@@ -1,0 +1,52 @@
+{
+  "name": "projectairdrop",
+  "version": "1.0.0",
+  "description": "Cognitive testing app for the military.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -r dotenv/config server/server.js & webpack-dev-server --config webpack.config.js --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arshiamasih/projectAirdrop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arshiamasih/projectAirdrop/issues"
+  },
+  "homepage": "https://github.com/arshiamasih/projectAirdrop#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^7.11.0",
+    "postgresql": "0.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "cli": "^1.0.1",
+    "css-loader": "^3.0.0",
+    "dotenv": "^8.0.0",
+    "nodemon": "^1.19.1",
+    "react-hot-loader": "^4.12.0",
+    "redux-devtools-extension": "^2.13.8",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
