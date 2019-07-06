@@ -21,5 +21,5 @@ class Questionnaires extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires);
+export default Questionnaires;
+// export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires);
