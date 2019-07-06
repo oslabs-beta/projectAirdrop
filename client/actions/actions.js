@@ -1,10 +1,5 @@
 import * as types from './../constants/actionTypes';
 
-// LIKELY ASYNC
-// export const REQUEST_QUESTIONS = 'REQUEST_QUESTIONS';
-// export const REQUEST_POSSIBLE_ANSWERS = 'REQUEST_POSSIBLE_ANSWERS';
-// export const REQUEST_QUESTIONS_FAILURE = 'REQUEST_QUESTIONS_FAILURE';
-
-// LIKELY NON-ASYNC
-// export const STORE_DEMOGRAPHIC_DATA = 'STORE_DEMOGRAPHIC_DATA';
-// export const UPDATE_CHOSEN_ANSWER = 'UPDATE_CHOSEN_ANSWER';
+export const showClicks = () => ({
+  type: types.TEST_TEST,
+});

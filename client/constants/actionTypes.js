@@ -14,5 +14,4 @@ export const LTVR_SUBMIT = 'LTVR_SUBMIT';
 export const CREATE_USER_ACCOUNT = 'CREATE_USER_ACCOUNT';
 export const POST_TO_DB = 'POST_TO_DB';
 
-
-
+export const TEST_TEST = 'TEST_TEST';
