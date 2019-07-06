@@ -1,7 +1,8 @@
 const { Pool } = require('pg');
+const dbURI = process.env.API_URL;
 
 const pool = new Pool({
-    connectionString: 'postgres://itmzzoin:xL6R8UShQ_hAnZnDc78Hp3OkcA9SjKML@raja.db.elephantsql.com:5432/itmzzoin'
+    connectionString: dbURI
 });
 
 const get_sections = `SELECT * FROM sections;`;
