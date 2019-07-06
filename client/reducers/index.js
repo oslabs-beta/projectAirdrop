@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import testReducer from './testReducer';
-import { STORE_DEMOGRAPHIC_DATA } from '../constants/actionTypes';
 import imageRecognitionReducer from './imageRecognitionReducer';
 import longTermVerbalRecallReducer from './longTermVerbalRecallReducer';
 import questionnairesReducer from './questionnairesReducer';
