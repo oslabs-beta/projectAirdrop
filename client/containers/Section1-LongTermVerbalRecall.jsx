@@ -21,5 +21,5 @@ class LongTermVerbalRecall extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(LongTermVerbalRecall);
+export default LongTermVerbalRecall;
+// export default connect(mapStateToProps, mapDispatchToProps)(LongTermVerbalRecall);
