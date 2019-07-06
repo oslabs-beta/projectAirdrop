@@ -17,6 +17,7 @@ class App extends Component {
       <div>
         <Header />
         <h1> Hello World (react) </h1>
+        <UserDemographics />
      </div>
     )
   }

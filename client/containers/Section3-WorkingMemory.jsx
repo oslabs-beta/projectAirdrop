@@ -21,5 +21,5 @@ class WorkingMemory extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(WorkingMemory);
+export default WorkingMemory;
+// export default connect(mapStateToProps, mapDispatchToProps)(WorkingMemory);

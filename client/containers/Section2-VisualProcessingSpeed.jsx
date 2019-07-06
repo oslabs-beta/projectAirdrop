@@ -21,5 +21,5 @@ class VisualProcessingSpeed extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(VisualProcessingSpeed);
+export default VisualProcessingSpeed;
+// export default connect(mapStateToProps, mapDispatchToProps)(VisualProcessingSpeed);

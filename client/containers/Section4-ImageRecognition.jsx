@@ -21,5 +21,5 @@ class ImageRecognition extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageRecognition);
+export default ImageRecognition;
+// export default connect(mapStateToProps, mapDispatchToProps)(ImageRecognition);
