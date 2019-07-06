@@ -12,18 +12,18 @@ const get_words = `SELECT word FROM words WHERE id IN (
 	$11, $12, $13, $14, $15, $16, $17, $18, $19, $20
 );`;
 
-const get_image = `SELECT DISTINCT ON ($1) id, image_url FROM images ORDER BY $1, random();`
+const get_images = `SELECT id, image_url FROM images WHERE section_id=$1 GROUP BY images.id ORDER BY section_id, random() LIMIT $2;`
 
-const get_question = `SELECT DISTINCT ON ($1) id, question_text FROM questions ORDER BY $1, random();`;
+const get_question = `SELECT DISTINCT ON (image_id) id, question_text FROM questions WHERE image_id=$1 ORDER BY image_id, random();`;
 
 const get_choices = `SELECT choice1, choice2, choice3, choice4, correct_choice FROM choices WHERE question_id=$1;`;
 
 const databaseModel = {
 	getWords(){
 		const words = new Set()
-		while(words.length < 20) words.add(Math.ceil(Math.random()*80));
+		while(words.size < 20) words.add(Math.ceil(Math.random()*80));
 		return new Promise((resolve, reject) => {
-			pool.query(get_words, words, (err, result) => {
+			pool.query(get_words, Array.from(words), (err, result) => {
 					if(err) return reject(err);
 					resolve(result);
 			})
@@ -37,10 +37,12 @@ const databaseModel = {
 			})
 		})
 	},
-	getImage(sectionID){
+	getImages(array){
 		return new Promise((resolve, reject) => {
-			pool.query(get_image, sectionID, (err, result) => {
+			console.log(array, "outside Query")
+			pool.query(get_images, array, (err, result) => {
 				if(err) return reject(err)
+				// console.log(result);
 				resolve(result);
 			})
 		})
@@ -49,6 +51,7 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_question, imageID, (err, result) => {
 				if(err) return reject(err)
+				console.log(result.rows[0]);
 				resolve(result);
 			})
 		})
