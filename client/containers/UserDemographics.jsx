@@ -31,7 +31,8 @@ class UserDemographics extends Component {
     return (
       <div>
         <h1>Demo test</h1>
-        <UserDemographicsCMPT />
+        <UserDemographicsCMPT showClicks={this.props.showClicks}/>
+        {this.props.clicks}
       </div>
     );
   }

@@ -7,7 +7,7 @@ import React from 'react';
 //   );
 // }
 
-const UserSubmitBtn = () => (
-  <button>Submit</button>
+const UserSubmitBtn = (props) => (
+  <button onClick={props.showClicks}>Submit</button>
 )
 export default UserSubmitBtn;

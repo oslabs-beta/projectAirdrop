@@ -8,10 +8,10 @@ import UserSubmitBTN from './UserSubmitBTN';
 //   </div>
 // );
 
-const UserDemographicsCMPT = () => (
+const UserDemographicsCMPT = (props) => (
   <div>
     <h3> User Demographics </h3>
-    <UserSubmitBTN />
+    <UserSubmitBTN showClicks={props.showClicks}/>
   </div>
 );
 
