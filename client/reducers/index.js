@@ -9,12 +9,12 @@ import workingMemoryReducer from './workingMemoryReducer';
 
 const reducers = combineReducers({
     test: testReducer,
-    longTermVerbalRecall: longTermVerbalRecallReducer,
-    imageRecognition: imageRecognitionReducer,
-    questionnaires: questionnairesReducer,
-    userData: userDataReducer,
-    visualProcessingSpeed: visualProcessingSpeedReducer,
-    workingMemory: workingMemoryReducer,
+    // longTermVerbalRecall: longTermVerbalRecallReducer,
+    // imageRecognition: imageRecognitionReducer,
+    // questionnaires: questionnairesReducer,
+    // userData: userDataReducer,
+    // visualProcessingSpeed: visualProcessingSpeedReducer,
+    // workingMemory: workingMemoryReducer,
 });
 
 export default reducers;
