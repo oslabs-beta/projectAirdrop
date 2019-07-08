@@ -13,11 +13,10 @@ app.get('/', (req, res) => {
   res.send('served');
 })
 
-// app.get('/api', (req, res) => {
-//   console.log('api route test');
-//   res.json({test: 'test'});
-// })
-
+app.get('/api', (req, res) => {
+  console.log('api route test');
+  res.json([{question: 'this is a question'}]);
+});
 
 app.get('/test', dbController.getTestData, (req, res) => {
   res.send('no errors yet');
@@ -25,3 +24,4 @@ app.get('/test', dbController.getTestData, (req, res) => {
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 });
+
