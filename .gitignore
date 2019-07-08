@@ -84,6 +84,3 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-client/dist/precache-manifest.58e2c6f08029bd0f556ebf6344f09aae.js
-client/dist/service-worker.js
-client/dist/bundle.js
