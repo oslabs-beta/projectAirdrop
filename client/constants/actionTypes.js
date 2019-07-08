@@ -1,0 +1,17 @@
+export const REQUEST_TEST = 'REQUEST_TEST';
+export const REQUEST_TEST_FAILURE = 'REQUEST_TEST_FAILURE';
+
+// Submits all data in the demographic data page to the store
+export const STORE_DEMOGRAPHIC_DATA = 'STORE_DEMOGRAPHIC_DATA';
+
+// UPDATES the answer option chosen
+export const UPDATE_ANSWER = 'UPDATE_ANSWER';
+export const UPDATE_NEXT_PAINT = 'UPDATE_NEXT_PAINT';
+export const SELECT_ANSWER = 'SELECT_ANSWER';
+export const LTVR_SUBMIT = 'LTVR_SUBMIT';
+
+// potentially we will use AWS Cognito
+export const CREATE_USER_ACCOUNT = 'CREATE_USER_ACCOUNT';
+export const POST_TO_DB = 'POST_TO_DB';
+
+export const TEST_TEST = 'TEST_TEST';

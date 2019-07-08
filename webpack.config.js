@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const NODE_DEV_SERVER_URL = 'http://localhost:3000';
 
@@ -29,6 +31,14 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+      filename: 'index.html',
+    }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+    })
   ],
   devServer: {
     contentBase: `${__dirname}/client/dist`,
