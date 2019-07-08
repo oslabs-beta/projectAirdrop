@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
 //   console.log('api route test');
 //   res.json({test: 'test'});
 // })
+
+
 app.get('/test', dbController.getTestData, (req, res) => {
   res.send('no errors yet');
 })
