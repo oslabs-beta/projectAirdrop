@@ -6,6 +6,7 @@ import UserDemographicsCMPT from '../components/UserDemographicsCMPT';
 const mapStateToProps = store => ({
   clicks: store.test.clicks,
   test: store.test.test,
+  apiStatus: store.test.apiStatus,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,6 +33,7 @@ class UserDemographics extends Component {
         />
         {this.props.clicks}
         {hold}
+        {this.props.apiStatus}
       </div>
     );
   }
