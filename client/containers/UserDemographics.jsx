@@ -5,34 +5,33 @@ import UserDemographicsCMPT from '../components/UserDemographicsCMPT';
 
 const mapStateToProps = store => ({
   clicks: store.test.clicks,
+  test: store.test.test,
 });
 
 const mapDispatchToProps = dispatch => ({
-  showClicks: () => dispatch(actions.showClicks())
+  showClicks: () => dispatch(actions.showClicks()),
+  fetchTest: () => dispatch(actions.fetchTest())
 });
-
-// class UserDemographics extends Component {
-
-//   render () {
-//     console.log('test', this.props);
-//     return (
-//       <div>
-//         <h1>Demo test</h1>
-//         <UserDemographicsCMPT clicks={this.props.onClick} />
-//       </div>
-//     );
-//   }
-// }
 
 class UserDemographics extends Component {
 
+  componentDidMount() {
+    this.props.fetchTest();
+  }
   render () {
     console.log('test',this.props)
+    const hold = this.props.test.map((item, i) => {
+      return <p key={i}>{item.question}</p>
+    })
+    console.log(hold)
     return (
       <div>
         <h1>Demo test</h1>
-        <UserDemographicsCMPT showClicks={this.props.showClicks}/>
+        <UserDemographicsCMPT 
+        showClicks={this.props.showClicks}
+        />
         {this.props.clicks}
+        {hold}
       </div>
     );
   }

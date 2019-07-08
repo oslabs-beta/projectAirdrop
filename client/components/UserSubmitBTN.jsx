@@ -8,6 +8,8 @@ import React from 'react';
 // }
 
 const UserSubmitBtn = (props) => (
+  <div>
   <button onClick={props.showClicks}>Submit</button>
+  </div>
 )
 export default UserSubmitBtn;
