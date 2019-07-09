@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NODE_DEV_SERVER_URL = 'http://localhost:3000';
 
 module.exports = {
-  entry: path.resolve(__dirname, 'client/index'),
+  entry: path.resolve(__dirname, 'client/index.jsx'),
   output: {
     path: path.resolve(__dirname, 'client/dist'),
     publicPath: '/',
