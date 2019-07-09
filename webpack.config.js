@@ -38,6 +38,19 @@ module.exports = {
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
       skipWaiting: true,
+      runtimeCaching: [{
+        urlPattern: '/api',
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'api-cache',
+          backgroundSync: {
+            name: 'background-queue',
+            options: {
+              maxRetentionTime: 60 * 60,
+            }
+          }
+        }
+      }],
     })
   ],
   devServer: {
