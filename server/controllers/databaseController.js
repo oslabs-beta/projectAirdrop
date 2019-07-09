@@ -59,39 +59,43 @@ const databaseController = {};
 // 	});
 // };
 
-databaseController.getWords = (req, res, next) => {
-	res.locals[1] = {};
-	res.locals[2] = {};
-	res.locals[3] = {};
-	res.locals[4] = {};
-	res.locals[5] = {};
-	dbModel.getWords()
-		.then(result => {
-			res.locals[4].words = result.rows;
-			next()
-		})
-		.catch(err => next(err))
-};
-
 databaseController.getSections = (req, res, next) => {
+	res.locals.test = [];
 	dbModel.getSections()
 		.then(result => {
 			for (let i = 0; i < result.rows.length; i += 1) {
-				res.locals[result.rows[i].id].section = result.rows[i];
+				res.locals.test.push(result.rows[i]);
+				console.log('RES LOCALS TEST SECTION', res.locals.test)
 			}
 			next();
 		})
 		.catch(err => next(err))
 };
 
+databaseController.getWords = (req, res, next) => {
+	dbModel.getWords()
+		.then(result => {
+			console.log('RES LOCALS TEST 3 ', res.locals.test[3]);
+			for (let i = 0; i < res.locals.test.length; i += 1) {
+				if (res.locals.test[i].section_name === 'LTVR') {
+					res.locals.test[i].words = result.rows;
+				}
+			}
+			console.log('RES LOCALS TEST WORDS', res.locals.test);
+			next()
+		})
+		.catch(err => next(err))
+};
+
 databaseController.getInstructions = (req, res, next) => {
-	const keys = Object.keys(res.locals);
+	// const keys = Object.keys(res.locals);
 	const promArr = [];
-	for (let i = 0; i < keys.length; i += 1) {
+	for (let i = 0; i < res.locals.test.length; i += 1) {
 		promArr.push(
-			dbModel.getInstructions([keys[i]])
+			dbModel.getInstructions([res.locals.test[i].id])
 				.then(result => {
-					res.locals[result.rows[0].section_id].instructions = result.rows;
+					res.locals.test[i].instructions = result.rows;
+					console.log('RES LOCALS INSTRUCTIONS TEST', res.locals.test)
 				})
 				.catch(err => next(err))
 		)
@@ -103,14 +107,15 @@ databaseController.getInstructions = (req, res, next) => {
 };
 
 databaseController.getImages = (req, res, next) => {
-	const keys = Object.keys(res.locals);
+	// const keys = Object.keys(res.locals);
 	const promArr = [];
-	for (let i = 0; i < keys.length; i += 1) {
-		if (res.locals[keys[i]].section.number_of_images > 0) {
+	for (let i = 0; i < res.locals.test.length; i += 1) {
+		if (res.locals.test[i].number_of_images > 0) {
 			promArr.push(
-				dbModel.getImages([res.locals[keys[i]].section.id, res.locals[keys[i]].section.number_of_images])
+				dbModel.getImages([res.locals.test[i].id, res.locals.test[i].number_of_images])
 					.then(result => {
-						res.locals[keys[i]].images = result.rows
+						res.locals.test[i].images = result.rows
+						console.log('RES LOCALS IMAGES TEST', res.locals.test)
 					})
 					.catch(err => next(err))
 			)
@@ -124,15 +129,19 @@ databaseController.getImages = (req, res, next) => {
 
 databaseController.getQuestionByImage = (req, res, next) => {
 	const promArr = [];
-	for (let i = 0; i < 2; i += 1) {
-		for (let j = 0; j < res.locals[i + 1].images.length; j += 1) {
-			promArr.push(
-				dbModel.getQuestionByImage([res.locals[i + 1].images[j].id])
-					.then(result => {
-						res.locals[i + 1].images[j].questions = result.rows
-					})
-					.catch(err => next(err))
-			)
+	for (let i = 0; i < res.locals.test.length; i += 1) {
+		if (res.locals.test[i].number_of_images > 0) {
+			for (let j = 0; j < res.locals.test[i].images.length; j += 1) {
+				promArr.push(
+					dbModel.getQuestionByImage([res.locals.test[i].images[j].id])
+						.then(result => {
+							res.locals.test[i].images[j].questions = result.rows;
+							console.log('RES LOCALS QUESTION IMAGES', res.locals.test)
+
+						})
+						.catch(err => next(err))
+				)
+			}
 		}
 	}
 	Promise.all(promArr)
@@ -143,15 +152,17 @@ databaseController.getQuestionByImage = (req, res, next) => {
 
 databaseController.getChoices = (req, res, next) => {
 	const promArr = [];
-	for (let i = 0; i < 2; i += 1) {
-		for (let j = 0; j < res.locals[i + 1].images.length; j += 1) {
-			promArr.push(
-				dbModel.getChoices([res.locals[i + 1].images[j].questions[0].id])
-					.then(result => {
-						res.locals[i + 1].images[j].questions[0].choices = result.rows
-					})
-					.catch(err => next(err))
-			)
+	for (let i = 0; i < res.locals.test.length; i += 1) {
+		if (res.locals.test[i].images) {
+			for (let j = 0; j < res.locals.test[i].images.length; j += 1) {
+				promArr.push(
+					dbModel.getChoices([res.locals.test[i].images[j].questions[0].id])
+						.then(result => {
+							res.locals.test[i].images[j].questions[0].choices = result.rows
+						})
+						.catch(err => next(err))
+				)
+			}
 		}
 	}
 	Promise.all(promArr)
