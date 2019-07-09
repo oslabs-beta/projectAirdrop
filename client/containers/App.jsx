@@ -10,12 +10,16 @@ import Questionnaires from './Section5-Questionnaires.jsx';
 import UserDemographics from './UserDemographics.jsx';
 import Header from './../components/Header.jsx';
 import Login from './Login.jsx';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 class App extends Component {
 
   render() {
     return (
       <div>
+        <Router> 
+          <Route path="/demo" component={UserDemographics}/>
+        </Router> 
         <Header />
         <h1> Hello World (react) </h1>
         <UserDemographics />
