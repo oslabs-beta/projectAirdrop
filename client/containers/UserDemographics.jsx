@@ -7,14 +7,17 @@ const mapStateToProps = store => ({
   clicks: store.test.clicks,
   test: store.test.test,
   apiStatus: store.test.apiStatus,
-  userData: store.userData.userData,
   dropDowns: store.userData.dropDowns,
+  userData: store.userData.userData,
+  dates: store.userData.dates,
 });
 
 const mapDispatchToProps = dispatch => ({
   showClicks: () => dispatch(actions.showClicks()),
   fetchTest: () => dispatch(actions.fetchTest()),
   handleChange: (event) => dispatch(actions.handleChange(event)),
+  handleChangeDeploy: () => dispatch(actions.handleChangeDeploy(event)),
+  setDate: () => dispatch(actions.setDate()),
 });
 
 class UserDemographics extends Component {
@@ -24,10 +27,14 @@ class UserDemographics extends Component {
   }
   componentDidMount() {
     this.props.fetchTest();
+    this.props.setDate();
   }
+
 
   submit (e) {
     console.log('FORM SUBMITTED \n', this.props.userData)
+    console.log('FORM SUBMITTED \n', this.props.dates)
+
     e.preventDefault()
   }
 
@@ -37,7 +44,9 @@ class UserDemographics extends Component {
         <h1>Demo Information</h1>
         <UserDemographicsCMPT 
         userData={this.props.userData}
+        dates={this.props.dates}
         handleChange={this.props.handleChange}
+        handleChangeDeploy={this.props.handleChangeDeploy}
         dropDowns={this.props.dropDowns}
         submit={this.submit}
         />

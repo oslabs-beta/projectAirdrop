@@ -42,3 +42,19 @@ export const handleChange = event => ({
     type: types.HANDLE_CHANGE,
     payload: event,
   });
+  
+
+export const handleChangeDeploy = () => ({
+  type: types.HANDLE_CHANGE_DATES,
+});
+
+export const setDate = () => {
+  const newDate = new Date()
+  const today = `${newDate.getMonth()}/${newDate.getDay()}/${newDate.getFullYear()}`
+  console.log('testing date', today);
+  return {
+    type: types.SET_DATE,
+    payload: today,
+  };
+}
+
