@@ -20,6 +20,9 @@ const mapDispatchToProps = dispatch => ({
   setDate: () => dispatch(actions.setDate()),
   handleChangeTwo: (event) => dispatch(actions.handleChangeTwo(event)),
   storeDemoData: (userData) => dispatch(actions.storeDemoData(userData)),
+  //fetch LTVR
+  //post demo data
+
 });
 
 class UserDemographics extends Component {
