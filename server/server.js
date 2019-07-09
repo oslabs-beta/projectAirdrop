@@ -25,8 +25,9 @@ app.get('/test',
   dbController.getImages,
   dbController.getQuestionByImage,
   dbController.getChoices,
+  dbController.getQuestionBySection,
   (req, res) => {
-  res.json(res.locals);
+  res.json(res.locals.test);
 });
 
 app.listen(PORT, () => {
