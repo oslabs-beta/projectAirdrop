@@ -65,7 +65,7 @@ databaseController.getSections = (req, res, next) => {
 		.then(result => {
 			for (let i = 0; i < result.rows.length; i += 1) {
 				res.locals.test.push(result.rows[i]);
-				console.log('RES LOCALS TEST SECTION', res.locals.test)
+				// console.log('RES LOCALS TEST SECTION', res.locals.test)
 			}
 			next();
 		})
@@ -75,13 +75,13 @@ databaseController.getSections = (req, res, next) => {
 databaseController.getWords = (req, res, next) => {
 	dbModel.getWords()
 		.then(result => {
-			console.log('RES LOCALS TEST 3 ', res.locals.test[3]);
+			// console.log('RES LOCALS TEST 3 ', res.locals.test[3]);
 			for (let i = 0; i < res.locals.test.length; i += 1) {
 				if (res.locals.test[i].section_name === 'LTVR') {
 					res.locals.test[i].words = result.rows;
 				}
 			}
-			console.log('RES LOCALS TEST WORDS', res.locals.test);
+			// console.log('RES LOCALS TEST WORDS', res.locals.test);
 			next()
 		})
 		.catch(err => next(err))
@@ -95,7 +95,7 @@ databaseController.getInstructions = (req, res, next) => {
 			dbModel.getInstructions([res.locals.test[i].id])
 				.then(result => {
 					res.locals.test[i].instructions = result.rows;
-					console.log('RES LOCALS INSTRUCTIONS TEST', res.locals.test)
+					// console.log('RES LOCALS INSTRUCTIONS TEST', res.locals.test)
 				})
 				.catch(err => next(err))
 		)
@@ -115,7 +115,7 @@ databaseController.getImages = (req, res, next) => {
 				dbModel.getImages([res.locals.test[i].id, res.locals.test[i].number_of_images])
 					.then(result => {
 						res.locals.test[i].images = result.rows
-						console.log('RES LOCALS IMAGES TEST', res.locals.test)
+						// console.log('RES LOCALS IMAGES TEST', res.locals.test)
 					})
 					.catch(err => next(err))
 			)
@@ -136,7 +136,7 @@ databaseController.getQuestionByImage = (req, res, next) => {
 					dbModel.getQuestionByImage([res.locals.test[i].images[j].id])
 						.then(result => {
 							res.locals.test[i].images[j].questions = result.rows;
-							console.log('RES LOCALS QUESTION IMAGES', res.locals.test)
+							// console.log('RES LOCALS QUESTION IMAGES', res.locals.test)
 
 						})
 						.catch(err => next(err))
@@ -172,7 +172,22 @@ databaseController.getChoices = (req, res, next) => {
 };
 
 databaseController.getQuestionBySection = (req, res, next) => {
-
+	const promArr = [];
+	for (let i = 0; i < res.locals.test.length; i += 1) {
+		if (res.locals.test[i].section_name === 'CMSQ' || res.locals.test[i].section_name === 'CNAAQ') {
+			promArr.push(
+				dbModel.getQuestionBySection([res.locals.test[i].id])
+					.then(result => {
+						res.locals.test[i].questions = result.rows
+						console.log('GET QUESTION BY SECTION RESULT', result)
+					})
+					.catch(err => next(err)))
+		}
+	}
+	Promise.all(promArr)
+		.then(result => {
+			next()
+		})
 };
 
 module.exports = databaseController;
