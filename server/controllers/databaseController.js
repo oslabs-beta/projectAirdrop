@@ -144,11 +144,10 @@ databaseController.getQuestionByImage = (req, res, next) => {
 databaseController.getChoices = (req, res, next) => {
 	const promArr = [];
 	for (let i = 0; i < 2; i += 1) {
-		for (let j = 0; j < res.locals[i + 1].images[j].length; j += 1) {
+		for (let j = 0; j < res.locals[i + 1].images.length; j += 1) {
 			promArr.push(
-				dbModel.getChoices([res.locals[i + 1].images[j].questions.id])
+				dbModel.getChoices([res.locals[i + 1].images[j].questions[0].id])
 					.then(result => {
-						console.log(result)
 						res.locals[i + 1].images[j].questions[0].choices = result.rows
 					})
 					.catch(err => next(err))

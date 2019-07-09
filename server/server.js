@@ -18,6 +18,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/test',
+  // dbController.getTestData,
   dbController.getWords,
   dbController.getSections,
   dbController.getInstructions,
