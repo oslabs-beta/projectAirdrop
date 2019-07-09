@@ -12,7 +12,7 @@ const reducers = combineReducers({
     // longTermVerbalRecall: longTermVerbalRecallReducer,
     // imageRecognition: imageRecognitionReducer,
     // questionnaires: questionnairesReducer,
-    // userData: userDataReducer,
+    userData: userDataReducer,
     // visualProcessingSpeed: visualProcessingSpeedReducer,
     // workingMemory: workingMemoryReducer,
 });

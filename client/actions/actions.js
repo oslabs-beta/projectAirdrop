@@ -36,4 +36,9 @@ export const fetchTest = () => dispatch => {
     return dispatch(receiveAPI(res));
   })
   .catch(err => dispatch(receiveFailure(err)));
-}
+};
+
+export const handleChange = event => ({
+    type: types.HANDLE_CHANGE,
+    payload: event,
+  });
