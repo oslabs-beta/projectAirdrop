@@ -9,6 +9,7 @@ import ImageRecognition from './Section4-ImageRecognition.jsx';
 import Questionnaires from './Section5-Questionnaires.jsx';
 import UserDemographics from './UserDemographics.jsx';
 import Header from './../components/Header.jsx';
+import Login from './Login.jsx';
 
 class App extends Component {
 
