@@ -1,4 +1,4 @@
-import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE } from "../constants/actionTypes";
+import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO } from "../constants/actionTypes";
 import { bindActionCreators } from "../../../../../../Library/Caches/typescript/3.5/node_modules/redux";
 
 const initialState = {
@@ -29,17 +29,7 @@ const userDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case STORE_DEMOGRAPHIC_DATA:
       return { ...state };
-    // case HANDLE_CHANGE:
-    //   const event = action.payload;
-    //   const name = event.target.name;
-    //   const value = event.target.value;
-    //   return {
-    //     ...state,
-    //     userData: {
-    //       ...state.userData,
-    //       [name]: value,
-    //     },
-    //   };
+
     case HANDLE_CHANGE:
         const event = action.payload;
         const name = event.target.name;
@@ -50,11 +40,18 @@ const userDataReducer = (state = initialState, action) => {
             ...state.userData,
             [name]: value,
           },
-          dates: {
-            ...state.dates,
-            [name]: value,
-          }
         };
+        case HANDLE_CHANGE_TWO:
+            const event2 = action.payload;
+            const name2 = event2.target.name;
+            const value2 = event2.target.value;
+            return {
+              ...state,
+              dates: {
+                ...state.dates,
+                [name2]: value2,
+              }
+            };
     case HANDLE_CHANGE_DATES:
       return {
         ...state,

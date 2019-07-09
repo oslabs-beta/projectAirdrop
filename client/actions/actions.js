@@ -1,60 +1,67 @@
-import * as types from './../constants/actionTypes';
+import * as types from "./../constants/actionTypes";
 
 export const showClicks = () => ({
-  type: types.TEST_TEST,
+  type: types.TEST_TEST
 });
 
 export const requestAPI = () => ({
-  type: types.CALL_API,
+  type: types.CALL_API
 });
 
-export const receiveAPI = (json) => ({
+export const receiveAPI = json => ({
   type: types.RECEIVE_API,
   payload: json
 });
 
-export const receiveFailure = (err) => ({
+export const receiveFailure = err => ({
   type: types.API_FAILURE,
-  payload: err,
+  payload: err
 });
 
-function isValid (res) {
+function isValid(res) {
   return Array.isArray(res);
-};
+}
 
 export const fetchTest = () => dispatch => {
-  console.log('fetch test');
+  console.log("fetch test");
   dispatch(requestAPI);
 
-  return fetch('/api')
-  .then(
-    res => res.json()
-  )
-  .then(
-    res => {
-    if(!isValid(res)) throw new Error('something went wrong');
-    return dispatch(receiveAPI(res));
-  })
-  .catch(err => dispatch(receiveFailure(err)));
+  return fetch("/api")
+    .then(res => res.json())
+    .then(res => {
+      if (!isValid(res)) throw new Error("something went wrong");
+      return dispatch(receiveAPI(res));
+    })
+    .catch(err => dispatch(receiveFailure(err)));
 };
 
 export const handleChange = event => ({
-    type: types.HANDLE_CHANGE,
-    payload: event,
-  });
-  
+  type: types.HANDLE_CHANGE,
+  payload: event,
+});
+
+export const handleChangeTwo = (event) => ({
+  type: types.HANDLE_CHANGE_TWO,
+  payload: event,
+});
 
 export const handleChangeDeploy = () => ({
-  type: types.HANDLE_CHANGE_DATES,
+  type: types.HANDLE_CHANGE_DATES
 });
 
 export const setDate = () => {
-  const newDate = new Date()
-  const today = `${newDate.getMonth()}/${newDate.getDay()}/${newDate.getFullYear()}`
-  console.log('testing date', today);
+  const newDate = new Date();
+  const today = `${newDate.getMonth()}/${newDate.getDay()}/${newDate.getFullYear()}`;
   return {
     type: types.SET_DATE,
     payload: today,
   };
-}
+};
 
+export const storeDemoData = (userData) => {
+  // needs to be connected to DB using thunk
+  console.log('FORM SUBMITTED \n', userData);
+  return {
+    type: types.STORE_DEMOGRAPHIC_DATA,
+  }
+};

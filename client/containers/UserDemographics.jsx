@@ -18,6 +18,8 @@ const mapDispatchToProps = dispatch => ({
   handleChange: (event) => dispatch(actions.handleChange(event)),
   handleChangeDeploy: () => dispatch(actions.handleChangeDeploy(event)),
   setDate: () => dispatch(actions.setDate()),
+  handleChangeTwo: (event) => dispatch(actions.handleChangeTwo(event)),
+  storeDemoData: (userData) => dispatch(actions.storeDemoData(userData)),
 });
 
 class UserDemographics extends Component {
@@ -32,9 +34,7 @@ class UserDemographics extends Component {
 
 
   submit (e) {
-    console.log('FORM SUBMITTED \n', this.props.userData)
-    console.log('FORM SUBMITTED \n', this.props.dates)
-
+    this.props.storeDemoData(this.props.userData)
     e.preventDefault()
   }
 
@@ -46,6 +46,7 @@ class UserDemographics extends Component {
         userData={this.props.userData}
         dates={this.props.dates}
         handleChange={this.props.handleChange}
+        handleChangeTwo={this.props.handleChangeTwo}
         handleChangeDeploy={this.props.handleChangeDeploy}
         dropDowns={this.props.dropDowns}
         submit={this.submit}

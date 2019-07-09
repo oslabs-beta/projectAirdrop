@@ -2,7 +2,6 @@ import React from "react";
 import UserSubmitBTN from "./UserSubmitBTN";
 
 const UserDemographicsCMPT = props => {
-  // dropDowns.mos, dropDowns.rank, dropDowns.rank
   const dropDownsMos = props.dropDowns.mos.map((item, index) => {
     return <option key={index}>{item}</option>;
   });
@@ -19,7 +18,8 @@ const UserDemographicsCMPT = props => {
   const listOfDays = days.map((item, index) => {
     return <option key={index}>{item}</option>;
   });
-  const yearsDate = Array.from({ length: 100 }, (_, idx) => 1919 + idx + 1).reverse();
+  const year2 = new Date().getFullYear();
+  const yearsDate = Array.from({ length: 70 }, (_, idx) => year2 - 70 + idx + 1).reverse();
   const listOfYears = yearsDate.map((item, index) => {
     return <option key={index}>{item}</option>
   });
@@ -104,11 +104,11 @@ const UserDemographicsCMPT = props => {
           </select>
         </label>
         <label>
-          Date:
+          Date of Last Deployment:
           <select
             name="monthLD"
             value={props.dates.monthLD}
-            onChange={props.handleChange}
+            onChange={props.handleChangeTwo}
             onBlur={props.handleChangeDeploy} 
           >
             {listOfDays}
@@ -116,7 +116,7 @@ const UserDemographicsCMPT = props => {
           <select
             name="yearLD"
             value={props.dates.yearLD}
-            onChange={props.handleChange}
+            onChange={props.handleChangeTwo}
             onBlur={props.handleChangeDeploy}  
           >
             {listOfYears}
