@@ -6,37 +6,55 @@ import UserDemographicsCMPT from '../components/UserDemographicsCMPT';
 const mapStateToProps = store => ({
   clicks: store.test.clicks,
   test: store.test.test,
+  apiStatus: store.test.apiStatus,
+  dropDowns: store.userData.dropDowns,
+  userData: store.userData.userData,
+  dates: store.userData.dates,
 });
 
 const mapDispatchToProps = dispatch => ({
   showClicks: () => dispatch(actions.showClicks()),
-  fetchTest: () => dispatch(actions.fetchTest())
+  fetchTest: () => dispatch(actions.fetchTest()),
+  handleChange: (event) => dispatch(actions.handleChange(event)),
+  handleChangeDeploy: () => dispatch(actions.handleChangeDeploy(event)),
+  setDate: () => dispatch(actions.setDate()),
+  handleChangeTwo: (event) => dispatch(actions.handleChangeTwo(event)),
+  storeDemoData: (userData) => dispatch(actions.storeDemoData(userData)),
 });
 
 class UserDemographics extends Component {
-
+  constructor(props) {
+    super(props)
+    this.submit = this.submit.bind(this);
+  }
   componentDidMount() {
     this.props.fetchTest();
+    this.props.setDate();
   }
+
+
+  submit (e) {
+    this.props.storeDemoData(this.props.userData)
+    e.preventDefault()
+  }
+
   render () {
-    console.log('test',this.props)
-    const hold = this.props.test.map((item, i) => {
-      return <p key={i}>{item.question}</p>
-    })
-    console.log(hold)
     return (
       <div>
-        <h1>Demo test</h1>
+        <h1>Demo Information</h1>
         <UserDemographicsCMPT 
-        showClicks={this.props.showClicks}
+        userData={this.props.userData}
+        dates={this.props.dates}
+        handleChange={this.props.handleChange}
+        handleChangeTwo={this.props.handleChangeTwo}
+        handleChangeDeploy={this.props.handleChangeDeploy}
+        dropDowns={this.props.dropDowns}
+        submit={this.submit}
         />
-        {this.props.clicks}
-        {hold}
       </div>
     );
   }
 }
 
-// export default UserDemographics;
 export default connect(mapStateToProps, mapDispatchToProps)(UserDemographics);
 

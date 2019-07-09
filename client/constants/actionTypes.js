@@ -19,3 +19,8 @@ export const TEST_TEST = 'TEST_TEST';
 export const CALL_API = 'CALL_API';
 export const RECEIVE_API = 'RECEIVE_API';
 export const API_FAILURE = 'API_FAILURE';
+
+export const HANDLE_CHANGE = 'HANDLE_CHANGE';
+export const HANDLE_CHANGE_TWO = 'HANDLE_CHANGE_TWO';
+export const HANDLE_CHANGE_DATES = 'HANDLE_CHANGE_DATES';
+export const SET_DATE = 'SET_DATE';

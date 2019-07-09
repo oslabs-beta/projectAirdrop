@@ -9,7 +9,7 @@ import React from 'react';
 
 const UserSubmitBtn = (props) => (
   <div>
-  <button onClick={props.showClicks}>Submit</button>
+  <button>Submit</button>
   </div>
 )
 export default UserSubmitBtn;
