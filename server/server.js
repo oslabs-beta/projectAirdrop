@@ -8,9 +8,13 @@ const dbController = require('./controllers/databaseController');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('served');
-});
+
+//app.use('/static', express.static(path.join(__dirname, 'dist')))
+
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+
 
 app.get('/api', (req, res) => {
   console.log('api route test');
@@ -28,6 +32,27 @@ app.get('/test',
   (req, res) => {
   res.json(res.locals);
 });
+
+
+app.get('/', (req, res) => {   
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+
+
+
+//error handling
+app.use((req, res, next) => {
+  res.status(404).send("Sorry can't find that!")
+})
+
+app.use((err, req, res, next) =>{
+  console.log(err);
+  res.status(400).json({'msg':err});
+})
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
