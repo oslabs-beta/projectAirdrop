@@ -4,6 +4,12 @@ export const showClicks = () => ({
   type: types.TEST_TEST
 });
 
+//Increment Section Component Action
+export const changeSection = () => ({
+  type: types.CHANGE_SECTION
+})
+
+//Below this are test-retrieval related actions
 export const requestAPI = () => ({
   type: types.CALL_API
 });
@@ -26,10 +32,11 @@ export const fetchTest = () => dispatch => {
   console.log("fetch test");
   dispatch(requestAPI);
 
-  return fetch("/api")
+  return fetch("/api/test")
     .then(res => res.json())
     .then(res => {
       if (!isValid(res)) throw new Error("something went wrong");
+      console.log(res);
       return dispatch(receiveAPI(res));
     })
     .catch(err => dispatch(receiveFailure(err)));

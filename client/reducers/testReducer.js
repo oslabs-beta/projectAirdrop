@@ -1,10 +1,12 @@
-import { TEST_TEST, RECEIVE_API, CALL_API, API_FAILURE } from './../constants/actionTypes';
+import { TEST_TEST, RECEIVE_API, CALL_API, API_FAILURE, CHANGE_SECTION } from './../constants/actionTypes';
 
 const initialState = {
   clicks: 0,
   test: [],
+  answers: [],
   apiStatus: null,
   apiError: null,
+  currentSection: 0,
 }
 
 const testReducer = (state = initialState, action) => {
@@ -31,6 +33,12 @@ const testReducer = (state = initialState, action) => {
         apiStatus: 'failure',
         apiError: action.payload,
       }
+    
+    case CHANGE_SECTION:
+      return (console.log('test'), {
+        ...state,
+        currentSection: state.currentSection + 1,
+      })
     default:
       return state;
   }
