@@ -17,7 +17,6 @@ class App extends Component {
      
         <Header />
         <h1> Hello World (react) </h1>
-        <UserDemographics />
         <MainTestDisplay />
      </div>
     )
