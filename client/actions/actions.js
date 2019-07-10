@@ -9,6 +9,11 @@ export const changeSection = () => ({
   type: types.CHANGE_SECTION
 })
 
+//Build VPS answers
+export const buildVPSAnswers = () => ({
+  type: types.BUILD_VPS_ANSWERS
+})
+
 //Below this are test-retrieval related actions
 export const requestAPI = () => ({
   type: types.CALL_API

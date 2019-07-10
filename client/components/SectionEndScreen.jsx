@@ -1,10 +1,10 @@
 import React from 'react';
 import UserNextBTN from './UserNextBTN'
 
-const SectionEndScreen = () => (
+const SectionEndScreen = (props) => (
   <div> 
     CONGRATULATIOn 
-    <UserNextBTN />
+    <UserNextBTN changeSection={props.changeSection}/>
   </div>
 );
 
