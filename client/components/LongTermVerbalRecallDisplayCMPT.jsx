@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UserNextBTN from './UserNextBTN.jsx';
 
 // const LongTermVerbalRecall = () => (
 //   <h1>LongTermVerbalRecall</h1>
@@ -6,12 +7,14 @@ import React, { Component } from 'react';
 
 class LTVRDCMPT extends Component {
   componentDidMount(){
-    setTimeout(this.props.changeSection, 5000)
+    console.log('hi?', this.props)
+    this.props.buildVPSAnswers();
   }
   render(){
     return (
     <div>
       <h1>LongTermVerbalRecall</h1>
+      <UserNextBTN changeSection={this.props.changeSection}/>
     </div>
     )
   }
