@@ -16,12 +16,12 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
 
-app.get('/api', (req, res) => {
+app.get('/api/allyourrandom', (req, res) => {
   console.log('api route test');
   res.json([{question: 'this is a question'}]);
 });
 
-app.get('/test',
+app.get('/api/test',
   // dbController.getTestData,
   dbController.getSections,
   dbController.getWords,
