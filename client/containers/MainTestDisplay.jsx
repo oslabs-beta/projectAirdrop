@@ -13,8 +13,9 @@ import SectionEndScreen from '../components/SectionEndScreen.jsx';
 
 const mapStateToProps = store => ({
 //test
-test: store.test.test,
-currentSection: store.test.currentSection
+  test: store.test.test,
+  currentSection: store.test.currentSection,
+  currentSlide: store.test.currentSlide,
 //question
 //answer
 //input
@@ -22,7 +23,10 @@ currentSection: store.test.currentSection
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeSection: () => dispatch(actions.changeSection())
+  changeSection: () => dispatch(actions.changeSection()),
+  changeSlide: () => dispatch(actions.changeSlide()),
+  fetchTest: () => dispatch(actions.fetchTest()),
+
 //fetch tests except LTVR
 //next
 //submit
@@ -35,15 +39,18 @@ class MainTestDisplay extends Component {
     super(props)
     this.changeSection = this.props.changeSection.bind(this);
   }
+
+
   render () {
+    console.log(this.props.test)
     const compArray = [<LongTermVerbalRecallDisplayCMPT changeSection={this.changeSection}/>, <VisualProcessingSpeed />, <WorkingMemory />,
-       <ImageRecognition />, <LongTermVerbalRecallResponseCMPT />]
+       <ImageRecognition IR={this.props.test[3]} currentSlide={this.props.currentSlide} changeSlide={this.props.changeSlide} />, <LongTermVerbalRecallResponseCMPT />]
     // if(this.props.test[0]) dummyStandIn = this.props.test[0];
     // console.log('rendering Main Test')
     console.log(this.props.currentSection, 'currentSection');
     return (
       <div>
-        {compArray[this.props.currentSection]}
+        {this.props.test.length > 0 && compArray[this.props.currentSection]}
       </div>
     );
   }

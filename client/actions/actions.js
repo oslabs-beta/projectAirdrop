@@ -9,6 +9,10 @@ export const changeSection = () => ({
   type: types.CHANGE_SECTION
 })
 
+export const changeSlide = () => ({
+  type: types.CHANGE_SLIDE
+})
+
 //Below this are test-retrieval related actions
 export const requestAPI = () => ({
   type: types.CALL_API

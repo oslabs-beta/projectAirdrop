@@ -1,4 +1,4 @@
-import { TEST_TEST, RECEIVE_API, CALL_API, API_FAILURE, CHANGE_SECTION } from './../constants/actionTypes';
+import { TEST_TEST, RECEIVE_API, CALL_API, API_FAILURE, CHANGE_SECTION, CHANGE_SLIDE } from './../constants/actionTypes';
 
 const initialState = {
   clicks: 0,
@@ -6,7 +6,8 @@ const initialState = {
   answers: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 0,
+  currentSection: 3,
+  currentSlide: 0,
 }
 
 const testReducer = (state = initialState, action) => {
@@ -33,12 +34,19 @@ const testReducer = (state = initialState, action) => {
         apiStatus: 'failure',
         apiError: action.payload,
       }
-    
+
     case CHANGE_SECTION:
       return (console.log('test'), {
         ...state,
         currentSection: state.currentSection + 1,
-      })
+      });
+
+    case CHANGE_SLIDE:
+      return (console.log('change Slide'), {
+        ...state,
+        currentSlide: state.currentSlide + 1,
+      });
+
     default:
       return state;
   }

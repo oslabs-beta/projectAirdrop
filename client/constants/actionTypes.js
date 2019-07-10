@@ -29,3 +29,4 @@ export const SET_DATE = 'SET_DATE';
 
 //Increment Section Component
 export const CHANGE_SECTION = 'CHANGE_SECTION';
+export const CHANGE_SLIDE = 'CHANGE_SLIDE';
