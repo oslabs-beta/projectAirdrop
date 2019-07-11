@@ -4,7 +4,7 @@ import * as actions from '../actions/actions';
 import UserDemographics from './UserDemographics.jsx';
 import LongTermVerbalRecallDisplayCMPT from '../components/LongTermVerbalRecallDisplayCMPT.jsx';
 import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecallResponseCMPT.jsx'
-import VisualProcessingSpeed from '../components/VisualProcessingSpeedCMPT.jsx';
+import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
 import WorkingMemory from '../components/WorkingMemoryCMPT.jsx';
 import ImageRecognition from '../components/ImageRecognitionCMPT.jsx';
 import Questionnaires from '../components/QuestionnairesCMPT.jsx';
@@ -51,7 +51,6 @@ class MainTestDisplay extends Component {
     }
     // if(this.props.test[0]) dummyStandIn = this.props.test[0];
     // console.log('rendering Main Test')
-    console.log(compArray, 'currentSection');
     return (
       <div>
         {compArray[this.props.currentSection]}
