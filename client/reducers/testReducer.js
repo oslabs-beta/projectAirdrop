@@ -12,6 +12,7 @@ const initialState = {
 };
 
 const testReducer = (state = initialState, action) => {
+
   switch(action.type) {
 
     case TEST_TEST:
@@ -62,7 +63,7 @@ const testReducer = (state = initialState, action) => {
   }
 };
 
-function generateVPS(){
+function generateVPS() {
   const randArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
   'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   let retArr = [];
@@ -96,7 +97,7 @@ function generateVPS(){
   let veryWrong = makeVeryWrong(rightAnswers);
   retArr.push(rightAnswers, nearlyRight, kindaRight, veryWrong);
   return retArr;
-};
+}
 
 function makeNearlyRight(rightAnswers){
   let nearlyRight = [];
@@ -113,6 +114,7 @@ function makeNearlyRight(rightAnswers){
   }
   return nearlyRight;
 }
+
 function makeKindaRight(rightAnswers){
   let kindaRight = [];
   for(let j = 0; j < 6; j++){
