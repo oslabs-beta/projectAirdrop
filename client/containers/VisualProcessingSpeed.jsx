@@ -8,7 +8,7 @@ class VisualProcessingSpeed extends Component {
 	constructor(props){
     super(props)
     this.state = {
-			timeToNext: 2000,
+			timeToNext: 0,
 			currentElementIndex: 0,
 			currentSeriesIndex: 0,
 			timerRunning: false,
@@ -22,17 +22,18 @@ class VisualProcessingSpeed extends Component {
 	}
 	startNewSeries() {
 		this.setState({
-			timeToNext: this.state.timeToNext += (4500 - (this.state.currentElementIndex*500)),
+			timeToNext: 4500 - (this.state.currentSeriesIndex*500),
 			timerRunning: true,
-		})
-		this.seriesTicker = setInterval(this.seriesIncrementer, this.state.timeToNext);
+		}, this.intervalSetter)
 	}
 	startPractice(){
 		this.setState({
 			timeToNext: 2000,
 			timerRunning: true,
 			practiceRun: true,
-		})
+		}, this.intervalSetter)
+	}
+	intervalSetter(){
 		this.seriesTicker = setInterval(this.seriesIncrementer, this.state.timeToNext);
 	}
 	seriesIncrementer() {
@@ -69,6 +70,7 @@ class VisualProcessingSpeed extends Component {
 				currentElementIndex={this.state.currentElementIndex}
 				currentSeriesIndex={this.state.currentSeriesIndex} 
 				vpsAnswers={this.props.vpsAnswers}
+				practiceRun={this.state.practiceRun}
 				/>
 			</div>
 		)
