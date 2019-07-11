@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import UserDemographics from './UserDemographics.jsx';
-import LongTermVerbalRecallDisplayCMPT from '../components/LongTermVerbalRecallDisplayCMPT.jsx';
+import LongTermVerbalRecallDisplayCMPT from './LTVRD';
 import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecallResponseCMPT.jsx'
 import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
 import WorkingMemory from '../components/WorkingMemoryCMPT.jsx';
 import ImageRecognition from '../components/ImageRecognitionCMPT.jsx';
 import Questionnaires from '../components/QuestionnairesCMPT.jsx';
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
+import LTVRD from './LTVRD';
 
 
 
 const mapStateToProps = store => ({
 //test
+userData: store.userData.userData,
 test: store.test.test,
 currentSection: store.test.currentSection,
 vpsAnswers: store.test.vpsAnswers,
@@ -26,6 +28,8 @@ vpsAnswers: store.test.vpsAnswers,
 const mapDispatchToProps = dispatch => ({
   changeSection: () => dispatch(actions.changeSection()),
   buildVPSAnswers: () => dispatch(actions.buildVPSAnswers()),
+  fetchTest: () => dispatch(actions.fetchTest()),  
+  setDate: () => dispatch(actions.setDate()),
 //fetch tests except LTVR
 //next
 //submit
@@ -39,9 +43,14 @@ class MainTestDisplay extends Component {
     this.changeSection = this.props.changeSection.bind(this);
     this.buildVPSAnswers = this.props.buildVPSAnswers.bind(this);
   }
+  componentDidMount() {
+    this.props.fetchTest();
+  }
+  
   render () {
+    console.log(this.props.test)
     const compArray = [<UserDemographics changeSection={this.changeSection}/>, 
-    <LongTermVerbalRecallDisplayCMPT changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers}/>, 
+    <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[0]}/>, 
     <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers}/>, 
     <WorkingMemory changeSection={this.changeSection}/>, 
     <ImageRecognition changeSection={this.changeSection}/>, 

@@ -31,7 +31,6 @@ class UserDemographics extends Component {
     this.submit = this.submit.bind(this);
   }
   componentDidMount() {
-    this.props.fetchTest();
     this.props.setDate();
   }
 
