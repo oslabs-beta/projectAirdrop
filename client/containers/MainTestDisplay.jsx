@@ -7,8 +7,9 @@ import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecall
 import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
 import WorkingMemory from '../components/WorkingMemoryCMPT.jsx';
 import ImageRecognition from '../components/ImageRecognitionCMPT.jsx';
-import Questionnaires from '../components/QuestionnairesCMPT.jsx';
+// import Questionnaires from '../components/QuestionnairesCMPT.jsx';
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
+import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
 
 
 
@@ -26,6 +27,7 @@ vpsAnswers: store.test.vpsAnswers,
 const mapDispatchToProps = dispatch => ({
   changeSection: () => dispatch(actions.changeSection()),
   buildVPSAnswers: () => dispatch(actions.buildVPSAnswers()),
+  fetchTest: () => dispatch(actions.fetchTest()),
 //fetch tests except LTVR
 //next
 //submit
@@ -39,18 +41,24 @@ class MainTestDisplay extends Component {
     this.changeSection = this.props.changeSection.bind(this);
     this.buildVPSAnswers = this.props.buildVPSAnswers.bind(this);
   }
+
+  componentDidMount() {
+    this.props.fetchTest();
+  }
   render () {
     const compArray = [<UserDemographics changeSection={this.changeSection}/>, 
     <LongTermVerbalRecallDisplayCMPT changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers}/>, 
     <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers}/>, 
     <WorkingMemory changeSection={this.changeSection}/>, 
     <ImageRecognition changeSection={this.changeSection}/>, 
-    <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>]
+    <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
+    <QuestionnaireCont test={this.props.test}/>]
     for(let i = 0; i < compArray.length; i++){
       if(i%2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
     }
     // if(this.props.test[0]) dummyStandIn = this.props.test[0];
     // console.log('rendering Main Test')
+    // console.log('test', this.props.test);
     return (
       <div>
         {compArray[this.props.currentSection]}
