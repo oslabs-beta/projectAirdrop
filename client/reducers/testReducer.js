@@ -83,6 +83,10 @@ function generateVPS(){
   let kindaRight = makeKindaRight(rightAnswers);
   let veryWrong = makeVeryWrong(rightAnswers);
   retArr.push(rightAnswers, nearlyRight, kindaRight, veryWrong);
+  for(let i = 0; i < retArr.length; i++){
+    retArr[i].unshift(retArr[i][3]);
+    retArr[i].splice(3, 1);
+  }
   return retArr;
 }
 function makeNearlyRight(rightAnswers){
