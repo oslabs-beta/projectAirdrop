@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
-import UserNextBTN from '../components/UserNextBTN.jsx';
 
 
 class VisualProcessingSpeed extends Component {
@@ -16,7 +15,6 @@ class VisualProcessingSpeed extends Component {
 			practiceDone: false,
 			testStarted: false,
 			displayingAnswers: false,
-			testDone: false,
 		}
 		this.startNewSeries = this.startNewSeries.bind(this);
 		this.startPractice = this.startPractice.bind(this);
@@ -57,11 +55,6 @@ class VisualProcessingSpeed extends Component {
 						currentSeriesIndex: ++this.state.currentSeriesIndex,
 						timerRunning: false,
 					})
-					if(this.state.currentSeriesIndex === 6){
-						this.setState({
-							testDone: true
-						})
-					}
 				}
 				if(this.state.timerRunning){
 					this.setState({
@@ -84,8 +77,6 @@ class VisualProcessingSpeed extends Component {
 				practiceDone={this.state.practiceDone}
 				testStarted={this.state.testStarted}
 				displayingAnswers={this.state.displayingAnswers}
-				testDone={this.state.testDone}
-				changeSection={this.props.changeSection}
 				/>
 			</div>
 		)
