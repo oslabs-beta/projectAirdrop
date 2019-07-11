@@ -6,7 +6,7 @@ import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.j
 
 class VisualProcessingSpeed extends Component {
 	constructor(props){
-    super(props)
+    super(props);
     this.state = {
 			timeToNext: 2000,
 			currentElementIndex: 0,
@@ -14,7 +14,7 @@ class VisualProcessingSpeed extends Component {
 			timerRunning: false,
 			seriesOver: false,
 			practiceRun: true,
-		}
+		};
 		this.startNewSeries = this.startNewSeries.bind(this);
 		this.startPractice = this.startPractice.bind(this);
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
@@ -24,7 +24,7 @@ class VisualProcessingSpeed extends Component {
 		this.setState({
 			timeToNext: this.state.timeToNext += (4500 - (this.state.currentElementIndex*500)),
 			timerRunning: true,
-		})
+		});
 		this.seriesTicker = setInterval(this.seriesIncrementer, this.state.timeToNext);
 	}
 	startPractice(){
@@ -32,13 +32,13 @@ class VisualProcessingSpeed extends Component {
 			timeToNext: 2000,
 			timerRunning: true,
 			practiceRun: true,
-		})
+		});
 		this.seriesTicker = setInterval(this.seriesIncrementer, this.state.timeToNext);
 	}
 	seriesIncrementer() {
 		this.setState({
 			currentElementIndex: ++this.state.currentElementIndex,
-		})
+		});
 		if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 			clearInterval(this.seriesTicker);
 			if(this.state.practiceRun){
@@ -48,7 +48,7 @@ class VisualProcessingSpeed extends Component {
 					currentSeriesIndex: 1,
 					currentElementIndex: 0,
 				})
-			} else { 
+			} else {
 					this.setState({
 					currentSeriesIndex: ++this.state.currentSeriesIndex,
 					currentElementIndex: 0,
@@ -56,18 +56,18 @@ class VisualProcessingSpeed extends Component {
 					timerRunning: false
 				})
 			}
-		} 
+		}
 	}
 	render () {
 		return (
-			<div> 
-				<VisualProcessingSpeedCMPT 
-				timerRunning={this.state.timerRunning} 
-				seriesOver={this.state.seriesOver} 
-				startNewSeries={this.startNewSeries} 
+			<div>
+				<VisualProcessingSpeedCMPT
+				timerRunning={this.state.timerRunning}
+				seriesOver={this.state.seriesOver}
+				startNewSeries={this.startNewSeries}
 				startPractice={this.startPractice}
 				currentElementIndex={this.state.currentElementIndex}
-				currentSeriesIndex={this.state.currentSeriesIndex} 
+				currentSeriesIndex={this.state.currentSeriesIndex}
 				vpsAnswers={this.props.vpsAnswers}
 				/>
 			</div>

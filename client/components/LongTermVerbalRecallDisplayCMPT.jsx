@@ -8,7 +8,7 @@ import UserNextBTN from './UserNextBTN.jsx';
 class LTVRDCMPT extends Component {
   componentDidMount(){
     console.log('hi?', this.props)
-    this.props.buildVPSAnswers();
+    // this.props.buildVPSAnswers();
   }
   render(){
     return (

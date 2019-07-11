@@ -6,7 +6,7 @@ import LongTermVerbalRecallDisplayCMPT from '../components/LongTermVerbalRecallD
 import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecallResponseCMPT.jsx'
 import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
 import WorkingMemory from '../components/WorkingMemoryCMPT.jsx';
-import ImageRecognition from '../components/ImageRecognitionCMPT.jsx';
+import ImageRecognition from './ImageRecognition.jsx';
 import Questionnaires from '../components/QuestionnairesCMPT.jsx';
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
 
@@ -48,11 +48,11 @@ class MainTestDisplay extends Component {
   render () {
 
     const compArray = [<UserDemographics changeSection={this.changeSection}/>,
-    <LongTermVerbalRecallDisplayCMPT changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers}/>,
+      <LongTermVerbalRecallDisplayCMPT changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers}/>,
 
-    <WorkingMemory changeSection={this.changeSection}/>,
-    <ImageRecognition IR={this.props.test[6]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-    <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>];
+      <WorkingMemory changeSection={this.changeSection}/>,
+      <ImageRecognition IR={this.props.test[6]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>];
 
     // for (let i = 0; i < compArray.length; i++) {
     //   if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
@@ -60,7 +60,7 @@ class MainTestDisplay extends Component {
     // if(this.props.test[0]) dummyStandIn = this.props.test[0];
     // console.log('rendering Main Test')
 
-    console.log(compArray, 'currentSection 14');
+    console.log(compArray, 'currentSection 19');
 
     return (
       <div>
