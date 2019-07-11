@@ -12,36 +12,33 @@ const ImageRecognitionCMPT = (props) => {
       // Object.values(props.IR.images[0].questions[0].choices[0])],
 
       <img src={props.IR.images[1].image_url}/> ,
-      <IRQuestion question={props.IR.images[0].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+      <IRQuestion question={props.IR.images[1].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[1].questions[0].question_text,
       //   Object.values(props.IR.images[1].questions[0].choices[0])],
 
       props.IR.instructions[1].instruction_text,
       <img src={props.IR.images[2].image_url}/> ,
-      <IRQuestion question={props.IR.images[0].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+      <IRQuestion question={props.IR.images[2].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[2].questions[0].question_text,
       //   Object.values(props.IR.images[2].questions[0].choices[0])],
 
       <img src={props.IR.images[3].image_url}/> ,
-      <IRQuestion question={props.IR.images[0].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+      <IRQuestion question={props.IR.images[3].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[3].questions[0].question_text,
       //   Object.values(props.IR.images[3].questions[0].choices[0])],
 
       <img src={props.IR.images[4].image_url}/> ,
-      <IRQuestion question={props.IR.images[0].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
-
+      <IRQuestion question={props.IR.images[4].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[4].questions[0].question_text,
       //   Object.values(props.IR.images[4].questions[0].choices[0])],
 
       <img src={props.IR.images[5].image_url}/> ,
-      <IRQuestion question={props.IR.images[0].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
-
+      <IRQuestion question={props.IR.images[5].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[5].questions[0].question_text,
       //   Object.values(props.IR.images[5].questions[0].choices[0])],
 
       <img src={props.IR.images[6].image_url}/> ,
-      <IRQuestion question={props.IR.images[0].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
-
+      <IRQuestion question={props.IR.images[6].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[6].questions[0].question_text,
       //   Object.values(props.IR.images[6].questions[0].choices[0])],
     ];
