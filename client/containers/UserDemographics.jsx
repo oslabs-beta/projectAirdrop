@@ -38,6 +38,7 @@ class UserDemographics extends Component {
 
   submit (e) {
     this.props.storeDemoData(this.props.userData)
+    this.props.changeSection()
     e.preventDefault()
   }
 

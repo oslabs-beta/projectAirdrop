@@ -61,6 +61,7 @@ const databaseController = {};
 
 databaseController.getSections = (req, res, next) => {
 	res.locals.test = [];
+	console.log('/test route being hit');
 	dbModel.getSections()
 		.then(result => {
 			for (let i = 0; i < result.rows.length; i += 1) {
