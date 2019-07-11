@@ -5,15 +5,9 @@ import UserDemographics from './UserDemographics.jsx';
 import LongTermVerbalRecallDisplayCMPT from '../components/LongTermVerbalRecallDisplayCMPT.jsx';
 import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecallResponseCMPT.jsx'
 import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
-<<<<<<< HEAD
 import WorkingMemory from './WorkingMemory.jsx';
 import ImageRecognition from './ImageRecognition.jsx';
 import Questionnaires from '../components/QuestionnairesCMPT.jsx';
-=======
-import WorkingMemory from '../components/WorkingMemoryCMPT.jsx';
-import ImageRecognition from '../components/ImageRecognitionCMPT.jsx';
-// import Questionnaires from '../components/QuestionnairesCMPT.jsx';
->>>>>>> 4de97dd2421a7b6aaac6ba7b3e40936b836fc099
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
 import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
 
