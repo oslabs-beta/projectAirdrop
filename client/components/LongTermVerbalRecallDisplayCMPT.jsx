@@ -5,18 +5,23 @@ import UserNextBTN from './UserNextBTN.jsx';
 //   <h1>LongTermVerbalRecall</h1>
 // );
 
-class LTVRDCMPT extends Component {
-  componentDidMount(){
-    console.log('hi?', this.props)
-    // this.props.buildVPSAnswers();
+
+const LTVRDCMPT = (props) => {
+  const formatWords = []
+  let currentBTN;
+  if(props.testStarted && !props.testDone){
+    for(let i = 0; i < props.words.length; i++){
+      formatWords.push(<div>{props.words[i].word}</div>)
+    }
   }
-  render(){
-    return (
-    <div>
-      <h1>LongTermVerbalRecall</h1>
-      <UserNextBTN changeSection={this.props.changeSection}/>
-    </div>
-    )
-  }
-}
+  if(!props.testStarted) currentBTN = <button onClick={props.displayWords}>Start Test</button>
+  if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
+  return (
+  <div>
+    <h1>LongTermVerbalRecall</h1>
+    {formatWords}
+    {currentBTN}
+  </div>
+  )
+};
 export default LTVRDCMPT;

@@ -5,7 +5,7 @@ class WorkingMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeToNext: 3000,
+      timeToNext: 300,
       practiceRun: true
     };
     this.startPractice = this.startPractice.bind(this);
@@ -34,7 +34,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 500)
         })
       })
   }
@@ -61,7 +61,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 500)
         })
       })
       .then(() => {
@@ -77,7 +77,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 500)
         })
       })
       .then(() => {
@@ -93,7 +93,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 500)
         })
       })
       .then(() => {
@@ -109,7 +109,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 500)
         })
       })
       .then(() => {
@@ -125,7 +125,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 500)
         })
       })
   }
@@ -137,7 +137,7 @@ class WorkingMemory extends Component {
         WM={this.props.WM}
         changeSlide={this.props.changeSlide}
         currentSlide={this.props.currentSlide}
-        changeSection={this.changeSection}
+        changeSection={this.props.changeSection}
         startPractice={this.startPractice}
         startTest={this.startTest}
       />

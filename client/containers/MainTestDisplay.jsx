@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import UserDemographics from './UserDemographics.jsx';
-import LongTermVerbalRecallDisplayCMPT from '../components/LongTermVerbalRecallDisplayCMPT.jsx';
+import LongTermVerbalRecallDisplayCMPT from './LTVRD';
 import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecallResponseCMPT.jsx'
 import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
 import WorkingMemory from './WorkingMemory.jsx';
 import ImageRecognition from './ImageRecognition.jsx';
 import Questionnaires from '../components/QuestionnairesCMPT.jsx';
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
+import LTVRD from './LTVRD';
 import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
 
 const mapStateToProps = store => ({
@@ -28,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
   changeSlide: () => dispatch(actions.changeSlide()),
   buildVPSAnswers: () => dispatch(actions.buildVPSAnswers()),
   fetchTest: () => dispatch(actions.fetchTest()),
+  setDate: () => dispatch(actions.setDate()),
 //fetch tests except LTVR
 //next
 //submit
@@ -46,22 +48,24 @@ class MainTestDisplay extends Component {
     this.props.fetchTest();
   }
 
-/*<VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers}/>,*/
   render () {
-
+    console.log(this.props.test);
     const compArray = [<UserDemographics changeSection={this.changeSection}/>,
-      <LongTermVerbalRecallDisplayCMPT changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers}/>,
-
+      <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[0]}/>,
+      <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers}/>,
       <WorkingMemory WM={this.props.test[5]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
       <ImageRecognition IR={this.props.test[6]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
       <QuestionnaireCont test={this.props.test}/>];
 
-    // for (let i = 0; i < compArray.length; i++) {
-    //   if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
-    // }
+    //      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
 
-    console.log(compArray, 'currentSection 20');
+    for(let i = 0; i < compArray.length; i++){
+      if(i%2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
+    }
+
+    // if(this.props.test[0]) dummyStandIn = this.props.test[0];
+    // console.log('rendering Main Test')
+    // console.log('test', this.props.test);
 
     return (
       <div>

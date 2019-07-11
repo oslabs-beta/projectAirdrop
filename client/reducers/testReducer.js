@@ -7,7 +7,7 @@ const initialState = {
   vpsAnswers: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 2,
+  currentSection: 0,
   currentSlide: 0,
 };
 
@@ -44,6 +44,7 @@ const testReducer = (state = initialState, action) => {
       return {
         ...state,
         currentSection: state.currentSection + 1,
+        currentSlide: 0
       };
 
     case CHANGE_SLIDE:

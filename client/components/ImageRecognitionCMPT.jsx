@@ -1,5 +1,6 @@
 import React from 'react';
 import IRQuestion from './IRQuestionDisplay';
+import SectionEndScreen from "./SectionEndScreen";
 
 const ImageRecognitionCMPT = (props) => {
   console.log('props IR', props.IR, 'ir content', IR_content);
@@ -41,6 +42,9 @@ const ImageRecognitionCMPT = (props) => {
       <IRQuestion question={props.IR.images[6].questions[0].question_text} choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
       // [props.IR.images[6].questions[0].question_text,
       //   Object.values(props.IR.images[6].questions[0].choices[0])],
+
+      <SectionEndScreen changeSection={props.changeSection}/>
+
     ];
 
   return (

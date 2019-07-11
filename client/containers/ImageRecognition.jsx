@@ -5,7 +5,7 @@ class ImageRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeToNext: 2000,
+      timeToNext: 200,
       practiceRun: true
     };
     this.startPractice = this.startPractice.bind(this);
@@ -120,6 +120,14 @@ class ImageRecognition extends Component {
           }, this.state.timeToNext)
         })
       })
+      .then(() => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            this.props.changeSlide();
+            resolve()
+          }, this.state.timeToNext * 2)
+        })
+      })
   }
 
   render() {
@@ -129,7 +137,7 @@ class ImageRecognition extends Component {
       IR={this.props.IR}
       changeSlide={this.props.changeSlide}
       currentSlide={this.props.currentSlide}
-      changeSection={this.changeSection}
+      changeSection={this.props.changeSection}
       startPractice={this.startPractice}
       startTest={this.startTest}
     />
