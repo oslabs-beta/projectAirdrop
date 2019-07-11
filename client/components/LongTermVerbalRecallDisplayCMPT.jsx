@@ -5,6 +5,7 @@ import UserNextBTN from './UserNextBTN.jsx';
 //   <h1>LongTermVerbalRecall</h1>
 // );
 
+
 const LTVRDCMPT = (props) => {
   const formatWords = []
   let currentBTN;
@@ -22,5 +23,5 @@ const LTVRDCMPT = (props) => {
     {currentBTN}
   </div>
   )
-}
+};
 export default LTVRDCMPT;

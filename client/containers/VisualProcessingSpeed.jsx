@@ -6,7 +6,7 @@ import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.j
 
 class VisualProcessingSpeed extends Component {
 	constructor(props){
-    super(props)
+    super(props);
     this.state = {
 			timeToNext: 0,
 			currentElementIndex: 0,
@@ -15,7 +15,8 @@ class VisualProcessingSpeed extends Component {
 			practiceDone: false,
 			testStarted: false,
 			displayingAnswers: false,
-		}
+		};
+
 		this.startNewSeries = this.startNewSeries.bind(this);
 		this.startPractice = this.startPractice.bind(this);
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
@@ -23,13 +24,13 @@ class VisualProcessingSpeed extends Component {
 	}
 	startNewSeries() {
 		this.setState({
-			timeToNext: 4500 - (this.state.currentSeriesIndex*500),
+			timeToNext: 450 - (this.state.currentSeriesIndex*50),
 			timerRunning: true,
 		}, this.intervalSetter)
 	}
 	startPractice(){
 		this.setState({
-			timeToNext: 2000,
+			timeToNext: 200,
 			timerRunning: true,
 			practiceDone: true,
 			testStarted: true,
@@ -52,31 +53,32 @@ class VisualProcessingSpeed extends Component {
 					this.setState({
 						displayingAnswers: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: ++this.state.currentSeriesIndex,
+						currentSeriesIndex: this.state.currentSeriesIndex +=3,
 						timerRunning: false,
 					})
 				}
 				if(this.state.timerRunning){
 					this.setState({
 						displayingAnswers: true,
-						timeToNext: 10000,
-					}, this.intervalSetter)	
+						timeToNext: 1000,
+					}, this.intervalSetter)
 				}
-		} 
+		}
 	}
 	render () {
 		return (
-			<div> 
-				<VisualProcessingSpeedCMPT 
-				timerRunning={this.state.timerRunning} 
-				startNewSeries={this.startNewSeries} 
+			<div>
+				<VisualProcessingSpeedCMPT
+				timerRunning={this.state.timerRunning}
+				startNewSeries={this.startNewSeries}
 				startPractice={this.startPractice}
 				currentElementIndex={this.state.currentElementIndex}
-				currentSeriesIndex={this.state.currentSeriesIndex} 
+				currentSeriesIndex={this.state.currentSeriesIndex}
 				vpsAnswers={this.props.vpsAnswers}
 				practiceDone={this.state.practiceDone}
 				testStarted={this.state.testStarted}
 				displayingAnswers={this.state.displayingAnswers}
+				changeSection={this.props.changeSection}
 				/>
 			</div>
 		)

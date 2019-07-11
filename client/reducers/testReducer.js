@@ -1,4 +1,4 @@
-import { TEST_TEST, RECEIVE_API, CALL_API, API_FAILURE, CHANGE_SECTION, BUILD_VPS_ANSWERS } from './../constants/actionTypes';
+import { TEST_TEST, RECEIVE_API, CALL_API, API_FAILURE, CHANGE_SECTION, CHANGE_SLIDE, BUILD_VPS_ANSWERS } from './../constants/actionTypes';
 
 const initialState = {
   clicks: 0,
@@ -8,50 +8,64 @@ const initialState = {
   apiStatus: null,
   apiError: null,
   currentSection: 0,
-}
+  currentSlide: 0,
+};
 
 const testReducer = (state = initialState, action) => {
+
   switch(action.type) {
+
     case TEST_TEST:
       let newClicks = state.clicks + 1;
       // return {...state, clicks: state.clicks + 1 };
       return {...state, clicks: newClicks };
+
     case RECEIVE_API:
       return {
         ...state,
         apiStatus: 'success',
         test: action.payload,
-      }
+      };
+
     case CALL_API:
       return {
         ...state,
         apiStatus: 'pending',
-      }
+      };
 
     case API_FAILURE:
       return {
         ...state,
         apiStatus: 'failure',
         apiError: action.payload,
-      }
-    
+      };
+
     case CHANGE_SECTION:
       return {
         ...state,
         currentSection: state.currentSection + 1,
-      }
-    case BUILD_VPS_ANSWERS: 
+        currentSlide: 0
+      };
+
+    case CHANGE_SLIDE:
+      return (console.log('change Slide'), {
+        ...state,
+        currentSlide: state.currentSlide + 1,
+      });
+
+    case BUILD_VPS_ANSWERS:
       return (console.log('building VPS'), {
         ...state,
         vpsAnswers: generateVPS()
-      })
+      });
+
     default:
       return state;
   }
 };
 
-function generateVPS(){
-  const randArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 
+function generateVPS() {
+  const randArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
   'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   let retArr = [];
   let rightAnswers = [];
@@ -89,6 +103,7 @@ function generateVPS(){
   }
   return retArr;
 }
+
 function makeNearlyRight(rightAnswers){
   let nearlyRight = [];
   for(let j = 0; j < 6; j++){
@@ -104,6 +119,7 @@ function makeNearlyRight(rightAnswers){
   }
   return nearlyRight;
 }
+
 function makeKindaRight(rightAnswers){
   let kindaRight = [];
   for(let j = 0; j < 6; j++){
@@ -121,10 +137,11 @@ function makeKindaRight(rightAnswers){
   }
   return kindaRight;
 }
+
 function makeVeryWrong(rightAnswers){
   let veryWrong = [];
   for(let j = 0; j < 6; j++){
-      let vwSet = [...rightAnswers[j]]; 
+      let vwSet = [...rightAnswers[j]];
       for(let i = 0; i < 3; i++){
         let wordLocation = Math.ceil(Math.random()*rightAnswers[j].length-1);
         let wordLocation2 = Math.ceil(Math.random()*rightAnswers[j].length-1);
@@ -135,7 +152,8 @@ function makeVeryWrong(rightAnswers){
         [vwSet[wordLocation], vwSet[wordLocation2]] = [vwSet[wordLocation2], vwSet[wordLocation]];
       }
       veryWrong.push(vwSet);
-  } 
+  }
   return veryWrong;
 }
+
 export default testReducer;
