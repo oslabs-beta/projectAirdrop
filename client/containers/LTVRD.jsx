@@ -21,7 +21,7 @@ class LTVRD extends Component {
   }
 	displayWords(){
 		this.setState({
-			timeToDisplay: 450,
+			timeToDisplay: 5000,
 			testStarted: true,
 		}, this.startTimer)
 	}
@@ -37,9 +37,9 @@ class LTVRD extends Component {
 		console.log(this.props.section)
 		return (
 			<div>
-				<LTVRDCMPT 
-				testStarted={this.state.testStarted} 
-				testDone={this.state.testDone} 
+				<LTVRDCMPT
+				testStarted={this.state.testStarted}
+				testDone={this.state.testDone}
 				changeSection={this.props.changeSection}
 				words={this.props.section.words}
 				displayWords={this.displayWords}

@@ -47,13 +47,18 @@ const ImageRecognitionCMPT = (props) => {
 
     ];
 
+  let currentBTN;
+  if (props.currentSlide === 0) {
+    currentBTN = <button onClick={props.startPractice}>Start Practice</button>
+  } else if (props.currentSlide === 5) {
+    currentBTN = <button onClick={props.startTest}>Start Test</button>
+  }
+
   return (
 
     <div>
       {IR_content[props.currentSlide]}
-      <button onClick={props.changeSlide}>Next</button>
-      <button onClick={props.startPractice}>Start Practice</button>
-      <button onClick={props.startTest}>Start Test</button>
+      {currentBTN}
     </div>
   )
 };

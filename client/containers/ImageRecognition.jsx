@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ImageRecognitionCMPT from '../components/ImageRecognitionCMPT.jsx'
+import './../styles.css'
 
 class ImageRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeToNext: 200,
+      timeToNext: 1000,
       practiceRun: true
     };
     this.startPractice = this.startPractice.bind(this);
