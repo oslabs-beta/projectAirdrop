@@ -10,15 +10,21 @@ export default class QuestionnaireCont extends Component {
       CNAAQ: null,
       scores: {
         CNAAQ: {
-          learn: [],
-          improve: [],
-          stable: [],
-          gift: [],
+          learn: 0,
+          improve: 0,
+          stable: 0,
+          gift: 0,
+        },
+        CMSQ: {
+          DF: 0,
+          WF: 0,
+          DO: 0,
+          FE: 0,
         } 
       },
-      questions: [],
     }
     this.addVal = this.addVal.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   
 
@@ -31,25 +37,125 @@ export default class QuestionnaireCont extends Component {
     })
   }
 
-  addVal (e) {
+  addVal (e, id, questionnaire) {
     const name = e.target.name;
     const value = e.target.value;
-    
+    console.log('testing', value, name, id, questionnaire);
+    if(questionnaire === 'CNAAQ') {
+      if (id === 2 || id === 5 || id === 8) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CNAAQ: {
+              ...this.state.scores.CNAAQ,
+              learn: this.state.scores.CNAAQ.learn + Number(value),
+            }
+          }
+        })
+      } else if (id === 6 || id === 9 || id === 12) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CNAAQ: {
+              ...this.state.scores.CNAAQ,
+              improve: this.state.scores.CNAAQ.improve + Number(value),
+            }
+          }
+        })
+      } else if (id === 1 || id === 3 || id === 10) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CNAAQ: {
+              ...this.state.scores.CNAAQ,
+              stable: this.state.scores.CNAAQ.stable + Number(value),
+            }
+          }
+        })
+      } else if (id === 4 || id === 7 || id === 11) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CNAAQ: {
+              ...this.state.scores.CNAAQ,
+              gift: this.state.scores.CNAAQ.gift + Number(value),
+            }
+          }
+        })
+      }
+
+    } else {
+
+      if (id === 1 || id === 5 || id === 11 || id === 15 || id === 18) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CMSQ: {
+              ...this.state.scores.CMSQ,
+              DF: this.state.scores.CMSQ.DF + Number(value),
+            }
+          }
+        })
+      } else if (id === 4 || id === 7 || id === 9 || id === 19) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CMSQ: {
+              ...this.state.scores.CMSQ,
+              WF: this.state.scores.CMSQ.WF + Number(value),
+            }
+          }
+        })
+      } else if (id === 2 || id === 6 || id === 10 || id === 12 || id === 14 || id === 16) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CMSQ: {
+              ...this.state.scores.CMSQ,
+              DO: this.state.scores.CMSQ.DO + Number(value),
+            }
+          }
+        })
+      } else if (id === 3 || id === 8 || id === 13 || id === 17 || id === 20) {
+        this.setState({
+          ...this.state,
+          scores: {
+            ...this.state.scores,
+            CMSQ: {
+              ...this.state.scores.CMSQ,
+              FE: this.state.scores.CMSQ.FE + Number(value),
+            }
+          }
+        })
+      } 
+    }
   }
 
-
+  onSubmit (e) {
+    e.preventDefault();
+    console.log(this.state);
+  }
   render() {
 
-    console.log('state', this.state)
+    // console.log('state', this.state)
     return (
       <div>
         {this.state.instructions.instruction_text}
-        {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />}
-        {this.state.CNAAQ && <QuestionnaireCMPT questions={this.state.CNAAQ} />}
+        {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />}
+        {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />}
+        <button onClick={this.onSubmit}>Submit</button>
       </div>
     )
   }
 };
+
 
 
 // •	Items 2, 5, 8 averaged for the LEARN dimension
