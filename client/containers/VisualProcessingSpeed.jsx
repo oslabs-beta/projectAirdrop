@@ -24,13 +24,13 @@ class VisualProcessingSpeed extends Component {
 	}
 	startNewSeries() {
 		this.setState({
-			timeToNext: 450 - (this.state.currentSeriesIndex*50),
+			timeToNext: 2250 - (this.state.currentSeriesIndex*250),
 			timerRunning: true,
 		}, this.intervalSetter)
 	}
 	startPractice(){
 		this.setState({
-			timeToNext: 200,
+			timeToNext: 1500,
 			timerRunning: true,
 			practiceDone: true,
 			testStarted: true,
