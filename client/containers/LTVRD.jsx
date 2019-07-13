@@ -43,6 +43,7 @@ class LTVRD extends Component {
 				changeSection={this.props.changeSection}
 				words={this.props.section.words}
 				displayWords={this.displayWords}
+				instructions={this.props.section.instructions}
 				/>
 			</div>
 		)

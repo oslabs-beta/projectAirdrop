@@ -11,6 +11,7 @@ import Questionnaires from '../components/QuestionnairesCMPT.jsx';
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
 import LTVRD from './LTVRD';
 import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
+import LTVRR from './LTVRR';
 
 const mapStateToProps = store => ({
 //test
@@ -55,6 +56,7 @@ class MainTestDisplay extends Component {
       <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[1]}/>,
       <WorkingMemory WM={this.props.test[5]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
       <ImageRecognition IR={this.props.test[6]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      <LTVRR changeSection={this.props.changeSection} section={this.props.test[0]} />,
       <QuestionnaireCont test={this.props.test}/>];
 
     //      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,

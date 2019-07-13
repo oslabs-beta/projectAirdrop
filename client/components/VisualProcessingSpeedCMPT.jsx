@@ -14,7 +14,7 @@ const VisualProcessingSpeed = (props) => {
       }
     }
   }
-  if(props.practiceDone && !props.timerRunning){
+  if(props.practiceDone && !props.timerRunning && !(props.currentSeriesIndex === 6)){
     for(let i = 0; i < props.instructions.length; i ++){
       if(!props.instructions[i].is_practice) {
         currentInstructions = props.instructions[i].instruction_text;
