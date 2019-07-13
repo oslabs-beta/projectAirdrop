@@ -23,7 +23,7 @@ const get_images = `SELECT id, image_url FROM images WHERE section_id=$1 GROUP B
 
 const get_question_by_image = `SELECT DISTINCT ON (image_id) id, question_text FROM questions WHERE image_id=$1 ORDER BY image_id, random();`;
 
-const get_question_by_section = `SELECT id, question_text FROM questions WHERE section_id=$1 ORDER BY section_id, random();`;
+const get_question_by_section = `SELECT id, question_text FROM questions WHERE section_id=$1 ORDER BY section_id;`;
 
 const get_choices = `SELECT choice1, choice2, choice3, choice4, correct_choice FROM choices WHERE question_id=$1;`;
 
