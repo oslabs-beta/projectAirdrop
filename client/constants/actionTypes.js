@@ -30,5 +30,8 @@ export const SET_DATE = 'SET_DATE';
 //Increment Section Component
 export const CHANGE_SECTION = 'CHANGE_SECTION';
 
+//Increment Slide Component
+export const CHANGE_SLIDE = 'CHANGE_SLIDE';
+
 //Build VPS questions
 export const BUILD_VPS_ANSWERS = 'BUILD_VPS_ANSWERS';

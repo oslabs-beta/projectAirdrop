@@ -7,12 +7,16 @@ export const showClicks = () => ({
 //Increment Section Component Action
 export const changeSection = () => ({
   type: types.CHANGE_SECTION
-})
+});
+
+export const changeSlide = () => ({
+  type: types.CHANGE_SLIDE
+});
 
 //Build VPS answers
 export const buildVPSAnswers = () => ({
   type: types.BUILD_VPS_ANSWERS
-})
+});
 
 //Below this are test-retrieval related actions
 export const requestAPI = () => ({
