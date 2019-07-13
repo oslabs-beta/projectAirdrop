@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
 
-app.get('/api/allyourrandom', (req, res) => {
+app.get('/api', (req, res) => {
   console.log('api route test');
   res.json([{question: 'this is a question'}]);
 });
