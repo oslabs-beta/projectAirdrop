@@ -8,13 +8,15 @@ const QuestionnairesCMPT = (props) => {
   for (let i = 0; i < props.questions.length; i++) {
   questions.push(
   <li 
-  key={new Date().getTime()+i}
+  key={i}
   
   >
-    {props.questions[i].question_text}
+    {i + 1}{" "}{props.questions[i].question_text}
     <QuestionnairesBTN 
     qid={props.questions[i].id}
+    addVal={props.addVal}
     questionnaire={props.questions.length > 12 ? 'CMSQ' : 'CNAAQ'}
+    id={i + 1}
     />
   </li>)
 }
@@ -22,7 +24,7 @@ const QuestionnairesCMPT = (props) => {
 
   
 
-  console.log('q', props)
+  // console.log('q', props)
   return (
     <ul>
       {questions}
