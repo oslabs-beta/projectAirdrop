@@ -1,9 +1,9 @@
 import React from 'react'
   // props.questions.length > 12 ? hold = cnaaqOptions : hold = cmsqOptions;
-  
+
   // for(let j = 0; j < hold.length; j++) {
   //   answers.push(
-  //   <QuestionnairesBTN 
+  //   <QuestionnairesBTN
   //   // key={}
   //   qid={props.qid}
   //   answerText={hold[j]}
@@ -34,6 +34,6 @@ const QuestionnaireBTN = (props) => {
       {options}
     </div>
   )
-}
+};
 
 export default QuestionnaireBTN
