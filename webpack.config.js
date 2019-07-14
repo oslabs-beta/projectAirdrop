@@ -39,7 +39,7 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
       runtimeCaching: [{
-        urlPattern: '/api',
+        urlPattern: '/api/test',
         handler: 'CacheFirst',
         options: {
           cacheName: 'api-cache',
