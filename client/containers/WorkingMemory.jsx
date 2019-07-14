@@ -131,7 +131,6 @@ class WorkingMemory extends Component {
   }
 
   render() {
-
     return (
       <WorkingMemoryCMPT
         WM={this.props.WM}
