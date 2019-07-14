@@ -19,6 +19,8 @@ const get_words = `SELECT word FROM words WHERE id IN (
 	$11, $12, $13, $14, $15, $16, $17, $18, $19, $20
 );`;
 
+const get_practice_images = `SELECT * FROM practice_images WHERE section_id=$1 GROUP BY practice_images.id ORDER BY section_id;`;
+
 const get_images = `SELECT id, image_url FROM images WHERE section_id=$1 GROUP BY images.id ORDER BY section_id, random() LIMIT $2;`;
 
 const get_question_by_image = `SELECT DISTINCT ON (image_id) id, question_text FROM questions WHERE image_id=$1 ORDER BY image_id, random();`;
@@ -36,7 +38,6 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_words, Array.from(words), (err, result) => {
 					if (err) return reject(err);
-					// console.log('GET WORDS', result.rows);
 					resolve(result);
 			})
 		})
@@ -45,7 +46,6 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_sections, (err, result) => {
 				if (err) return reject(err);
-				// console.log('GET SECTIONS', result.rows);
 				resolve(result);
 			})
 		})
@@ -54,7 +54,14 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_instructions, sectionID, (err, result) => {
 				if (err) return reject(err);
-				// console.log('GET INSTRUCTIONS', result.rows);
+				resolve(result);
+			})
+		})
+	},
+	getPracticeImages(sectionID) {
+		return new Promise((resolve, reject) => {
+			pool.query(get_practice_images, sectionID, (err, result) => {
+				if (err) return reject(err);
 				resolve(result);
 			})
 		})
@@ -63,7 +70,6 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_images, array, (err, result) => {
 				if (err) return reject(err);
-				// console.log('GET IMAGES', result.rows);
 				resolve(result);
 			})
 		})
@@ -72,7 +78,6 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_question_by_image, imageID, (err, result) => {
 				if (err) return reject(err);
-				// console.log('GET QUESTION BY IMAGE', result.rows);
 				resolve(result);
 			})
 		})
@@ -81,7 +86,6 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_question_by_section, sectionID, (err, result) => {
 				if (err) return reject(err);
-				// console.log('GET QUESTION BY SECTION', result.rows);
 				resolve(result);
 			})
 		})
@@ -90,7 +94,6 @@ const databaseModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(get_choices, questionID, (err, result) => {
 				if (err) return reject(err);
-				// console.log('GET CHOICES', result.rows[0]);
 				resolve(result);
 			})
 		})
