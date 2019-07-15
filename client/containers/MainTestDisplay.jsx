@@ -14,15 +14,10 @@ import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
 import LTVRR from './LTVRR';
 
 const mapStateToProps = store => ({
-//test
   test: store.test.test,
   currentSection: store.test.currentSection,
   currentSlide: store.test.currentSlide,
   vpsAnswers: store.test.vpsAnswers,
-//question
-//answer
-//input
-//currentSlide
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,11 +26,6 @@ const mapDispatchToProps = dispatch => ({
   buildVPSAnswers: () => dispatch(actions.buildVPSAnswers()),
   fetchTest: () => dispatch(actions.fetchTest()),
   setDate: () => dispatch(actions.setDate()),
-//fetch tests except LTVR
-//next
-//submit
-//update input
-//post section
 });
 
 class MainTestDisplay extends Component {
@@ -61,13 +51,9 @@ class MainTestDisplay extends Component {
 
     //      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
 
-    for(let i = 0; i < compArray.length; i++){
-      if(i%2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
+    for (let i = 0; i < compArray.length; i++) {
+      if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
     }
-
-    // if(this.props.test[0]) dummyStandIn = this.props.test[0];
-    // console.log('rendering Main Test')
-    // console.log('test', this.props.test);
 
     return (
       <div>
@@ -76,5 +62,5 @@ class MainTestDisplay extends Component {
     );
   }
 }
-// export default MainTestDisplay;
+
 export default connect(mapStateToProps, mapDispatchToProps)(MainTestDisplay);

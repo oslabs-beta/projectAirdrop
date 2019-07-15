@@ -6,7 +6,7 @@ class ImageRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeToNext: 1000,
+      timeToNext: 500,
       practiceRun: true
     };
     this.startPractice = this.startPractice.bind(this);
