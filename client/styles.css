@@ -1,3 +1,17 @@
 img {
     width: 600px
 }
+.VPSchoices{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 100px;
+}
+.LTVRDchoices{
+    display: flex;
+    flex-direction: column;
+    background-color: #f64c72;
+    border-radius: 6px;
+    padding: 5px
+}

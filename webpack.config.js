@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const NODE_DEV_SERVER_URL = 'http://localhost:3000';
+const NODE_DEV_SERVER_URL = 'http://[::1]:3000';
 
 module.exports = {
   entry: path.resolve(__dirname, 'client/index.jsx'),

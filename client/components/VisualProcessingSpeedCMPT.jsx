@@ -5,7 +5,22 @@ import UserNextBtn from "./UserNextBTN";
 const VisualProcessingSpeed = (props) => {
   let currentEl;
   let currentBTN;
+  let currentInstructions;
   let choiceDisplay = [];
+  if(!props.testStarted){
+    for(let i = 0; i < props.instructions.length; i ++){
+      if(props.instructions[i].is_practice) {
+        currentInstructions = props.instructions[i].instruction_text;
+      }
+    }
+  }
+  if(props.practiceDone && !props.timerRunning && !(props.currentSeriesIndex === 6)){
+    for(let i = 0; i < props.instructions.length; i ++){
+      if(!props.instructions[i].is_practice) {
+        currentInstructions = props.instructions[i].instruction_text;
+      }
+    }
+  }
   if(props.timerRunning) currentEl = props.vpsAnswers[0][props.currentSeriesIndex][props.currentElementIndex];
   if(!(props.displayingAnswers || props.timerRunning)) {
     if(!props.practiceDone) currentBTN = <button onClick={props.startPractice}>Start</button>
@@ -17,21 +32,22 @@ const VisualProcessingSpeed = (props) => {
     for(let j = 0; j < 4; j++){
       let choiceRow = [];
       for(let i = 0; i < 5; i++){
-        choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
+        choiceRow.push(<span>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</span>)
       }
       console.log(choiceRow)
-      choiceDisplay.push(<span>
+      choiceDisplay.push(<div className="LTVRDchoices">
         {choiceRow}
-        </span>)
+        </div>)
     }
   }
-  console.log(currentEl);
+  console.log(currentInstructions, "CURRENT INSTRUCTIONS");
   return (
   <div>
   <h1>VisualProcessingSpeed</h1>
-   {currentEl}
-   {currentBTN}
-   {choiceDisplay}
+  {currentInstructions}
+  {currentEl}
+  {currentBTN}
+  <div className="VPSchoices">{choiceDisplay}</div>
   </div>
 )};
 
