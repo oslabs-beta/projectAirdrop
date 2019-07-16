@@ -3,7 +3,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { PORT } = process.env;
 const app = express();
-const dbController = require('./controllers/databaseController');
+const dbController = require('./controllers/testController');
+const encryptionController = require('./controllers/encryptionController');
+const userController = require('./controllers/userController');
+const tokenController = require('./controllers/tokenController')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,11 +18,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
+//signup to create account for new users
+//creating middleware
+// app.post('/createuser',encryptionController.encryptPassword, userController.postUser, (req, res) => {
+//   res.status(200).json(res.locals.result);
+// });
 
-app.get('/api', (req, res) => {
-  console.log('api route test');
-  res.json([{question: 'this is a question'}]);
-});
+
+// app.post('/login', encryptionController.comparePassword, userController.login, tokenController.signToken, (req, res) => {
+//   res.cookie('token', res.locals.token, {httpOnly: true});
+//   res.status(200).json(res.locals.result);
+// });
+
+
+// app.get('/api', (req, res) => {
+//   console.log('api route test');
+//   res.json([{question: 'this is a question'}]);
+// });
 
 app.get('/api/test',
   // dbController.getTestData,
@@ -35,7 +50,7 @@ app.get('/api/test',
 });
 
 
-app.get('/', (req, res) => {   
+app.get('/*', (req, res) => {   
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
       res.status(500).send(err)
