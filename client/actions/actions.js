@@ -81,25 +81,3 @@ export const storeDemoData = (userData) => {
     type: types.STORE_DEMOGRAPHIC_DATA,
   }
 };
-
-// Test storage related actions
-export const sendAPI = () => ({
-  type: types.sendAPI
-});
-
-export const sendFailure = () => ({
-
-});
-
-// export const addFood = foodData => dispatch => {
-//   fetch('http://localhost:5000/addDiet', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(foodData)
-//   })
-//   .then(res => {
-//     dispatch(addFoodAsync(foodData));
-//   })
-// }
