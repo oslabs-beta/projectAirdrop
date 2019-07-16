@@ -4,6 +4,7 @@ const initialState = {
   clicks: 0,
   test: [],
   answers: [],
+  // new answer array for each section
   vpsAnswers: [],
   apiStatus: null,
   apiError: null,
