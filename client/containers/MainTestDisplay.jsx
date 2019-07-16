@@ -51,13 +51,15 @@ class MainTestDisplay extends Component {
 
     //      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
 
-    for (let i = 0; i < compArray.length; i++) {
-      if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
-    }
+    // for (let i = 0; i < compArray.length; i++) {
+    //   if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
+    // }
 
     return (
       <div>
-        {this.props.test.length > 0 && compArray[this.props.currentSection]}
+        {/* {this.props.test.length > 0 && compArray[this.props.currentSection]} */}
+        {this.props.test.length > 0 && <QuestionnaireCont test={this.props.test}/>}
+        {/* <h1>Testest</h1> */}
       </div>
     );
   }
