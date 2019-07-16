@@ -5,11 +5,30 @@ class WorkingMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeToNext: 900,
-      practiceRun: true
+      timeToNext: 3000,
+      currentChoice: '',
+      answers: {}
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onPracticeHandler = this.onPracticeHandler.bind(this)
+  }
+
+  onChangeHandler(e, qid) {
+    this.setState({
+      currentChoice: e.target.value,
+      answers: {
+        ...this.state.answers,
+        [qid]: e.target.value
+      }
+    })
+  }
+
+  onPracticeHandler(e) {
+    this.setState({
+      currentChoice: e.target.value
+    })
   }
 
   startPractice() {
@@ -34,7 +53,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 1500)
+          }, 5000)
         })
       })
   }
@@ -61,7 +80,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 1500)
+          }, 5000)
         })
       })
       .then(() => {
@@ -77,7 +96,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 1500)
+          }, 5000)
         })
       })
       .then(() => {
@@ -93,7 +112,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 1500)
+          }, 5000)
         })
       })
       .then(() => {
@@ -109,7 +128,7 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 1500)
+          }, 5000)
         })
       })
       .then(() => {
@@ -125,12 +144,13 @@ class WorkingMemory extends Component {
           setTimeout(() => {
             this.props.changeSlide();
             resolve()
-          }, 1500)
+          }, 5000)
         })
       })
   }
 
   render() {
+    console.log(this.state.answers);
     return (
       <WorkingMemoryCMPT
         WM={this.props.WM}
@@ -139,6 +159,9 @@ class WorkingMemory extends Component {
         changeSection={this.props.changeSection}
         startPractice={this.startPractice}
         startTest={this.startTest}
+        onChangeHandler={this.onChangeHandler}
+        currentChoice={this.state.currentChoice}
+        onPracticeHandler={this.onPracticeHandler}
       />
     );
   }
