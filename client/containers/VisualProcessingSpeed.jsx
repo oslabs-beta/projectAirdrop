@@ -23,6 +23,11 @@ class VisualProcessingSpeed extends Component {
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
 
 	}
+
+	componentWillUnmount() {
+		console.log('COMPONENT WILL UNMOUNT RE-RENDER TESt')
+	}
+
 	startNewSeries() {
 		this.setState({
 			timeToNext: 4500 - (this.state.currentSeriesIndex*500),
@@ -67,7 +72,7 @@ class VisualProcessingSpeed extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		console.log(this.state.answerArray[0])
+		console.log(this.state.answerArray)
 		this.setState({
 			answerArray: [...this.state.answerArray, answerChoice],
 		});

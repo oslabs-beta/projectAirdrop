@@ -14,7 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-
+app.post('/api/testpostdata', (req, res) => {
+  console.log('testing post route', req.body);
+  res.status(200)//.send()
+})
 
 app.get('/api', (req, res) => {
   console.log('api route test');
@@ -35,7 +38,7 @@ app.get('/api/test',
 });
 
 
-app.get('/', (req, res) => {   
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
       res.status(500).send(err)

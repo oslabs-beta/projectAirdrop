@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import WorkingMemoryCMPT from '../components/WorkingMemoryCMPT.jsx'
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
+
+const mapDispatchToProps = dispatch => ({
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+});
 
 class WorkingMemory extends Component {
   constructor(props) {
@@ -7,7 +13,8 @@ class WorkingMemory extends Component {
     this.state = {
       timeToNext: 3000,
       currentChoice: '',
-      answers: {}
+      sectionData: {},
+      sectionId: 'WM'
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -15,11 +22,25 @@ class WorkingMemory extends Component {
     this.onPracticeHandler = this.onPracticeHandler.bind(this)
   }
 
+  componentWillUnmount() {
+    const assessment = Object.keys(this.state.sectionData).reduce((a, b) => {
+      const answer = {
+        'aid': 1,
+        'qid': b,
+        'answer': this.state.sectionData[b]
+      };
+      a.push(answer);
+      return a
+    }, []);
+
+    this.props.postAnswers(this.state.sectionId, assessment)
+  }
+
   onChangeHandler(e, qid) {
     this.setState({
       currentChoice: e.target.value,
-      answers: {
-        ...this.state.answers,
+      sectionData: {
+        ...this.state.sectionData,
         [qid]: e.target.value
       }
     })
@@ -150,7 +171,7 @@ class WorkingMemory extends Component {
   }
 
   render() {
-    console.log(this.state.answers);
+    console.log(this.state.sectionId, this.state.sectionData);
     return (
       <WorkingMemoryCMPT
         WM={this.props.WM}
@@ -167,4 +188,4 @@ class WorkingMemory extends Component {
   }
 }
 
-export default WorkingMemory
+export default connect(null, mapDispatchToProps)(WorkingMemory)

@@ -102,7 +102,9 @@ const ImageRecognitionCMPT = (props) => {
         currentChoice={props.currentChoice}
       />,
 
-      <SectionEndScreen changeSection={props.changeSection}/>
+      <SectionEndScreen
+        changeSection={props.changeSection}
+      />
 
     ];
 

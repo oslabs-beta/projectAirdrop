@@ -35,3 +35,7 @@ export const CHANGE_SLIDE = 'CHANGE_SLIDE';
 
 //Build VPS questions
 export const BUILD_VPS_ANSWERS = 'BUILD_VPS_ANSWERS';
+
+export const SEND_API = 'SEND_API';
+export const SEND_API_FAILURE = 'SEND_API_FAILURE';
+
