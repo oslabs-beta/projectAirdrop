@@ -32,15 +32,19 @@ const VisualProcessingSpeed = (props) => {
     for(let j = 0; j < 4; j++){
       let choiceRow = [];
       for(let i = 0; i < 5; i++){
-        choiceRow.push(<span>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</span>)
+        choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
-      console.log(choiceRow)
+      choiceRow.push(<button>Submit</button>)
+      // console.log(choiceRow)
       choiceDisplay.push(<div className="LTVRDchoices">
         {choiceRow}
         </div>)
     }
+    let randomIndex = Math.ceil(Math.random()*3);
+    let temp = choiceDisplay[0];
+    choiceDisplay[0] = choiceDisplay[randomIndex];
+    choiceDisplay[randomIndex] = temp;
   }
-  console.log(currentInstructions, "CURRENT INSTRUCTIONS");
   return (
   <div>
   <h1>VisualProcessingSpeed</h1>

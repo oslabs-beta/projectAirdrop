@@ -15,6 +15,12 @@ class VisualProcessingSpeed extends Component {
 			practiceDone: false,
 			testStarted: false,
 			displayingAnswers: false,
+			answerArray: [],
+			currentSet: {
+				userChoice: null,
+				correctChoice: null,
+				choices: [],
+			}
 		};
 
 		this.startNewSeries = this.startNewSeries.bind(this);

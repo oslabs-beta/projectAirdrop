@@ -9,7 +9,7 @@ class WorkingMemory extends Component {
       practiceRun: true
     };
     this.startPractice = this.startPractice.bind(this);
-    this.startTest = this.startTest.bind(this)
+    this.startTest = this.startTest.bind(this);
   }
 
   startPractice() {
