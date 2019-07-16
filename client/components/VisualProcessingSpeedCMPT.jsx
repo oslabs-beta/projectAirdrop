@@ -34,7 +34,7 @@ const VisualProcessingSpeed = (props) => {
       for(let i = 0; i < 5; i++){
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
-      choiceRow.push(<button>Submit</button>)
+      choiceRow.push(<button onClick={() => props.submitAnswer(j)}>Submit</button>)
       // console.log(choiceRow)
       choiceDisplay.push(<div className="LTVRDchoices">
         {choiceRow}
