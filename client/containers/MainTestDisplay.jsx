@@ -57,9 +57,7 @@ class MainTestDisplay extends Component {
 
     return (
       <div>
-        {/* {this.props.test.length > 0 && compArray[this.props.currentSection]} */}
-        {this.props.test.length > 0 && <QuestionnaireCont test={this.props.test}/>}
-        {/* <h1>Testest</h1> */}
+         {this.props.test.length > 0 && compArray[this.props.currentSection]}
       </div>
     );
   }
