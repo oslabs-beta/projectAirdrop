@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { PORT } = process.env;
 const app = express();
 const dbController = require('./controllers/databaseController');
+const tpController = require('./controllers/testPostController');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,14 @@ app.post('/api/testpostdata', (req, res) => {
 app.get('/api', (req, res) => {
   console.log('api route test');
   res.json([{question: 'this is a question'}]);
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
 });
 
 app.get('/api/test',
@@ -46,17 +55,21 @@ app.get('/', (req, res) => {
   })
 });
 
-
+app.post('/api/test',
+  tpController.postAnswers,
+  (req, res) => {
+  res.send();
+});
 
 //error handling
 app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that!")
-})
+});
 
 app.use((err, req, res, next) =>{
   console.log(err);
   res.status(400).json({'msg':err});
-})
+});
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
