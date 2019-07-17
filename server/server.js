@@ -18,9 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
+//LOGIN AND AUTH
 //signup to create account for new users
 //creating middleware
-// app.post('/createuser',encryptionController.encryptPassword, userController.postUser, (req, res) => {
+// app.post('/signup',encryptionController.encryptPassword, userController.postUser, (req, res) => {
 //   res.status(200).json(res.locals.result);
 // });
 
@@ -31,10 +32,11 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // });
 
 
-// app.get('/api', (req, res) => {
-//   console.log('api route test');
-//   res.json([{question: 'this is a question'}]);
-// });
+//for authentication component at login
+//app.get('/verifytoken', tokenController.checkToken, (req, res) => {
+//  res.json(req.token);
+//})
+
 
 app.get('/api/test',
   // dbController.getTestData,
