@@ -25,14 +25,21 @@ class VisualProcessingSpeed extends Component {
 		this.startNewSeries = this.startNewSeries.bind(this);
 		this.startPractice = this.startPractice.bind(this);
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
-
 	}
 
 	componentWillUnmount() {
-		console.log('COMPONENT WILL UNMOUNT RE-RENDER TESt');
-
-
-		this.props.postAnswers(this.state.sectionId, )
+		console.log('VPS UNMOUNT ANSWER ARRAY ', this.state.answerArray);
+		const vpsAnswers = this.state.answerArray.reduce((a, b, i) => {
+			const response = {
+				'aid': 1,
+				'seriesIndex': i,
+				'userChoice': b,
+				'timeTaken': 0
+			};
+			a.push(response);
+			return a
+		}, []);
+		this.props.postAnswers(this.state.sectionId, vpsAnswers)
 	}
 
 	startNewSeries() {
@@ -79,13 +86,13 @@ class VisualProcessingSpeed extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		console.log(this.state.answerArray)
 		this.setState({
 			answerArray: [...this.state.answerArray, answerChoice],
 		});
 	}
 	render () {
 		console.log('VPS GENERATED CHOICES', this.props.vpsAnswers);
+		console.log('VPS ANSWER ARRAY', this.state.answerArray);
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT
