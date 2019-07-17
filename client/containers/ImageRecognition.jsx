@@ -18,23 +18,34 @@ class ImageRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeToNext: 500,
+      timeElapsed: 0,
+      timeToNext: 1000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'IR'
+      sectionId: 'IR',
+      answerTimeArray: [],
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.onPracticeHandler = this.onPracticeHandler.bind(this)
+    this.onPracticeHandler = this.onPracticeHandler.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.startTimer = this.startTimer.bind(this);
   }
 
   componentWillUnmount() {
-    const assessment = Object.keys(this.state.sectionData).reduce((a, b) => {
+    let subtractTime = this.state.timeToNext;
+    let answerTimeArrayCopy = [...this.state.answerTimeArray];
+    for (let i = 0; i < this.state.answerTimeArray.length; i += 1) {
+      answerTimeArrayCopy[i] -= subtractTime;
+      subtractTime += (this.state.timeToNext * 3)
+    }
+    const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
         'aid': 1,
         'qid': b,
-        'answer': this.state.sectionData[b]
+        'answer': this.state.sectionData[b],
+        'timeTaken': answerTimeArrayCopy[i]
       };
       a.push(answer);
       return a
@@ -56,6 +67,23 @@ class ImageRecognition extends Component {
   onPracticeHandler(e) {
     this.setState({
       currentChoice: e.target.value
+    })
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.setState({
+        timeElapsed: this.state.timeElapsed + 100
+      })
+    }, 100);
+  }
+
+  onSubmit() {
+    this.setState({
+      answerTimeArray: [
+        ...this.state.answerTimeArray,
+        this.state.timeElapsed
+      ]
     })
   }
 
@@ -95,6 +123,7 @@ class ImageRecognition extends Component {
   }
 
   startTest() {
+    this.startTimer();
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -170,6 +199,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -178,9 +208,8 @@ class ImageRecognition extends Component {
   }
 
   render() {
-    console.log(this.props.apiStatus);
-    console.log(this.props.apiError);
-    console.log(this.state.sectionId, this.state.sectionData);
+    console.log('IR TIME ARRAY', this.state.answerTimeArray);
+    console.log('IR SECTION DATA', this.state.sectionData);
     return (
     <ImageRecognitionCMPT
       IR={this.props.IR}
@@ -192,6 +221,7 @@ class ImageRecognition extends Component {
       onChangeHandler={this.onChangeHandler}
       currentChoice={this.state.currentChoice}
       onPracticeHandler={this.onPracticeHandler}
+      onSubmit={this.onSubmit}
     />
     );
   }

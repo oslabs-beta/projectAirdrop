@@ -15,13 +15,14 @@ class LTVRR extends Component {
 	constructor(props){
     super(props);
     this.state = {
-            timeLeft: 120000,
-            testStarted: false,
-            testDone: false,
-            answerArray: [],
-            currentAnswer: '',
-            sectionId: 'LTVR'
-		};
+      timeLeft: 120000,
+      testStarted: false,
+      testDone: false,
+      answerArray: [],
+      currentAnswer: '',
+      sectionId: 'LTVR',
+      answerTimeArray: []
+    };
 
 		this.startTimer = this.startTimer.bind(this);
         this.tick = this.tick.bind(this);
@@ -37,7 +38,8 @@ class LTVRR extends Component {
     const assessment = {
       'aid': 1,
       'wordArr': wordArr,
-      'respArr': this.state.answerArray
+      'respArr': this.state.answerArray,
+      'timeTaken': this.answerTimeArray
     };
 	  this.props.postAnswers(this.state.sectionId, assessment)
   };
@@ -53,7 +55,8 @@ class LTVRR extends Component {
 
     submitAnswer () {
         this.setState({
-            answerArray: [...this.state.answerArray, this.state.currentAnswer]
+          answerArray: [...this.state.answerArray, this.state.currentAnswer],
+          answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft]
         })
     }
 
@@ -84,6 +87,7 @@ class LTVRR extends Component {
     }
 
 	render () {
+	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
 		return (
 			<div>
 				<LTVRRCMPT

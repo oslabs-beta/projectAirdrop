@@ -8,6 +8,7 @@ const WMQuestionDisplay = props => {
     {
       (props.choices[2] === "n/a") ?
         (
+          <div>
       <form>
         <label>
           <input
@@ -28,7 +29,10 @@ const WMQuestionDisplay = props => {
           {props.choices[1]}
         </label>
       </form>
-        ) : (
+          <button onClick={props.onSubmit}>Submit</button>
+          </div>
+      ) : (
+          <div>
           <form>
             <label>
               <input
@@ -67,6 +71,8 @@ const WMQuestionDisplay = props => {
               {props.choices[3]}
             </label>
           </form>
+        <button onClick={props.onSubmit}>Submit</button>
+          </div>
       )
     }
     </div>

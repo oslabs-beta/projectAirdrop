@@ -3,6 +3,7 @@ import WMQuestionDisplay from './WMQuestionDisplay';
 import SectionEndScreen from './SectionEndScreen';
 import NextCMPT from './NextCMPT';
 import PracticeImageCMPT from './PracticeImageCMPT';
+import ImageRecognitionCMPT from "./ImageRecognitionCMPT";
 
 const WorkingMemoryCMPT = (props) => {
 
@@ -48,6 +49,7 @@ const WorkingMemoryCMPT = (props) => {
       choices={Object.values(props.WM.images[0].questions[0].choices[0])}
       onChangeHandler={props.onChangeHandler}
       currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
     />,
 
     <img src={props.WM.images[2].image_url}/>,
@@ -58,6 +60,7 @@ const WorkingMemoryCMPT = (props) => {
       choices={Object.values(props.WM.images[1].questions[0].choices[0])}
       onChangeHandler={props.onChangeHandler}
       currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
     />,
 
     <img src={props.WM.images[3].image_url}/>,
@@ -68,6 +71,7 @@ const WorkingMemoryCMPT = (props) => {
       choices={Object.values(props.WM.images[2].questions[0].choices[0])}
       onChangeHandler={props.onChangeHandler}
       currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
     />,
 
     <img src={props.WM.images[4].image_url}/>,
@@ -78,6 +82,7 @@ const WorkingMemoryCMPT = (props) => {
       choices={Object.values(props.WM.images[3].questions[0].choices[0])}
       onChangeHandler={props.onChangeHandler}
       currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
     />,
 
     <img src={props.WM.images[5].image_url}/>,
@@ -88,6 +93,7 @@ const WorkingMemoryCMPT = (props) => {
       choices={Object.values(props.WM.images[4].questions[0].choices[0])}
       onChangeHandler={props.onChangeHandler}
       currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
     />,
 
     <SectionEndScreen changeSection={props.changeSection}/>
