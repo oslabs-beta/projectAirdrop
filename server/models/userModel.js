@@ -19,6 +19,7 @@ const pool = new Pool({
   //admin authentication -- with password?
 
 const compare_password = 'SELECT * FROM users WHERE username = $1';
+const create_user = 'INSERT INTO users (username, password, role) VALUES ($1, $2, $3) RETURNING _id';
 
 const userModel = {
 
@@ -29,7 +30,16 @@ const userModel = {
 				resolve(result);
 			})
 		})
-	},
+  },
+  
+  createUser () {
+		return new Promise((resolve, reject) => {
+			pool.query(create_user, (err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			})
+		})
+	}
 
 }
 
