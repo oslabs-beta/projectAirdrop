@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
 
+const mapDispatchToProps = dispatch => ({
+	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+});
 
 class VisualProcessingSpeed extends Component {
 	constructor(props){
@@ -16,6 +19,7 @@ class VisualProcessingSpeed extends Component {
 			testStarted: false,
 			displayingAnswers: false,
 			answerArray: [],
+			sectionId: 'VPS'
 		};
 		this.submitAnswer = this.submitAnswer.bind(this);
 		this.startNewSeries = this.startNewSeries.bind(this);
@@ -25,7 +29,10 @@ class VisualProcessingSpeed extends Component {
 	}
 
 	componentWillUnmount() {
-		console.log('COMPONENT WILL UNMOUNT RE-RENDER TESt')
+		console.log('COMPONENT WILL UNMOUNT RE-RENDER TESt');
+
+
+		this.props.postAnswers(this.state.sectionId, )
 	}
 
 	startNewSeries() {
@@ -78,6 +85,7 @@ class VisualProcessingSpeed extends Component {
 		});
 	}
 	render () {
+		console.log('VPS GENERATED CHOICES', this.props.vpsAnswers);
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT
@@ -98,4 +106,4 @@ class VisualProcessingSpeed extends Component {
 		)
 	}
 }
-export default VisualProcessingSpeed;
+export default connect(null, mapDispatchToProps)(VisualProcessingSpeed)

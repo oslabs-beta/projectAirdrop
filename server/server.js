@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.post('/api/testpostdata', (req, res) => {
   console.log('testing post route', req.body);
   res.status(200)//.send()
-})
+});
 
 app.get('/api', (req, res) => {
   console.log('api route test');

@@ -20,6 +20,7 @@ const mapDispatchToProps = dispatch => ({
   setDate: () => dispatch(actions.setDate()),
   handleChangeTwo: (event) => dispatch(actions.handleChangeTwo(event)),
   storeDemoData: (userData) => dispatch(actions.storeDemoData(userData)),
+  postAnswers: (data) => dispatch(actions.postAnswers(data))
   //fetch LTVR
   //post demo data
 
@@ -36,7 +37,7 @@ class UserDemographics extends Component {
 
 
   submit (e) {
-    this.props.storeDemoData(this.props.userData);
+    this.props.postAnswers(this.props.userData);
     this.props.changeSection();
     e.preventDefault()
   }

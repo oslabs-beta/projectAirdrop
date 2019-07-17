@@ -3,6 +3,7 @@ import { CALL_API, SEND_API, SEND_API_FAILURE } from '../constants/actionTypes';
 const initialState = {
   apiStatus: '',
   apiError: '',
+  aid: ''
 };
 
 const answersReducer = ( state = initialState, action) => {
@@ -16,6 +17,8 @@ const answersReducer = ( state = initialState, action) => {
       return {
         ...state,
         apiStatus: 'success',
+        aid: action.payload
+
       };
     case SEND_API_FAILURE:
     return {

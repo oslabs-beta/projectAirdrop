@@ -97,7 +97,7 @@ export const sendFailure = err => ({
   payload: err
 });
 
-export const postAnswers = (sectionId, data) => dispatch => {
+export const postAnswers = (data, sectionId) => dispatch => {
   console.log('POST ANSWERS DATA', data);
   dispatch(requestAPI)
 
@@ -115,7 +115,7 @@ export const postAnswers = (sectionId, data) => dispatch => {
     .then(res => res.json())
     .then(res => {
       if(!isValid(res)) throw new Error("something went wrong!")
-        console.log(res)
+      console.log('POST ANSWERS RESPONSE OBJECT', res);
       return dispatch(sendAPI(res))
     })
     .catch(err => dispatch(sendFailure(err)));

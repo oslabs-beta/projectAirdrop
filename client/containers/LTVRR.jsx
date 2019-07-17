@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import LTVRRCMPT from '../components/LongTermVerbalRecallResponseCMPT';
 
+const mapStateToProps = (store) => ({
+  words: store.test.test[0].words
+});
+
+const mapDispatchToProps = dispatch => ({
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+});
 
 class LTVRR extends Component {
 	constructor(props){
@@ -13,6 +20,7 @@ class LTVRR extends Component {
             testDone: false,
             answerArray: [],
             currentAnswer: '',
+            sectionId: 'LTVR'
 		};
 
 		this.startTimer = this.startTimer.bind(this);
@@ -21,6 +29,19 @@ class LTVRR extends Component {
         this.submitAnswer = this.submitAnswer.bind(this);
         this.earlyFinish = this.earlyFinish.bind(this);
 	}
+
+	componentWillUnmount() {
+
+	  const wordArr = this.props.words.map(wordObject => wordObject['word']);
+
+    const assessment = {
+      'aid': 1,
+      'wordArr': wordArr,
+      'respArr': this.state.answerArray
+    };
+	  this.props.postAnswers(this.state.sectionId, assessment)
+  };
+
 	startTimer() {
 		this.setState({
 			testStarted: true,
@@ -29,16 +50,19 @@ class LTVRR extends Component {
 		    this.timer = setInterval(this.tick, 1000);
         })
     }
+
     submitAnswer () {
         this.setState({
             answerArray: [...this.state.answerArray, this.state.currentAnswer]
         })
     }
+
     handleChange (e) {
         this.setState({
             currentAnswer: e.target.value
         })
     }
+
 	tick() {
 		this.setState({
             timeLeft: this.state.timeLeft - 1000
@@ -78,4 +102,4 @@ class LTVRR extends Component {
 		)
 	}
 }
-export default LTVRR;
+export default connect(mapStateToProps, mapDispatchToProps)(LTVRR)
