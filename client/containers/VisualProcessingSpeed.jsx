@@ -15,8 +15,9 @@ class VisualProcessingSpeed extends Component {
 			practiceDone: false,
 			testStarted: false,
 			displayingAnswers: false,
+			answerArray: [],
 		};
-
+		this.submitAnswer = this.submitAnswer.bind(this);
 		this.startNewSeries = this.startNewSeries.bind(this);
 		this.startPractice = this.startPractice.bind(this);
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
@@ -65,6 +66,12 @@ class VisualProcessingSpeed extends Component {
 				}
 		}
 	}
+	submitAnswer(answerChoice){
+		console.log(this.state.answerArray[0])
+		this.setState({
+			answerArray: [...this.state.answerArray, answerChoice],
+		});
+	}
 	render () {
 		return (
 			<div>
@@ -80,6 +87,7 @@ class VisualProcessingSpeed extends Component {
 				displayingAnswers={this.state.displayingAnswers}
 				changeSection={this.props.changeSection}
 				instructions={this.props.section.instructions}
+				submitAnswer={this.submitAnswer}
 				/>
 			</div>
 		)

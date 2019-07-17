@@ -36,8 +36,8 @@ class UserDemographics extends Component {
 
 
   submit (e) {
-    this.props.storeDemoData(this.props.userData)
-    this.props.changeSection()
+    this.props.storeDemoData(this.props.userData);
+    this.props.changeSection();
     e.preventDefault()
   }
 
@@ -45,7 +45,7 @@ class UserDemographics extends Component {
     return (
       <div>
         <h1>Demo Information</h1>
-        <UserDemographicsCMPT 
+        <UserDemographicsCMPT
         userData={this.props.userData}
         dates={this.props.dates}
         handleChange={this.props.handleChange}

@@ -13,7 +13,8 @@ const WMQuestionDisplay = props => {
           <input
             type="radio"
             value={props.choices[0]}
-            checked={true}
+            checked={props.currentChoice === props.choices[0]}
+            onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
           />
           {props.choices[0]}
         </label>
@@ -21,6 +22,8 @@ const WMQuestionDisplay = props => {
           <input
             type="radio"
             value={props.choices[1]}
+            checked={props.currentChoice === props.choices[1]}
+            onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
           />
           {props.choices[1]}
         </label>
@@ -31,7 +34,8 @@ const WMQuestionDisplay = props => {
               <input
                 type="radio"
                 value={props.choices[0]}
-                checked={true}
+                checked={props.currentChoice === props.choices[0]}
+                onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
               />
               {props.choices[0]}
             </label>
@@ -39,6 +43,8 @@ const WMQuestionDisplay = props => {
               <input
                 type="radio"
                 value={props.choices[1]}
+                checked={props.currentChoice === props.choices[1]}
+                onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
               />
               {props.choices[1]}
             </label>
@@ -46,6 +52,8 @@ const WMQuestionDisplay = props => {
               <input
                 type="radio"
                 value={props.choices[2]}
+                checked={props.currentChoice === props.choices[2]}
+                onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
               />
               {props.choices[2]}
             </label>
@@ -53,6 +61,8 @@ const WMQuestionDisplay = props => {
               <input
                 type="radio"
                 value={props.choices[3]}
+                checked={props.currentChoice === props.choices[3]}
+                onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
               />
               {props.choices[3]}
             </label>

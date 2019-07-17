@@ -4,10 +4,11 @@ const initialState = {
   clicks: 0,
   test: [],
   answers: [],
+  // new answer array for each section
   vpsAnswers: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 0,
+  currentSection: 5,
   currentSlide: 0,
 };
 

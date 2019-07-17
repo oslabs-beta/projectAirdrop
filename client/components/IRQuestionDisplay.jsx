@@ -9,17 +9,20 @@ const IRQuestionDisplay = props => {
         <label>
           <input
             type="radio"
-            value="true"
-            checked={true}
+            value={props.choices[0]}
+            checked={props.currentChoice === props.choices[0]}
+            onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
           />
-          True
+          {props.choices[0]}
         </label>
         <label>
           <input
             type="radio"
-            value="false"
+            value={props.choices[1]}
+            checked={props.currentChoice === props.choices[1]}
+            onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
           />
-          False
+          {props.choices[1]}
         </label>
       </form>
     </div>

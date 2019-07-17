@@ -3,6 +3,7 @@ import IRQuestion from './IRQuestionDisplay';
 import SectionEndScreen from "./SectionEndScreen";
 import NextCMPT from './NextCMPT';
 import PracticeImageCMPT from './PracticeImageCMPT';
+import WMQuestionDisplay from "./WMQuestionDisplay";
 
 const ImageRecognitionCMPT = (props) => {
 
@@ -16,7 +17,9 @@ const ImageRecognitionCMPT = (props) => {
         choices={
           [props.IR.practice[0]['choice1'],
             props.IR.practice[0]['choice2']]
-        }/>,
+        }
+        currentChoice={props.currentChoice}
+        onPracticeHandler={props.onPracticeHandler}/>,
 
       <img src={props.IR.practice[3].image_url}/> ,
 
@@ -25,7 +28,9 @@ const ImageRecognitionCMPT = (props) => {
         choices={
           [props.IR.practice[1]['choice1'],
             props.IR.practice[1]['choice2']]
-        }/>,
+        }
+        currentChoice={props.currentChoice}
+        onPracticeHandler={props.onPracticeHandler}/>,
 
       <NextCMPT changeSlide={props.changeSlide}/>,
 
@@ -51,31 +56,51 @@ const ImageRecognitionCMPT = (props) => {
 
       <IRQuestion
         question={props.IR.images[0].questions[0].question_text}
-        choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+        qid={props.IR.images[0].questions[0].id}
+        choices={Object.values(props.IR.images[0].questions[0].choices[0])}
+        onChangeHandler={props.onChangeHandler}
+        currentChoice={props.currentChoice}
+      />,
 
       <img src={props.IR.images[1].image_url}/> ,
 
       <IRQuestion
         question={props.IR.images[1].questions[0].question_text}
-        choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+        qid={props.IR.images[1].questions[0].id}
+        choices={Object.values(props.IR.images[0].questions[0].choices[0])}
+        onChangeHandler={props.onChangeHandler}
+        currentChoice={props.currentChoice}
+      />,
 
       <img src={props.IR.images[2].image_url}/>,
 
       <IRQuestion
         question={props.IR.images[2].questions[0].question_text}
-        choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+        qid={props.IR.images[2].questions[0].id}
+        choices={Object.values(props.IR.images[0].questions[0].choices[0])}
+        onChangeHandler={props.onChangeHandler}
+        currentChoice={props.currentChoice}
+      />,
 
       <img src={props.IR.images[3].image_url}/> ,
 
       <IRQuestion
         question={props.IR.images[3].questions[0].question_text}
-        choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+        qid={props.IR.images[3].questions[0].id}
+        choices={Object.values(props.IR.images[0].questions[0].choices[0])}
+        onChangeHandler={props.onChangeHandler}
+        currentChoice={props.currentChoice}
+      />,
 
       <img src={props.IR.images[4].image_url}/>,
 
       <IRQuestion
         question={props.IR.images[4].questions[0].question_text}
-        choices={Object.values(props.IR.images[0].questions[0].choices[0])}/>,
+        qid={props.IR.images[4].questions[0].id}
+        choices={Object.values(props.IR.images[0].questions[0].choices[0])}
+        onChangeHandler={props.onChangeHandler}
+        currentChoice={props.currentChoice}
+      />,
 
       <SectionEndScreen changeSection={props.changeSection}/>
 
