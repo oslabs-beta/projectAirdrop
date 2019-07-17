@@ -72,7 +72,7 @@ class QuestionnaireCont extends Component {
     console.log('cmsq', cmsq)
     console.log('cnaaq', cnaaq)
     const questionnaireResponses = { ...cmsq, ...cnaaq};
-    this.props.postAnswers(questionnaireResponses, this.state.sectionId)
+    this.props.postAnswers(this.state.sectionId, questionnaireResponses)
   }
 
   handleChange(e, qid) {

@@ -97,7 +97,7 @@ export const sendFailure = err => ({
   payload: err
 });
 
-export const postAnswers = (data, sectionId) => dispatch => {
+export const postAnswers = (sectionId, data) => dispatch => {
   console.log('POST ANSWERS DATA', data);
   dispatch(requestAPI)
 
@@ -119,4 +119,32 @@ export const postAnswers = (data, sectionId) => dispatch => {
       return dispatch(sendAPI(res))
     })
     .catch(err => dispatch(sendFailure(err)));
-}
+};
+
+export const postDemo = (data) => dispatch => {
+  console.log('POST DEMO DATA', data);
+  dispatch(requestAPI);
+
+  // TODO: Needs URL
+  return fetch('/api/testpostdata', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      demoData: data
+    })
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (!isValid(res)) throw new Error("something went wrong!");
+      console.log('POST DEMO RESPONSE OBJECT', res);
+      return dispatch(receiveAID(res))
+    })
+    .catch(err => dispatch(sendFailure(err)));
+};
+
+export const receiveAID = (aid) => ({
+  type: types.RECEIVE_AID,
+  payload: aid
+});
