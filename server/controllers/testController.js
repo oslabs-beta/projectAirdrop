@@ -1,4 +1,4 @@
-const dbModel = require('../models/databaseModel');
+const dbModel = require('../models/testModel');
 const databaseController = {};
 
 databaseController.getSections = (req, res, next) => {
