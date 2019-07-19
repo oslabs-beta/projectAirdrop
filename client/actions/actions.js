@@ -81,3 +81,70 @@ export const storeDemoData = (userData) => {
     type: types.STORE_DEMOGRAPHIC_DATA,
   }
 };
+
+// POST action Creators
+// export const requestAPI = () => ({
+//   type: types.CALL_API
+// });
+
+export const sendAPI = json => ({
+  type: types.SEND_API,
+  payload: json
+});
+
+export const sendFailure = err => ({
+  type: types.SEND_API_FAILURE,
+  payload: err
+});
+
+export const postAnswers = (sectionId, data) => dispatch => {
+  console.log('POST ANSWERS DATA', data);
+  dispatch(requestAPI)
+
+  // TODO: Needs URL
+  return fetch('/api/testpostdata', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sectionId: sectionId,
+      sectionData: data
+    })
+  })
+    .then(res => res.json())
+    .then(res => {
+      if(!isValid(res)) throw new Error("something went wrong!")
+      console.log('POST ANSWERS RESPONSE OBJECT', res);
+      return dispatch(sendAPI(res))
+    })
+    .catch(err => dispatch(sendFailure(err)));
+};
+
+export const postDemo = (data) => dispatch => {
+  console.log('POST DEMO DATA', data);
+  dispatch(requestAPI);
+
+  // TODO: Needs URL
+  return fetch('/api/testpostdata', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      demoData: data
+    })
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (!isValid(res)) throw new Error("something went wrong!");
+      console.log('POST DEMO RESPONSE OBJECT', res);
+      return dispatch(receiveAID(res))
+    })
+    .catch(err => dispatch(sendFailure(err)));
+};
+
+export const receiveAID = (aid) => ({
+  type: types.RECEIVE_AID,
+  payload: aid
+});

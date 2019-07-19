@@ -3,6 +3,7 @@ import WMQuestionDisplay from './WMQuestionDisplay';
 import SectionEndScreen from './SectionEndScreen';
 import NextCMPT from './NextCMPT';
 import PracticeImageCMPT from './PracticeImageCMPT';
+import ImageRecognitionCMPT from "./ImageRecognitionCMPT";
 
 const WorkingMemoryCMPT = (props) => {
 
@@ -19,7 +20,10 @@ const WorkingMemoryCMPT = (props) => {
         [props.WM.practice[0]['choice1'],
           props.WM.practice[0]['choice2'],
           props.WM.practice[0]['choice3'],
-          props.WM.practice[0]['choice4']]}/>,
+          props.WM.practice[0]['choice4']]}
+      currentChoice={props.currentChoice}
+      onPracticeHandler={props.onPracticeHandler}
+    />,
 
     <NextCMPT changeSlide={props.changeSlide}/>,
 
@@ -41,31 +45,56 @@ const WorkingMemoryCMPT = (props) => {
 
     <WMQuestionDisplay
       question={props.WM.images[0].questions[0].question_text}
-      choices={Object.values(props.WM.images[0].questions[0].choices[0])}/>,
+      qid={props.WM.images[0].questions[0].id}
+      choices={Object.values(props.WM.images[0].questions[0].choices[0])}
+      onChangeHandler={props.onChangeHandler}
+      currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
+    />,
 
     <img src={props.WM.images[2].image_url}/>,
 
     <WMQuestionDisplay
       question={props.WM.images[1].questions[0].question_text}
-      choices={Object.values(props.WM.images[1].questions[0].choices[0])}/>,
+      qid={props.WM.images[1].questions[0].id}
+      choices={Object.values(props.WM.images[1].questions[0].choices[0])}
+      onChangeHandler={props.onChangeHandler}
+      currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
+    />,
 
     <img src={props.WM.images[3].image_url}/>,
 
     <WMQuestionDisplay
       question={props.WM.images[2].questions[0].question_text}
-      choices={Object.values(props.WM.images[2].questions[0].choices[0])}/>,
+      qid={props.WM.images[2].questions[0].id}
+      choices={Object.values(props.WM.images[2].questions[0].choices[0])}
+      onChangeHandler={props.onChangeHandler}
+      currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
+    />,
 
     <img src={props.WM.images[4].image_url}/>,
 
     <WMQuestionDisplay
       question={props.WM.images[3].questions[0].question_text}
-      choices={Object.values(props.WM.images[3].questions[0].choices[0])}/>,
+      qid={props.WM.images[3].questions[0].id}
+      choices={Object.values(props.WM.images[3].questions[0].choices[0])}
+      onChangeHandler={props.onChangeHandler}
+      currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
+    />,
 
     <img src={props.WM.images[5].image_url}/>,
 
     <WMQuestionDisplay
       question={props.WM.images[4].questions[0].question_text}
-      choices={Object.values(props.WM.images[4].questions[0].choices[0])}/>,
+      qid={props.WM.images[4].questions[0].id}
+      choices={Object.values(props.WM.images[4].questions[0].choices[0])}
+      onChangeHandler={props.onChangeHandler}
+      currentChoice={props.currentChoice}
+      onSubmit={props.onSubmit}
+    />,
 
     <SectionEndScreen changeSection={props.changeSection}/>
 

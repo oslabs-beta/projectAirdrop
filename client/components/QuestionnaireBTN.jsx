@@ -14,26 +14,123 @@ import React from 'react'
 const cnaaqOptions = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
 const cmsqOptions = ['Strongly Disagree', 'Disagree', 'Mostly Disagree', 'Mostly Agree', 'Agree', 'Strongly Agree'];
 
+
+
+
 const QuestionnaireBTN = (props) => {
-  let hold = props.questionnaire === 'CNAAQ' ? cnaaqOptions : cmsqOptions;
-  const options = [];
-  for(let i = 0; i < hold.length; i++) {
-    options.push(
-      <button
-      key={i}
-      value={i + 1}
-      onClick={(e) => props.addVal(e, props.id, props.questionnaire)}
-      >
-        {hold[i]}
-      </button>
-    )
-  }
-  // console.log('btn props', props)
-  return (
-    <div>
-      {options}
-    </div>
-  )
+return (
+  <div>
+    {props.questionnaire === 'CNAAQ' && (
+      <form>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '1'}
+          value={1}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Strongly Disagree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '2'}
+          value={2}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Disagree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '3'}
+          value={3}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Neutral
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '4'}
+          value={4}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Agree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '5'}
+          value={5}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Strongly Agree
+        </label>
+      </form>
+    )}
+
+    {props.questionnaire !== 'CNAAQ' && (
+      <form>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '1'}
+          value={1}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Strongly Disagree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '2'}
+          value={2}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Disagree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '3'}
+          value={3}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Mostly Disagree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '4'}
+          value={4}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Mostly Agree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '5'}
+          value={5}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Agree
+        </label>
+        <label>
+          <input
+          type="radio"
+          checked={props.currentChoice[props.qid] === '6'}
+          value={6}
+          onChange={(e) => props.handleChange(e, props.qid)}
+          />
+          Strongly Agree
+        </label>
+      </form>
+    )}
+
+  </div>
+)
 };
 
 export default QuestionnaireBTN

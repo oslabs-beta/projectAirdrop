@@ -4,27 +4,24 @@ import QuestionnairesBTN from './QuestionnaireBTN';
 
 const QuestionnairesCMPT = (props) => {
   const questions = [];
-
+  // console.log('testing props for cmpt', props)
   for (let i = 0; i < props.questions.length; i++) {
   questions.push(
-  <li 
+  <li
   key={i}
-  
   >
     {i + 1}{" "}{props.questions[i].question_text}
-    <QuestionnairesBTN 
+    <QuestionnairesBTN
+    key={i}
     qid={props.questions[i].id}
     addVal={props.addVal}
+    handleChange={props.handleChange}
+    currentChoice={props.questions.length > 12 ? props.cmsqCurrentChoice : props.cnaaqCurrentChoice}
     questionnaire={props.questions.length > 12 ? 'CMSQ' : 'CNAAQ'}
-    id={i + 1}
+    answers={props.questions.length > 12 ? props.cmsqAnswers : props.cnaaqAnswers}
     />
   </li>)
 }
-
-
-  
-
-  // console.log('q', props)
   return (
     <ul>
       {questions}

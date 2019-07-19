@@ -1,19 +1,28 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import LTVRRCMPT from '../components/LongTermVerbalRecallResponseCMPT';
 
+const mapStateToProps = (store) => ({
+  words: store.test.test[0].words
+});
+
+const mapDispatchToProps = dispatch => ({
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+});
 
 class LTVRR extends Component {
 	constructor(props){
     super(props);
     this.state = {
-            timeLeft: 120000,
-            testStarted: false,
-            testDone: false,
-            answerArray: [],
-            currentAnswer: '',
-		};
+      timeLeft: 120000,
+      testStarted: false,
+      testDone: false,
+      answerArray: [],
+      currentAnswer: '',
+      sectionId: 'LTVR',
+      answerTimeArray: []
+    };
 
 		this.startTimer = this.startTimer.bind(this);
         this.tick = this.tick.bind(this);
@@ -21,27 +30,61 @@ class LTVRR extends Component {
         this.submitAnswer = this.submitAnswer.bind(this);
         this.earlyFinish = this.earlyFinish.bind(this);
 	}
+
+	componentWillUnmount() {
+
+	  const wordArr = this.props.words.map(wordObject => wordObject['word']);
+
+	  const realTimeTaken = [];
+	  let currentTime = 120000;
+	  for (let i = 0; i < this.state.answerTimeArray.length; i += 1) {
+	    const timeTaken = currentTime - this.state.answerTimeArray[i];
+	    realTimeTaken.push(timeTaken);
+      currentTime -= timeTaken
+    }
+
+	  const respArr = [];
+	  for (let i = 0; i < realTimeTaken.length; i += 1) {
+	    respArr.push({
+        word: this.state.answerArray[i],
+        timeTaken: realTimeTaken[i]
+      })
+    }
+
+    const assessment = {
+      'aid': 1,
+      'wordArr': wordArr,
+      'respArr': respArr,
+    };
+
+	  this.props.postAnswers(this.state.sectionId, assessment)
+  };
+
 	startTimer() {
 		this.setState({
 			testStarted: true,
 		}, () => {
             // console.log(this.state);
-		    this.timer = setInterval(this.tick, 1000);
+		    this.timer = setInterval(this.tick, 100);
         })
     }
+
     submitAnswer () {
         this.setState({
-            answerArray: [...this.state.answerArray, this.state.currentAnswer]
+          answerArray: [...this.state.answerArray, this.state.currentAnswer],
+          answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft]
         })
     }
+
     handleChange (e) {
         this.setState({
             currentAnswer: e.target.value
         })
     }
+
 	tick() {
 		this.setState({
-            timeLeft: this.state.timeLeft - 1000
+            timeLeft: this.state.timeLeft - 100
         }, () => {
             if(this.state.timeLeft === 0){
                 clearInterval(this.timer);
@@ -60,6 +103,7 @@ class LTVRR extends Component {
     }
 
 	render () {
+	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
 		return (
 			<div>
 				<LTVRRCMPT
@@ -78,4 +122,4 @@ class LTVRR extends Component {
 		)
 	}
 }
-export default LTVRR;
+export default connect(mapStateToProps, mapDispatchToProps)(LTVRR)
