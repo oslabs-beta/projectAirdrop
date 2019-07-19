@@ -40,10 +40,6 @@ const VisualProcessingSpeed = (props) => {
         {choiceRow}
         </div>)
     }
-    let randomIndex = Math.ceil(Math.random()*3);
-    let temp = choiceDisplay[0];
-    choiceDisplay[0] = choiceDisplay[randomIndex];
-    choiceDisplay[randomIndex] = temp;
   }
   return (
   <div>

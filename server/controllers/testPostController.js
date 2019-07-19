@@ -13,7 +13,7 @@ testPostController.postAnswers = (req, res, next) => {
 			}
 			case "LTVR":
 				console.log('entered correct case')
-				let rightWords = {}
+				let rightWords = {};
 				let wordArr = req.body.sectionData.wordArr
 				let respArr = req.body.sectionData.respArr
 				console.log(wordArr, "wordArr")

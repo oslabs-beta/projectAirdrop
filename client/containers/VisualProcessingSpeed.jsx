@@ -9,6 +9,7 @@ class VisualProcessingSpeed extends Component {
     super(props);
     this.state = {
 			timeToNext: 0,
+			timeRun: 0,
 			currentElementIndex: 0,
 			currentSeriesIndex: 0,
 			timerRunning: false,
@@ -27,7 +28,7 @@ class VisualProcessingSpeed extends Component {
 		this.setState({
 			timeToNext: 4500 - (this.state.currentSeriesIndex*500),
 			timerRunning: true,
-		}, this.intervalSetter)
+		}, this.setAndNameInterval)
 	}
 	startPractice(){
 		this.setState({
@@ -35,41 +36,52 @@ class VisualProcessingSpeed extends Component {
 			timerRunning: true,
 			practiceDone: true,
 			testStarted: true,
-		}, this.intervalSetter)
+		}, this.setAndNameInterval)
 	}
-	intervalSetter(){
+	setAndNameInterval(){
 		console.log(this.state);
-		this.seriesTicker = setInterval(this.seriesIncrementer, this.state.timeToNext);
+		this.seriesTicker = setInterval(this.seriesIncrementer, 100);
 	}
 	seriesIncrementer() {
-		if(!this.state.displayingAnswers){
+		if(this.state.timeToNext === this.state.timeRun){
+			if(!this.state.displayingAnswers){
+				this.setState({
+					currentElementIndex: ++this.state.currentElementIndex,		
+					timeRun: 0
+				})
+			}
+			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
+				clearInterval(this.seriesTicker);
+					if(this.state.displayingAnswers){
+						console.log('clear answers')
+						this.setState({
+							displayingAnswers: false,
+							currentElementIndex: 0,
+							currentSeriesIndex: this.state.currentSeriesIndex +=3,
+							timerRunning: false,
+							timeRun: 0
+						})
+					}
+					if(this.state.timerRunning){
+						this.setState({
+							displayingAnswers: true,
+							timeToNext: 10000,
+						}, this.setAndNameInterval)
+					}
+			}
+		} else {
 			this.setState({
-				currentElementIndex: ++this.state.currentElementIndex,
+				timeRun: this.state.timeRun += 100
 			})
-		}
-		if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
-			clearInterval(this.seriesTicker);
-				if(this.state.displayingAnswers){
-					console.log('clear answers')
-					this.setState({
-						displayingAnswers: false,
-						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex +=3,
-						timerRunning: false,
-					})
-				}
-				if(this.state.timerRunning){
-					this.setState({
-						displayingAnswers: true,
-						timeToNext: 10000,
-					}, this.intervalSetter)
-				}
 		}
 	}
 	submitAnswer(answerChoice){
-		console.log(this.state.answerArray[0])
+		console.log(this.state.answerArray)
 		this.setState({
-			answerArray: [...this.state.answerArray, answerChoice],
+			answerArray: [...this.state.answerArray, {
+				answer: answerChoice,
+				timeToRespond: this.state.timeRun
+			}],
 		});
 	}
 	render () {
