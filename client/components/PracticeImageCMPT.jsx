@@ -15,18 +15,14 @@ const PracticeImageCMPT = (props) => {
               <label>
                 <input
                   type="radio"
-                  value={props.choices[0]}
-                  checked={props.currentChoice === props.choices[0]}
-                  onChange={props.onPracticeHandler}
+                  value=""
                 />
                 {props.choices[0]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[1]}
-                  checked={props.currentChoice === props.choices[1]}
-                  onChange={props.onPracticeHandler}
+                  value=""
                 />
                 {props.choices[1]}
               </label>
@@ -36,36 +32,28 @@ const PracticeImageCMPT = (props) => {
               <label>
                 <input
                   type="radio"
-                  value={props.choices[0]}
-                  checked={props.currentChoice === props.choices[0]}
-                  onChange={props.onPracticeHandler}
+                  value=""
                 />
                 {props.choices[0]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[1]}
-                  checked={props.currentChoice === props.choices[1]}
-                  onChange={props.onPracticeHandler}
+                  value=""
                 />
                 {props.choices[1]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[2]}
-                  checked={props.currentChoice === props.choices[2]}
-                  onChange={props.onPracticeHandler}
+                  value=""
                 />
                 {props.choices[2]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[3]}
-                  checked={props.currentChoice === props.choices[3]}
-                  onChange={props.onPracticeHandler}
+                  value=""
                 />
                 {props.choices[3]}
               </label>
