@@ -14,7 +14,7 @@ const VisualProcessingSpeed = (props) => {
       }
     }
   }
-  if(props.practiceDone && !props.timerRunning && !(props.currentSeriesIndex === 6)){
+  if(props.practiceDone && !props.timerRunning && props.currentSeriesIndex === 1){
     for(let i = 0; i < props.instructions.length; i ++){
       if(!props.instructions[i].is_practice) {
         currentInstructions = props.instructions[i].instruction_text;
@@ -27,31 +27,40 @@ const VisualProcessingSpeed = (props) => {
     else currentBTN = <button onClick={props.startNewSeries}>Start</button>
     if(props.currentSeriesIndex === 6) currentBTN = <UserNextBtn changeSection={props.changeSection} />
   }
-  console.log(props.displayingAnswers, 'displaying answers')
   if(props.displayingAnswers){
     for(let j = 0; j < 4; j++){
       let choiceRow = [];
       for(let i = 0; i < 5; i++){
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
-      choiceRow.push(<button onClick={() => props.submitAnswer(j)}>Submit</button>)
-      // console.log(choiceRow)
-      choiceDisplay.push(<div className="LTVRDchoices">
-        {choiceRow}
-        </div>)
+      choiceDisplay.push(
+      <label 
+      className="VPSseries">
+      {choiceRow}
+        <input type="radio"
+        value={j}
+        checked={props.currentChoice == j}
+        onChange={props.updateChoice}
+        />
+      </label>
+        )
     }
-    let randomIndex = Math.ceil(Math.random()*3);
-    let temp = choiceDisplay[0];
-    choiceDisplay[0] = choiceDisplay[randomIndex];
-    choiceDisplay[randomIndex] = temp;
+    if(!props.swappedColumns){
+      let randomIndex = (Math.ceil(Math.random()*3))
+      let temp = choiceDisplay[0];
+      choiceDisplay[0] = choiceDisplay[randomIndex];
+      choiceDisplay[randomIndex] = temp;
+      props.recognizeSwap();
+    }
+    currentBTN = <button onClick={() => props.submitAnswer(props.currentChoice)}>Submit Answer</button>
   }
   return (
   <div>
-  <h1>VisualProcessingSpeed</h1>
-  {currentInstructions}
-  {currentEl}
-  {currentBTN}
-  <div className="VPSchoices">{choiceDisplay}</div>
+    <h1>VisualProcessingSpeed</h1>
+    {currentInstructions}
+    {currentEl}
+    <div className="VPSchoices">{choiceDisplay}</div>
+    {currentBTN}
   </div>
 )};
 
