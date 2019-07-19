@@ -1,6 +1,6 @@
 //post at sign up
 //login
-//compare password 
+//compare password
 
 const userModel = require('../models/userModel');
 const userController = {};
@@ -26,7 +26,7 @@ userController.comparePassword = (req,res,next) => {
 //         res.locals.encryptedPassword = result.rows[0].password;
 //         return next();
 //       }
-      
+
 //       return next('wrong password entered');
 //     });
 //   });
