@@ -35,7 +35,10 @@ const WorkingMemoryCMPT = (props) => {
           props.WM.practice[0]['choice2'],
           props.WM.practice[0]['choice3'],
           props.WM.practice[0]['choice4']]}
-      changeSlide={props.changeSlide}/>,
+      changeSlide={props.changeSlide}
+      currentChoice={props.currentChoice}
+      onPracticeHandler={props.onPracticeHandler}
+      />,
 
     props.WM.instructions[1].instruction_text,
 
