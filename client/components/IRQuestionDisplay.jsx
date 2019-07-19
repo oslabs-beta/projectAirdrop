@@ -25,6 +25,7 @@ const IRQuestionDisplay = props => {
           {props.choices[1]}
         </label>
       </form>
+      <button onClick={props.onSubmit}>Submit</button>
     </div>
   )
 };

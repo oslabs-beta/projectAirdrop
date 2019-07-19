@@ -12,6 +12,7 @@ import SectionEndScreen from '../components/SectionEndScreen.jsx';
 import LTVRD from './LTVRD';
 import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
 import LTVRR from './LTVRR';
+import Instructions from '../components/Instructions.jsx';
 
 const mapStateToProps = store => ({
   test: store.test.test,
@@ -36,18 +37,20 @@ class MainTestDisplay extends Component {
   }
 
   componentDidMount() {
+    console.log('COMPONENT DID MOUNT?????');
     this.props.fetchTest();
   }
 
   render () {
-    console.log(this.props.test[1]);
+    console.log('THIS PROPS TEST 0', this.props.test[0]);
     const compArray = [<UserDemographics changeSection={this.changeSection}/>,
       <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[0]}/>,
       <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[1]}/>,
       <WorkingMemory WM={this.props.test[6]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
       <ImageRecognition IR={this.props.test[5]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
       <LTVRR changeSection={this.props.changeSection} section={this.props.test[0]} />,
-      <QuestionnaireCont test={this.props.test}/>];
+      <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
+      <Instructions />];
 
     //      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
 

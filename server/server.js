@@ -3,8 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { PORT } = process.env;
 const app = express();
-const dbController = require('./controllers/databaseController');
+
+const dbController = require('./controllers/testController');
+const encryptionController = require('./controllers/encryptionController');
+const userController = require('./controllers/userController');
+const tokenController = require('./controllers/tokenController')
 const tpController = require('./controllers/testPostController');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,14 +20,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-
-
-app.get('/api', (req, res) => {
-  console.log('api route test');
-  res.json([{question: 'this is a question'}]);
+app.post('/api/testpostdata', (req, res) => {
+  console.log('testing post route', req.body);
+  res.status(200)//.send()
 });
 
-app.get('/', (req, res) => {   
+//signup to create account for new users
+//creating middleware
+// app.post('/createuser',encryptionController.encryptPassword, userController.postUser, (req, res) => {
+//   res.status(200).json(res.locals.result);
+// });
+
+// app.post('/login', encryptionController.comparePassword, userController.login, tokenController.signToken, (req, res) => {
+//   res.cookie('token', res.locals.token, {httpOnly: true});
+//   res.status(200).json(res.locals.result);
+// });
+
+
+// app.get('/api', (req, res) => {
+//   console.log('api route test');
+//   res.json([{question: 'this is a question'}]);
+// });
+
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
       res.status(500).send(err)
@@ -43,6 +63,14 @@ app.get('/api/test',
   res.json(res.locals.test);
 });
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+
 app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
@@ -56,12 +84,12 @@ app.post('/api/demo', (req, res) => {
 //error handling
 app.use((req, res) => {
   res.status(404).send("Sorry can't find that!")
-})
+});
 
 app.use((err, req, res, next) =>{
   console.log(err);
   res.status(400).json({'msg':err});
-})
+});
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);

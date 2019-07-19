@@ -7,19 +7,18 @@ const QuestionnairesCMPT = (props) => {
   // console.log('testing props for cmpt', props)
   for (let i = 0; i < props.questions.length; i++) {
   questions.push(
-  <li 
+  <li
   key={i}
   >
     {i + 1}{" "}{props.questions[i].question_text}
     <QuestionnairesBTN
-    key={i} 
+    key={i}
     qid={props.questions[i].id}
     addVal={props.addVal}
     handleChange={props.handleChange}
     currentChoice={props.questions.length > 12 ? props.cmsqCurrentChoice : props.cnaaqCurrentChoice}
     questionnaire={props.questions.length > 12 ? 'CMSQ' : 'CNAAQ'}
     answers={props.questions.length > 12 ? props.cmsqAnswers : props.cnaaqAnswers}
-    id={i + 1}
     />
   </li>)
 }
