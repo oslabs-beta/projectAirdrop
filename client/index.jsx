@@ -8,7 +8,9 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 render (
   <Provider store={store}>
     <BrowserRouter>
+    <Switch>
       <Route path='/' component={App}/>
+    </Switch>  
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
