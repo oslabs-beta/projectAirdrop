@@ -24,9 +24,9 @@ class App extends Component {
 
         <Switch>
           <Route path='/login' component={Login} />
-            <AuthenticatedComponent>
-              <Route path='/main' component={MainTestDisplay}/> 
-            </AuthenticatedComponent>
+            {/* <Authentication> */}
+          <Route path='/main' component={MainTestDisplay}/> 
+            {/* </Authentication> */}
         </Switch>
      </div>
     )
