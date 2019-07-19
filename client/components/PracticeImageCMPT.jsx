@@ -1,6 +1,7 @@
 import React from 'react';
 
 const PracticeImageCMPT = (props) => {
+  // console.log('is this PICMPT?')
   return (
     <div>
       <img src={props.url}/>
@@ -14,15 +15,14 @@ const PracticeImageCMPT = (props) => {
               <label>
                 <input
                   type="radio"
-                  value={props.choices[0]}
-                  checked={true}
+                  value=""
                 />
                 {props.choices[0]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[1]}
+                  value=""
                 />
                 {props.choices[1]}
               </label>
@@ -32,29 +32,28 @@ const PracticeImageCMPT = (props) => {
               <label>
                 <input
                   type="radio"
-                  value={props.choices[0]}
-                  checked={true}
+                  value=""
                 />
                 {props.choices[0]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[1]}
+                  value=""
                 />
                 {props.choices[1]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[2]}
+                  value=""
                 />
                 {props.choices[2]}
               </label>
               <label>
                 <input
                   type="radio"
-                  value={props.choices[3]}
+                  value=""
                 />
                 {props.choices[3]}
               </label>
