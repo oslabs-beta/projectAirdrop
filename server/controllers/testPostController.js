@@ -8,7 +8,7 @@ testPostController.postAnswers = (req, res, next) => {
 		case "VPS": //ask for values
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i.timeTaken]);
+				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i].timeTaken);
 				tpModel.postToVPS(row)
 			}
 			case "LTVR":

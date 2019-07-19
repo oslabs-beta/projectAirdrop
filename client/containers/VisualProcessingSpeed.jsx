@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
 
+const mapDispatchToProps = dispatch => ({
+	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+});
 
 class VisualProcessingSpeed extends Component {
 	constructor(props){
@@ -16,13 +19,29 @@ class VisualProcessingSpeed extends Component {
 			testStarted: false,
 			displayingAnswers: false,
 			answerArray: [],
+			sectionId: 'VPS'
 		};
 		this.submitAnswer = this.submitAnswer.bind(this);
 		this.startNewSeries = this.startNewSeries.bind(this);
 		this.startPractice = this.startPractice.bind(this);
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
-
 	}
+
+	componentWillUnmount() {
+		console.log('VPS UNMOUNT ANSWER ARRAY ', this.state.answerArray);
+		const vpsAnswers = this.state.answerArray.reduce((a, b, i) => {
+			const response = {
+				'aid': 1,
+				'seriesIndex': i,
+				'userChoice': b,
+				'timeTaken': 0
+			};
+			a.push(response);
+			return a
+		}, []);
+		this.props.postAnswers(this.state.sectionId, vpsAnswers)
+	}
+
 	startNewSeries() {
 		this.setState({
 			timeToNext: 4500 - (this.state.currentSeriesIndex*500),
@@ -67,12 +86,13 @@ class VisualProcessingSpeed extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		console.log(this.state.answerArray[0])
 		this.setState({
 			answerArray: [...this.state.answerArray, answerChoice],
 		});
 	}
 	render () {
+		console.log('VPS GENERATED CHOICES', this.props.vpsAnswers);
+		console.log('VPS ANSWER ARRAY', this.state.answerArray);
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT
@@ -93,4 +113,4 @@ class VisualProcessingSpeed extends Component {
 		)
 	}
 }
-export default VisualProcessingSpeed;
+export default connect(null, mapDispatchToProps)(VisualProcessingSpeed)

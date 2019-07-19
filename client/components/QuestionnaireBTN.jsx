@@ -18,118 +18,117 @@ const cmsqOptions = ['Strongly Disagree', 'Disagree', 'Mostly Disagree', 'Mostly
 
 
 const QuestionnaireBTN = (props) => {
-console.log()
 return (
   <div>
     {props.questionnaire === 'CNAAQ' && (
       <form>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Strongly Disagree"}
-          value="Strongly Disagree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '1'}
+          value={1}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Strongly Disagree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Disagree"}
-          value="Disagree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '2'}
+          value={2}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Disagree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Neutral"}
-          value="Neutral"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '3'}
+          value={3}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Neutral
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Agree"}
-          value="Agree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '4'}
+          value={4}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Agree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Strongly Agree"}
-          value="Strongly Agree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '5'}
+          value={5}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Strongly Agree
         </label>
       </form>
     )}
-    
+
     {props.questionnaire !== 'CNAAQ' && (
       <form>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Strongly Disagree"}
-          value="Strongly Disagree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '1'}
+          value={1}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Strongly Disagree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Disagree"}
-          value="Disagree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '2'}
+          value={2}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Disagree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Mostly Disagree"}
-          value="Mostly Disagree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '3'}
+          value={3}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Mostly Disagree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Mostly Agree"}
-          value="Mostly Agree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '4'}
+          value={4}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Mostly Agree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Agree"}
-          value="Agree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '5'}
+          value={5}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Agree
         </label>
         <label>
-          <input 
+          <input
           type="radio"
-          checked={props.currentChoice[props.id][props.qid] === "Strongly Agree"}
-          value="Strongly Agree"
-          onChange={(e) => props.handleChange(e, props.id, props.qid)}
+          checked={props.currentChoice[props.qid] === '6'}
+          value={6}
+          onChange={(e) => props.handleChange(e, props.qid)}
           />
           Strongly Agree
         </label>
       </form>
     )}
-    
+
   </div>
 )
 };

@@ -20,13 +20,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+app.post('/api/testpostdata', (req, res) => {
+  console.log('testing post route', req.body);
+  res.status(200)//.send()
+});
 
 //signup to create account for new users
 //creating middleware
 // app.post('/createuser',encryptionController.encryptPassword, userController.postUser, (req, res) => {
 //   res.status(200).json(res.locals.result);
 // });
-
 
 // app.post('/login', encryptionController.comparePassword, userController.login, tokenController.signToken, (req, res) => {
 //   res.cookie('token', res.locals.token, {httpOnly: true});
@@ -39,7 +42,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 //   res.json([{question: 'this is a question'}]);
 // });
 
-app.get('/', (req, res) => {   
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
       res.status(500).send(err)
@@ -60,9 +63,7 @@ app.get('/api/test',
   res.json(res.locals.test);
 });
 
-
-
-app.get('/*', (req, res) => {   
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
       res.status(500).send(err)
@@ -74,20 +75,18 @@ app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
   res.send();
-})
-
-
+});
 
 
 //error handling
 app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that!")
-})
+});
 
 app.use((err, req, res, next) =>{
   console.log(err);
   res.status(400).json({'msg':err});
-})
+});
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);

@@ -60,6 +60,7 @@ const ImageRecognitionCMPT = (props) => {
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         onChangeHandler={props.onChangeHandler}
         currentChoice={props.currentChoice}
+        onSubmit={props.onSubmit}
       />,
 
       <img src={props.IR.images[1].image_url}/> ,
@@ -70,6 +71,7 @@ const ImageRecognitionCMPT = (props) => {
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         onChangeHandler={props.onChangeHandler}
         currentChoice={props.currentChoice}
+        onSubmit={props.onSubmit}
       />,
 
       <img src={props.IR.images[2].image_url}/>,
@@ -80,6 +82,7 @@ const ImageRecognitionCMPT = (props) => {
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         onChangeHandler={props.onChangeHandler}
         currentChoice={props.currentChoice}
+        onSubmit={props.onSubmit}
       />,
 
       <img src={props.IR.images[3].image_url}/> ,
@@ -90,6 +93,7 @@ const ImageRecognitionCMPT = (props) => {
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         onChangeHandler={props.onChangeHandler}
         currentChoice={props.currentChoice}
+        onSubmit={props.onSubmit}
       />,
 
       <img src={props.IR.images[4].image_url}/>,
@@ -100,9 +104,12 @@ const ImageRecognitionCMPT = (props) => {
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         onChangeHandler={props.onChangeHandler}
         currentChoice={props.currentChoice}
+        onSubmit={props.onSubmit}
       />,
 
-      <SectionEndScreen changeSection={props.changeSection}/>
+      <SectionEndScreen
+        changeSection={props.changeSection}
+      />
 
     ];
 
