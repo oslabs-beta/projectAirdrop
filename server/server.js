@@ -19,14 +19,14 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 //LOGIN AND AUTH
 //signup to create account for new users
 //creating middleware
-// app.post('/signup',encryptionController.encryptPassword, userController.createUser, (req, res) => {
-//   res.status(200).json(res.locals.result);
-// });
+app.post('/signup',encryptionController.encryptPassword, userController.createUser, (req, res) => {
+  res.status(200).json(res.locals.result);
+});
 
-// app.post('/login', encryptionController.comparePassword, userController.login, tokenController.signToken, (req, res) => {
-//   res.cookie('token', res.locals.token, {httpOnly: true});
-//   res.status(200).json(res.locals.result);
-// });
+app.post('/login', encryptionController.comparePassword, userController.login, tokenController.signToken, (req, res) => {
+  res.cookie('token', res.locals.token, {httpOnly: true});
+  res.status(200).json(res.locals.result);
+});
 
 //for authentication component at login
 //app.get('/verifytoken', tokenController.checkToken, (req, res) => {

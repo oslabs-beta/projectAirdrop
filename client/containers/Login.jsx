@@ -10,6 +10,7 @@ class Login extends Component {
     return (
       <div> 
         <button>Login</button>
+        <h1>HI</h1>
 
       </div>
     )
