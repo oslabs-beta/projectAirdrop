@@ -35,12 +35,28 @@ class LTVRR extends Component {
 
 	  const wordArr = this.props.words.map(wordObject => wordObject['word']);
 
+	  const realTimeTaken = [];
+	  let currentTime = 120000;
+	  for (let i = 0; i < this.state.answerTimeArray.length; i += 1) {
+	    const timeTaken = currentTime - this.state.answerTimeArray[i];
+	    realTimeTaken.push(timeTaken);
+      currentTime -= timeTaken
+    }
+
+	  const respArr = [];
+	  for (let i = 0; i < realTimeTaken.length; i += 1) {
+	    respArr.push({
+        word: this.state.answerArray[i],
+        timeTaken: realTimeTaken[i]
+      })
+    }
+
     const assessment = {
       'aid': 1,
       'wordArr': wordArr,
-      'respArr': this.state.answerArray,
-      'timeTaken': this.answerTimeArray
+      'respArr': respArr,
     };
+
 	  this.props.postAnswers(this.state.sectionId, assessment)
   };
 
@@ -49,7 +65,7 @@ class LTVRR extends Component {
 			testStarted: true,
 		}, () => {
             // console.log(this.state);
-		    this.timer = setInterval(this.tick, 1000);
+		    this.timer = setInterval(this.tick, 100);
         })
     }
 
@@ -68,7 +84,7 @@ class LTVRR extends Component {
 
 	tick() {
 		this.setState({
-            timeLeft: this.state.timeLeft - 1000
+            timeLeft: this.state.timeLeft - 100
         }, () => {
             if(this.state.timeLeft === 0){
                 clearInterval(this.timer);
