@@ -6,9 +6,8 @@ img {
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-around;
-    height: 100px;
 }
-.LTVRDchoices{
+.VPSseries{
     display: flex;
     flex-direction: column;
     background-color: #f64c72;
