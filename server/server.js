@@ -52,14 +52,6 @@ app.get('/', (req, res) => {
   })
 });
 
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// });
-
 app.get('/api/test',
   dbController.getSections,
   dbController.getWords,
@@ -83,6 +75,14 @@ app.post('/api/demo', tpController.postDemoData, (req, res) => {
 })
 
 //error handling
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+
 app.use((req, res) => {
   res.status(404).send("Sorry can't find that!")
 });
