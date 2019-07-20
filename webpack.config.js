@@ -55,6 +55,8 @@ module.exports = {
   ],
   devServer: {
     contentBase: '/',
+    publicPath: '/',
+    historyApiFallback: true,
     hot: true,
     proxy: {
       '/api': NODE_DEV_SERVER_URL,
