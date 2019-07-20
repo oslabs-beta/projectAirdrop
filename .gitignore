@@ -89,5 +89,5 @@ client/dist/service-worker.js
 client/dist/bundle.js
 client/dist/index.js
 client/dist
-server/config.js
 package-lock.json
+config.js
