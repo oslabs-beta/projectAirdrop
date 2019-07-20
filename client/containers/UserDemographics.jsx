@@ -41,6 +41,7 @@ class UserDemographics extends Component {
   }
 
   render () {
+    // console.log('userData', this.props.userData)
     return (
       <div>
         <h1>Demo Information</h1>

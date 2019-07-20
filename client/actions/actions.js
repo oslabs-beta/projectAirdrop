@@ -124,9 +124,7 @@ export const postAnswers = (sectionId, data) => dispatch => {
 export const postDemo = (data) => dispatch => {
   console.log('POST DEMO DATA', data);
   dispatch(requestAPI);
-
-  // TODO: Needs URL
-  return fetch('/api/testpostdata', {
+  return fetch('/api/demo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -135,9 +133,12 @@ export const postDemo = (data) => dispatch => {
       demoData: data
     })
   })
-    .then(res => res.json())
     .then(res => {
-      if (!isValid(res)) throw new Error("something went wrong!");
+      console.log("HELP")
+      return res.json()
+    })
+    .then(res => {
+      // if (!isValid(res)) throw new Error("something went wrong!");
       console.log('POST DEMO RESPONSE OBJECT', res);
       return dispatch(receiveAID(res))
     })

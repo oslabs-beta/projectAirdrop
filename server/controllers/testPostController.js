@@ -39,4 +39,23 @@ testPostController.postAnswers = (req, res, next) => {
 	return next();
 }
 
+testPostController.postDemoData = async (req, res, next) => {
+	let demoArray = [];
+	console.log(req.body, 'first name')
+	demoArray.push(
+		req.body.demoData.userID,
+		req.body.demoData.firstName, 
+		req.body.demoData.middleInitial, 
+		req.body.demoData.lastName, 
+		req.body.demoData.rank, 
+		req.body.demoData.yearsInService, 
+		req.body.demoData.yearsInSpecialOps, 
+		req.body.demoData.ODANumber, 
+		req.body.demoData.MOS, 
+		req.body.demoData.dateOfLastDeployment, 
+		req.body.demoData.dateOfAssessment);
+		res.locals.aID = await tpModel.postToDemoData(demoArray);
+		next();
+}
+
 module.exports = testPostController;

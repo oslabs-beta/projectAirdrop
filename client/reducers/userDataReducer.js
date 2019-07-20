@@ -2,14 +2,15 @@ import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, H
 
 const initialState = {
   userData: {
+    userID: 6,
     firstName: '',
     middleInitial: '',
     lastName: '',
-    rank: '',
-    yearsInService: '',
-    yearsInSpecialOps: '',
-    ODANumber: '',
-    MOS: '',
+    rank: 'SGT',
+    yearsInService: '<2',
+    yearsInSpecialOps: '<2',
+    ODANumber: 0,
+    MOS: '18A',
     dateOfLastDeployment: '',
     dateOfAssessment: '',
   },
