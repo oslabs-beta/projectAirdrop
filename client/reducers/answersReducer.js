@@ -48,7 +48,7 @@ const answersReducer = (state = initialState, action) => {
     case CALL_API:
       return {
         ...state,
-        apiStatus: "pending"
+        apiStatus: 'pending',
       };
     case SEND_API:
       return {

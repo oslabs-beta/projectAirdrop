@@ -8,7 +8,6 @@ const reducers = combineReducers({
     test: testReducer,
     answers: answersReducer,
     userData: userDataReducer,
-    
 });
 
 export default reducers;

@@ -124,7 +124,7 @@ class QuestionnaireCont extends Component {
     this.props.changeSection()
   }
   render() {
-    console.log('testing state',this.state.cmsqCurrentChoice, this.state.cnaaqCurrentChoice);
+    console.log('testing state',this.state.cmsqCurrentChoice);
     // console.log('state', this.state.cnaaqAnswers)
     return (
       <div>
@@ -145,7 +145,7 @@ class QuestionnaireCont extends Component {
         cmsqCurrentChoice={this.state.cmsqCurrentChoice}
         />}
         <button onClick={this.onSubmit}>Submit</button>
-
+        {/*<UserSubmitBtn onSubmit={this.onSubmit}/>*/}
       </div>
     )
   }
