@@ -1,6 +1,6 @@
 //post at sign up
 //login
-//compare password 
+//compare password
 
 const userModel = require('../models/userModel');
 const userController = {};
@@ -26,12 +26,11 @@ userController.comparePassword = (req,res,next) => {
 //         res.locals.encryptedPassword = result.rows[0].password;
 //         return next();
 //       }
-      
+
 //       return next('wrong password entered');
 //     });
 //   });
 // }
-
 
 // postUser(req, res, next) {
 //   const queryString = 'INSERT INTO users (pwd, name, apt_id, role) VALUES ($1, $2, $3, $4) RETURNING _id';

@@ -59,7 +59,7 @@ class WorkingMemory extends Component {
 
   onSubmit() {
     this.setState({
-      currentChoice: '',
+      // currentChoice: '',
       answerTimeArray: [
         ...this.state.answerTimeArray,
         this.state.timeElapsed
