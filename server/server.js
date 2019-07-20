@@ -33,14 +33,14 @@ app.post('/api/signup',
   res.status(200).json(res.locals.result);
 });
 
-// app.post('/login',
-//   encryptionController.comparePassword,
-//   userController.login,
-//   tokenController.signToken,
-//   (req, res) => {
-//   res.cookie('token', res.locals.token, {httpOnly: true});
-//   res.status(200).json(res.locals.result);
-// });
+app.post('/api/login',
+  userController.comparePassword,
+  // userController.login,
+  // tokenController.signToken,
+  (req, res) => {
+  // res.cookie('token', res.locals.token, {httpOnly: true});
+  res.status(200).json(res.locals);
+});
 
 //for authentication component at login
 //app.get('/verifytoken', tokenController.checkToken, (req, res) => {
@@ -52,14 +52,6 @@ app.post('/api/signup',
 // })
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-});
-
-app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
       res.status(500).send(err)
@@ -90,6 +82,14 @@ app.post('/api/demo', (req, res) => {
 })
 
 //error handling
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// });
+
 app.use((req, res) => {
   res.status(404).send("Sorry can't find that!")
 });

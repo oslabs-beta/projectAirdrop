@@ -1,36 +1,31 @@
-//post at sign up
-//login
-//compare password
+const bcrypt = require('bcryptjs');
 
 const userModel = require('../models/userModel');
 const userController = {};
 
-userController.comparePassword = (req,res,next) => {
-
-
-}
-
-
-// comparePassword(req, res, next) {
-//   const queryString = 'SELECT * FROM users WHERE username = $1';
-//   const values = [req.body.data.username];
-//   db.query(queryString, values, (err, result) => {
-//     if (err || !result.rows[0]) {
-//       return next(err);
-//     }
-//     bcrypt.compare(req.body.data.password, result.rows[0].password, (err, isMatch) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       if (isMatch) {
-//         res.locals.encryptedPassword = result.rows[0].password;
-//         return next();
-//       }
-
-//       return next('wrong password entered');
-//     });
-//   });
-// }
+userController.comparePassword = (req, res, next) => {
+  console.log('ARE WE INSIDE?');
+  const username = [req.body.username];
+  return new Promise((resolve, reject) => {
+    userModel.comparePasswords(username)
+      .then(result => {
+        bcrypt.compare(
+          req.body.pw,
+          result.rows[0].pw,
+          (err, isMatch) => {
+            console.log('BCRYPT ISMATCH', isMatch);
+            if (err) return next(err);
+            if (isMatch) {
+              res.locals.encryptedPassword = result.rows[0].pw;
+              console.log('ENCRYPTED PASSWORD', res.locals.encryptedPassword);
+              return next()
+            }
+            return next('wrong password entered')
+          })
+      })
+      .catch(err => reject(err))
+  });
+};
 
 userController.createUser = (req, res, next) => {
   const values = [req.body.username, req.body.pw];

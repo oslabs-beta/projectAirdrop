@@ -23,9 +23,9 @@ const create_user = 'INSERT INTO users (username, pw) VALUES ($1, $2) RETURNING 
 
 const userModel = {
 
-  comparePasswords () {
+  comparePasswords (username) {
 		return new Promise((resolve, reject) => {
-			pool.query(compare_password, (err, result) => {
+			pool.query(compare_password, username, (err, result) => {
 				if (err) return reject(err);
 				resolve(result);
 			})
