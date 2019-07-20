@@ -78,8 +78,8 @@ app.post('/api/test',
   res.send();
 })
 
-app.post('/api/demo', (req, res) => {
-  res.send(res.locals.aID)
+app.post('/api/demo', tpController.postDemoData, (req, res) => {
+  res.json(res.locals.aID)
 })
 
 //error handling
