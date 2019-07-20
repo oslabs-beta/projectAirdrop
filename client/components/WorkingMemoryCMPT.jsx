@@ -23,6 +23,7 @@ const WorkingMemoryCMPT = (props) => {
           props.WM.practice[0]['choice4']]}
       currentChoice={props.currentChoice}
       onPracticeHandler={props.onPracticeHandler}
+      onSubmit={props.onSubmit}
     />,
 
     <NextCMPT changeSlide={props.changeSlide}/>,
@@ -35,7 +36,8 @@ const WorkingMemoryCMPT = (props) => {
           props.WM.practice[0]['choice2'],
           props.WM.practice[0]['choice3'],
           props.WM.practice[0]['choice4']]}
-      changeSlide={props.changeSlide}/>,
+      changeSlide={props.changeSlide}
+      />,
 
     props.WM.instructions[1].instruction_text,
 

@@ -78,11 +78,14 @@ app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
   res.send();
-});
+})
 
+app.post('/api/demo', (req, res) => {
+  res.send(res.locals.aID)
+})
 
 //error handling
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).send("Sorry can't find that!")
 });
 
