@@ -8,7 +8,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
+  postLTVRR: data => dispatch(actions.ltvrResponses(data)),
 });
 
 class LTVRR extends Component {
@@ -57,7 +58,9 @@ class LTVRR extends Component {
       'respArr': respArr,
     };
 
-	  this.props.postAnswers(this.state.sectionId, assessment)
+    this.props.postAnswers(this.state.sectionId, assessment);
+    // const ltvrrAnswers = this.state.answerArray
+    this.props.postLTVRR(this.state.answerArray);
   };
 
 	startTimer() {

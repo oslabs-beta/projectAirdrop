@@ -10,7 +10,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
+  postResponses: data => dispatch(actions.irResponses(data)),
 });
 
 
@@ -52,7 +53,13 @@ class ImageRecognition extends Component {
       return a
     }, []);
 
-    this.props.postAnswers(this.state.sectionId, assessment)
+    this.props.postAnswers(this.state.sectionId, assessment);
+
+    const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+      a.push(this.state.sectionData[b]);
+      return a;
+    }, []);
+    this.props.postResponses(irResponses);
   }
 
   onChangeHandler(e, qid) {
