@@ -66,13 +66,6 @@ app.get('/api/test',
   res.json(res.locals.test);
 });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-});
 
 app.post('/api/test',
   tpController.postAnswers,
@@ -85,6 +78,15 @@ app.post('/api/demo', (req, res) => {
 })
 
 //error handling
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+
 app.use((req, res) => {
   res.status(404).send("Sorry can't find that!")
 });
