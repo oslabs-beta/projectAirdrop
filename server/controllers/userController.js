@@ -52,17 +52,17 @@ userController.login = (req, res, next) => {
   });
 };
 
-// getUserInfo(req, res, next) {
-//   const queryString = 'SELECT * FROM users WHERE name = $1';
-//   const values = [req.headers.name];
-//   db.query(queryString, values, (err, result) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.locals.result = result.rows;
-//     res.locals.username = req.headers.name;
-//     return next();
-//   });
-// },
+userController.getUserInfo = (req, res, next) => {
+  const username = [req.headers.username];
+  return new Promise((resolve, reject) => {
+    userModel.getUserInfo(username)
+      .then(result => {
+        res.locals.result = result.rows;
+        res.locals.username = req.headers.username;
+        next()
+      })
+      .catch(err => reject(err))
+  })
+};
 
 module.exports = userController;

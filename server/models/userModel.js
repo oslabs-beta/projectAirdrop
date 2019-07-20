@@ -21,6 +21,7 @@ const pool = new Pool({
 const compare_password = 'SELECT * FROM users WHERE username = $1;';
 const create_user = 'INSERT INTO users (username, pw) VALUES ($1, $2) RETURNING id;';
 const user_login = 'SELECT * FROM users WHERE username = $1 AND pw = $2;';
+const get_user_info = 'SELECT * FROM users WHERE username = $1;';
 
 const userModel = {
 
@@ -45,6 +46,15 @@ const userModel = {
 	userLogin(loginInfo) {
   	return new Promise((resolve, reject) => {
   		pool.query(user_login, loginInfo, (err, result) => {
+  			if (err) return reject(err);
+  			resolve(result)
+			})
+		})
+	},
+
+	getUserInfo(username) {
+  	return new Promise((resolve, reject) => {
+  		pool.query(get_user_info, username, (err, result) => {
   			if (err) return reject(err);
   			resolve(result)
 			})

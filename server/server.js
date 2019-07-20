@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { PORT } = process.env;
 const app = express();
+const cookieParser = require('cookie-parser');
 
 const dbController = require('./controllers/testController');
 const encryptionController = require('./controllers/encryptionController');
@@ -10,7 +11,7 @@ const userController = require('./controllers/userController');
 const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
 
-
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -43,13 +44,22 @@ app.post('/api/login',
 });
 
 //for authentication component at login
-//app.get('/verifytoken', tokenController.checkToken, (req, res) => {
-//  res.json(req.token);
-//})
+app.get('/api/verifytoken',
+  tokenController.checkToken,
+  (req, res) => {
+ res.json(req.token);
+});
 
-// app.get('/getUserInfo', userController.getUserInfo, (req, res) => {
-//   res.json(res.locals.result[0]);
-// })
+app.get('/api/getUserInfo',
+  userController.getUserInfo,
+  (req, res) => {
+  res.json(res.locals.result[0]);
+});
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.status(200).send()
+});
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
@@ -75,11 +85,11 @@ app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
   res.send();
-})
+});
 
 app.post('/api/demo', (req, res) => {
   res.send(res.locals.aID)
-})
+});
 
 //error handling
 // app.get('/*', (req, res) => {
