@@ -142,7 +142,9 @@ export const postDemo = (data) => dispatch => {
       console.log('POST DEMO RESPONSE OBJECT', res);
       return dispatch(receiveAID(res))
     })
-    .catch(err => dispatch(sendFailure(err)));
+    .catch(err => {
+      console.log(err, "ERROR")
+      dispatch(sendFailure(err))});
 };
 
 export const receiveAID = (aid) => ({

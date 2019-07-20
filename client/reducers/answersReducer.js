@@ -12,7 +12,7 @@ const answersReducer = ( state = initialState, action) => {
       return ({
         ...state,
         aid: action.payload
-      }, console.log(initialState.aid, 'LOOOK '));
+      });
     case CALL_API:
       return {
         ...state,

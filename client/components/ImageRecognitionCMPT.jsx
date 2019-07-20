@@ -19,7 +19,8 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[0]['choice2']]
         }
         currentChoice={props.currentChoice}
-        onPracticeHandler={props.onPracticeHandler}/>,
+        onPracticeHandler={props.onPracticeHandler}
+        onSubmit={props.onSubmit}/>,
 
       <img src={props.IR.practice[3].image_url}/> ,
 
@@ -30,7 +31,8 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[1]['choice2']]
         }
         currentChoice={props.currentChoice}
-        onPracticeHandler={props.onPracticeHandler}/>,
+        onPracticeHandler={props.onPracticeHandler}
+        onSubmit={props.onSubmit}/>,
 
       <NextCMPT changeSlide={props.changeSlide}/>,
 

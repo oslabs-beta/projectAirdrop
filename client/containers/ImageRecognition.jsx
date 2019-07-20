@@ -31,6 +31,7 @@ class ImageRecognition extends Component {
     this.onPracticeHandler = this.onPracticeHandler.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
+    this.optionReset = this.optionReset.bind(this);
   }
 
   componentWillUnmount() {
@@ -80,6 +81,7 @@ class ImageRecognition extends Component {
 
   onSubmit() {
     this.setState({
+      // currentChoice: '',
       answerTimeArray: [
         ...this.state.answerTimeArray,
         this.state.timeElapsed
@@ -87,10 +89,17 @@ class ImageRecognition extends Component {
     })
   }
 
+  optionReset () {
+    this.setState({
+      currentChoice: '',
+    })
+  }
+
   startPractice() {
       this.props.changeSlide();
       return new Promise((resolve, reject) => {
         setTimeout(() => {
+          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -99,6 +108,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -107,6 +117,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -115,6 +126,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -127,6 +139,7 @@ class ImageRecognition extends Component {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -135,6 +148,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -143,6 +157,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -151,6 +166,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -159,6 +175,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -167,6 +184,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -175,6 +193,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -183,6 +202,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext * 2)
@@ -191,6 +211,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -199,6 +220,7 @@ class ImageRecognition extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()

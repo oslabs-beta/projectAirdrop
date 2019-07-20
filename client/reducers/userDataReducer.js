@@ -66,6 +66,7 @@ const userDataReducer = (state = initialState, action) => {
         userData: {
           ...state.userData,
           dateOfAssessment: action.payload,
+          dateOfLastDeployment: action.payload,
         }
       };
     default:

@@ -25,6 +25,7 @@ class WorkingMemory extends Component {
     this.onPracticeHandler = this.onPracticeHandler.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
+    this.optionReset = this.optionReset.bind(this);
   }
 
   componentWillUnmount() {
@@ -58,6 +59,7 @@ class WorkingMemory extends Component {
 
   onSubmit() {
     this.setState({
+      // currentChoice: '',
       answerTimeArray: [
         ...this.state.answerTimeArray,
         this.state.timeElapsed
@@ -81,10 +83,18 @@ class WorkingMemory extends Component {
     })
   }
 
+  optionReset () {
+    console.log('option reset')
+    this.setState({
+      currentChoice: '',
+    })
+  }
+
   startPractice() {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -93,6 +103,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -101,6 +112,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, 5000)
@@ -113,6 +125,7 @@ class WorkingMemory extends Component {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -121,6 +134,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -129,6 +143,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, 5000)
@@ -137,6 +152,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -145,6 +161,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, 5000)
@@ -153,6 +170,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -161,6 +179,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, 5000)
@@ -169,6 +188,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -177,6 +197,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, 5000)
@@ -185,6 +206,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -193,6 +215,7 @@ class WorkingMemory extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.optionReset();
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
@@ -202,8 +225,9 @@ class WorkingMemory extends Component {
   }
 
   render() {
-    console.log('WM TIME ARRAY', this.state.answerTimeArray);
-    console.log('WM SECTION DATA', this.state.sectionData);
+    // console.log('WM TIME ARRAY', this.state.answerTimeArray);
+    // console.log('WM SECTION DATA', this.state.sectionData);
+    console.log('currentchoice', this.state.currentChoice);
     return (
       <WorkingMemoryCMPT
         WM={this.props.WM}
