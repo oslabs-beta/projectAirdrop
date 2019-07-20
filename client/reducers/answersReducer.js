@@ -3,16 +3,16 @@ import { RECEIVE_AID, CALL_API, SEND_API, SEND_API_FAILURE } from '../constants/
 const initialState = {
   apiStatus: '',
   apiError: '',
-  aid: ''
+  aid: null
 };
 
 const answersReducer = ( state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_AID:
-      return {
+      return ({
         ...state,
         aid: action.payload
-      };
+      });
     case CALL_API:
       return {
         ...state,
