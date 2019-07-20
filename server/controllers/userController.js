@@ -32,17 +32,20 @@ userController.comparePassword = (req,res,next) => {
 //   });
 // }
 
-// postUser(req, res, next) {
-//   const queryString = 'INSERT INTO users (pwd, name, apt_id, role) VALUES ($1, $2, $3, $4) RETURNING _id';
-//   const values = [req.body.pwd, req.body.name, req.body.apt_id, req.body.role];
-//   db.query(queryString, values, (err, result)=>{
-//     if (err) {
-//       return err;
-//     }
-//       res.locals.result = result.rows;
-//       return next();
-//   });
-// },
+userController.createUser = (req, res, next) => {
+  const values = [req.body.username, req.body.pw];
+  return new Promise((resolve, reject) => {
+    userModel.createUser(values)
+      .then(result => {
+        res.locals.result = result.rows;
+        console.log('CREATE USER RES LOCALS RESULT', res.locals.result);
+        next()
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+};
 
 // login(req, res, next) {
 //   const queryString = 'SELECT * FROM users WHERE name = $1 AND pwd = $2';
@@ -55,7 +58,7 @@ userController.comparePassword = (req,res,next) => {
 //     res.locals.username = req.body.data.name;
 //     return next();
 //   });
-// },
+// }
 
 // getUserInfo(req, res, next) {
 //   const queryString = 'SELECT * FROM users WHERE name = $1';
@@ -69,3 +72,5 @@ userController.comparePassword = (req,res,next) => {
 //     return next();
 //   });
 // },
+
+module.exports = userController;

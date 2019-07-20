@@ -7,7 +7,7 @@ const app = express();
 const dbController = require('./controllers/testController');
 const encryptionController = require('./controllers/encryptionController');
 const userController = require('./controllers/userController');
-const tokenController = require('./controllers/tokenController')
+const tokenController = require('./tokenController')
 const tpController = require('./controllers/testPostController');
 
 
@@ -26,11 +26,18 @@ app.post('/api/testpostdata', (req, res) => {
 //LOGIN AND AUTH
 //signup to create account for new users
 //creating middleware
-// app.post('/signup',encryptionController.encryptPassword, userController.createUser, (req, res) => {
-//   res.status(200).json(res.locals.result);
-// });
+app.post('/api/signup',
+  encryptionController.encryptPassword,
+  userController.createUser,
+  (req, res) => {
+  res.status(200).json(res.locals.result);
+});
 
-// app.post('/login', encryptionController.comparePassword, userController.login, tokenController.signToken, (req, res) => {
+// app.post('/login',
+//   encryptionController.comparePassword,
+//   userController.login,
+//   tokenController.signToken,
+//   (req, res) => {
 //   res.cookie('token', res.locals.token, {httpOnly: true});
 //   res.status(200).json(res.locals.result);
 // });

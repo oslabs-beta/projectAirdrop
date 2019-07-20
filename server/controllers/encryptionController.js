@@ -1,6 +1,7 @@
 const db = require('../models/testModel');
 //best way to query database?
 const bcrypt = require('bcryptjs');
+const SALT_WORK_FACTOR = 10;
 
 
 module.exports = {
@@ -9,17 +10,17 @@ module.exports = {
       if (err) {
         return next(err);
       }
-      bcrypt.hash(req.body.password, salt, (err, hash) => {
+      bcrypt.hash(req.body.pw, salt, (err, hash) => {
         if (err) {
           return next(err);
         }
-        req.body.password = hash;
+        req.body.pw = hash;
         next();
       });
     });
   }
 
-  //does this need to be formatted like databaseController in promises 
+  //does this need to be formatted like databaseController in promises
   // comparePassword(req, res, next) {
   //   const queryString = 'SELECT * FROM users WHERE username = $1';
   //   const values = [req.body.data.username];
@@ -35,7 +36,7 @@ module.exports = {
   //         res.locals.encryptedPassword = result.rows[0].password;
   //         return next();
   //       }
-        
+
   //       return next('wrong password entered');
   //     });
   //   });

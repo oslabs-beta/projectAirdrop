@@ -15,11 +15,11 @@ const pool = new Pool({
 
 //post to user table at sign up
 //login
-  //compare password for authentication 
+  //compare password for authentication
   //admin authentication -- with password?
 
-const compare_password = 'SELECT * FROM users WHERE username = $1';
-const create_user = 'INSERT INTO users (username, password, role) VALUES ($1, $2, $3) RETURNING _id';
+const compare_password = 'SELECT * FROM users WHERE username = $1;';
+const create_user = 'INSERT INTO users (username, pw) VALUES ($1, $2) RETURNING id;';
 
 const userModel = {
 
@@ -31,16 +31,15 @@ const userModel = {
 			})
 		})
   },
-  
-  createUser () {
+
+  createUser (loginInfo) {
 		return new Promise((resolve, reject) => {
-			pool.query(create_user, (err, result) => {
+			pool.query(create_user, loginInfo, (err, result) => {
 				if (err) return reject(err);
 				resolve(result);
 			})
 		})
 	}
-
 }
 
 module.exports = userModel;

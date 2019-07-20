@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const {secret} = require('../config.js');
+const {secret} = require('./config.js');
 
 module.exports = {
   checkToken(req, res, next) {
@@ -8,7 +8,7 @@ module.exports = {
     if (!token || !token.startsWith('Bearer')) {
       return next('Incorrect token format');
     }
-    
+
     token = token.split(' ')[1];
     jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
@@ -18,7 +18,7 @@ module.exports = {
       next();
     });
   },
-  
+
   signToken(req, res, next) {
     let token = jwt.sign({username: res.locals.username}, secret);
     res.locals.token = `Bearer ${token}`;
