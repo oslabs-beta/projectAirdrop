@@ -20,10 +20,11 @@ const pool = new Pool({
 
 const compare_password = 'SELECT * FROM users WHERE username = $1;';
 const create_user = 'INSERT INTO users (username, pw) VALUES ($1, $2) RETURNING id;';
+const user_login = 'SELECT * FROM users WHERE username = $1 AND pw = $2;';
 
 const userModel = {
 
-  comparePasswords (username) {
+  comparePasswords(username) {
 		return new Promise((resolve, reject) => {
 			pool.query(compare_password, username, (err, result) => {
 				if (err) return reject(err);
@@ -32,14 +33,23 @@ const userModel = {
 		})
   },
 
-  createUser (loginInfo) {
+  createUser(loginInfo) {
 		return new Promise((resolve, reject) => {
 			pool.query(create_user, loginInfo, (err, result) => {
 				if (err) return reject(err);
 				resolve(result);
 			})
 		})
+	},
+
+	userLogin(loginInfo) {
+  	return new Promise((resolve, reject) => {
+  		pool.query(user_login, loginInfo, (err, result) => {
+  			if (err) return reject(err);
+  			resolve(result)
+			})
+		})
 	}
-}
+};
 
 module.exports = userModel;

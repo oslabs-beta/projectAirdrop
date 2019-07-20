@@ -7,7 +7,7 @@ const app = express();
 const dbController = require('./controllers/testController');
 const encryptionController = require('./controllers/encryptionController');
 const userController = require('./controllers/userController');
-const tokenController = require('./tokenController')
+const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
 
 
@@ -35,10 +35,10 @@ app.post('/api/signup',
 
 app.post('/api/login',
   userController.comparePassword,
-  // userController.login,
-  // tokenController.signToken,
+  userController.login,
+  tokenController.signToken,
   (req, res) => {
-  // res.cookie('token', res.locals.token, {httpOnly: true});
+  res.cookie('token', res.locals.token, {httpOnly: true});
   res.status(200).json(res.locals);
 });
 
