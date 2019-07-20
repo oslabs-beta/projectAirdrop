@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const NODE_DEV_SERVER_URL = 'http://localhost:3000';
+const NODE_DEV_SERVER_URL = 'http://[::1]:3000';
 
 module.exports = {
-  entry: path.resolve(__dirname, 'client/index'),
+  entry: path.resolve(__dirname, 'client/index.jsx'),
   output: {
     path: path.resolve(__dirname, 'client/dist'),
     publicPath: '/',
@@ -29,9 +31,32 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+      filename: 'index.html',
+    }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [{
+        urlPattern: '/api/test',
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'api-cache',
+          backgroundSync: {
+            name: 'background-queue',
+            options: {
+              maxRetentionTime: 60 * 60,
+            }
+          }
+        }
+      }],
+    })
   ],
   devServer: {
-    contentBase: `${__dirname}/client/dist`,
+    contentBase: '/',
+    publicPath: '/',
+    historyApiFallback: true,
     hot: true,
     proxy: {
       '/api': NODE_DEV_SERVER_URL,
