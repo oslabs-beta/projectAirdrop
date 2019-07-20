@@ -108,7 +108,7 @@ class VisualProcessingSpeed extends Component {
 				timeToRespond: this.state.timeRun,
 			}],
 			currentChoice: null,
-			timeRun: this.state.timeToNext
+			// timeRun: this.state.timeToNext
 		});
 	}
 	updateChoice(e){
