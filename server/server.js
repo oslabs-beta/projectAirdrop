@@ -14,7 +14,6 @@ const tpController = require('./controllers/testPostController');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 //app.use('/static', express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -24,9 +23,10 @@ app.post('/api/testpostdata', (req, res) => {
   res.status(200)//.send()
 });
 
+//LOGIN AND AUTH
 //signup to create account for new users
 //creating middleware
-// app.post('/createuser',encryptionController.encryptPassword, userController.postUser, (req, res) => {
+// app.post('/signup',encryptionController.encryptPassword, userController.createUser, (req, res) => {
 //   res.status(200).json(res.locals.result);
 // });
 
@@ -35,10 +35,14 @@ app.post('/api/testpostdata', (req, res) => {
 //   res.status(200).json(res.locals.result);
 // });
 
-// app.get('/api', (req, res) => {
-//   console.log('api route test');
-//   res.json([{question: 'this is a question'}]);
-// });
+//for authentication component at login
+//app.get('/verifytoken', tokenController.checkToken, (req, res) => {
+//  res.json(req.token);
+//})
+
+// app.get('/getUserInfo', userController.getUserInfo, (req, res) => {
+//   res.json(res.locals.result[0]);
+// })
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {

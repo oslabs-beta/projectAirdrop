@@ -54,7 +54,9 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: `${__dirname}/client/dist`,
+    contentBase: '/',
+    publicPath: '/',
+    historyApiFallback: true,
     hot: true,
     proxy: {
       '/api': NODE_DEV_SERVER_URL,
