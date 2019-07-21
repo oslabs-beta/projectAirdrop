@@ -236,18 +236,30 @@ class WorkingMemory extends Component {
     // console.log('WM SECTION DATA', this.state.sectionData);
     console.log('currentchoice', this.state.currentChoice);
     return (
-      <WorkingMemoryCMPT
-        WM={this.props.WM}
-        changeSlide={this.props.changeSlide}
-        currentSlide={this.props.currentSlide}
-        changeSection={this.props.changeSection}
-        startPractice={this.startPractice}
-        startTest={this.startTest}
-        onChangeHandler={this.onChangeHandler}
-        currentChoice={this.state.currentChoice}
-        onPracticeHandler={this.onPracticeHandler}
-        onSubmit={this.onSubmit}
-      />
+      <div>
+        <h1
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '30%',
+            transform: 'translate(-50%, -50%)'
+          }}
+        >
+          Working Memory
+        </h1>
+        <WorkingMemoryCMPT
+          WM={this.props.WM}
+          changeSlide={this.props.changeSlide}
+          currentSlide={this.props.currentSlide}
+          changeSection={this.props.changeSection}
+          startPractice={this.startPractice}
+          startTest={this.startTest}
+          onChangeHandler={this.onChangeHandler}
+          currentChoice={this.state.currentChoice}
+          onPracticeHandler={this.onPracticeHandler}
+          onSubmit={this.onSubmit}
+        />
+      </div>
     );
   }
 }

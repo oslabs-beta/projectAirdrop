@@ -1,6 +1,8 @@
 import React from 'react';
 import UserStartBTN from './UserStartBTN.jsx';
 import UserNextBtn from "./UserNextBTN";
+import Button from '@material-ui/core/Button';
+import TestInstructions from './TestInstructions';
 
 const VisualProcessingSpeed = (props) => {
   let currentEl;
@@ -23,8 +25,28 @@ const VisualProcessingSpeed = (props) => {
   }
   if(props.timerRunning) currentEl = props.vpsAnswers[0][props.currentSeriesIndex][props.currentElementIndex];
   if(!(props.displayingAnswers || props.timerRunning)) {
-    if(!props.practiceDone) currentBTN = <button onClick={props.startPractice}>Start</button>
-    else currentBTN = <button onClick={props.startNewSeries}>Start</button>
+    if(!props.practiceDone) currentBTN = <Button
+      onClick={props.startPractice}
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '65%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      Start
+    </Button>
+    else currentBTN = <Button
+      onClick={props.startNewSeries}
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '65%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      Start
+    </Button>
     if(props.currentSeriesIndex === 6) currentBTN = <UserNextBtn changeSection={props.changeSection} />
   }
   if(props.displayingAnswers){
@@ -34,7 +56,7 @@ const VisualProcessingSpeed = (props) => {
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
       choiceDisplay.push(
-      <label 
+      <label
       className="VPSseries">
       {choiceRow}
         <input type="radio"
@@ -52,12 +74,22 @@ const VisualProcessingSpeed = (props) => {
       choiceDisplay[randomIndex] = temp;
       props.recognizeSwap();
     }
-    currentBTN = <button onClick={() => props.submitAnswer(props.currentChoice)}>Submit Answer</button>
+    currentBTN = <Button
+      onClick={() => props.submitAnswer(props.currentChoice)}
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '65%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      Submit Answer
+    </Button>
   }
   return (
   <div>
-    <h1>VisualProcessingSpeed</h1>
-    {currentInstructions}
+    <TestInstructions instructions={currentInstructions}/>
+    {/*{currentInstructions}*/}
     {currentEl}
     <div className="VPSchoices">{choiceDisplay}</div>
     {currentBTN}

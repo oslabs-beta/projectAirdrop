@@ -18,14 +18,16 @@ class App extends Component {
     return (
       <div>
 
-        <Header />
+        <Header
+
+        />
         {/*<h1> Hello World (react) </h1>*/}
         {/* <MainTestDisplay /> */}
 
         <Switch>
           <Route path='/login' component={Login} />
             {/* <Authentication> */}
-          <Route path='/main' component={MainDisplay}/> 
+          <Route path='/main' component={MainDisplay}/>
             {/* </Authentication> */}
         </Switch>
      </div>

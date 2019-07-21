@@ -37,6 +37,16 @@ class LTVRD extends Component {
 		console.log(this.props.section)
 		return (
 			<div>
+				<h1
+					style={{
+						position: 'absolute',
+						left: '50%',
+						top: '30%',
+						transform: 'translate(-50%, -50%)'
+					}}
+				>
+					Long-Term Verbal Recall
+				</h1>
 				<LTVRDCMPT
 				testStarted={this.state.testStarted}
 				testDone={this.state.testDone}

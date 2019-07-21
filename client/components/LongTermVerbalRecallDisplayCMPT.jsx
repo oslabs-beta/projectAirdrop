@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
+import Button from '@material-ui/core/Button';
+import TestInstructions from './TestInstructions';
 
 // const LongTermVerbalRecall = () => (
 //   <h1>LongTermVerbalRecall</h1>
@@ -15,17 +17,29 @@ const LTVRDCMPT = (props) => {
       formatWords.push(<div key={i}>{props.words[i].word}</div>)
     }
   }
-  
+
   if(!props.testStarted) {
-    currentBTN = <button onClick={props.displayWords}>Start Test</button>
+    currentBTN = <Button
+      onClick={props.displayWords}
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '65%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      Start Test
+    </Button>
     instructions = props.instructions[0].instruction_text;
   }
   if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
   return (
   <div>
-    <h1>LongTermVerbalRecall</h1>
-    {instructions}
-    {formatWords}
+    <TestInstructions instructions={instructions}/>
+    {/*{instructions}*/}
+    <div>
+      {formatWords}
+    </div>
     {currentBTN}
   </div>
   )

@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const WMQuestionDisplay = props => {
 
@@ -29,7 +30,7 @@ const WMQuestionDisplay = props => {
           {props.choices[1]}
         </label>
       </form>
-          <button onClick={props.onSubmit}>Submit</button>
+          <Button onClick={props.onSubmit}>Submit</Button>
           </div>
       ) : (
           <div>
@@ -71,7 +72,7 @@ const WMQuestionDisplay = props => {
               {props.choices[3]}
             </label>
           </form>
-        <button onClick={props.onSubmit}>Submit</button>
+        <Button onClick={props.onSubmit}>Submit</Button>
           </div>
       )
     }

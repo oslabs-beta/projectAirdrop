@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
+import Button from "@material-ui/core/Button";
 
 const mapDispatchToProps = dispatch => ({
 	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -76,7 +77,7 @@ class VisualProcessingSpeed extends Component {
 		if(this.state.timeToNext === this.state.timeRun){
 			if(!this.state.displayingAnswers){
 				this.setState({
-					currentElementIndex: ++this.state.currentElementIndex,		
+					currentElementIndex: ++this.state.currentElementIndex,
 					timeRun: 0,
 				})
 			}
@@ -88,7 +89,7 @@ class VisualProcessingSpeed extends Component {
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: ++this.state.currentSeriesIndex,
+						currentSeriesIndex: this.state.currentSeriesIndex += 6,
 						timerRunning: false,
 						timeRun: 0
 					})
@@ -131,6 +132,16 @@ class VisualProcessingSpeed extends Component {
 	render () {
 		return (
 			<div>
+				<h1
+					style={{
+						position: 'absolute',
+						left: '50%',
+						top: '30%',
+						transform: 'translate(-50%, -50%)'
+					}}
+				>
+					Visual Processing Speed
+				</h1>
 				<VisualProcessingSpeedCMPT
 				timerRunning={this.state.timerRunning}
 				startNewSeries={this.startNewSeries}
