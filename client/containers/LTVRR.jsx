@@ -109,7 +109,17 @@ class LTVRR extends Component {
 	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
 		return (
 			<div>
-				<LTVRRCMPT
+        <h1
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '30%',
+            transform: 'translate(-50%, -50%)'
+          }}
+        >
+          Long-Term Verbal Recall
+        </h1>
+        <LTVRRCMPT
                 timeLeft={this.state.timeLeft}
                 testStarted={this.state.testStarted}
                 testDone={this.state.testDone}

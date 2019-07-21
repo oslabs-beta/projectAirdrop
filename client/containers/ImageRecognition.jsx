@@ -240,18 +240,30 @@ class ImageRecognition extends Component {
     console.log('IR TIME ARRAY', this.state.answerTimeArray);
     console.log('IR SECTION DATA', this.state.sectionData);
     return (
-    <ImageRecognitionCMPT
-      IR={this.props.IR}
-      changeSlide={this.props.changeSlide}
-      currentSlide={this.props.currentSlide}
-      changeSection={this.props.changeSection}
-      startPractice={this.startPractice}
-      startTest={this.startTest}
-      onChangeHandler={this.onChangeHandler}
-      currentChoice={this.state.currentChoice}
-      onPracticeHandler={this.onPracticeHandler}
-      onSubmit={this.onSubmit}
-    />
+      <div>
+        <h1
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '30%',
+            transform: 'translate(-50%, -50%)'
+          }}
+        >
+          Image Recognition
+        </h1>
+        <ImageRecognitionCMPT
+          IR={this.props.IR}
+          changeSlide={this.props.changeSlide}
+          currentSlide={this.props.currentSlide}
+          changeSection={this.props.changeSection}
+          startPractice={this.startPractice}
+          startTest={this.startTest}
+          onChangeHandler={this.onChangeHandler}
+          currentChoice={this.state.currentChoice}
+          onPracticeHandler={this.onPracticeHandler}
+          onSubmit={this.onSubmit}
+        />
+      </div>
     );
   }
 }

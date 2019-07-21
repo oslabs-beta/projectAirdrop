@@ -1,5 +1,7 @@
 import React from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
+import TestInstructions from "./TestInstructions";
+import Button from '@material-ui/core/Button';
 
 const LTVRR = (props) => {
   let currentBTN;
@@ -10,11 +12,31 @@ const LTVRR = (props) => {
     fields[i] = <p>{props.answerArray[i]}</p>;
   }
   if(!props.testStarted) {
-    currentBTN = <button onClick={props.startTimer}>Start Test</button>
+    currentBTN = <Button
+      onClick={props.startTimer}
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '65%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      Start Test
+    </Button>
     instructions = props.instructions[0].instruction_text;
   } else if(!props.testDone){
     timeLeft = props.timeLeft/1000
-    currentBTN = <button onClick={props.submitAnswer}>Submit Answer</button>
+    currentBTN = <Button
+      onClick={props.submitAnswer}
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '65%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      Submit Answer
+    </Button>
     fields.push(<input value={props.currentAnswer} onChange={props.handleChange} placeholder="Enter one word"/>)
   }
   if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
@@ -24,9 +46,9 @@ const LTVRR = (props) => {
   }
   return (
     <div>
-    <h1>LongTermVerbalRecall</h1>
     {timeLeft}
-    {instructions}
+    {/*{instructions}*/}
+    <TestInstructions instructions={instructions}/>
     {fields}
     {currentBTN}
   </div>
