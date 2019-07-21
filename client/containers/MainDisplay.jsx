@@ -21,7 +21,7 @@ class MainDisplay extends Component {
     return(
         <div >
             <h1 id="header"> Welcome {this.props.username}  </h1>
-            {!true ? <AdminDisplay/> : <UserTestDisplay/> }
+            {this.props.isAdmin ? <AdminDisplay/> : <UserTestDisplay/> }
         </div>
     )
   }

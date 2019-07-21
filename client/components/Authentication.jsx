@@ -8,7 +8,7 @@ const mapStateToProps = store => ({
   username: store.userData.username,
   pw: store.userData.pw,
   isAdmin: store.userData.isAdmin,
-  login: false,
+  login: store.userData.login,
 
 });
 

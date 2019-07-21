@@ -45,7 +45,7 @@ const Login = props => {
     </div>
       {/* ) : (
          <Redirect to='/main' />
-     )}      */}
+     )}        */}
 
    </div>
 )};

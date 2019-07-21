@@ -9,6 +9,10 @@ import MainDisplay from "./MainDisplay.jsx"
 import UserDemographics from "./UserDemographics.jsx"
 import Login from './Login.jsx';
 
+const mapStateToProps = store => ({
+  login: store.userData.login
+});
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,5 +32,5 @@ class App extends Component {
   }
 }
 
-export default App;
-//export default connect(mapStateToProps)(App);
+//export default App;
+export default connect(mapStateToProps)(App);
