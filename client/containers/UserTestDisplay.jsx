@@ -10,7 +10,7 @@ import ImageRecognition from './ImageRecognition.jsx';
 import Questionnaires from '../components/QuestionnairesCMPT.jsx';
 import SectionEndScreen from '../components/SectionEndScreen.jsx';
 import LTVRD from './LTVRD';
-import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
+import QuestionnaireCont from './QuestionnaireCont.jsx';
 import LTVRR from './LTVRR';
 import Instructions from '../components/Instructions.jsx';
 
