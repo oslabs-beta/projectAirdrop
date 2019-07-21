@@ -4,6 +4,10 @@ import * as actions from "../actions/actions";
 import { connect } from 'react-redux';
 import UserSubmitBtn from "../components/UserSubmitBTN";
 
+const mapStateToProps = store => ({
+	aid: store.answers.aid,
+});
+
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
   postQuestionnaireResponses: (data) => dispatch(actions.questionnaireResponses(data)),
@@ -53,7 +57,7 @@ class QuestionnaireCont extends Component {
   componentWillUnmount() {
     const cmsq = Object.keys(this.state.cmsqCurrentChoice).reduce((a, b) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': Number(this.state.cmsqCurrentChoice[b])
       };
@@ -63,7 +67,7 @@ class QuestionnaireCont extends Component {
 
     const cnaaq = Object.keys(this.state.cnaaqCurrentChoice).reduce((a, b) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': Number(this.state.cnaaqCurrentChoice[b])
       };
@@ -151,7 +155,7 @@ class QuestionnaireCont extends Component {
   }
 };
 
-export default connect(null, mapDispatchToProps)(QuestionnaireCont);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionnaireCont);
 //  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
 //         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}
 //         {/* {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />} */}
