@@ -1,6 +1,10 @@
-import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO } from "../constants/actionTypes";
+import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
 
 const initialState = {
+  username: '',
+  pw: '',
+  isAdmin: null,
+  login: false,
   userData: {
     userID: 6,
     firstName: '',
@@ -69,6 +73,29 @@ const userDataReducer = (state = initialState, action) => {
           dateOfLastDeployment: action.payload,
         }
       };
+    case UPDATE_USERNAME:
+      return {
+        ...state,
+        username: action.payload
+      };
+    case UPDATE_PASSWORD:
+      return {
+        ...state,
+        pw: action.payload
+      }; 
+    case UPDATE_LOGIN:
+      console.log('is update login working omg')
+      return { 
+        ...state,
+        pw: '',
+        isAdmin: action.payload.isAdmin,
+        login: true
+      };
+    case IS_ADMIN:
+      return {
+        ...state,
+        isAdmin: action.payload,
+      }         
     default:
       return state;
   }

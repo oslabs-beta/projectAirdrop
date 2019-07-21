@@ -23,6 +23,7 @@ userController.comparePassword = (req, res, next) => {
   return new Promise((resolve, reject) => {
     userModel.comparePasswords(username)
       .then(result => {
+        console.log(req.body)
         bcrypt.compare(
           req.body.pw,
           result.rows[0].pw,

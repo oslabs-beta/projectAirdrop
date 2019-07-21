@@ -46,5 +46,6 @@ export const RECEIVE_AID = 'RECEIVE_AID';
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const SIGN_UP = 'SIGN_UP';
+export const IS_ADMIN = 'IS_ADMIN';
 export const LOG_IN = 'LOG_IN';
 export const UPDATE_LOGIN = 'UPDATE_LOGIN';
