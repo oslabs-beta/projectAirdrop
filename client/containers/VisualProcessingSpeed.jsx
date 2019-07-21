@@ -4,7 +4,8 @@ import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
 
 const mapDispatchToProps = dispatch => ({
-	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
+	postVPS: data => dispatch(actions.vpsResponses(data)),
 });
 
 class VisualProcessingSpeed extends Component {
@@ -45,7 +46,12 @@ class VisualProcessingSpeed extends Component {
 			a.push(response);
 			return a
 		}, []);
-		this.props.postAnswers(this.state.sectionId, vpsAnswers)
+		this.props.postAnswers(this.state.sectionId, vpsAnswers);
+		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
+			a.push(b.answer);
+			return a;
+		},[])
+		this.props.postVPS(vpsResponses)
 	}
 
 	startNewSeries() {

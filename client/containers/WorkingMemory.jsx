@@ -5,7 +5,8 @@ import * as actions from '../actions/actions';
 import ImageRecognitionCMPT from "../components/ImageRecognitionCMPT";
 
 const mapDispatchToProps = dispatch => ({
-  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
+  postResponses: data => dispatch(actions.wmResponses(data)),
 });
 
 class WorkingMemory extends Component {
@@ -47,6 +48,12 @@ class WorkingMemory extends Component {
     }, []);
 
     this.props.postAnswers(this.state.sectionId, assessment)
+
+    const wmResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+      a.push(this.state.sectionData[b]);
+      return a;
+    }, []);
+    this.props.postResponses(wmResponses);
   }
 
   startTimer() {

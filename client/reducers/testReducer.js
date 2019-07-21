@@ -25,7 +25,9 @@ const testReducer = (state = initialState, action) => {
       return {
         ...state,
         apiStatus: 'success',
-        test: action.payload,
+        // test: action.payload,
+        test: action.payload.test,
+
       };
 
     case CALL_API:

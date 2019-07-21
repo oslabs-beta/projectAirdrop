@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import UserSubmitBtn from "../components/UserSubmitBTN";
 
 const mapDispatchToProps = dispatch => ({
-  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
+  postQuestionnaireResponses: (data) => dispatch(actions.questionnaireResponses(data)),
 });
 
 
@@ -72,7 +73,23 @@ class QuestionnaireCont extends Component {
     console.log('cmsq', cmsq)
     console.log('cnaaq', cnaaq)
     const questionnaireResponses = { ...cmsq, ...cnaaq};
-    this.props.postAnswers(this.state.sectionId, questionnaireResponses)
+    this.props.postAnswers(this.state.sectionId, questionnaireResponses);
+
+
+    const cmsqResponses = Object.keys(this.state.cmsqCurrentChoice).reduce((a,b,c,d) => {
+      a.push(this.state.cmsqCurrentChoice[b]);
+      return a;
+    }, []);
+    const cnaaqResponses = Object.keys(this.state.cnaaqCurrentChoice).reduce((a,b,c,d) => {
+      a.push(this.state.cnaaqCurrentChoice[b]);
+      return a;
+    }, []);
+    this.props.postQuestionnaireResponses({
+      cmsqResponses,
+      cnaaqResponses,
+
+    });
+    console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
   }
 
   handleChange(e, qid) {
