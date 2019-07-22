@@ -1,71 +1,68 @@
-//post at sign up
-//login
-//compare password
+const bcrypt = require('bcryptjs');
 
 const userModel = require('../models/userModel');
 const userController = {};
 
-userController.comparePassword = (req,res,next) => {
+userController.createUser = (req, res, next) => {
+  const loginInfo = [req.body.username, req.body.pw];
+  return new Promise((resolve, reject) => {
+    userModel.createUser(loginInfo)
+      .then(result => {
+        res.locals.result = result.rows;
+        console.log('CREATE USER RES LOCALS RESULT', res.locals.result);
+        next()
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+};
 
+userController.comparePassword = (req, res, next) => {
+  const username = [req.body.username];
+  return new Promise((resolve, reject) => {
+    userModel.comparePasswords(username)
+      .then(result => {
+        bcrypt.compare(
+          req.body.pw,
+          result.rows[0].pw,
+          (err, isMatch) => {
+            if (err) return next(err);
+            if (isMatch) {
+              res.locals.encryptedPassword = result.rows[0].pw;
+              return next()
+            }
+            return next('wrong password entered')
+          })
+      })
+      .catch(err => reject(err))
+  });
+};
 
-}
+userController.login = (req, res, next) => {
+  const loginInfo = [req.body.username, res.locals.encryptedPassword];
+  return new Promise((resolve, reject) => {
+    userModel.userLogin(loginInfo)
+      .then(result => {
+        res.locals.result = result.rows;
+        res.locals.username = req.body.username;
+        return next()
+      })
+      .catch(err => reject(err))
+  });
+};
 
+userController.getUserInfo = (req, res, next) => {
+  const username = [req.headers.username];
+  return new Promise((resolve, reject) => {
+    userModel.getUserInfo(username)
+      .then(result => {
+        res.locals.result = result.rows;
+        res.locals.username = req.headers.username;
+        next()
+      })
+      .catch(err => reject(err))
+  })
+};
 
-// comparePassword(req, res, next) {
-//   const queryString = 'SELECT * FROM users WHERE username = $1';
-//   const values = [req.body.data.username];
-//   db.query(queryString, values, (err, result) => {
-//     if (err || !result.rows[0]) {
-//       return next(err);
-//     }
-//     bcrypt.compare(req.body.data.password, result.rows[0].password, (err, isMatch) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       if (isMatch) {
-//         res.locals.encryptedPassword = result.rows[0].password;
-//         return next();
-//       }
-
-//       return next('wrong password entered');
-//     });
-//   });
-// }
-
-// postUser(req, res, next) {
-//   const queryString = 'INSERT INTO users (pwd, name, apt_id, role) VALUES ($1, $2, $3, $4) RETURNING _id';
-//   const values = [req.body.pwd, req.body.name, req.body.apt_id, req.body.role];
-//   db.query(queryString, values, (err, result)=>{
-//     if (err) {
-//       return err;
-//     }
-//       res.locals.result = result.rows;
-//       return next();
-//   });
-// },
-
-// login(req, res, next) {
-//   const queryString = 'SELECT * FROM users WHERE name = $1 AND pwd = $2';
-//   const values = [req.body.data.name, res.locals.encryptedPassword];
-//   db.query(queryString, values, (err, result) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.locals.result = result.rows;
-//     res.locals.username = req.body.data.name;
-//     return next();
-//   });
-// },
-
-// getUserInfo(req, res, next) {
-//   const queryString = 'SELECT * FROM users WHERE name = $1';
-//   const values = [req.headers.name];
-//   db.query(queryString, values, (err, result) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.locals.result = result.rows;
-//     res.locals.username = req.headers.name;
-//     return next();
-//   });
-// },
+module.exports = userController;

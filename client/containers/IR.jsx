@@ -10,11 +10,12 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment))
+  postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
+  postResponses: data => dispatch(actions.irResponses(data)),
 });
 
 
-class ImageRecognition extends Component {
+class IR extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +53,13 @@ class ImageRecognition extends Component {
       return a
     }, []);
 
-    this.props.postAnswers(this.state.sectionId, assessment)
+    this.props.postAnswers(this.state.sectionId, assessment);
+
+    const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+      a.push(this.state.sectionData[b]);
+      return a;
+    }, []);
+    this.props.postResponses(irResponses);
   }
 
   onChangeHandler(e, qid) {
@@ -233,20 +240,32 @@ class ImageRecognition extends Component {
     console.log('IR TIME ARRAY', this.state.answerTimeArray);
     console.log('IR SECTION DATA', this.state.sectionData);
     return (
-    <ImageRecognitionCMPT
-      IR={this.props.IR}
-      changeSlide={this.props.changeSlide}
-      currentSlide={this.props.currentSlide}
-      changeSection={this.props.changeSection}
-      startPractice={this.startPractice}
-      startTest={this.startTest}
-      onChangeHandler={this.onChangeHandler}
-      currentChoice={this.state.currentChoice}
-      onPracticeHandler={this.onPracticeHandler}
-      onSubmit={this.onSubmit}
-    />
+      <div>
+        <h1
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '30%',
+            transform: 'translate(-50%, -50%)'
+          }}
+        >
+          Image Recognition
+        </h1>
+        <ImageRecognitionCMPT
+          IR={this.props.IR}
+          changeSlide={this.props.changeSlide}
+          currentSlide={this.props.currentSlide}
+          changeSection={this.props.changeSection}
+          startPractice={this.startPractice}
+          startTest={this.startTest}
+          onChangeHandler={this.onChangeHandler}
+          currentChoice={this.state.currentChoice}
+          onPracticeHandler={this.onPracticeHandler}
+          onSubmit={this.onSubmit}
+        />
+      </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageRecognition)
+export default connect(mapStateToProps, mapDispatchToProps)(IR)

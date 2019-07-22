@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import Header from './../components/Header.jsx';
 import Authentication from './../components/Authentication.jsx';
-import MainTestDisplay from "./MainTestDisplay.jsx"
-import UserDemographics from "./UserDemographics.jsx"
+import Main from "./Main.jsx"
+import UserDemographics from "./Demographics.jsx"
 import Login from './Login.jsx';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
@@ -18,14 +18,16 @@ class App extends Component {
     return (
       <div>
 
-        <Header />
+        <Header
+
+        />
         {/*<h1> Hello World (react) </h1>*/}
         {/* <MainTestDisplay /> */}
 
         <Switch>
           <Route path='/login' component={Login} />
             {/* <Authentication> */}
-          <Route path='/main' component={MainTestDisplay}/> 
+          <Route path='/main' component={Main}/>
             {/* </Authentication> */}
         </Switch>
      </div>

@@ -2,7 +2,7 @@ import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, H
 
 const initialState = {
   userData: {
-    userID: 6,
+    userID: 5,
     firstName: '',
     middleInitial: '',
     lastName: '',
