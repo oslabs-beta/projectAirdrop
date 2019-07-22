@@ -2,14 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminDisplay from './Admin.jsx';
-import UserTestDisplay from './Test.jsx';
+import UserTestDisplay from './UserTest.jsx';
 
 const mapStateToProps = store => ({
   //isAdmin: store.user.isAdmin,
 
 });
-
-
 
 class Main extends Component {
   constructor(props) {

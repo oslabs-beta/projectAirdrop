@@ -1,10 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import * as actions from '../actions/actions';
+import React, { Component } from 'react';
 import LTVRDCMPT from '../components/LongTermVerbalRecallDisplayCMPT';
 
 class LTVRD extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			timeToDisplay: 0,

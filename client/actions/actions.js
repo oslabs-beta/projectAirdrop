@@ -29,8 +29,8 @@ export const requestAPI = () => ({
 // });
 
 export const receiveAPI = json => {
-  const words = json[1].words;
-  const wm = json[2].images.reduce((a,b) => {
+  const words = json[6].words;
+  const wm = json[1].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
   }, []);

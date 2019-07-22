@@ -1,6 +1,5 @@
 import React from 'react';
 import UserNextBTN from './UserNextBTN'
-import Button from "@material-ui/core/Button";
 
 const SectionEndScreen = (props) => (
   <div>

@@ -28,9 +28,9 @@ class Questionnaires extends Component {
   componentDidMount(){
     this.setState({
       ...this.state,
-      instructions: this.props.test[4].instructions[0],
-      CMSQ: this.props.test[4].questions,
-      CNAAQ: this.props.test[5].questions
+      instructions: this.props.test[3].instructions[0],
+      CMSQ: this.props.test[3].questions,
+      CNAAQ: this.props.test[4].questions
     })
   }
   componentWillUnmount() {
