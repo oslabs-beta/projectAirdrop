@@ -7,7 +7,7 @@ const mapStateToProps = store => ({
   username: store.userData.username,
   pw: store.userData.password,
   isAdmin: store.userData.isAdmin,
-  login: store.userData.login,
+  isLoggedIn: store.userData.isLoggedIn,
 
 });
 
@@ -26,7 +26,7 @@ const Login = props => {
   return(
     
     <div>
-      {props.login === false ? 
+      {props.isLoggedIn === false ? 
       
       (
 
@@ -43,9 +43,9 @@ const Login = props => {
        <button type="submit">Login</button>
       </form>
     </div>
-        ) : (
+         ) : (
          <Redirect to='/main' />
-     )}         
+     )}          
 
    </div>
 )};

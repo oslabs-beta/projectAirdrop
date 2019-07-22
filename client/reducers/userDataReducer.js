@@ -4,7 +4,7 @@ const initialState = {
   username: '',
   pw: '',
   isAdmin: null,
-  login: false,
+  isLoggedIn: false,
   userData: {
     userID: 5,
     firstName: '',
@@ -89,7 +89,7 @@ const userDataReducer = (state = initialState, action) => {
         ...state,
         pw: '',
         isAdmin: action.payload.isAdmin,
-        login: true
+        isLoggedIn: true
       };
     case IS_ADMIN:
       return {
