@@ -1,17 +1,15 @@
-//conditionally renders to AdminDisplay or UserTestDisplay 
+//conditionally renders to AdminDisplay or UserTestDisplay
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AdminDisplay from './AdminDisplay.jsx';
-import UserTestDisplay from './UserTestDisplay.jsx';
+import AdminDisplay from './Admin.jsx';
+import UserTestDisplay from './UserTest.jsx';
 
 const mapStateToProps = store => ({
   //isAdmin: store.user.isAdmin,
 
 });
 
-
-
-class MainDisplay extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
   }
@@ -26,5 +24,5 @@ class MainDisplay extends Component {
   }
 }
 
-export default MainDisplay;
-//export default connect(mapStateToProps)(MainDisplay);
+export default Main;
+//export default connect(mapStateToProps)(Main);

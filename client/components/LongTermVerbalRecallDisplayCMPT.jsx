@@ -1,13 +1,24 @@
-import React, { Component } from 'react';
-import UserNextBTN from './UserNextBTN.jsx';
+import React from 'react';
+import UserStartBTN from './UserStartBTN';
+import SectionInstructions from './SectionInstructions';
+import LongTermVerbalRecallDisplayWordGrid from './LongTermVerbalRecallDisplayWordGrid';
+import SectionHeader from './SectionHeader';
+import SectionEndScreen from "./SectionEndScreen";
+import {makeStyles} from "@material-ui/core";
 
-// const LongTermVerbalRecall = () => (
-//   <h1>LongTermVerbalRecall</h1>
-// );
-
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'space-between'
+  }
+}));
 
 const LTVRDCMPT = (props) => {
-  const formatWords = []
+  const classes = useStyles();
+  const formatWords = [];
   let currentBTN;
   let instructions;
   if(props.testStarted && !props.testDone){
@@ -15,19 +26,21 @@ const LTVRDCMPT = (props) => {
       formatWords.push(<div key={i}>{props.words[i].word}</div>)
     }
   }
-  
+
   if(!props.testStarted) {
-    currentBTN = <button onClick={props.displayWords}>Start Test</button>
+    currentBTN = <UserStartBTN action={props.displayWords} buttonText={'Start Test'}/>;
     instructions = props.instructions[0].instruction_text;
   }
-  if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
+  if(props.testDone) currentBTN = <SectionEndScreen changeSection={props.changeSection}/>;
   return (
-  <div>
-    <h1>LongTermVerbalRecall</h1>
-    {instructions}
-    {formatWords}
-    {currentBTN}
-  </div>
+    <div>
+      <div className={classes.root}>
+        <SectionHeader sectionName={props.sectionName}/>
+        <SectionInstructions instructions={instructions}/>
+        {props.testStarted && !props.testDone && <LongTermVerbalRecallDisplayWordGrid words={formatWords}/>}
+        {currentBTN}
+      </div>
+    </div>
   )
 };
 export default LTVRDCMPT;

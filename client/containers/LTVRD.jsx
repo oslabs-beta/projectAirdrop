@@ -1,16 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import * as actions from '../actions/actions';
+import React, { Component } from 'react';
 import LTVRDCMPT from '../components/LongTermVerbalRecallDisplayCMPT';
 
 class LTVRD extends Component {
-	constructor(props){
-		super(props)
-			this.state = {
-				timeToDisplay: 0,
-				testStarted: false,
-				testDone: false,
-		}
+	constructor(props) {
+		super(props);
+		this.state = {
+			timeToDisplay: 0,
+			testStarted: false,
+			testDone: false,
+		};
 		this.displayWords = this.displayWords.bind(this);
 		this.endSection = this.endSection.bind(this);
 		this.startTimer = this.startTimer.bind(this);
@@ -21,7 +19,7 @@ class LTVRD extends Component {
   }
 	displayWords(){
 		this.setState({
-			timeToDisplay: 500,
+			timeToDisplay: 1000,
 			testStarted: true,
 		}, this.startTimer)
 	}
@@ -44,6 +42,7 @@ class LTVRD extends Component {
 				words={this.props.section.words}
 				displayWords={this.displayWords}
 				instructions={this.props.section.instructions}
+				sectionName={this.props.section.section_display_name}
 				/>
 			</div>
 		)

@@ -23,7 +23,7 @@ const UserDemographicsCMPT = props => {
   const listOfYears = yearsDate.map((item, index) => {
     return <option key={index}>{item}</option>
   });
-  
+
   return (
     <div>
       <form onSubmit={props.submit}>
@@ -109,7 +109,7 @@ const UserDemographicsCMPT = props => {
             name="monthLD"
             value={props.dates.monthLD}
             onChange={props.handleChangeTwo}
-            onBlur={props.handleChangeDeploy} 
+            onBlur={props.handleChangeDeploy}
           >
             {listOfDays}
           </select>
@@ -117,12 +117,12 @@ const UserDemographicsCMPT = props => {
             name="yearLD"
             value={props.dates.yearLD}
             onChange={props.handleChangeTwo}
-            onBlur={props.handleChangeDeploy}  
+            onBlur={props.handleChangeDeploy}
           >
             {listOfYears}
           </select>
         </label>
-        <UserSubmitBTN />
+        <UserSubmitBTN action={props.submit}/>
       </form>
     </div>
   );
