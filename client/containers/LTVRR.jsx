@@ -4,7 +4,8 @@ import * as actions from '../actions/actions';
 import LTVRRCMPT from '../components/LongTermVerbalRecallResponseCMPT';
 
 const mapStateToProps = (store) => ({
-  words: store.test.test[6].words
+  words: store.test.test[6].words,
+  aid: store.answers.aid,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -53,10 +54,11 @@ class LTVRR extends Component {
     }
 
     const assessment = {
-      'aid': 1,
+      'aid': this.props.aid,
       'wordArr': wordArr,
       'respArr': respArr,
     };
+    console.log('ltvrr', assessment)
 
     this.props.postAnswers(this.state.sectionId, assessment);
     // const ltvrrAnswers = this.state.answerArray
