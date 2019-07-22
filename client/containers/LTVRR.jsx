@@ -4,7 +4,7 @@ import * as actions from '../actions/actions';
 import LTVRRCMPT from '../components/LongTermVerbalRecallResponseCMPT';
 
 const mapStateToProps = (store) => ({
-  words: store.test.test[0].words
+  words: store.test.test[1].words
 });
 
 const mapDispatchToProps = dispatch => ({

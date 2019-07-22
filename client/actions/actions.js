@@ -29,12 +29,12 @@ export const requestAPI = () => ({
 // });
 
 export const receiveAPI = json => {
-  const words = json[0].words;
-  const wm = json[6].images.reduce((a,b) => {
+  const words = json[1].words;
+  const wm = json[2].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
   }, []);
-  const ir = json[5].images.reduce((a,b) => {
+  const ir = json[0].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
   }, []);
@@ -68,17 +68,19 @@ function isValid(res) {
 }
 
 export const fetchTest = () => dispatch => {
-  console.log("fetch test");
   dispatch(requestAPI);
 
   return fetch("/api/test")
     .then(res => res.json())
     .then(res => {
+      console.log('TESTING FETCH TEST RESPONSE', res)
       if (!isValid(res)) throw new Error("something went wrong");
-      console.log('res', res);
       return dispatch(receiveAPI(res));
     })
-    .catch(err => dispatch(receiveFailure(err)));
+    .catch(err => {
+      console.log('TESTING FETCH TEST CATCH ERROR');
+      dispatch(receiveFailure(err))
+    });
 };
 
 export const handleChange = event => ({

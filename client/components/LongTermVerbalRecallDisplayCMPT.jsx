@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
 import Button from '@material-ui/core/Button';
 import TestInstructions from './TestInstructions';
-
-// const LongTermVerbalRecall = () => (
-//   <h1>LongTermVerbalRecall</h1>
-// );
-
+import WordGrid from './WordGrid';
+import SectionHeader from './SectionHeader';
 
 const LTVRDCMPT = (props) => {
-  const formatWords = []
+  const formatWords = [];
   let currentBTN;
   let instructions;
   if(props.testStarted && !props.testDone){
@@ -35,11 +32,11 @@ const LTVRDCMPT = (props) => {
   if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
   return (
   <div>
-    <TestInstructions instructions={instructions}/>
-    {/*{instructions}*/}
-    <div>
-      {formatWords}
-    </div>
+    <SectionHeader sectionName={props.sectionName}/>
+      <TestInstructions instructions={instructions}/>
+        <div>
+          {props.testStarted && !props.testDone && <WordGrid words={formatWords}/>}
+        </div>
     {currentBTN}
   </div>
   )

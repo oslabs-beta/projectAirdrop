@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import QuestionnaireCMPT from './../components/QuestionnairesCMPT';
 import * as actions from "../actions/actions";
 import { connect } from 'react-redux';
-import UserSubmitBtn from "../components/UserSubmitBTN";
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -12,42 +11,25 @@ const mapDispatchToProps = dispatch => ({
 
 class QuestionnaireCont extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       instructions: '',
       CMSQ: null,
       CNAAQ: null,
-      // cnaaqOptions: {
-      //   SD: 'Strongly Disagree',
-      //   D: 'Disagree',
-      //   N: 'Neutral',
-      //   A: 'Agree',
-      //   SA: 'Strongly Agree'
-      // },
-      cmsqCurrentChoice: {
-
-
-      },
-      // cmsqAnswers: {},
-      cnaaqCurrentChoice: {
-
-      },
-    }
-    // this.addVal = this.addVal.bind(this);
+      cmsqCurrentChoice: {},
+      cnaaqCurrentChoice: {},
+    };
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeCMSQ = this.handleChangeCMSQ.bind(this);
   }
 
-// const cnaaqOptions = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
-// const cmsqOptions = ['Strongly Disagree', 'Disagree', 'Mostly Disagree', 'Mostly Agree', 'Agree', 'Strongly Agree'];
-
   componentDidMount(){
     this.setState({
       ...this.state,
-      instructions: this.props.test[3].instructions[0],
-      CMSQ: this.props.test[3].questions,
-      CNAAQ: this.props.test[4].questions
+      instructions: this.props.test[4].instructions[0],
+      CMSQ: this.props.test[4].questions,
+      CNAAQ: this.props.test[5].questions
     })
   }
   componentWillUnmount() {
@@ -70,11 +52,10 @@ class QuestionnaireCont extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('cmsq', cmsq)
-    console.log('cnaaq', cnaaq)
+    console.log('cmsq unmount', cmsq);
+    console.log('cnaaq unmount', cnaaq);
     const questionnaireResponses = { ...cmsq, ...cnaaq};
     this.props.postAnswers(this.state.sectionId, questionnaireResponses);
-
 
     const cmsqResponses = Object.keys(this.state.cmsqCurrentChoice).reduce((a,b,c,d) => {
       a.push(this.state.cmsqCurrentChoice[b]);
@@ -87,45 +68,35 @@ class QuestionnaireCont extends Component {
     this.props.postQuestionnaireResponses({
       cmsqResponses,
       cnaaqResponses,
-
     });
     console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
   }
 
   handleChange(e, qid) {
-    const name = e.target.name;
-    const value = e.target.value;
-    // console.log('handlechange', name, value, id)
-    // console.log('check state', 'state cnaaq id', typeof this.state.cnaaqCurrentChoice[id][qid], typeof e.target.value);
     this.setState({
       cnaaqCurrentChoice: {
       ...this.state.cnaaqCurrentChoice,
         [qid]: e.target.value,
-    },
-
+      },
     });
   }
 
   handleChangeCMSQ(e, qid) {
-    // const name = e.target.name;
-    // const value = e.target.value;
-    // console.log('handlechange', name, value, id)
-    // console.log('check state', 'state cnaaq id', this.state.cnaaqCurrentChoice[id], 'e.target.val', e.target.value)
     this.setState({
       cmsqCurrentChoice: {
       ...this.state.cmsqCurrentChoice,
         [qid]: e.target.value,
-    },
-
+      },
     });
   }
 
   onSubmit (e) {
     this.props.changeSection()
   }
+
   render() {
-    console.log('testing state',this.state.cmsqCurrentChoice);
-    // console.log('state', this.state.cnaaqAnswers)
+    console.log('CNAAQ STATE', this.state.cnaaqCurrentChoice);
+    console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
     return (
       <div>
         {this.state.instructions.instruction_text}
@@ -145,13 +116,13 @@ class QuestionnaireCont extends Component {
         cmsqCurrentChoice={this.state.cmsqCurrentChoice}
         />}
         <button onClick={this.onSubmit}>Submit</button>
-        {/*<UserSubmitBtn onSubmit={this.onSubmit}/>*/}
       </div>
     )
   }
-};
+}
 
 export default connect(null, mapDispatchToProps)(QuestionnaireCont);
+
 //  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
 //         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}
 //         {/* {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />} */}
