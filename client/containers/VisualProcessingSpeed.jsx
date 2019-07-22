@@ -88,7 +88,7 @@ class VisualProcessingSpeed extends Component {
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: ++this.state.currentSeriesIndex,
+						currentSeriesIndex: this.state.currentSeriesIndex +=6,
 						timerRunning: false,
 						timeRun: 0
 					})

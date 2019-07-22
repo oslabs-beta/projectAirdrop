@@ -7,6 +7,7 @@ import UserNextBTN from './UserNextBTN.jsx';
 
 
 const LTVRDCMPT = (props) => {
+  console.log('props',props)
   const formatWords = []
   let currentBTN;
   let instructions;

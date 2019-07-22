@@ -19,6 +19,7 @@ const mapStateToProps = store => ({
   currentSection: store.test.currentSection,
   currentSlide: store.test.currentSlide,
   vpsAnswers: store.test.vpsAnswers,
+  results: store.answers.results,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -43,12 +44,13 @@ class MainTestDisplay extends Component {
 
   render () {
     console.log('THIS PROPS TEST 0', this.props.test[0]);
+    console.log('results test', this.props.results)
     const compArray = [<UserDemographics changeSection={this.changeSection}/>,
-      <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[0]}/>,
-      <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[1]}/>,
-      <WorkingMemory WM={this.props.test[6]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <ImageRecognition IR={this.props.test[5]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <LTVRR changeSection={this.props.changeSection} section={this.props.test[0]} />,
+      <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[6]}/>,
+      <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[5]}/>,
+      <WorkingMemory WM={this.props.test[1]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      <ImageRecognition IR={this.props.test[0]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
       <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
       <Instructions />];
 
