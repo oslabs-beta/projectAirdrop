@@ -11,11 +11,9 @@ import React from 'react'
   //   />
   //   )
   // }
+
 const cnaaqOptions = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
 const cmsqOptions = ['Strongly Disagree', 'Disagree', 'Mostly Disagree', 'Mostly Agree', 'Agree', 'Strongly Agree'];
-
-
-
 
 const QuestionnaireBTN = (props) => {
 return (

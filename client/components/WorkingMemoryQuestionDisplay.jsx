@@ -1,6 +1,7 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
-const WMQuestionDisplay = props => {
+const WorkingMemoryQuestionDisplay = props => {
 
   return (
     <div>
@@ -29,7 +30,7 @@ const WMQuestionDisplay = props => {
           {props.choices[1]}
         </label>
       </form>
-          <button onClick={props.onSubmit}>Submit</button>
+          <Button onClick={props.onSubmit}>Submit</Button>
           </div>
       ) : (
           <div>
@@ -71,7 +72,7 @@ const WMQuestionDisplay = props => {
               {props.choices[3]}
             </label>
           </form>
-        <button onClick={props.onSubmit}>Submit</button>
+        <Button onClick={props.onSubmit}>Submit</Button>
           </div>
       )
     }
@@ -79,4 +80,4 @@ const WMQuestionDisplay = props => {
   )
 };
 
-export default WMQuestionDisplay;
+export default WorkingMemoryQuestionDisplay;

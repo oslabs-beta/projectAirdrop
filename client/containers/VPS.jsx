@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
+import Button from "@material-ui/core/Button";
+import LTVRDCMPT from "../components/LongTermVerbalRecallDisplayCMPT";
 
 const mapDispatchToProps = dispatch => ({
 	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
 	postVPS: data => dispatch(actions.vpsResponses(data)),
 });
 
-class VisualProcessingSpeed extends Component {
+class VPS extends Component {
 	constructor(props){
     super(props);
     this.state = {
@@ -76,7 +78,7 @@ class VisualProcessingSpeed extends Component {
 		if(this.state.timeToNext === this.state.timeRun){
 			if(!this.state.displayingAnswers){
 				this.setState({
-					currentElementIndex: ++this.state.currentElementIndex,		
+					currentElementIndex: ++this.state.currentElementIndex,
 					timeRun: 0,
 				})
 			}
@@ -88,7 +90,7 @@ class VisualProcessingSpeed extends Component {
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex +=6,
+						currentSeriesIndex: this.state.currentSeriesIndex += 6,
 						timerRunning: false,
 						timeRun: 0
 					})
@@ -148,9 +150,10 @@ class VisualProcessingSpeed extends Component {
 				submitAnswer={this.submitAnswer}
 				currentChoice={this.state.currentChoice}
 				updateChoice={this.updateChoice}
+				sectionName={this.props.section.section_display_name}
 				/>
 			</div>
 		)
 	}
 }
-export default connect(null, mapDispatchToProps)(VisualProcessingSpeed)
+export default connect(null, mapDispatchToProps)(VPS)

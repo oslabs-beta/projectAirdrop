@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -8,20 +7,21 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignContent: 'space-around',
+    alignContent: 'center',
     alignItems: 'center'
   }
 }));
 
-const UserStartBTN = (props) => {
+const SectionHeader = props => {
   const classes = useStyles();
+
   return (
-    <div className={classes.root}>
-      <Button onClick={props.action}>
-        {props.buttonText}
-      </Button>
+    <div >
+      <h1 className={classes.root}>
+        {props.sectionName}
+      </h1>
     </div>
   )
 };
 
-export default UserStartBTN;
+export default SectionHeader;

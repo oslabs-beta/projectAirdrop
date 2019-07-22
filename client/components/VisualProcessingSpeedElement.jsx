@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -13,15 +13,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserStartBTN = (props) => {
+const VisualProcessingSpeedElement = props => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Button onClick={props.action}>
-        {props.buttonText}
-      </Button>
+      <Paper>
+        {props.currentEl}
+      </Paper>
     </div>
   )
 };
 
-export default UserStartBTN;
+export default VisualProcessingSpeedElement;

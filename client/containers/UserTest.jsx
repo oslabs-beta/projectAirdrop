@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import UserDemographics from './UserDemographics.jsx';
-import LongTermVerbalRecallDisplayCMPT from './LTVRD';
-import LongTermVerbalRecallResponseCMPT from '../components/LongTermVerbalRecallResponseCMPT.jsx'
-import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
-import WorkingMemory from './WorkingMemory.jsx';
-import ImageRecognition from './ImageRecognition.jsx';
-import Questionnaires from '../components/QuestionnairesCMPT.jsx';
-import SectionEndScreen from '../components/SectionEndScreen.jsx';
+import UserDemographics from './Demographics.jsx';
+import VisualProcessingSpeed from './VPS.jsx';
+import WorkingMemory from './WM.jsx';
+import ImageRecognition from './IR.jsx';
 import LTVRD from './LTVRD';
-import QuestionnaireCont from './../containers/QuestionnaireCont.jsx';
+import QuestionnaireCont from './Questionnaires.jsx';
 import LTVRR from './LTVRR';
+import Introduction from '../components/IntroductionCMPT';
 import Instructions from '../components/Instructions.jsx';
+import Container from '@material-ui/core/Container';
+
 
 const mapStateToProps = store => ({
   test: store.test.test,
@@ -38,7 +37,7 @@ class MainTestDisplay extends Component {
   }
 
   componentDidMount() {
-    console.log('COMPONENT DID MOUNT?????');
+    console.log('USER TEST DISPLAY COMPONENT DID MOUNT');
     this.props.fetchTest();
   }
 
@@ -46,6 +45,7 @@ class MainTestDisplay extends Component {
     console.log('THIS PROPS TEST 0', this.props.test[0]);
     console.log('results test', this.props.results)
     const compArray = [<UserDemographics changeSection={this.changeSection}/>,
+      <Introduction intro={this.props.test[2]} changeSection={this.changeSection}/>,
       <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[6]}/>,
       <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[5]}/>,
       <WorkingMemory WM={this.props.test[1]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
@@ -54,16 +54,16 @@ class MainTestDisplay extends Component {
       <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
       <Instructions />];
 
-    //      <LongTermVerbalRecallResponseCMPT changeSection={this.changeSection}/>,
-
     // for (let i = 0; i < compArray.length; i++) {
     //   if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)
     // }
 
     return (
-      <div>
-         {this.props.test.length > 0 && compArray[this.props.currentSection]}
-      </div>
+      <Container maxWidth={'sm'}>
+        <div>
+          {this.props.test.length > 0 && compArray[this.props.currentSection]}
+        </div>
+      </Container>
     );
   }
 }
