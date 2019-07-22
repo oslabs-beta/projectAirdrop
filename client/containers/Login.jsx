@@ -26,9 +26,9 @@ const Login = props => {
   return(
     
     <div>
-      {/* {props.login === false ? 
+      {props.login === false ? 
       
-      ( */}
+      (
 
         <div id="loginMain">
      
@@ -43,9 +43,9 @@ const Login = props => {
        <button type="submit">Login</button>
       </form>
     </div>
-      {/* ) : (
+        ) : (
          <Redirect to='/main' />
-     )}        */}
+     )}         
 
    </div>
 )};
