@@ -9,7 +9,7 @@ import {
 const initialState = {
   apiStatus: "",
   apiError: "",
-  aid: 6,
+  aid: 10,
   ltvr: {
     words: [],
     responses: [],
@@ -48,7 +48,7 @@ const answersReducer = (state = initialState, action) => {
     case CALL_API:
       return {
         ...state,
-        apiStatus: 'pending',
+        apiStatus: "pending"
       };
     case SEND_API:
       return {

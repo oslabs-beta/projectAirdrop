@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import QuestionnaireCMPT from './../components/QuestionnairesCMPT';
 import * as actions from "../actions/actions";
 import { connect } from 'react-redux';
-import SectionInstructions from '../components/SectionInstructions';
+import UserSubmitBtn from "../components/UserSubmitBTN";
+
+
+const mapStateToProps = store => ({
+	aid: store.answers.aid,
+});
+
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -10,20 +16,37 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class Questionnaires extends Component {
+class QuestionnaireCont extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       instructions: '',
       CMSQ: null,
       CNAAQ: null,
-      cmsqCurrentChoice: {},
-      cnaaqCurrentChoice: {},
-    };
+      // cnaaqOptions: {
+      //   SD: 'Strongly Disagree',
+      //   D: 'Disagree',
+      //   N: 'Neutral',
+      //   A: 'Agree',
+      //   SA: 'Strongly Agree'
+      // },
+      cmsqCurrentChoice: {
+
+
+      },
+      // cmsqAnswers: {},
+      cnaaqCurrentChoice: {
+
+      },
+    }
+    // this.addVal = this.addVal.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeCMSQ = this.handleChangeCMSQ.bind(this);
   }
+
+// const cnaaqOptions = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+// const cmsqOptions = ['Strongly Disagree', 'Disagree', 'Mostly Disagree', 'Mostly Agree', 'Agree', 'Strongly Agree'];
 
   componentDidMount(){
     this.setState({
@@ -36,7 +59,7 @@ class Questionnaires extends Component {
   componentWillUnmount() {
     const cmsq = Object.keys(this.state.cmsqCurrentChoice).reduce((a, b) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': Number(this.state.cmsqCurrentChoice[b])
       };
@@ -46,17 +69,18 @@ class Questionnaires extends Component {
 
     const cnaaq = Object.keys(this.state.cnaaqCurrentChoice).reduce((a, b) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': Number(this.state.cnaaqCurrentChoice[b])
       };
       a.push(answer);
       return a
     }, []);
-    console.log('cmsq unmount', cmsq);
-    console.log('cnaaq unmount', cnaaq);
+    console.log('cmsq', cmsq)
+    console.log('cnaaq', cnaaq)
     const questionnaireResponses = { ...cmsq, ...cnaaq};
     this.props.postAnswers(this.state.sectionId, questionnaireResponses);
+
 
     const cmsqResponses = Object.keys(this.state.cmsqCurrentChoice).reduce((a,b,c,d) => {
       a.push(this.state.cmsqCurrentChoice[b]);
@@ -69,38 +93,48 @@ class Questionnaires extends Component {
     this.props.postQuestionnaireResponses({
       cmsqResponses,
       cnaaqResponses,
+
     });
     console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
   }
 
   handleChange(e, qid) {
+    const name = e.target.name;
+    const value = e.target.value;
+    // console.log('handlechange', name, value, id)
+    // console.log('check state', 'state cnaaq id', typeof this.state.cnaaqCurrentChoice[id][qid], typeof e.target.value);
     this.setState({
       cnaaqCurrentChoice: {
       ...this.state.cnaaqCurrentChoice,
         [qid]: e.target.value,
-      },
+    },
+
     });
   }
 
   handleChangeCMSQ(e, qid) {
+    // const name = e.target.name;
+    // const value = e.target.value;
+    // console.log('handlechange', name, value, id)
+    // console.log('check state', 'state cnaaq id', this.state.cnaaqCurrentChoice[id], 'e.target.val', e.target.value)
     this.setState({
       cmsqCurrentChoice: {
       ...this.state.cmsqCurrentChoice,
         [qid]: e.target.value,
-      },
+    },
+
     });
   }
 
   onSubmit (e) {
     this.props.changeSection()
   }
-
   render() {
-    console.log('CNAAQ STATE', this.state.cnaaqCurrentChoice);
-    console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
+    console.log('testing state',this.state.cmsqCurrentChoice, this.state.cnaaqCurrentChoice);
+    // console.log('state', this.state.cnaaqAnswers)
     return (
       <div>
-        <SectionInstructions instructions={this.state.instructions.instruction_text}/>
+        {this.state.instructions.instruction_text}
 
         {this.state.CNAAQ &&
         <QuestionnaireCMPT
@@ -117,13 +151,13 @@ class Questionnaires extends Component {
         cmsqCurrentChoice={this.state.cmsqCurrentChoice}
         />}
         <button onClick={this.onSubmit}>Submit</button>
+
       </div>
     )
   }
-}
+};
 
-export default connect(null, mapDispatchToProps)(Questionnaires);
-
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionnaireCont);
 //  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
 //         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}
 //         {/* {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />} */}

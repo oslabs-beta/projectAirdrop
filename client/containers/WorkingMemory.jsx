@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import WorkingMemoryCMPT from '../components/WorkingMemoryCMPT.jsx'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import SectionHeader from "../components/SectionHeader";
+import ImageRecognitionCMPT from "../components/ImageRecognitionCMPT";
+
+const mapStateToProps = store => ({
+	aid: store.answers.aid,
+});
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
   postResponses: data => dispatch(actions.wmResponses(data)),
 });
 
-class WM extends Component {
+class WorkingMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +31,7 @@ class WM extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
+    this.stateReset = this.stateReset.bind(this);
   }
 
   componentWillUnmount() {
@@ -38,7 +43,7 @@ class WM extends Component {
     }
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
@@ -46,7 +51,7 @@ class WM extends Component {
       a.push(answer);
       return a
     }, []);
-
+    console.log('assessment', assessment)
     this.props.postAnswers(this.state.sectionId, assessment)
 
     const wmResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
@@ -90,6 +95,12 @@ class WM extends Component {
     })
   }
 
+  stateReset() {
+    this.setState({
+      answerTimeArray: [],
+    })
+  }
+
   optionReset () {
     console.log('option reset')
     this.setState({
@@ -121,8 +132,9 @@ class WM extends Component {
           setTimeout(() => {
             this.optionReset();
             this.props.changeSlide();
+            this.stateReset();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
   }
@@ -153,7 +165,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -171,7 +183,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -189,7 +201,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -207,7 +219,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -226,7 +238,7 @@ class WM extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
   }
@@ -234,25 +246,23 @@ class WM extends Component {
   render() {
     // console.log('WM TIME ARRAY', this.state.answerTimeArray);
     // console.log('WM SECTION DATA', this.state.sectionData);
+
     console.log('currentchoice', this.state.currentChoice);
     return (
-      <div>
-        <SectionHeader sectionName={this.props.WM.section_display_name}/>
-        <WorkingMemoryCMPT
-          WM={this.props.WM}
-          changeSlide={this.props.changeSlide}
-          currentSlide={this.props.currentSlide}
-          changeSection={this.props.changeSection}
-          startPractice={this.startPractice}
-          startTest={this.startTest}
-          onChangeHandler={this.onChangeHandler}
-          currentChoice={this.state.currentChoice}
-          onPracticeHandler={this.onPracticeHandler}
-          onSubmit={this.onSubmit}
-        />
-      </div>
+      <WorkingMemoryCMPT
+        WM={this.props.WM}
+        changeSlide={this.props.changeSlide}
+        currentSlide={this.props.currentSlide}
+        changeSection={this.props.changeSection}
+        startPractice={this.startPractice}
+        startTest={this.startTest}
+        onChangeHandler={this.onChangeHandler}
+        currentChoice={this.state.currentChoice}
+        onPracticeHandler={this.onPracticeHandler}
+        onSubmit={this.onSubmit}
+      />
     );
   }
 }
 
-export default connect(null, mapDispatchToProps)(WM)
+export default connect(mapStateToProps, mapDispatchToProps)(WorkingMemory)

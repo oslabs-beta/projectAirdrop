@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PracticeImageAnswerDisplay = (props) => {
+const PracticeImageCMPT = (props) => {
   // console.log('is this PICMPT?')
   return (
     <div>
@@ -65,4 +65,4 @@ const PracticeImageAnswerDisplay = (props) => {
   )
 };
 
-export default PracticeImageAnswerDisplay;
+export default PracticeImageCMPT;

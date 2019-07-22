@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageRecognitionQuestionDisplay = props => {
+const IRQuestionDisplay = props => {
 
   return (
     <div>
@@ -30,4 +30,4 @@ const ImageRecognitionQuestionDisplay = props => {
   )
 };
 
-export default ImageRecognitionQuestionDisplay
+export default IRQuestionDisplay

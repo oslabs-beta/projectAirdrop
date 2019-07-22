@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 const mapStateToProps = state => ({
   // username: store.user.username,
   // password: store.user.password,
-  // isAdmin: store.user.isAdmin,
+  // role: store.user.role,
   // login: false,
 
 });
@@ -42,12 +42,12 @@ class Authentication extends Component {
         })
         .then(res => res.json())
         .then(res => {
-          this.props.updateUsername(res.username);
-          this.props.isAdmin(res.isAdmin);
+          this.props.updateUsername(res.name);
+          this.props.updateRole(res.role);
       
         });
       } else {
-
+        //if token not verified redirect to login
         this.setState({redirect: true});
       }
     });

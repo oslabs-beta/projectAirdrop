@@ -1,15 +1,14 @@
 import React from 'react';
-import IRQuestion from './ImageRecognitionQuestionDisplay';
+import IRQuestion from './IRQuestionDisplay';
 import SectionEndScreen from "./SectionEndScreen";
 import NextCMPT from './NextCMPT';
-import PracticeImageAnswerDisplay from './PracticeImageAnswerDisplay';
-import Button from '@material-ui/core/Button';
-import SectionInstructions from './SectionInstructions';
+import PracticeImageCMPT from './PracticeImageCMPT';
+import WMQuestionDisplay from "./WMQuestionDisplay";
 
 const ImageRecognitionCMPT = (props) => {
 
     const IR_content = [
-      <SectionInstructions instructions={props.IR.instructions[0].instruction_text}/>,
+      props.IR.instructions[0].instruction_text,
 
       <img src={props.IR.practice[2].image_url}/> ,
 
@@ -37,7 +36,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <NextCMPT changeSlide={props.changeSlide}/>,
 
-      <PracticeImageAnswerDisplay
+      <PracticeImageCMPT
         url={props.IR.practice[0].image_url}
         question={props.IR.practice[0].question_text}
         choices={
@@ -45,7 +44,7 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[0]['choice2']]}
         changeSlide={props.changeSlide}/>,
 
-      <PracticeImageAnswerDisplay
+      <PracticeImageCMPT
         url={props.IR.practice[1].image_url}
         question={props.IR.practice[1].question_text}
         choices={
@@ -53,7 +52,7 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[1]['choice2']]}
         changeSlide={props.changeSlide}/>,
 
-      <SectionInstructions instructions={props.IR.instructions[1].instruction_text}/>,
+      props.IR.instructions[1].instruction_text,
 
       <img src={props.IR.images[0].image_url}/>,
 
@@ -118,31 +117,9 @@ const ImageRecognitionCMPT = (props) => {
 
   let currentBTN;
   if (props.currentSlide === 0) {
-    currentBTN =
-      <Button
-        onClick={props.startPractice}
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '65%',
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-        Start Practice
-      </Button>
+    currentBTN = <button onClick={props.startPractice}>Start Practice</button>
   } else if (props.currentSlide === 8) {
-    currentBTN =
-      <Button
-        onClick={props.startTest}
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '65%',
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-        Start Test
-      </Button>
+    currentBTN = <button onClick={props.startTest}>Start Test</button>
   }
 
   return (

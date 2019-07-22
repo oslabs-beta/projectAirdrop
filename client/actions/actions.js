@@ -29,16 +29,16 @@ export const requestAPI = () => ({
 // });
 
 export const receiveAPI = json => {
-  const words = json[6].words;
+  const words = json[6].words
   const wm = json[1].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
-  }, []);
+  }, [])
   const ir = json[0].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
-  }, []);
-
+  }, [])
+  
   const results = {
     words,
     wm: {
@@ -47,14 +47,14 @@ export const receiveAPI = json => {
     ir : {
       correct: ir,
     }
-  };
+  }
 
   return {
-    type: types.RECEIVE_API,
-    payload: {
-      test: json,
-      results,
-   }
+  type: types.RECEIVE_API,
+  payload: {
+    test: json,
+    results,
+  }
   }
 };
 
@@ -68,30 +68,40 @@ function isValid(res) {
 }
 
 export const fetchTest = () => dispatch => {
+  console.log("fetch test");
   dispatch(requestAPI);
 
   return fetch("/api/test")
     .then(res => res.json())
     .then(res => {
-      console.log('TESTING FETCH TEST RESPONSE', res)
       if (!isValid(res)) throw new Error("something went wrong");
+      console.log('res', res);
       return dispatch(receiveAPI(res));
     })
-    .catch(err => {
-      console.log('TESTING FETCH TEST CATCH ERROR');
-      dispatch(receiveFailure(err))
-    });
+    .catch(err => dispatch(receiveFailure(err)));
 };
 
-export const handleChange = event => ({
-  type: types.HANDLE_CHANGE,
-  payload: event,
-});
+// export const handleChange = event => ({
+//   type: types.HANDLE_CHANGE,
+//   payload: event,
+// });
 
 export const handleChangeTwo = (event) => ({
   type: types.HANDLE_CHANGE_TWO,
   payload: event,
 });
+
+export const handleChange = (event) => {
+ console.log('testing handle change prop', event.target.value)
+ 
+  return {
+  type: types.HANDLE_CHANGE,
+  payload: {
+    name: event.target.name,
+    value: event.target.value
+  },
+}
+};
 
 export const handleChangeDeploy = () => ({
   type: types.HANDLE_CHANGE_DATES

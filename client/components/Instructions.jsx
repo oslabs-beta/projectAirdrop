@@ -1,7 +1,11 @@
 import React from 'react'
 
-const Instructions = props => {
+const Instructions = () => {
+  return (
+    <div>
 
-};
+    </div>
+  )
+}
 
 export default Instructions;

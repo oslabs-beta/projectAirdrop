@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
-import Button from "@material-ui/core/Button";
-import LTVRDCMPT from "../components/LongTermVerbalRecallDisplayCMPT";
+
+const mapStateToProps = store => ({
+	aid: store.answers.aid,
+});
 
 const mapDispatchToProps = dispatch => ({
 	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
 	postVPS: data => dispatch(actions.vpsResponses(data)),
 });
 
-class VPS extends Component {
+class VisualProcessingSpeed extends Component {
 	constructor(props){
     super(props);
     this.state = {
@@ -39,12 +41,12 @@ class VPS extends Component {
 		console.log('VPS UNMOUNT ANSWER ARRAY ', this.state.answerArray);
 		const vpsAnswers = this.state.answerArray.reduce((a, b, i) => {
 			const response = {
-				'aid': 1,
+				'aid': this.props.aid,
 				'seriesIndex': i + 1,
 				'userChoice': b.answer,
 				'timeTaken': b.timeToRespond
 			};
-			console.log(response);
+			console.log('testing response', response);
 			a.push(response);
 			return a
 		}, []);
@@ -78,7 +80,7 @@ class VPS extends Component {
 		if(this.state.timeToNext === this.state.timeRun){
 			if(!this.state.displayingAnswers){
 				this.setState({
-					currentElementIndex: ++this.state.currentElementIndex,
+					currentElementIndex: ++this.state.currentElementIndex,		
 					timeRun: 0,
 				})
 			}
@@ -90,7 +92,7 @@ class VPS extends Component {
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 6,
+						currentSeriesIndex: ++this.state.currentSeriesIndex,
 						timerRunning: false,
 						timeRun: 0
 					})
@@ -150,10 +152,9 @@ class VPS extends Component {
 				submitAnswer={this.submitAnswer}
 				currentChoice={this.state.currentChoice}
 				updateChoice={this.updateChoice}
-				sectionName={this.props.section.section_display_name}
 				/>
 			</div>
 		)
 	}
 }
-export default connect(null, mapDispatchToProps)(VPS)
+export default connect(mapStateToProps, mapDispatchToProps)(VisualProcessingSpeed)

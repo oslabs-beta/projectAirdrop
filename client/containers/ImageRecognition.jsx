@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 const mapStateToProps = store => ({
   apiStatus: store.answers.apiStatus,
   apiError: store.answers.apiError,
+  aid: store.answers.aid,
 });
+
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -15,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class IR extends Component {
+class ImageRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,6 +35,7 @@ class IR extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
+    this.stateReset = this.stateReset.bind(this);    
   }
 
   componentWillUnmount() {
@@ -44,7 +47,7 @@ class IR extends Component {
     }
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
@@ -52,7 +55,7 @@ class IR extends Component {
       a.push(answer);
       return a
     }, []);
-
+    console.log('assessment', assessment);
     this.props.postAnswers(this.state.sectionId, assessment);
 
     const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
@@ -96,6 +99,12 @@ class IR extends Component {
     })
   }
 
+  stateReset() {
+    this.setState({
+      answerTimeArray: [],
+    })
+  }
+
   optionReset () {
     this.setState({
       currentChoice: '',
@@ -135,6 +144,7 @@ class IR extends Component {
           setTimeout(() => {
             this.optionReset();
             this.props.changeSlide();
+            this.stateReset();
             resolve()
           }, this.state.timeToNext * 2)
         })
@@ -240,32 +250,20 @@ class IR extends Component {
     console.log('IR TIME ARRAY', this.state.answerTimeArray);
     console.log('IR SECTION DATA', this.state.sectionData);
     return (
-      <div>
-        <h1
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '30%',
-            transform: 'translate(-50%, -50%)'
-          }}
-        >
-          Image Recognition
-        </h1>
-        <ImageRecognitionCMPT
-          IR={this.props.IR}
-          changeSlide={this.props.changeSlide}
-          currentSlide={this.props.currentSlide}
-          changeSection={this.props.changeSection}
-          startPractice={this.startPractice}
-          startTest={this.startTest}
-          onChangeHandler={this.onChangeHandler}
-          currentChoice={this.state.currentChoice}
-          onPracticeHandler={this.onPracticeHandler}
-          onSubmit={this.onSubmit}
-        />
-      </div>
+    <ImageRecognitionCMPT
+      IR={this.props.IR}
+      changeSlide={this.props.changeSlide}
+      currentSlide={this.props.currentSlide}
+      changeSection={this.props.changeSection}
+      startPractice={this.startPractice}
+      startTest={this.startTest}
+      onChangeHandler={this.onChangeHandler}
+      currentChoice={this.state.currentChoice}
+      onPracticeHandler={this.onPracticeHandler}
+      onSubmit={this.onSubmit}
+    />
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IR)
+export default connect(mapStateToProps, mapDispatchToProps)(ImageRecognition)
