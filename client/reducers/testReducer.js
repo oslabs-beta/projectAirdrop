@@ -8,7 +8,7 @@ const initialState = {
   vpsAnswers: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 0,
+  currentSection: 4,
   currentSlide: 0,
 };
 
@@ -25,7 +25,9 @@ const testReducer = (state = initialState, action) => {
       return {
         ...state,
         apiStatus: 'success',
-        test: action.payload,
+        // test: action.payload,
+        test: action.payload.test,
+
       };
 
     case CALL_API:

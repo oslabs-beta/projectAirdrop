@@ -1,13 +1,45 @@
-import { RECEIVE_AID, CALL_API, SEND_API, SEND_API_FAILURE } from '../constants/actionTypes';
+import {
+  RECEIVE_AID,
+  CALL_API,
+  SEND_API,
+  SEND_API_FAILURE,
+  RECEIVE_API,
+} from "../constants/actionTypes";
 
 const initialState = {
-  apiStatus: '',
-  apiError: '',
-  aid: null
+  apiStatus: "",
+  apiError: "",
+  aid: 6,
+  ltvr: {
+    words: [],
+    responses: [],
+    mean: null,
+  },
+  vps: {
+    answers: [],
+    mean: null,
+  },
+  wm: {
+    correct: [],
+    responses: [],
+    mean: null,
+  },
+  ir: {
+    correct: [],
+    responses: [],
+    mean: null,
+  },
+  cmsq: {
+    responses: [],
+  },
+  cnaaq: {
+    responses: [],
+  },
 };
 
-const answersReducer = ( state = initialState, action) => {
-  switch(action.type) {
+const answersReducer = (state = initialState, action) => {
+  console.log('action', action)
+  switch (action.type) {
     case RECEIVE_AID:
       return ({
         ...state,
@@ -21,13 +53,22 @@ const answersReducer = ( state = initialState, action) => {
     case SEND_API:
       return {
         ...state,
-        apiStatus: 'success',
+        apiStatus: "success"
       };
     case SEND_API_FAILURE:
-    return {
+      return {
+        ...state,
+        apiStatus: "failure",
+        apiError: action.payload
+      };
+    case RECEIVE_API:
+      return {
       ...state,
-      apiStatus: 'failure',
-      apiError: action.payload,
+      results: action.payload.results,
+    //   ltvr: {
+    //     // array of objects --> words
+    //     words: action.payload[0].words,
+      // },
     };
     default:
       return state;

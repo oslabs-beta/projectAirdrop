@@ -23,10 +23,40 @@ export const requestAPI = () => ({
   type: types.CALL_API
 });
 
-export const receiveAPI = json => ({
-  type: types.RECEIVE_API,
-  payload: json
-});
+// export const receiveAPI = json => ({
+//   type: types.RECEIVE_API,
+//   payload: json
+// });
+
+export const receiveAPI = json => {
+  const words = json[6].words;
+  const wm = json[1].images.reduce((a,b) => {
+    a.push(b.questions[0].choices[0].correct_choice);
+    return a;
+  }, []);
+  const ir = json[0].images.reduce((a,b) => {
+    a.push(b.questions[0].choices[0].correct_choice);
+    return a;
+  }, []);
+
+  const results = {
+    words,
+    wm: {
+      correct: wm,
+    },
+    ir : {
+      correct: ir,
+    }
+  };
+
+  return {
+    type: types.RECEIVE_API,
+    payload: {
+      test: json,
+      results,
+   }
+  }
+};
 
 export const receiveFailure = err => ({
   type: types.API_FAILURE,
@@ -38,17 +68,19 @@ function isValid(res) {
 }
 
 export const fetchTest = () => dispatch => {
-  console.log("fetch test");
   dispatch(requestAPI);
 
   return fetch("/api/test")
     .then(res => res.json())
     .then(res => {
+      console.log('TESTING FETCH TEST RESPONSE', res)
       if (!isValid(res)) throw new Error("something went wrong");
-      console.log(res);
       return dispatch(receiveAPI(res));
     })
-    .catch(err => dispatch(receiveFailure(err)));
+    .catch(err => {
+      console.log('TESTING FETCH TEST CATCH ERROR');
+      dispatch(receiveFailure(err))
+    });
 };
 
 export const handleChange = event => ({
@@ -151,3 +183,74 @@ export const receiveAID = (aid) => ({
   type: types.RECEIVE_AID,
   payload: aid
 });
+
+
+// export const questionnaireResponses = (data) => ({
+//   type: types.QUESTIONNAIRE_RESPONSES,
+//   payload: data,
+// });
+
+export const questionnaireResponses = data => {
+  console.log('testing arrival', data)
+  return {
+    type: types.SEND_QUESTIONNAIRE_RESPONSES,
+    payload: data,
+  }
+};
+
+// export const vpsResponses = data => ({
+//   type: types.SEND_VPS_RESPONSES,
+//   payload: data,
+// })
+
+export const vpsResponses = data => {
+  console.log('testing arrival', data);
+  return {
+    type: types.SEND_VPS_RESPONSES,
+    payload: data,
+  }
+};
+
+// export const ltvrResponses = data => ({
+//   type: types.SEND_LTVR_RESPONSES,
+//   payload: data,
+// })
+
+export const ltvrResponses = data => {
+  console.log('testing arrival', data);
+  return {
+    type: types.SEND_LTVR_RESPONSES,
+    payload: data,
+  }
+};
+
+// export const wmResponses = data => ({
+//   type: types.SEND_WM_RESPONSES,
+//   payload: data,
+// });
+
+export const wmResponses = data => {
+  console.log('testing arrival', data);
+  return {
+    type: types.SEND_WM_RESPONSES,
+    payload: data,
+  }
+};
+
+// export const IRResponses = data => ({
+//   type: types.SEND_IR_RESPONSES,
+//   payload: data,
+// });
+
+export const irResponses = data => {
+  console.log('testing arrival', data);
+  return {
+    type: types.SEND_IR_RESPONSES,
+    payload: data,
+  }
+};
+
+// export const loadAnswers = data => ({
+//   type: types.LOAD_ANSWERS,
+//   payload: data,
+// });

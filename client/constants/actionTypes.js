@@ -41,7 +41,6 @@ export const SEND_API_FAILURE = 'SEND_API_FAILURE';
 
 export const RECEIVE_AID = 'RECEIVE_AID';
 
-
 //Auth Actions
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
@@ -49,3 +48,10 @@ export const SIGN_UP = 'SIGN_UP';
 export const IS_ADMIN = 'IS_ADMIN';
 export const LOG_IN = 'LOG_IN';
 export const UPDATE_LOGIN = 'UPDATE_LOGIN';
+
+export const SEND_QUESTIONNAIRE_RESPONSES = 'SEND_QUESTIONNAIRE_RESPONSES';
+export const SEND_VPS_RESPONSES = 'SEND_VPS_RESPONSES';
+export const SEND_LTVR_RESPONSES = 'SEND_LTVR_RESPONSES';
+export const SEND_WM_RESPONSES = 'SEND_WM_RESPONSES';
+export const SEND_IR_RESPONSES = 'SEND_IR_RESPONSES';
+export const LOAD_ANSWERS = 'LOAD_ANSWERS';

@@ -5,8 +5,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import Header from './../components/Header.jsx';
 import Authentication from './../components/Authentication.jsx';
-import MainDisplay from "./MainDisplay.jsx"
-import UserDemographics from "./UserDemographics.jsx"
+import Main from "./Main.jsx"
+import UserDemographics from "./Demographics.jsx"
 import Login from './Login.jsx';
 
 const mapStateToProps = store => ({
