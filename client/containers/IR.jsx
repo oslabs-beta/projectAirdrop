@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = store => ({
   apiStatus: store.answers.apiStatus,
   apiError: store.answers.apiError,
+  aid: store.answers.aid,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,6 +34,8 @@ class IR extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
+    this.stateReset = this.stateReset.bind(this);    
+
   }
 
   componentWillUnmount() {
@@ -44,7 +47,7 @@ class IR extends Component {
     }
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
@@ -52,6 +55,7 @@ class IR extends Component {
       a.push(answer);
       return a
     }, []);
+    console.log('assessment', assessment);
 
     this.props.postAnswers(this.state.sectionId, assessment);
 
@@ -102,6 +106,12 @@ class IR extends Component {
     })
   }
 
+  stateReset() {
+    this.setState({
+      answerTimeArray: [],
+    })
+  }
+
   startPractice() {
       this.props.changeSlide();
       return new Promise((resolve, reject) => {
@@ -135,6 +145,7 @@ class IR extends Component {
           setTimeout(() => {
             this.optionReset();
             this.props.changeSlide();
+            this.stateReset();
             resolve()
           }, this.state.timeToNext * 2)
         })
