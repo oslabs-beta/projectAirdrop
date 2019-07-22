@@ -7,7 +7,7 @@ const SectionHeader = props => {
       style={{
         position: 'absolute',
         left: '50%',
-        top: '30%',
+        top: '10%',
         transform: 'translate(-50%, -50%)'
       }}
     >

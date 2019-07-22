@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
-import Button from '@material-ui/core/Button';
+import UserStartBTN from './UserStartBTN';
 import SectionInstructions from './SectionInstructions';
 import LongTermVerbalRecallDisplayWordGrid from './LongTermVerbalRecallDisplayWordGrid';
 import SectionHeader from './SectionHeader';
+import SectionEndScreen from "./SectionEndScreen";
 
 const LTVRDCMPT = (props) => {
   const formatWords = [];
@@ -16,20 +17,10 @@ const LTVRDCMPT = (props) => {
   }
 
   if(!props.testStarted) {
-    currentBTN = <Button
-      onClick={props.displayWords}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Start Test
-    </Button>
+    currentBTN = <UserStartBTN action={props.displayWords} buttonText={'Start Test'}/>;
     instructions = props.instructions[0].instruction_text;
   }
-  if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
+  if(props.testDone) currentBTN = <SectionEndScreen changeSection={props.changeSection}/>;
   return (
   <div>
     <SectionHeader sectionName={props.sectionName}/>

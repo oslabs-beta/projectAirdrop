@@ -3,6 +3,8 @@ import UserStartBTN from './UserStartBTN.jsx';
 import UserNextBtn from "./UserNextBTN";
 import Button from '@material-ui/core/Button';
 import SectionInstructions from './SectionInstructions';
+import SectionHeader from "./SectionHeader";
+import SectionEndScreen from "./SectionEndScreen";
 
 const VisualProcessingSpeed = (props) => {
   let currentEl;
@@ -25,29 +27,9 @@ const VisualProcessingSpeed = (props) => {
   }
   if(props.timerRunning) currentEl = props.vpsAnswers[0][props.currentSeriesIndex][props.currentElementIndex];
   if(!(props.displayingAnswers || props.timerRunning)) {
-    if(!props.practiceDone) currentBTN = <Button
-      onClick={props.startPractice}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Start
-    </Button>
-    else currentBTN = <Button
-      onClick={props.startNewSeries}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Start
-    </Button>
-    if(props.currentSeriesIndex === 6) currentBTN = <UserNextBtn changeSection={props.changeSection} />
+    if(!props.practiceDone) currentBTN = <UserStartBTN action={props.startPractice} buttonText={'Start Practice'}/>;
+    else currentBTN = <UserStartBTN action={props.startNewSeries} buttonText={'Start Test'}/>;
+    if(props.currentSeriesIndex === 6) currentBTN = <SectionEndScreen changeSection={props.changeSection}/>
   }
   if(props.displayingAnswers){
     for(let j = 0; j < 4; j++){
@@ -88,8 +70,8 @@ const VisualProcessingSpeed = (props) => {
   }
   return (
   <div>
+    <SectionHeader sectionName={props.sectionName}/>
     <SectionInstructions instructions={currentInstructions}/>
-    {/*{currentInstructions}*/}
     {currentEl}
     <div className="VPSchoices">{choiceDisplay}</div>
     {currentBTN}

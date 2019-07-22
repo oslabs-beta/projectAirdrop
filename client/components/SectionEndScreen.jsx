@@ -7,16 +7,15 @@ const SectionEndScreen = (props) => (
       style={{
         position: 'absolute',
         left: '50%',
-        top: '55%',
+        top: '26%',
         transform: 'translate(-50%, -50%)'
       }}
     >
-      {/*Congratulations! Please click next to continue to the next section.*/}
+      Congratulations! Please click next to continue to the next section.
     </div>
     <UserNextBTN
       changeSection={props.changeSection}
     />
-
   </div>
 );
 
