@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
 	postVPS: data => dispatch(actions.vpsResponses(data)),
 });
 
-class VisualProcessingSpeed extends Component {
+class VPS extends Component {
 	constructor(props){
     super(props);
     this.state = {
@@ -164,4 +164,4 @@ class VisualProcessingSpeed extends Component {
 		)
 	}
 }
-export default connect(null, mapDispatchToProps)(VisualProcessingSpeed)
+export default connect(null, mapDispatchToProps)(VPS)

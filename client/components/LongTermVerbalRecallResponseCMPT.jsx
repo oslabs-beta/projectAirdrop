@@ -1,6 +1,6 @@
 import React from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
-import TestInstructions from "./TestInstructions";
+import SectionInstructions from "./SectionInstructions";
 import Button from '@material-ui/core/Button';
 
 const LTVRR = (props) => {
@@ -48,7 +48,7 @@ const LTVRR = (props) => {
     <div>
     {timeLeft}
     {/*{instructions}*/}
-    <TestInstructions instructions={instructions}/>
+    <SectionInstructions instructions={instructions}/>
     {fields}
     {currentBTN}
   </div>

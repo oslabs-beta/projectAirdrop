@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   //post demo data
 });
 
-class UserDemographics extends Component {
+class Demographics extends Component {
   constructor(props) {
     super(props)
     this.submit = this.submit.bind(this);
@@ -59,5 +59,5 @@ class UserDemographics extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserDemographics);
+export default connect(mapStateToProps, mapDispatchToProps)(Demographics);
 

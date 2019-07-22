@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import QuestionnaireCMPT from './../components/QuestionnairesCMPT';
 import * as actions from "../actions/actions";
 import { connect } from 'react-redux';
+import SectionInstructions from '../components/SectionInstructions';
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -9,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class QuestionnaireCont extends Component {
+class Questionnaires extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,7 +100,7 @@ class QuestionnaireCont extends Component {
     console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
     return (
       <div>
-        {this.state.instructions.instruction_text}
+        <SectionInstructions instructions={this.state.instructions.instruction_text}/>
 
         {this.state.CNAAQ &&
         <QuestionnaireCMPT
@@ -121,7 +122,7 @@ class QuestionnaireCont extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(QuestionnaireCont);
+export default connect(null, mapDispatchToProps)(Questionnaires);
 
 //  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
 //         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}

@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function WordGrid(props) {
+export default function LongTermVerbalRecallDisplayWordGrid(props) {
   const classes = useStyles();
 
   const wordArr = [];

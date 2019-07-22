@@ -1,21 +1,21 @@
 import React from 'react';
-import WMQuestionDisplay from './WMQuestionDisplay';
+import WorkingMemoryQuestionDisplay from './WorkingMemoryQuestionDisplay';
 import SectionEndScreen from './SectionEndScreen';
 import NextCMPT from './NextCMPT';
 import PracticeImageCMPT from './PracticeImageCMPT';
 import Button from '@material-ui/core/Button';
-import TestInstructions from './TestInstructions';
+import SectionInstructions from './SectionInstructions';
 
 const WorkingMemoryCMPT = (props) => {
 
   const WM_content = [
-    <TestInstructions instructions={props.WM.instructions[0].instruction_text}/>,
+    <SectionInstructions instructions={props.WM.instructions[0].instruction_text}/>,
 
     <img src={props.WM.practice[2].image_url}/>,
 
     <img src={props.WM.practice[1].image_url}/>,
 
-    <WMQuestionDisplay
+    <WorkingMemoryQuestionDisplay
       question={props.WM.practice[0].question_text}
       choices={
         [props.WM.practice[0]['choice1'],
@@ -40,13 +40,13 @@ const WorkingMemoryCMPT = (props) => {
       changeSlide={props.changeSlide}
       />,
 
-    <TestInstructions instructions={props.WM.instructions[1].instruction_text}/>,
+    <SectionInstructions instructions={props.WM.instructions[1].instruction_text}/>,
 
     <img src={props.WM.images[0].image_url}/> ,
 
     <img src={props.WM.images[1].image_url}/> ,
 
-    <WMQuestionDisplay
+    <WorkingMemoryQuestionDisplay
       question={props.WM.images[0].questions[0].question_text}
       qid={props.WM.images[0].questions[0].id}
       choices={Object.values(props.WM.images[0].questions[0].choices[0])}
@@ -57,7 +57,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <img src={props.WM.images[2].image_url}/>,
 
-    <WMQuestionDisplay
+    <WorkingMemoryQuestionDisplay
       question={props.WM.images[1].questions[0].question_text}
       qid={props.WM.images[1].questions[0].id}
       choices={Object.values(props.WM.images[1].questions[0].choices[0])}
@@ -68,7 +68,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <img src={props.WM.images[3].image_url}/>,
 
-    <WMQuestionDisplay
+    <WorkingMemoryQuestionDisplay
       question={props.WM.images[2].questions[0].question_text}
       qid={props.WM.images[2].questions[0].id}
       choices={Object.values(props.WM.images[2].questions[0].choices[0])}
@@ -79,7 +79,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <img src={props.WM.images[4].image_url}/>,
 
-    <WMQuestionDisplay
+    <WorkingMemoryQuestionDisplay
       question={props.WM.images[3].questions[0].question_text}
       qid={props.WM.images[3].questions[0].id}
       choices={Object.values(props.WM.images[3].questions[0].choices[0])}
@@ -90,7 +90,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <img src={props.WM.images[5].image_url}/>,
 
-    <WMQuestionDisplay
+    <WorkingMemoryQuestionDisplay
       question={props.WM.images[4].questions[0].question_text}
       qid={props.WM.images[4].questions[0].id}
       choices={Object.values(props.WM.images[4].questions[0].choices[0])}

@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
-import ImageRecognitionCMPT from '../components/ImageRecognitionCMPT.jsx'
-import './../styles.css'
-import * as actions from '../actions/actions';
+import WorkingMemoryCMPT from '../components/WorkingMemoryCMPT.jsx'
 import { connect } from 'react-redux';
-
-const mapStateToProps = store => ({
-  apiStatus: store.answers.apiStatus,
-  apiError: store.answers.apiError,
-});
+import * as actions from '../actions/actions';
+import ImageRecognitionCMPT from "../components/ImageRecognitionCMPT";
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
-  postResponses: data => dispatch(actions.irResponses(data)),
+  postResponses: data => dispatch(actions.wmResponses(data)),
 });
 
-
-class ImageRecognition extends Component {
+class WM extends Component {
   constructor(props) {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 1000,
+      timeToNext: 3000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'IR',
-      answerTimeArray: [],
+      sectionId: 'WM',
+      answerTimeArray: []
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -36,11 +30,11 @@ class ImageRecognition extends Component {
   }
 
   componentWillUnmount() {
-    let subtractTime = this.state.timeToNext;
+    let subtractTime = this.state.timeToNext * 2;
     let answerTimeArrayCopy = [...this.state.answerTimeArray];
     for (let i = 0; i < this.state.answerTimeArray.length; i += 1) {
       answerTimeArrayCopy[i] -= subtractTime;
-      subtractTime += (this.state.timeToNext * 3)
+      subtractTime += 8000
     }
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
@@ -53,29 +47,13 @@ class ImageRecognition extends Component {
       return a
     }, []);
 
-    this.props.postAnswers(this.state.sectionId, assessment);
+    this.props.postAnswers(this.state.sectionId, assessment)
 
-    const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+    const wmResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
       a.push(this.state.sectionData[b]);
       return a;
     }, []);
-    this.props.postResponses(irResponses);
-  }
-
-  onChangeHandler(e, qid) {
-    this.setState({
-      currentChoice: e.target.value,
-      sectionData: {
-        ...this.state.sectionData,
-        [qid]: e.target.value
-      }
-    })
-  }
-
-  onPracticeHandler(e) {
-    this.setState({
-      currentChoice: e.target.value
-    })
+    this.props.postResponses(wmResponses);
   }
 
   startTimer() {
@@ -96,15 +74,32 @@ class ImageRecognition extends Component {
     })
   }
 
+  onChangeHandler(e, qid) {
+    this.setState({
+      currentChoice: e.target.value,
+      sectionData: {
+        ...this.state.sectionData,
+        [qid]: e.target.value
+      }
+    })
+  }
+
+  onPracticeHandler(e) {
+    this.setState({
+      currentChoice: e.target.value
+    })
+  }
+
   optionReset () {
+    console.log('option reset')
     this.setState({
       currentChoice: '',
     })
   }
 
   startPractice() {
-      this.props.changeSlide();
-      return new Promise((resolve, reject) => {
+    this.props.changeSlide();
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
           this.optionReset();
           this.props.changeSlide();
@@ -112,15 +107,6 @@ class ImageRecognition extends Component {
         }, this.state.timeToNext)
       }
     )
-      .then(() => {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            this.optionReset();
-            this.props.changeSlide();
-            resolve()
-          }, this.state.timeToNext * 2)
-        })
-      })
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -136,7 +122,7 @@ class ImageRecognition extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext * 2)
+          }, 5000)
         })
       })
   }
@@ -158,7 +144,16 @@ class ImageRecognition extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext * 2)
+          }, this.state.timeToNext)
+        })
+      })
+      .then(() => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            this.optionReset();
+            this.props.changeSlide();
+            resolve()
+          }, 5000)
         })
       })
       .then(() => {
@@ -176,7 +171,7 @@ class ImageRecognition extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext * 2)
+          }, 5000)
         })
       })
       .then(() => {
@@ -194,7 +189,7 @@ class ImageRecognition extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext * 2)
+          }, 5000)
         })
       })
       .then(() => {
@@ -212,7 +207,7 @@ class ImageRecognition extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext * 2)
+          }, 5000)
         })
       })
       .then(() => {
@@ -231,14 +226,15 @@ class ImageRecognition extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext * 2)
+          }, 5000)
         })
       })
   }
 
   render() {
-    console.log('IR TIME ARRAY', this.state.answerTimeArray);
-    console.log('IR SECTION DATA', this.state.sectionData);
+    // console.log('WM TIME ARRAY', this.state.answerTimeArray);
+    // console.log('WM SECTION DATA', this.state.sectionData);
+    console.log('currentchoice', this.state.currentChoice);
     return (
       <div>
         <h1
@@ -249,10 +245,10 @@ class ImageRecognition extends Component {
             transform: 'translate(-50%, -50%)'
           }}
         >
-          Image Recognition
+          Working Memory
         </h1>
-        <ImageRecognitionCMPT
-          IR={this.props.IR}
+        <WorkingMemoryCMPT
+          WM={this.props.WM}
           changeSlide={this.props.changeSlide}
           currentSlide={this.props.currentSlide}
           changeSection={this.props.changeSection}
@@ -268,4 +264,4 @@ class ImageRecognition extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageRecognition)
+export default connect(null, mapDispatchToProps)(WM)

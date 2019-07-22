@@ -2,7 +2,7 @@ import React from 'react';
 import UserStartBTN from './UserStartBTN.jsx';
 import UserNextBtn from "./UserNextBTN";
 import Button from '@material-ui/core/Button';
-import TestInstructions from './TestInstructions';
+import SectionInstructions from './SectionInstructions';
 
 const VisualProcessingSpeed = (props) => {
   let currentEl;
@@ -88,7 +88,7 @@ const VisualProcessingSpeed = (props) => {
   }
   return (
   <div>
-    <TestInstructions instructions={currentInstructions}/>
+    <SectionInstructions instructions={currentInstructions}/>
     {/*{currentInstructions}*/}
     {currentEl}
     <div className="VPSchoices">{choiceDisplay}</div>

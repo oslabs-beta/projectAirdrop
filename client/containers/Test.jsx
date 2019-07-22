@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import UserDemographics from './UserDemographics.jsx';
-import VisualProcessingSpeed from './VisualProcessingSpeed.jsx';
-import WorkingMemory from './WorkingMemory.jsx';
-import ImageRecognition from './ImageRecognition.jsx';
+import UserDemographics from './Demographics.jsx';
+import VisualProcessingSpeed from './VPS.jsx';
+import WorkingMemory from './WM.jsx';
+import ImageRecognition from './IR.jsx';
 import LTVRD from './LTVRD';
-import QuestionnaireCont from './QuestionnaireCont.jsx';
+import QuestionnaireCont from './Questionnaires.jsx';
 import LTVRR from './LTVRR';
 import Instructions from '../components/Instructions.jsx';
 

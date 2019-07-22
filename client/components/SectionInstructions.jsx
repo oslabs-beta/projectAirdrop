@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 
-const TestInstructions = (props) => (
+const SectionInstructions = (props) => (
   <div
     style={{
       position: 'absolute',
@@ -14,4 +14,4 @@ const TestInstructions = (props) => (
   </div>
 );
 
-export default TestInstructions;
+export default SectionInstructions;

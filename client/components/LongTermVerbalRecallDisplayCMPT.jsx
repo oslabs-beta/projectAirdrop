@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
 import Button from '@material-ui/core/Button';
-import TestInstructions from './TestInstructions';
-import WordGrid from './WordGrid';
+import SectionInstructions from './SectionInstructions';
+import LongTermVerbalRecallDisplayWordGrid from './LongTermVerbalRecallDisplayWordGrid';
 import SectionHeader from './SectionHeader';
 
 const LTVRDCMPT = (props) => {
@@ -33,9 +33,9 @@ const LTVRDCMPT = (props) => {
   return (
   <div>
     <SectionHeader sectionName={props.sectionName}/>
-      <TestInstructions instructions={instructions}/>
+      <SectionInstructions instructions={instructions}/>
         <div>
-          {props.testStarted && !props.testDone && <WordGrid words={formatWords}/>}
+          {props.testStarted && !props.testDone && <LongTermVerbalRecallDisplayWordGrid words={formatWords}/>}
         </div>
     {currentBTN}
   </div>

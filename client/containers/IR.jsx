@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-import WorkingMemoryCMPT from '../components/WorkingMemoryCMPT.jsx'
-import { connect } from 'react-redux';
+import ImageRecognitionCMPT from '../components/ImageRecognitionCMPT.jsx'
+import './../styles.css'
 import * as actions from '../actions/actions';
-import ImageRecognitionCMPT from "../components/ImageRecognitionCMPT";
+import { connect } from 'react-redux';
+
+const mapStateToProps = store => ({
+  apiStatus: store.answers.apiStatus,
+  apiError: store.answers.apiError,
+});
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
-  postResponses: data => dispatch(actions.wmResponses(data)),
+  postResponses: data => dispatch(actions.irResponses(data)),
 });
 
-class WorkingMemory extends Component {
+
+class IR extends Component {
   constructor(props) {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 3000,
+      timeToNext: 1000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'WM',
-      answerTimeArray: []
+      sectionId: 'IR',
+      answerTimeArray: [],
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -30,11 +36,11 @@ class WorkingMemory extends Component {
   }
 
   componentWillUnmount() {
-    let subtractTime = this.state.timeToNext * 2;
+    let subtractTime = this.state.timeToNext;
     let answerTimeArrayCopy = [...this.state.answerTimeArray];
     for (let i = 0; i < this.state.answerTimeArray.length; i += 1) {
       answerTimeArrayCopy[i] -= subtractTime;
-      subtractTime += 8000
+      subtractTime += (this.state.timeToNext * 3)
     }
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
@@ -47,13 +53,29 @@ class WorkingMemory extends Component {
       return a
     }, []);
 
-    this.props.postAnswers(this.state.sectionId, assessment)
+    this.props.postAnswers(this.state.sectionId, assessment);
 
-    const wmResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+    const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
       a.push(this.state.sectionData[b]);
       return a;
     }, []);
-    this.props.postResponses(wmResponses);
+    this.props.postResponses(irResponses);
+  }
+
+  onChangeHandler(e, qid) {
+    this.setState({
+      currentChoice: e.target.value,
+      sectionData: {
+        ...this.state.sectionData,
+        [qid]: e.target.value
+      }
+    })
+  }
+
+  onPracticeHandler(e) {
+    this.setState({
+      currentChoice: e.target.value
+    })
   }
 
   startTimer() {
@@ -74,32 +96,15 @@ class WorkingMemory extends Component {
     })
   }
 
-  onChangeHandler(e, qid) {
-    this.setState({
-      currentChoice: e.target.value,
-      sectionData: {
-        ...this.state.sectionData,
-        [qid]: e.target.value
-      }
-    })
-  }
-
-  onPracticeHandler(e) {
-    this.setState({
-      currentChoice: e.target.value
-    })
-  }
-
   optionReset () {
-    console.log('option reset')
     this.setState({
       currentChoice: '',
     })
   }
 
   startPractice() {
-    this.props.changeSlide();
-    return new Promise((resolve, reject) => {
+      this.props.changeSlide();
+      return new Promise((resolve, reject) => {
         setTimeout(() => {
           this.optionReset();
           this.props.changeSlide();
@@ -107,6 +112,15 @@ class WorkingMemory extends Component {
         }, this.state.timeToNext)
       }
     )
+      .then(() => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            this.optionReset();
+            this.props.changeSlide();
+            resolve()
+          }, this.state.timeToNext * 2)
+        })
+      })
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -122,7 +136,7 @@ class WorkingMemory extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, this.state.timeToNext * 2)
         })
       })
   }
@@ -144,16 +158,7 @@ class WorkingMemory extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, this.state.timeToNext)
-        })
-      })
-      .then(() => {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            this.optionReset();
-            this.props.changeSlide();
-            resolve()
-          }, 5000)
+          }, this.state.timeToNext * 2)
         })
       })
       .then(() => {
@@ -171,7 +176,7 @@ class WorkingMemory extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, this.state.timeToNext * 2)
         })
       })
       .then(() => {
@@ -189,7 +194,7 @@ class WorkingMemory extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, this.state.timeToNext * 2)
         })
       })
       .then(() => {
@@ -207,7 +212,7 @@ class WorkingMemory extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, this.state.timeToNext * 2)
         })
       })
       .then(() => {
@@ -226,15 +231,14 @@ class WorkingMemory extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, this.state.timeToNext * 2)
         })
       })
   }
 
   render() {
-    // console.log('WM TIME ARRAY', this.state.answerTimeArray);
-    // console.log('WM SECTION DATA', this.state.sectionData);
-    console.log('currentchoice', this.state.currentChoice);
+    console.log('IR TIME ARRAY', this.state.answerTimeArray);
+    console.log('IR SECTION DATA', this.state.sectionData);
     return (
       <div>
         <h1
@@ -245,10 +249,10 @@ class WorkingMemory extends Component {
             transform: 'translate(-50%, -50%)'
           }}
         >
-          Working Memory
+          Image Recognition
         </h1>
-        <WorkingMemoryCMPT
-          WM={this.props.WM}
+        <ImageRecognitionCMPT
+          IR={this.props.IR}
           changeSlide={this.props.changeSlide}
           currentSlide={this.props.currentSlide}
           changeSection={this.props.changeSection}
@@ -264,4 +268,4 @@ class WorkingMemory extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(WorkingMemory)
+export default connect(mapStateToProps, mapDispatchToProps)(IR)
