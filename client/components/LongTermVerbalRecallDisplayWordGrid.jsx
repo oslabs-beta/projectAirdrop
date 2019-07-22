@@ -27,36 +27,16 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
   const wordArr = [];
   for (let i = 0; i < props.words.length; i += 1) {
     wordArr.push(
-      <GridListTile
-        key={i}
-        cols={1}
-      >
-        <Paper
-          square={false}
-          className={classes.paper}
-        >
+      <GridListTile key={i} cols={1}>
+        <Paper square={false} className={classes.paper}>
           {props.words[i]}
         </Paper>
       </GridListTile>
     )
   }
   return (
-    <div
-      className={classes.root}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '30%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      <GridList
-        container
-        spacing={1}
-        cols={5}
-        cellHeight={50}
-        className={classes.gridList}
-      >
+    <div>
+      <GridList spacing={1} cols={5} cellHeight={50} className={classes.gridList}>
         {wordArr}
       </GridList>
     </div>

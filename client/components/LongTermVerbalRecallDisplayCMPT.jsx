@@ -1,12 +1,23 @@
 import React from 'react';
-import UserNextBTN from './UserNextBTN.jsx';
 import UserStartBTN from './UserStartBTN';
 import SectionInstructions from './SectionInstructions';
 import LongTermVerbalRecallDisplayWordGrid from './LongTermVerbalRecallDisplayWordGrid';
 import SectionHeader from './SectionHeader';
 import SectionEndScreen from "./SectionEndScreen";
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'space-between'
+  }
+}));
 
 const LTVRDCMPT = (props) => {
+  const classes = useStyles();
   const formatWords = [];
   let currentBTN;
   let instructions;
@@ -22,14 +33,14 @@ const LTVRDCMPT = (props) => {
   }
   if(props.testDone) currentBTN = <SectionEndScreen changeSection={props.changeSection}/>;
   return (
-  <div>
-    <SectionHeader sectionName={props.sectionName}/>
-      <SectionInstructions instructions={instructions}/>
-        <div>
-          {props.testStarted && !props.testDone && <LongTermVerbalRecallDisplayWordGrid words={formatWords}/>}
-        </div>
-    {currentBTN}
-  </div>
+    <div>
+      <div className={classes.root}>
+        <SectionHeader sectionName={props.sectionName}/>
+        <SectionInstructions instructions={instructions}/>
+        {props.testStarted && !props.testDone && <LongTermVerbalRecallDisplayWordGrid words={formatWords}/>}
+        {currentBTN}
+      </div>
+    </div>
   )
 };
 export default LTVRDCMPT;

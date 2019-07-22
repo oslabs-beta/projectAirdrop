@@ -1,18 +1,26 @@
 import React from 'react';
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center'
+  }
+}));
 
 const SectionHeader = props => {
+  const classes = useStyles();
 
   return (
-    <h1
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '10%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      {props.sectionName}
-    </h1>
+    <div >
+      <h1 className={classes.root}>
+        {props.sectionName}
+      </h1>
+    </div>
   )
 };
 

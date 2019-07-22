@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import UserDemographicsCMPT from '../components/UserDemographicsCMPT';
+import SectionHeader from "../components/SectionHeader";
 
 const mapStateToProps = store => ({
   clicks: store.test.clicks,
@@ -41,10 +42,10 @@ class Demographics extends Component {
   }
 
   render () {
-    // console.log('userData', this.props.userData)
+    console.log('DEMO SECTION', this.props.test)
     return (
       <div>
-        <h1>Demo Information</h1>
+        <SectionHeader sectionName={this.props.test[7].section_display_name}/>
         <UserDemographicsCMPT
         userData={this.props.userData}
         dates={this.props.dates}

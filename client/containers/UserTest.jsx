@@ -10,6 +10,8 @@ import QuestionnaireCont from './Questionnaires.jsx';
 import LTVRR from './LTVRR';
 import Introduction from '../components/IntroductionCMPT';
 import Instructions from '../components/Instructions.jsx';
+import Container from '@material-ui/core/Container';
+
 
 const mapStateToProps = store => ({
   test: store.test.test,
@@ -55,9 +57,11 @@ class MainTestDisplay extends Component {
     // }
 
     return (
-      <div>
-         {this.props.test.length > 0 && compArray[this.props.currentSection]}
-      </div>
+      <Container maxWidth={'sm'}>
+        <div>
+          {this.props.test.length > 0 && compArray[this.props.currentSection]}
+        </div>
+      </Container>
     );
   }
 }
