@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import SectionHeader from "../components/SectionHeader";
 
+const mapStateToProps = store => ({
+	aid: store.answers.aid,
+});
+
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
   postResponses: data => dispatch(actions.wmResponses(data)),
@@ -14,7 +18,7 @@ class WM extends Component {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 3000,
+      timeToNext: 1000,
       currentChoice: '',
       sectionData: {},
       sectionId: 'WM',
@@ -27,6 +31,8 @@ class WM extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
+    this.stateReset = this.stateReset.bind(this);
+
   }
 
   componentWillUnmount() {
@@ -38,7 +44,7 @@ class WM extends Component {
     }
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
-        'aid': 1,
+        'aid': this.props.aid,
         'qid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
@@ -46,6 +52,7 @@ class WM extends Component {
       a.push(answer);
       return a
     }, []);
+    console.log('assessment', assessment);
 
     this.props.postAnswers(this.state.sectionId, assessment)
 
@@ -97,6 +104,12 @@ class WM extends Component {
     })
   }
 
+  stateReset() {
+    this.setState({
+      answerTimeArray: [],
+    })
+  }
+
   startPractice() {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
@@ -121,6 +134,7 @@ class WM extends Component {
           setTimeout(() => {
             this.optionReset();
             this.props.changeSlide();
+            this.stateReset();
             resolve()
           }, 10000)
         })
@@ -255,4 +269,4 @@ class WM extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(WM)
+export default connect(mapStateToProps, mapDispatchToProps)(WorkingMemory)

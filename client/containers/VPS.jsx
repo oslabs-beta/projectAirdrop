@@ -5,6 +5,12 @@ import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.j
 import Button from "@material-ui/core/Button";
 import LTVRDCMPT from "../components/LongTermVerbalRecallDisplayCMPT";
 
+
+const mapStateToProps = store => ({
+	aid: store.answers.aid,
+});
+
+
 const mapDispatchToProps = dispatch => ({
 	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
 	postVPS: data => dispatch(actions.vpsResponses(data)),
@@ -39,12 +45,12 @@ class VPS extends Component {
 		console.log('VPS UNMOUNT ANSWER ARRAY ', this.state.answerArray);
 		const vpsAnswers = this.state.answerArray.reduce((a, b, i) => {
 			const response = {
-				'aid': 1,
+				'aid': this.props.aid,
 				'seriesIndex': i + 1,
 				'userChoice': b.answer,
 				'timeTaken': b.timeToRespond
 			};
-			console.log(response);
+			console.log('testing response', response);
 			a.push(response);
 			return a
 		}, []);
@@ -156,4 +162,5 @@ class VPS extends Component {
 		)
 	}
 }
-export default connect(null, mapDispatchToProps)(VPS)
+
+export default connect(mapStateToProps, mapDispatchToProps)(VisualProcessingSpeed)
