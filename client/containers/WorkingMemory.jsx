@@ -13,12 +13,12 @@ const mapDispatchToProps = dispatch => ({
   postResponses: data => dispatch(actions.wmResponses(data)),
 });
 
-class WorkingMemory extends Component {
+class WM extends Component {
   constructor(props) {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 3000,
+      timeToNext: 1000,
       currentChoice: '',
       sectionData: {},
       sectionId: 'WM',
@@ -51,7 +51,8 @@ class WorkingMemory extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('assessment', assessment)
+    console.log('assessment', assessment);
+
     this.props.postAnswers(this.state.sectionId, assessment)
 
     const wmResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
@@ -105,6 +106,12 @@ class WorkingMemory extends Component {
     console.log('option reset')
     this.setState({
       currentChoice: '',
+    })
+  }
+
+  stateReset() {
+    this.setState({
+      answerTimeArray: [],
     })
   }
 
@@ -265,4 +272,4 @@ class WorkingMemory extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkingMemory)
+export default connect(mapStateToProps, mapDispatchToProps)(WM)

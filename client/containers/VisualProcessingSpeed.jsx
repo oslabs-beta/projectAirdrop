@@ -7,12 +7,13 @@ const mapStateToProps = store => ({
 	aid: store.answers.aid,
 });
 
+
 const mapDispatchToProps = dispatch => ({
 	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
 	postVPS: data => dispatch(actions.vpsResponses(data)),
 });
 
-class VisualProcessingSpeed extends Component {
+class VPS extends Component {
 	constructor(props){
     super(props);
     this.state = {
@@ -92,7 +93,7 @@ class VisualProcessingSpeed extends Component {
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: ++this.state.currentSeriesIndex,
+						currentSeriesIndex: this.state.currentSeriesIndex += 6,
 						timerRunning: false,
 						timeRun: 0
 					})
@@ -157,4 +158,5 @@ class VisualProcessingSpeed extends Component {
 		)
 	}
 }
-export default connect(mapStateToProps, mapDispatchToProps)(VisualProcessingSpeed)
+
+export default connect(mapStateToProps, mapDispatchToProps)(VPS)

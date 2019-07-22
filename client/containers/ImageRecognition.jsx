@@ -111,6 +111,12 @@ class ImageRecognition extends Component {
     })
   }
 
+  stateReset() {
+    this.setState({
+      answerTimeArray: [],
+    })
+  }
+
   startPractice() {
       this.props.changeSlide();
       return new Promise((resolve, reject) => {

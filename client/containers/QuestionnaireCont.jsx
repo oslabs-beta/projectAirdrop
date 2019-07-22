@@ -4,11 +4,9 @@ import * as actions from "../actions/actions";
 import { connect } from 'react-redux';
 import UserSubmitBtn from "../components/UserSubmitBTN";
 
-
 const mapStateToProps = store => ({
 	aid: store.answers.aid,
 });
-
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -16,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class QuestionnaireCont extends Component {
+class Questionnaires extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -155,9 +153,9 @@ class QuestionnaireCont extends Component {
       </div>
     )
   }
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionnaireCont);
+export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires);
 //  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
 //         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}
 //         {/* {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />} */}
