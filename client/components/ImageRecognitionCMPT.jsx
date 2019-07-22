@@ -2,7 +2,7 @@ import React from 'react';
 import IRQuestion from './ImageRecognitionQuestionDisplay';
 import SectionEndScreen from "./SectionEndScreen";
 import NextCMPT from './NextCMPT';
-import PracticeImageCMPT from './PracticeImageCMPT';
+import PracticeImageAnswerDisplay from './PracticeImageAnswerDisplay';
 import Button from '@material-ui/core/Button';
 import SectionInstructions from './SectionInstructions';
 
@@ -37,7 +37,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <NextCMPT changeSlide={props.changeSlide}/>,
 
-      <PracticeImageCMPT
+      <PracticeImageAnswerDisplay
         url={props.IR.practice[0].image_url}
         question={props.IR.practice[0].question_text}
         choices={
@@ -45,7 +45,7 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[0]['choice2']]}
         changeSlide={props.changeSlide}/>,
 
-      <PracticeImageCMPT
+      <PracticeImageAnswerDisplay
         url={props.IR.practice[1].image_url}
         question={props.IR.practice[1].question_text}
         choices={

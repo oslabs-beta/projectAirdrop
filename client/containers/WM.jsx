@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import WorkingMemoryCMPT from '../components/WorkingMemoryCMPT.jsx'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import ImageRecognitionCMPT from "../components/ImageRecognitionCMPT";
+import SectionHeader from "../components/SectionHeader";
 
 const mapDispatchToProps = dispatch => ({
   postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
@@ -122,7 +122,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 10000)
         })
       })
   }
@@ -153,7 +153,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 10000)
         })
       })
       .then(() => {
@@ -171,7 +171,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 10000)
         })
       })
       .then(() => {
@@ -189,7 +189,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 10000)
         })
       })
       .then(() => {
@@ -207,7 +207,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 10000)
         })
       })
       .then(() => {
@@ -226,7 +226,7 @@ class WM extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, 5000)
+          }, 10000)
         })
       })
   }
@@ -237,16 +237,7 @@ class WM extends Component {
     console.log('currentchoice', this.state.currentChoice);
     return (
       <div>
-        <h1
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '30%',
-            transform: 'translate(-50%, -50%)'
-          }}
-        >
-          Working Memory
-        </h1>
+        <SectionHeader sectionName={this.props.WM.section_display_name}/>
         <WorkingMemoryCMPT
           WM={this.props.WM}
           changeSlide={this.props.changeSlide}

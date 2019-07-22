@@ -2,9 +2,9 @@ import React from 'react';
 import WorkingMemoryQuestionDisplay from './WorkingMemoryQuestionDisplay';
 import SectionEndScreen from './SectionEndScreen';
 import NextCMPT from './NextCMPT';
-import PracticeImageCMPT from './PracticeImageCMPT';
-import Button from '@material-ui/core/Button';
+import PracticeImageAnswerDisplay from './PracticeImageAnswerDisplay';
 import SectionInstructions from './SectionInstructions';
+import UserStartBTN from "./UserStartBTN";
 
 const WorkingMemoryCMPT = (props) => {
 
@@ -29,7 +29,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <NextCMPT changeSlide={props.changeSlide}/>,
 
-    <PracticeImageCMPT
+    <PracticeImageAnswerDisplay
       url={props.WM.practice[0].image_url}
       question={props.WM.practice[0].question_text}
       choices={
@@ -105,29 +105,9 @@ const WorkingMemoryCMPT = (props) => {
 
   let currentBTN;
   if (props.currentSlide === 0) {
-    currentBTN = <Button
-      onClick={props.startPractice}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Start Practice
-    </Button>
+    currentBTN = <UserStartBTN action={props.startPractice} buttonText={'Start Practice'}/>
   } else if (props.currentSlide === 6) {
-    currentBTN = <Button
-      onClick={props.startTest}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Start Test
-    </Button>
+    currentBTN = <UserStartBTN action={props.startTest} buttonText={'Start Test'}/>
   }
 
   return (
