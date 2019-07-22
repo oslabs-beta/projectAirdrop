@@ -269,4 +269,4 @@ class WM extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkingMemory)
+export default connect(mapStateToProps, mapDispatchToProps)(WM)

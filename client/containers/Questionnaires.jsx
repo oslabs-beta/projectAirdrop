@@ -126,7 +126,7 @@ class Questionnaires extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionnaireCont);
+export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires);
 //  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
 //         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}
 //         {/* {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />} */}

@@ -163,4 +163,4 @@ class VPS extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VisualProcessingSpeed)
+export default connect(mapStateToProps, mapDispatchToProps)(VPS)
