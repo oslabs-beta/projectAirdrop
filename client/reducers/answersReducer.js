@@ -70,10 +70,6 @@ const answersReducer = (state = initialState, action) => {
       return {
       ...state,
       results: action.payload.results,
-    //   ltvr: {
-    //     // array of objects --> words
-    //     words: action.payload[0].words,
-      // },
     };
     case RECEIVE_API:
       return {

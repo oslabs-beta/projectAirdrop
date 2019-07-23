@@ -17,6 +17,9 @@ const UserResults = props => {
     if(el === '1') return acc + 1;
     return acc;
   })
+  // wmCorrectNumber = props.wm.responses.reduce((acc, el, index) => {
+    
+  // })
   return (
     <div>
       {ltvrCorrectNumber}
