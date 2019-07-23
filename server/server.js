@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // testing route for post requests from front-end to back-end at the end of each section
 app.post('/api/testpostdata', (req, res) => {
   console.log('testing post route', req.body);
-  res.status(200)//.send()
+  res.status(200).send()
 });
 
 //LOGIN AND AUTH

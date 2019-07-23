@@ -18,7 +18,7 @@ class WM extends Component {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 1000,
+      timeToNext: 3000,
       currentChoice: '',
       sectionData: {},
       sectionId: 'WM',
@@ -136,7 +136,7 @@ class WM extends Component {
             this.props.changeSlide();
             this.stateReset();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
   }
@@ -167,7 +167,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -185,7 +185,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -203,7 +203,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -221,7 +221,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -240,7 +240,7 @@ class WM extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, 10000)
+          }, 5000)
         })
       })
   }

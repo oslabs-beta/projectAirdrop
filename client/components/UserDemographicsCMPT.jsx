@@ -122,7 +122,7 @@ const UserDemographicsCMPT = props => {
             {listOfYears}
           </select>
         </label>
-        <UserSubmitBTN action={props.submit}/>
+        <UserSubmitBTN onSubmit={props.submit}/>
       </form>
     </div>
   );

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import LTVRRCMPT from '../components/LongTermVerbalRecallResponseCMPT';
+import SectionHeader from "../components/SectionHeader";
 
 const mapStateToProps = (store) => ({
   words: store.test.test[6].words,
@@ -111,16 +112,7 @@ class LTVRR extends Component {
 	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
 		return (
 			<div>
-        <h1
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '30%',
-            transform: 'translate(-50%, -50%)'
-          }}
-        >
-          Long-Term Verbal Recall
-        </h1>
+        <SectionHeader sectionName={this.props.section.section_display_name}/>
         <LTVRRCMPT
                 timeLeft={this.state.timeLeft}
                 testStarted={this.state.testStarted}
