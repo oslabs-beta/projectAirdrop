@@ -97,7 +97,7 @@ import {
 
 const initialState = {
   userData: {
-    userID: 0,
+    userID: 5,
     firstName: '',
     middleInitial: '',
     lastName: '',

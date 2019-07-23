@@ -143,11 +143,22 @@ import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
+    justifyContent: 'center',
+  },
+  card: {
+    minWidth: 275,
     display: "flex",
-    flexWrap: "wrap"
+    flexDirection: 'column',
+  },
+  container: {
+    // display: "flex",
+    // flexDirection: 'column',
+    // flexWrap: "wrap"
   },
   paper: {
     padding: theme.spacing(2),
@@ -158,19 +169,39 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
-    width: 500
+    // width: 400
+    // width: 300,
   },
-
   formControl: {
-    margin: theme.spacing(3),
-    width: 500
+    // display: 'flex',
+    // marginLeft: theme.spacing(3),
+    // marginRight: theme.spacing(3),
+    // marginTop: theme.spacing(3),
+    // width: 300,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // width: 400
   },
   dense: {
-    marginTop: 19
+    marginTop: 19,
   },
   menu: {
-    width: 200
-  }
+    // width: 200,
+  },
+  button: {
+    margin: theme.spacing(3),
+    // width: 400,
+    // borderPadding: 10,
+    // padding: 400,
+  },
+  labelWidth: {
+    maxWidth: 400,
+    display: "flex",
+    flexDirection: 'column',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(4),
+  },
 }));
 
 const UserDemographicsCMPT = props => {
@@ -198,6 +229,8 @@ const UserDemographicsCMPT = props => {
   const listOfYears = yearsDate.map((item, index) => {
     return <option key={index + 1}>{item}</option>;
   });
+
+
   const classes = useStyles();
   // const inputLabel = React.useRef(null);
   // console.log('testing teting testing', props.userData.)
@@ -215,16 +248,20 @@ const UserDemographicsCMPT = props => {
             onChange={props.handleChange}
           />
         </label> */}
-        <Grid
+        {/* <Grid
           container
           direction="column"
           justify="center"
           alignItems="center"
         >
           <Grid item xs={12}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper}> */}
+            <Card className={classes.card}>
+            <FormControl required className={classes.formControl}>
+
             <TextField
               required
+              variant="outlined"
               id="standard-fname"
               label="First Name:"
               name="firstName"
@@ -235,8 +272,9 @@ const UserDemographicsCMPT = props => {
               error={/[0-9]/.test(props.userData.firstName) || props.userDataErrors.firstName === true}
               helperText={/[0-9]/.test(props.userData.firstName) ? "Numbers are not allowed" : props.userDataErrors.firstName ? 'Insert your First Name' : null}
             />
-            </Paper>
-          </Grid>
+            </FormControl>
+            {/* </Paper>
+          </Grid> */}
           {/* <label>
           Last Name:
           <input
@@ -246,10 +284,13 @@ const UserDemographicsCMPT = props => {
             onChange={props.handleChange}
           />
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>            
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>             */}
+            <FormControl required className={classes.formControl}>
+
             <TextField
               required
+              variant="outlined"
               id="standard-lname"
               label="Last Name:"
               name="lastName"
@@ -260,8 +301,9 @@ const UserDemographicsCMPT = props => {
               error={/[0-9]/.test(props.userData.lastName) || props.userDataErrors.lastName === true}
               helperText={/[0-9]/.test(props.userData.lastName) ? "Numbers are not allowed" : props.userDataErrors.lastName ? 'Insert your Last Name' : null}
             />
-            </Paper>
-          </Grid>
+            </FormControl>
+            {/* </Paper>
+          </Grid> */}
           {/* <label>
           Middle Initial:
           <input
@@ -271,10 +313,14 @@ const UserDemographicsCMPT = props => {
             onChange={props.handleChange}
           />
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>                        
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>                         */}
+            <FormControl required className={classes.formControl}>
+
             <TextField
               required
+              variant="outlined"
+
               id="standard-mi"
               label="Middle Initial:"
               name="middleInitial"
@@ -285,8 +331,9 @@ const UserDemographicsCMPT = props => {
               error={/[0-9]/.test(props.userData.middleInitial) || props.userDataErrors.middleInitial === true}
               helperText={/[0-9]/.test(props.userData.middleInitial) ? "Numbers are not allowed" : props.userDataErrors.middleInitial ? 'Insert your Middle Initial (Only 1 letter)' : null}
             />
-            </Paper>
-          </Grid>
+            </FormControl>
+            {/* </Paper>
+          </Grid> */}
           {/* <label>
           Rank:
           <select
@@ -297,27 +344,34 @@ const UserDemographicsCMPT = props => {
             {dropDownsRank}
           </select>
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>          
-            <FormControl required className={classes.formControl}>
-              <InputLabel htmlFor="rank-native-required">Rank</InputLabel>
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>           */}
+            <FormControl variant="outlined" required className={classes.labelWidth}>
+              <InputLabel 
+              // ref={inputLabel} 
+              htmlFor="outlined-rank-simple"
+              >rank</InputLabel>
               <Select
                 native
+              
+
                 value={props.userData.rank}
                 onChange={props.handleChange}
                 name="rank"
+                
                 inputProps={{
                   id: "rank-native-required"
                 }}
                 error={props.userDataErrors.rank === true}
-                // helperText={props.userDataErrors.firstName ? 'Select your rank' : ' '}
+                className={classes.selectEmpty}
+                // input={<OutlinedInput labelWidth={labelWidth} name="rank" id="outlined-rank-simple" />}
               >
                 {[<option key={0} value="" />, ...dropDownsRank]}
               </Select>
               <FormHelperText>{props.userDataErrors.rank ? 'Select your rank' : null}</FormHelperText>
             </FormControl>
-            </Paper>
-          </Grid>
+            {/* </Paper>
+          </Grid> */}
           {/* <label>
           Years In Service:
           <select
@@ -328,10 +382,12 @@ const UserDemographicsCMPT = props => {
             {years}
           </select>
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>            
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>             */}
             <FormControl required className={classes.formControl}>
-              <InputLabel htmlFor="YearsInService-native-required">
+              <InputLabel 
+              // ref={inputLabel} 
+              htmlFor="YearsInService-native-required">
                 Years In Service
               </InputLabel>
               <Select
@@ -339,6 +395,7 @@ const UserDemographicsCMPT = props => {
                 value={props.userData.yearsInService}
                 onChange={props.handleChange}
                 name="yearsInService"
+                // input={<OutlinedInput labelWidth={labelWidth} name="yearsInService" id="outlined-yearsInService-simple" />}
                 inputProps={{
                   id: "YearsInService-native-required"
                 }}
@@ -349,8 +406,8 @@ const UserDemographicsCMPT = props => {
               </Select>
               <FormHelperText>{props.userDataErrors.yearsInService ? 'Select your years of Service' : null }</FormHelperText>
             </FormControl>
-              </Paper>
-          </Grid>
+              {/* </Paper>
+          </Grid> */}
           {/* <label>
           Years in Special Ops:
           <select
@@ -361,10 +418,12 @@ const UserDemographicsCMPT = props => {
             {yearsSO}
           </select>
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>            
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>             */}
             <FormControl required className={classes.formControl}>
-              <InputLabel htmlFor="YearsInSO-native-required">
+              <InputLabel 
+              // ref={inputLabel} 
+              htmlFor="YearsInSO-native-required">
                 Years In Special Ops
               </InputLabel>
               <Select
@@ -372,6 +431,7 @@ const UserDemographicsCMPT = props => {
                 value={props.userData.yearsInSpecialOps}
                 onChange={props.handleChange}
                 name="yearsInSpecialOps"
+                // input={<OutlinedInput labelWidth={labelWidth} name="yearsInSpecialOps" id="outlined-yearsInSpecialOps-simple" /> }
                 inputProps={{
                   id: "YearsInSO-native-required"
                 }}
@@ -382,8 +442,8 @@ const UserDemographicsCMPT = props => {
               </Select>
               <FormHelperText>{props.userDataErrors.yearsInSpecialOps ? 'Select your years in Special Ops' : null}</FormHelperText>
             </FormControl>
-            </Paper>
-          </Grid>
+            {/* </Paper>
+          </Grid> */}
           {/* <label>
           Occupational Detachment Number:
           <input
@@ -393,22 +453,27 @@ const UserDemographicsCMPT = props => {
             onChange={props.handleChange}
           />
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>            
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>  
+                     */}
+            <FormControl required className={classes.formControl}>
             <TextField
               required
+              variant="outlined"
               id="standard-oda"
-              label="Occupational Detachment Number:"
+              label="ODA:"
               name="ODANumber"
               className={classes.textField}
               value={props.userData.ODANumber}
               onChange={props.handleChange}
+              // input={<OutlinedInput labelWidth={labelWidth} name="ODANumber" id="outlined-ODANumber-simple" /> }
               margin="normal"
               error={/[\D+]/gi.test(props.userData.ODANumber) || props.userDataErrors.ODANumber === true}
               helperText={/[\D+]/gi.test(props.userData.ODANumber) ? 'The ODA Number should be 4 digis' : props.userDataErrors.ODANumber ? 'Insert your ODA Number' : null }
             />
-            </Paper>
-          </Grid>
+            </FormControl>
+            {/* </Paper>
+          </Grid> */}
           {/* <label>
           Military Occupational Specialty:
           <select
@@ -419,10 +484,12 @@ const UserDemographicsCMPT = props => {
             {dropDownsMos}
           </select>
         </label> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>                        
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>                         */}
             <FormControl required className={classes.formControl}>
-              <InputLabel htmlFor="MOS-native-required">
+              <InputLabel 
+              // ref={inputLabel} 
+              htmlFor="MOS-native-required">
                 Military Occupational Specialty
               </InputLabel>
               <Select
@@ -430,6 +497,7 @@ const UserDemographicsCMPT = props => {
                 value={props.userData.MOS}
                 onChange={props.handleChange}
                 name="MOS"
+                // input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
                 inputProps={{
                   id: "MOS-native-required"
                 }}
@@ -439,8 +507,8 @@ const UserDemographicsCMPT = props => {
               </Select>
               <FormHelperText>{props.userDataErrors.yearsInSpecialOps ? 'You must select your Military Occupational Specialty' : null}</FormHelperText>
             </FormControl>
-            </Paper>
-          </Grid>
+            {/* </Paper>
+          </Grid> */}
           {/* </FormControl>
         <label>
           Date of Last Deployment:
@@ -494,10 +562,12 @@ const UserDemographicsCMPT = props => {
 
         <FormHelperText>Required</FormHelperText>
       </FormControl> */}
-          <Grid item xs={12}>
-          <Paper className={classes.paper}>                        
+          {/* <Grid item xs={12}>
+          <Paper className={classes.paper}>                         */}
             <FormControl required className={classes.formControl}>
-              <InputLabel htmlFor="dold-d-native-required">
+              <InputLabel 
+              // ref={inputLabel} 
+              htmlFor="dold-d-native-required">
                 Date Of Last Deployment: Day
               </InputLabel>
 
@@ -507,6 +577,7 @@ const UserDemographicsCMPT = props => {
                 onChange={props.handleChangeTwo}
                 onBlur={props.handleChangeDeploy}
                 name="monthLD"
+                // input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
                 inputProps={{
                   id: "dold-d-native-required"
                 }}
@@ -516,12 +587,14 @@ const UserDemographicsCMPT = props => {
               </Select>
               <FormHelperText>{props.userDataErrors.monthLD  ? 'You must select your month of last deployment' : null}</FormHelperText>
             </FormControl>
-          </Paper>
+          {/* </Paper>
             </Grid>
           <Grid item xs={12}>
-          <Paper className={classes.paper}>                                   
+          <Paper className={classes.paper}>                                    */}
             <FormControl required className={classes.formControl}>
-              <InputLabel htmlFor="dold-m-native-required">
+              <InputLabel 
+              // ref={inputLabel} 
+              htmlFor="dold-m-native-required">
                 Date Of Last Deployment: Month{" "}
               </InputLabel>
               <Select
@@ -530,6 +603,7 @@ const UserDemographicsCMPT = props => {
                 onChange={props.handleChangeTwo}
                 onBlur={props.handleChangeDeploy}
                 name="yearLD"
+                // input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
                 inputProps={{
                   id: "dold-m-native-required"
                 }}
@@ -540,13 +614,19 @@ const UserDemographicsCMPT = props => {
 
               <FormHelperText>{props.userDataErrors.yearLD  ? 'You must select your last year of deployment' : null}</FormHelperText>
             </FormControl>
-          </Paper>
-            {/* <UserSubmitBTN /> */}
-            <Button
+          {/* </Paper>
+          <UserSubmitBTN />
+            
+          </Grid> */}
+            <FormControl required className={classes.formControl}>
+          <Button
             onClick={props.submit}
+            className={classes.button}
+            variant="contained"
             >Submit</Button>
-          </Grid>
-        </Grid>
+            </FormControl>
+        {/* </Grid> */}
+        </Card>
       </form>
       {/* </Grid> */}
     </div>
