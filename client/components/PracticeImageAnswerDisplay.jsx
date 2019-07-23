@@ -10,15 +10,16 @@ import NextCMPT from "./NextCMPT";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    justify: 'center'
+    // display: 'flex',
+    // justify: 'center'
   },
   formControl: {
     margin: theme.spacing(3),
   },
   group: {
     margin: theme.spacing(1, 0),
-    display: 'inline-table'
+    display: 'inline-table',
+    justifyContent: 'center'
   },
 }));
 

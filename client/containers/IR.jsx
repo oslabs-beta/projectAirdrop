@@ -3,6 +3,7 @@ import ImageRecognitionCMPT from '../components/ImageRecognitionCMPT.jsx'
 import './../styles.css'
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
+import SectionHeader from "../components/SectionHeader";
 
 const mapStateToProps = store => ({
   apiStatus: store.answers.apiStatus,
@@ -21,7 +22,7 @@ class IR extends Component {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 5000,
+      timeToNext: 2000,
       currentChoice: '',
       sectionData: {},
       sectionId: 'IR',
@@ -252,16 +253,7 @@ class IR extends Component {
     console.log('IR SECTION DATA', this.state.sectionData);
     return (
       <div>
-        <h1
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '30%',
-            transform: 'translate(-50%, -50%)'
-          }}
-        >
-          Image Recognition
-        </h1>
+        <SectionHeader sectionName={this.props.IR.section_display_name}/>
         <ImageRecognitionCMPT
           IR={this.props.IR}
           changeSlide={this.props.changeSlide}
