@@ -3,8 +3,8 @@ const testPostController = {};
 
 testPostController.postAnswers = (req, res, next) => {
 	console.log('entered middleware')
-	console.log(req.body);
-	switch (req.body.sectionID){
+	console.log(req.body.sectionData);
+	switch (req.body.sectionId){
 		case "VPS": //ask for values
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
@@ -34,8 +34,10 @@ testPostController.postAnswers = (req, res, next) => {
 				let row = [];
 				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].questionId, req.body.sectionData[i].userAnswer);
 				tpModel.postToImageAndQuestionnaire(row)
+				console.log("check check")
 			}
 		}
+		console.log("Check 2")
 	return next();
 }
 

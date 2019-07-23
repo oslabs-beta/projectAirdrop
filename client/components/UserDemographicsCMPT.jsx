@@ -37,7 +37,7 @@ const UserDemographicsCMPT = props => {
           />
         </label>
         <label>
-          Last Name:
+          Middle Initial:
           <input
             name="middleInitial"
             placeholder="Middle Initial"
@@ -46,7 +46,7 @@ const UserDemographicsCMPT = props => {
           />
         </label>
         <label>
-          Middle Initial:
+          Last Name:
           <input
             name="lastName"
             placeholder="Last Name"

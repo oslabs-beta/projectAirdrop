@@ -66,25 +66,25 @@ const answersReducer = (state = initialState, action) => {
         apiStatus: "failure",
         apiError: action.payload
       };
-    case RECEIVE_API:
-      return {
-      ...state,
-      results: action.payload.results,
-    };
+    // case RECEIVE_API:
+    //   return {
+    //   ...state,
+    //   results: action.payload.results,
+    // };
     case RECEIVE_API:
       return {
         ...state,
         ltvr: {
           ...state.ltvr,
-          words: [...action.payload.ltvrWords],
+          words: [...action.payload.results.words],
         },
         wm: {
           ...state.wm,
-          correct: [...action.payload.wmCorrect]
+          correct: [...action.payload.results.wm.correct]
         },
         ir: {
           ...state.ir,
-          correct: [...action.payload.irCorrect]
+          correct: [...action.payload.results.ir.correct]
         }
       }
     case SEND_QUESTIONNAIRE_RESPONSES:
