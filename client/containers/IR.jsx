@@ -21,7 +21,7 @@ class IR extends Component {
     super(props);
     this.state = {
       timeElapsed: 0,
-      timeToNext: 1000,
+      timeToNext: 5000,
       currentChoice: '',
       sectionData: {},
       sectionId: 'IR',
@@ -34,7 +34,7 @@ class IR extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
-    this.stateReset = this.stateReset.bind(this);    
+    this.stateReset = this.stateReset.bind(this);
 
   }
 
