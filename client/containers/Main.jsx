@@ -18,7 +18,7 @@ class Main extends Component {
   render() {
     return(
         <div >
-            <h1 id="header"> Welcome {this.props.username}  </h1>
+            {/* <h3 id="header"> user: {this.props.username}  </h3> */}
             {this.props.isAdmin ? <AdminDisplay/> : <UserTestDisplay/> }
         </div>
     )
