@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
 const UserSubmitBtn = (props) => {
   const classes = useStyles();
   return(
-    <div className={classes.root} onClick={props.action}>
+    <div className={classes.root} onClick={props.action}
+    >
       <Button>Submit</Button>
     </div>
   )
