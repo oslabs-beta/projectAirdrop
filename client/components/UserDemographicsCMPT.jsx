@@ -142,6 +142,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Grid from "@material-ui/core/Grid";
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -204,7 +205,7 @@ const UserDemographicsCMPT = props => {
     // <div className={classes.root}>
     // <div className={classes.container}>
     <div>
-      <form noValidate autoComplete="off" onSubmit={props.submit}>
+      <form noValidate autoComplete="off" >
         {/* <label>
           First Name:
           <input
@@ -541,7 +542,9 @@ const UserDemographicsCMPT = props => {
             </FormControl>
           </Paper>
             {/* <UserSubmitBTN /> */}
-            <button>Submit</button>
+            <Button
+            onClick={props.submit}
+            >Submit</Button>
           </Grid>
         </Grid>
       </form>
