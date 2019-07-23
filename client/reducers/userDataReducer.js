@@ -107,7 +107,7 @@ const userDataReducer = (state = initialState, action) => {
       console.log('is CREATELOGIN WORKING')
         return { 
           ...state,
-          isLoggedIn: true
+          // isLoggedIn: true,
         };  
     case IS_ADMIN:
       return {
