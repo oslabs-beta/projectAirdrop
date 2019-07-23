@@ -1,8 +1,10 @@
-import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
+import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, CREATE_USERNAME, CREATE_PASSWORD, CREATE_LOGIN, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
 
 const initialState = {
   username: '',
   pw: '',
+  newUsername: '',
+  newPW: '',
   isAdmin: null,
   isLoggedIn: false,
   userData: {
@@ -82,7 +84,17 @@ const userDataReducer = (state = initialState, action) => {
       return {
         ...state,
         pw: action.payload
-      }; 
+      };
+    case CREATE_USERNAME:
+      return {
+        ...state,
+        newUsername: action.payload
+      };
+    case CREATE_PASSWORD:
+      return {
+        ...state,
+        newPW: action.payload
+      };  
     case UPDATE_LOGIN:
       console.log('is update login working omg')
       return { 
@@ -91,6 +103,12 @@ const userDataReducer = (state = initialState, action) => {
         isAdmin: action.payload.isAdmin,
         isLoggedIn: true
       };
+    case CREATE_LOGIN:
+      console.log('is CREATELOGIN WORKING')
+        return { 
+          ...state,
+          isLoggedIn: true
+        };  
     case IS_ADMIN:
       return {
         ...state,

@@ -16,6 +16,20 @@ export const updateLogin = (data) => ({
   payload: data
 })
 
+export const createPassword = (value) => ({
+  type: types.CREATE_PASSWORD,
+  payload: value
+})
+
+export const createUsername = (data) => ({
+  type: types.CREATE_USERNAME,
+  payload: data
+})
+
+export const createLogin = (data) => ({
+  type: types.CREATE_LOGIN,
+  payload: data
+})
 
 export const isAdmin = (value) => ({
   type: types.IS_ADMIN,
@@ -27,35 +41,36 @@ export const isAdmin = (value) => ({
 
 // on sign up, a post request is sent/stored into our database. 
 // will return data of apt_id, name, pwd, and role
-// export function signup () {
-//   return (dispatch, getState) => {
-//     const url = '/api/signup'
-//     const state = getState();
-//     const body = {
-//       "username": state.user.username,
-//       "pw": state.user.password,
-//     }
-//     return axios.post(url, body)
-//       .then(response => {
-//         return response.data
-//       }).then(data => {
-//         let userData = {
-//           username: state.user.username,
-//           role: state.user.role
-//         }
-//         dispatch({
-//           type: types.UPDATE_LOGIN,
-//           payload: userData
-//         })
-//       })
-//     } 
-// }
+export function signup () {
+  return (dispatch, getState) => {
+    console.log('am i in signup')
+    const url = '/api/signup'
+    const state = getState();
+    const body = {
+      "username": state.userData.newUsername,
+      "pw": state.userData.newPW,
+    }
+    return axios.post(url, body)
+      .then(response => {
+        console.log('response', response)
+        //return response.data
+      }).then(data => {
+        let userData = {
+          isAdmin: false,
+        }
+        dispatch({
+          type: types.CREATE_LOGIN,
+          payload: userData
+        })
+      })
+    } 
+}
 
 // when signed in, we will send a post request to our database
 // will return data of apt_id, name, pwd, user_id, and role
 export function login () {
   return (dispatch, getState) => {
-    console.log('testing login dispatch')
+  
     const url = '/api/login'
     const state = getState();
     const body = {
