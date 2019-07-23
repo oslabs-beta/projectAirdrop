@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   // signup: () => dispatch(userActions.signup()),
   login: () => dispatch(userActions.login()),
   updateLogin: (data) => dispatch(userActions.updateLogin(data)),
-  createLogin: (data) => dispatch(userActions.createLogin(data))
+  signup: (data) => dispatch(userActions.signup(data))
 })
 
 const Login = props => {

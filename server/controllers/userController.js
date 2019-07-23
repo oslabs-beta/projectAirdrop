@@ -4,6 +4,7 @@ const userModel = require('../models/userModel');
 const userController = {};
 
 userController.createUser = (req, res, next) => {
+  console.log('create a user')
   const loginInfo = [req.body.username, req.body.pw];
   return new Promise((resolve, reject) => {
     userModel.createUser(loginInfo)
