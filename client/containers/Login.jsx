@@ -103,7 +103,7 @@ const Login = props => {
                     id="outlined-email-input"
                     label="Email"
                     className={classes.textField}
-                    type="email"
+                    // type="email"
                     name="email"
                     autoComplete="email"
                     margin="normal"

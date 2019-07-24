@@ -145,6 +145,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -174,13 +175,14 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     // display: 'flex',
-    // marginLeft: theme.spacing(3),
-    // marginRight: theme.spacing(3),
+    marginLeft: theme.spacing(12),
+    marginRight: theme.spacing(3),
     // marginTop: theme.spacing(3),
     // width: 300,
     // justifyContent: 'center',
     // alignItems: 'center',
-    // width: 400
+    width: 350
+
   },
   dense: {
     marginTop: 19,
@@ -195,12 +197,14 @@ const useStyles = makeStyles(theme => ({
     // padding: 400,
   },
   labelWidth: {
-    maxWidth: 400,
+    maxWidth: 350,
     display: "flex",
     flexDirection: 'column',
   },
   selectEmpty: {
-    marginTop: theme.spacing(4),
+    // marginTop: theme.spacing(4),
+    maxWidth: 350,
+    // marginLeft: theme.spacing(4),
   },
 }));
 
@@ -230,6 +234,11 @@ const UserDemographicsCMPT = props => {
     return <option key={index + 1}>{item}</option>;
   });
 
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
 
   const classes = useStyles();
   // const inputLabel = React.useRef(null);
@@ -269,6 +278,7 @@ const UserDemographicsCMPT = props => {
               value={props.userData.firstName}
               onChange={props.handleChange}
               margin="normal"
+              className={classes.selectEmpty}
               error={/[0-9]/.test(props.userData.firstName) || props.userDataErrors.firstName === true}
               helperText={/[0-9]/.test(props.userData.firstName) ? "Numbers are not allowed" : props.userDataErrors.firstName ? 'Insert your First Name' : null}
             />
@@ -298,6 +308,7 @@ const UserDemographicsCMPT = props => {
               value={props.userData.lastName}
               onChange={props.handleChange}
               margin="normal"
+              className={classes.selectEmpty}
               error={/[0-9]/.test(props.userData.lastName) || props.userDataErrors.lastName === true}
               helperText={/[0-9]/.test(props.userData.lastName) ? "Numbers are not allowed" : props.userDataErrors.lastName ? 'Insert your Last Name' : null}
             />
@@ -328,6 +339,7 @@ const UserDemographicsCMPT = props => {
               value={props.userData.middleInitial}
               onChange={props.handleChange}
               margin="normal"
+              className={classes.selectEmpty}
               error={/[0-9]/.test(props.userData.middleInitial) || props.userDataErrors.middleInitial === true}
               helperText={/[0-9]/.test(props.userData.middleInitial) ? "Numbers are not allowed" : props.userDataErrors.middleInitial ? 'Insert your Middle Initial (Only 1 letter)' : null}
             />
@@ -346,9 +358,9 @@ const UserDemographicsCMPT = props => {
         </label> */}
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>           */}
-            <FormControl variant="outlined" required className={classes.labelWidth}>
+            <FormControl variant="outlined" required className={classes.formControl}>
               <InputLabel
-              // ref={inputLabel}
+              ref={inputLabel}
               htmlFor="outlined-rank-simple"
               >rank</InputLabel>
               <Select
@@ -363,8 +375,8 @@ const UserDemographicsCMPT = props => {
                   id: "rank-native-required"
                 }}
                 error={props.userDataErrors.rank === true}
-                className={classes.selectEmpty}
-                // input={<OutlinedInput labelWidth={labelWidth} name="rank" id="outlined-rank-simple" />}
+                // className={classes.selectEmpty}
+                input={<OutlinedInput labelWidth={labelWidth} name="rank" id="outlined-rank-simple" />}
               >
                 {[<option key={0} value="" />, ...dropDownsRank]}
               </Select>
@@ -386,7 +398,7 @@ const UserDemographicsCMPT = props => {
           <Paper className={classes.paper}>             */}
             <FormControl required className={classes.formControl}>
               <InputLabel
-              // ref={inputLabel}
+              ref={inputLabel}
               htmlFor="YearsInService-native-required">
                 Years In Service
               </InputLabel>
@@ -395,12 +407,13 @@ const UserDemographicsCMPT = props => {
                 value={props.userData.yearsInService}
                 onChange={props.handleChange}
                 name="yearsInService"
-                // input={<OutlinedInput labelWidth={labelWidth} name="yearsInService" id="outlined-yearsInService-simple" />}
+                input={<OutlinedInput labelWidth={labelWidth} name="yearsInService" id="outlined-yearsInService-simple" />}
                 inputProps={{
                   id: "YearsInService-native-required"
                 }}
                 error={props.userDataErrors.yearsInService === true}
-
+                // className={classes.selectEmpty}
+                
               >
                 {[<option key={0} value="" />, ...years]}
               </Select>
@@ -422,7 +435,7 @@ const UserDemographicsCMPT = props => {
           <Paper className={classes.paper}>             */}
             <FormControl required className={classes.formControl}>
               <InputLabel
-              // ref={inputLabel}
+              ref={inputLabel}
               htmlFor="YearsInSO-native-required">
                 Years In Special Ops
               </InputLabel>
@@ -431,7 +444,7 @@ const UserDemographicsCMPT = props => {
                 value={props.userData.yearsInSpecialOps}
                 onChange={props.handleChange}
                 name="yearsInSpecialOps"
-                // input={<OutlinedInput labelWidth={labelWidth} name="yearsInSpecialOps" id="outlined-yearsInSpecialOps-simple" /> }
+                input={<OutlinedInput labelWidth={labelWidth} name="yearsInSpecialOps" id="outlined-yearsInSpecialOps-simple" /> }
                 inputProps={{
                   id: "YearsInSO-native-required"
                 }}
@@ -467,6 +480,7 @@ const UserDemographicsCMPT = props => {
               value={props.userData.ODANumber}
               onChange={props.handleChange}
               // input={<OutlinedInput labelWidth={labelWidth} name="ODANumber" id="outlined-ODANumber-simple" /> }
+              className={classes.selectEmpty}
               margin="normal"
               error={/[\D+]/gi.test(props.userData.ODANumber) || props.userDataErrors.ODANumber === true}
               helperText={/[\D+]/gi.test(props.userData.ODANumber) ? 'The ODA Number should be 4 digis' : props.userDataErrors.ODANumber ? 'Insert your ODA Number' : null }
@@ -488,7 +502,7 @@ const UserDemographicsCMPT = props => {
           <Paper className={classes.paper}>                         */}
             <FormControl required className={classes.formControl}>
               <InputLabel
-              // ref={inputLabel}
+              ref={inputLabel}
               htmlFor="MOS-native-required">
                 Military Occupational Specialty
               </InputLabel>
@@ -497,7 +511,7 @@ const UserDemographicsCMPT = props => {
                 value={props.userData.MOS}
                 onChange={props.handleChange}
                 name="MOS"
-                // input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
+                input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
                 inputProps={{
                   id: "MOS-native-required"
                 }}
@@ -566,7 +580,7 @@ const UserDemographicsCMPT = props => {
           <Paper className={classes.paper}>                         */}
             <FormControl required className={classes.formControl}>
               <InputLabel
-              // ref={inputLabel}
+              ref={inputLabel}
               htmlFor="dold-d-native-required">
                 Date Of Last Deployment: Day
               </InputLabel>
@@ -577,7 +591,7 @@ const UserDemographicsCMPT = props => {
                 onChange={props.handleChangeTwo}
                 onBlur={props.handleChangeDeploy}
                 name="monthLD"
-                // input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
+                input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
                 inputProps={{
                   id: "dold-d-native-required"
                 }}
@@ -593,7 +607,7 @@ const UserDemographicsCMPT = props => {
           <Paper className={classes.paper}>                                    */}
             <FormControl required className={classes.formControl}>
               <InputLabel
-              // ref={inputLabel}
+              ref={inputLabel}
               htmlFor="dold-m-native-required">
                 Date Of Last Deployment: Month{" "}
               </InputLabel>
@@ -603,7 +617,7 @@ const UserDemographicsCMPT = props => {
                 onChange={props.handleChangeTwo}
                 onBlur={props.handleChangeDeploy}
                 name="yearLD"
-                // input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
+                input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }
                 inputProps={{
                   id: "dold-m-native-required"
                 }}

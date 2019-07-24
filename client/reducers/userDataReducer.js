@@ -7,6 +7,10 @@ const initialState = {
   newPW: '',
   isAdmin: null,
   isLoggedIn: false,
+  // userLoginErrors: {
+  //   username: null,
+  //   pw: null,
+  // },
   userData: {
     userID: 5,
     firstName: '',
