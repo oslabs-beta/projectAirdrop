@@ -8,6 +8,8 @@ import Authentication from './../components/Authentication.jsx';
 import Main from "./Main.jsx"
 import UserDemographics from "./Demographics.jsx"
 import Login from './Login.jsx';
+import Container from '@material-ui/core/Container';
+import AppBar from '../components/Header';
 
 const mapStateToProps = store => ({
   login: store.userData.login
@@ -20,11 +22,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <AppBar />
         <Switch>
           <Route path='/login' component={Login} />
             <Authentication>
-              <Route path='/main' component={Main}/> 
+              <Route path='/main' component={Main}/>
             </Authentication>
         </Switch>
      </div>
