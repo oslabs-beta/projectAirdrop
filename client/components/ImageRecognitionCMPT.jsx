@@ -5,6 +5,7 @@ import NextCMPT from './NextCMPT';
 import PracticeImageAnswerDisplay from './PracticeImageAnswerDisplay';
 import Button from '@material-ui/core/Button';
 import SectionInstructions from './SectionInstructions';
+import UserStartBTN from "./UserStartBTN";
 
 const ImageRecognitionCMPT = (props) => {
 
@@ -118,31 +119,9 @@ const ImageRecognitionCMPT = (props) => {
 
   let currentBTN;
   if (props.currentSlide === 0) {
-    currentBTN =
-      <Button
-        onClick={props.startPractice}
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '65%',
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-        Start Practice
-      </Button>
+    currentBTN = <UserStartBTN action={props.startPractice} buttonText={'Start Practice'}/>
   } else if (props.currentSlide === 8) {
-    currentBTN =
-      <Button
-        onClick={props.startTest}
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '65%',
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-        Start Test
-      </Button>
+    currentBTN = <UserStartBTN action={props.startTest} buttonText={'Start Test'}/>
   }
 
   return (

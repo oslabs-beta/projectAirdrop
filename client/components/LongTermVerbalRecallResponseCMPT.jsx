@@ -2,6 +2,8 @@ import React from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
 import SectionInstructions from "./SectionInstructions";
 import Button from '@material-ui/core/Button';
+import UserStartBTN from "./UserStartBTN";
+import UserSubmitBtn from "./UserSubmitBTN";
 
 const LTVRR = (props) => {
   let currentBTN;
@@ -12,31 +14,11 @@ const LTVRR = (props) => {
     fields[i] = <p>{props.answerArray[i]}</p>;
   }
   if(!props.testStarted) {
-    currentBTN = <Button
-      onClick={props.startTimer}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Start Test
-    </Button>
+    currentBTN = <UserStartBTN action={props.startTimer} buttonText={'Start Test'}/>;
     instructions = props.instructions[0].instruction_text;
   } else if(!props.testDone){
-    timeLeft = props.timeLeft/1000
-    currentBTN = <Button
-      onClick={props.submitAnswer}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '65%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      Submit Answer
-    </Button>
+    timeLeft = props.timeLeft/1000;
+    currentBTN = <UserSubmitBtn onSubmit={props.submitAnswer}/>;
     fields.push(<input value={props.currentAnswer} onChange={props.handleChange} placeholder="Enter one word"/>)
   }
   if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
@@ -47,7 +29,6 @@ const LTVRR = (props) => {
   return (
     <div>
     {timeLeft}
-    {/*{instructions}*/}
     <SectionInstructions instructions={instructions}/>
     {fields}
     {currentBTN}

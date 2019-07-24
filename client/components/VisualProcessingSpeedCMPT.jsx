@@ -49,7 +49,7 @@ const VisualProcessingSpeed = (props) => {
       choiceDisplay[randomIndex] = temp;
       props.recognizeSwap();
     }
-    currentBTN = <UserSubmitBtn action={() => props.submitAnswer(props.currentChoice)}/>
+    currentBTN = <UserSubmitBtn onSubmit={() => props.submitAnswer(props.currentChoice)}/>
   }
   return (
   <div>
