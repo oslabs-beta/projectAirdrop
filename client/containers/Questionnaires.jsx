@@ -23,6 +23,7 @@ class Questionnaires extends Component {
       CNAAQ: null,
       cmsqCurrentChoice: {},
       cnaaqCurrentChoice: {},
+      sectionId: 'img/q'
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);

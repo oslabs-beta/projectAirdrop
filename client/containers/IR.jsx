@@ -24,7 +24,7 @@ class IR extends Component {
       timeToNext: 1000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'IR',
+      sectionId: 'img/q',
       answerTimeArray: [],
     };
     this.startPractice = this.startPractice.bind(this);

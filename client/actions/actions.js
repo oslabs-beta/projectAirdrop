@@ -146,7 +146,7 @@ export const postAnswers = (sectionId, data) => dispatch => {
   dispatch(requestAPI)
 
   // TODO: Needs URL
-  return fetch('/api/testpostdata', {
+  return fetch('/api/test', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
