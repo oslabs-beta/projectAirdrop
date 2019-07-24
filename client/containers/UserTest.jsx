@@ -59,11 +59,9 @@ class MainTestDisplay extends Component {
     // }
 
     return (
-      //<Container maxWidth={'sm'}>
         <div>
           {this.props.test.length > 0 && compArray[this.props.currentSection]}
         </div>
-      // </Container>
     );
   }
 }

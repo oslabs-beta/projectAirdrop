@@ -10,6 +10,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignContent: 'space-around',
     alignItems: 'center'
+  },
+  button: {
+    margin: theme.spacing(5)
   }
 }));
 
@@ -18,7 +21,7 @@ const UserNextBtn = (props) => {
 
   return (
     <div className={classes.root}>
-      <Button onClick={props.changeSection}> Next </Button>
+      <Button className={classes.button} variant={"contained"} color={"inherit"} onClick={props.changeSection}> Next </Button>
     </div>
   )
 };
