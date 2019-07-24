@@ -32,7 +32,7 @@ testPostController.postAnswers = (req, res, next) => {
 		case "img/q":
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].questionId, req.body.sectionData[i].userAnswer);
+				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].questionId, req.body.sectionData[i].userAnswer, req.body.sectionData[i].timeTaken);
 				tpModel.postToImageAndQuestionnaire(row)
 			}
 		}
