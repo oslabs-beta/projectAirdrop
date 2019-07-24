@@ -4,6 +4,7 @@ const testPostController = {};
 testPostController.postAnswers = (req, res, next) => {
 	console.log('entered middleware')
 	console.log(req.body.sectionData);
+	console.log(req.body.sectionId);
 	switch (req.body.sectionId){
 		case "VPS": //ask for values
 			for(let i = 0; i < req.body.sectionData.length; i++){

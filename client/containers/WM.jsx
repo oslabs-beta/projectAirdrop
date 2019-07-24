@@ -52,7 +52,7 @@ class WM extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('assessment', assessment);
+    console.log('WM assessment', assessment);
 
     this.props.postAnswers(this.state.sectionId, assessment)
 

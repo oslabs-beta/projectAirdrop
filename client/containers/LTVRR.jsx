@@ -59,7 +59,7 @@ class LTVRR extends Component {
       'wordArr': wordArr,
       'respArr': respArr,
     };
-    console.log('ltvrr', assessment)
+    console.log('ltvrr assessment', assessment)
 
     this.props.postAnswers(this.state.sectionId, assessment);
     // const ltvrrAnswers = this.state.answerArray
