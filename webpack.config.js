@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 const NODE_DEV_SERVER_URL = 'http://[::1]:3000';
 
@@ -46,13 +47,29 @@ module.exports = {
           backgroundSync: {
             name: 'background-queue',
             options: {
-              maxRetentionTime: 60 * 60,
+              maxRetentionTime: 24 * 60,
             }
           }
         }
       }],
+    }),
+    new WebpackPwaManifest({
+      name: 'My Applications Friendly Name',
+      short_name: 'Application',
+      description: 'Description!',
+      background_color: '#01579b',
+      theme_color: '#01579b',
+      start_url: '/?homescreen=1',
+      icons: [
+        {
+          src: path.resolve('client/src/images//5th_SFG_ICON.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          destination: path.join('assets', 'icons')
+        }
+      ]
     })
   ],
+    
   devServer: {
     contentBase: '/',
     publicPath: '/',
