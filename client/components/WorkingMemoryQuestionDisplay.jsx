@@ -1,24 +1,26 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import UserSubmitBtn from "./UserSubmitBTN";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    justify: 'center'
+    // display: 'inline-flex',
+    // justifyContent: 'center'
   },
   formControl: {
     margin: theme.spacing(3),
+    // display: 'flex',
+    // justifyContent: 'center'
   },
   group: {
     margin: theme.spacing(1, 0),
-    display: 'inline-table'
+    display: 'inline-table',
+    justifyContent: 'center'
   },
 }));
 
@@ -26,12 +28,12 @@ const WorkingMemoryQuestionDisplay = props => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.root}>
     {props.question}
     {
       (props.choices[2] === "n/a") ?
         (
-          <div className={classes.root}>
+          <div>
             <FormControl component={"fieldset"} className={classes.formControl}>
               <FormLabel component={"legend"}>
                 <RadioGroup className={classes.group}>
@@ -52,10 +54,9 @@ const WorkingMemoryQuestionDisplay = props => {
                 </RadioGroup>
               </FormLabel>
             </FormControl>
-          <Button onClick={props.onSubmit}>Submit</Button>
           </div>
       ) : (
-          <div className={classes.root}>
+          <div>
             <FormControl component={"fieldset"} className={classes.formControl}>
               <FormLabel component={"legend"}>
                 <RadioGroup className={classes.group}>
@@ -90,10 +91,10 @@ const WorkingMemoryQuestionDisplay = props => {
                 </RadioGroup>
               </FormLabel>
             </FormControl>
-          <Button onClick={props.onSubmit}>Submit</Button>
           </div>
       )
     }
+      <UserSubmitBtn onSubmit={props.onSubmit}/>
     </div>
   )
 };

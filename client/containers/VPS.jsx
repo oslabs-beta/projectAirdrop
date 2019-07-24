@@ -70,7 +70,7 @@ class VPS extends Component {
 	}
 	startPractice(){
 		this.setState({
-			timeToNext: 200,
+			timeToNext: 2000,
 			timerRunning: true,
 			practiceDone: true,
 			testStarted: true,

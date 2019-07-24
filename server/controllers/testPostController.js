@@ -32,7 +32,7 @@ testPostController.postAnswers = (req, res, next) => {
 		case "img/q":
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].questionId, req.body.sectionData[i].userAnswer);
+				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].questionId, req.body.sectionData[i].userAnswer, req.body.sectionData[i].timeTaken);
 				tpModel.postToImageAndQuestionnaire(row)
 				console.log("check check")
 			}
@@ -46,15 +46,15 @@ testPostController.postDemoData = async (req, res, next) => {
 	console.log(req.body, 'first name')
 	demoArray.push(
 		req.body.demoData.userID,
-		req.body.demoData.firstName, 
-		req.body.demoData.middleInitial, 
-		req.body.demoData.lastName, 
-		req.body.demoData.rank, 
-		req.body.demoData.yearsInService, 
-		req.body.demoData.yearsInSpecialOps, 
-		req.body.demoData.ODANumber, 
-		req.body.demoData.MOS, 
-		req.body.demoData.dateOfLastDeployment, 
+		req.body.demoData.firstName,
+		req.body.demoData.middleInitial,
+		req.body.demoData.lastName,
+		req.body.demoData.rank,
+		req.body.demoData.yearsInService,
+		req.body.demoData.yearsInSpecialOps,
+		req.body.demoData.ODANumber,
+		req.body.demoData.MOS,
+		req.body.demoData.dateOfLastDeployment,
 		req.body.demoData.dateOfAssessment);
 		res.locals.aID = await tpModel.postToDemoData(demoArray);
 		next();

@@ -347,18 +347,18 @@ const UserDemographicsCMPT = props => {
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>           */}
             <FormControl variant="outlined" required className={classes.labelWidth}>
-              <InputLabel 
-              // ref={inputLabel} 
+              <InputLabel
+              // ref={inputLabel}
               htmlFor="outlined-rank-simple"
               >rank</InputLabel>
               <Select
                 native
-              
+
 
                 value={props.userData.rank}
                 onChange={props.handleChange}
                 name="rank"
-                
+
                 inputProps={{
                   id: "rank-native-required"
                 }}
@@ -385,8 +385,8 @@ const UserDemographicsCMPT = props => {
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>             */}
             <FormControl required className={classes.formControl}>
-              <InputLabel 
-              // ref={inputLabel} 
+              <InputLabel
+              // ref={inputLabel}
               htmlFor="YearsInService-native-required">
                 Years In Service
               </InputLabel>
@@ -421,8 +421,8 @@ const UserDemographicsCMPT = props => {
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>             */}
             <FormControl required className={classes.formControl}>
-              <InputLabel 
-              // ref={inputLabel} 
+              <InputLabel
+              // ref={inputLabel}
               htmlFor="YearsInSO-native-required">
                 Years In Special Ops
               </InputLabel>
@@ -437,7 +437,7 @@ const UserDemographicsCMPT = props => {
                 }}
                 error={props.userDataErrors.yearsInSpecialOps === true}
               >
-                
+
                 {[<option key={0} value="" />, ...yearsSO]}
               </Select>
               <FormHelperText>{props.userDataErrors.yearsInSpecialOps ? 'Select your years in Special Ops' : null}</FormHelperText>
@@ -454,7 +454,7 @@ const UserDemographicsCMPT = props => {
           />
         </label> */}
           {/* <Grid item xs={12}>
-          <Paper className={classes.paper}>  
+          <Paper className={classes.paper}>
                      */}
             <FormControl required className={classes.formControl}>
             <TextField
@@ -487,8 +487,8 @@ const UserDemographicsCMPT = props => {
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>                         */}
             <FormControl required className={classes.formControl}>
-              <InputLabel 
-              // ref={inputLabel} 
+              <InputLabel
+              // ref={inputLabel}
               htmlFor="MOS-native-required">
                 Military Occupational Specialty
               </InputLabel>
@@ -542,10 +542,10 @@ const UserDemographicsCMPT = props => {
             id: 'dold-native-required',
           }}
         >
-          
+
           {[<option key={0} value=""/>, ...listOfDays]}
         </Select>
-        
+
         <Select
           native
           value={props.userData.yearLD}
@@ -556,7 +556,7 @@ const UserDemographicsCMPT = props => {
             id: 'dold-native-required',
           }}
         >
-          
+
           {[<option key={0} value=""/>, ...listOfYears]}
         </Select>
 
@@ -565,8 +565,8 @@ const UserDemographicsCMPT = props => {
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>                         */}
             <FormControl required className={classes.formControl}>
-              <InputLabel 
-              // ref={inputLabel} 
+              <InputLabel
+              // ref={inputLabel}
               htmlFor="dold-d-native-required">
                 Date Of Last Deployment: Day
               </InputLabel>
@@ -592,8 +592,8 @@ const UserDemographicsCMPT = props => {
           <Grid item xs={12}>
           <Paper className={classes.paper}>                                    */}
             <FormControl required className={classes.formControl}>
-              <InputLabel 
-              // ref={inputLabel} 
+              <InputLabel
+              // ref={inputLabel}
               htmlFor="dold-m-native-required">
                 Date Of Last Deployment: Month{" "}
               </InputLabel>
@@ -616,7 +616,7 @@ const UserDemographicsCMPT = props => {
             </FormControl>
           {/* </Paper>
           <UserSubmitBTN />
-            
+
           </Grid> */}
             <FormControl required className={classes.formControl}>
           <Button

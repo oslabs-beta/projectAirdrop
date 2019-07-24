@@ -1,27 +1,24 @@
 import React from 'react';
-import Button from "@material-ui/core/Button";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'space-around',
+    alignItems: 'center'
+  }
+}));
 
 const NextCMPT = (props) => {
+  const classes = useStyles();
+
   return (
-    <div>
-      <div
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '45%',
-          transform: 'translate(-50%, -50%)'
-        }}>
-        {/*Click next to continue.*/}
-      </div>
-      <Button
-        onClick={props.changeSlide}
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
+    <div className={classes.root}>
+      <Button onClick={props.changeSlide}>
         Next
       </Button>
     </div>
