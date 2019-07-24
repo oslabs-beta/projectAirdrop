@@ -6,9 +6,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import UserSubmitBtn from "./UserSubmitBTN";
+import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: 'flex',
+    justifyContent: 'center'
   },
   formControl: {
     margin: theme.spacing(3),
@@ -16,7 +19,6 @@ const useStyles = makeStyles(theme => ({
   group: {
     margin: theme.spacing(1, 0),
     display: 'inline-table',
-    justifyContent: 'center'
   },
 }));
 
@@ -24,12 +26,16 @@ const WorkingMemoryQuestionDisplay = props => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-    {props.question}
+    <div>
+      <div className={classes.root}>
+        <Typography>
+          {props.question}
+        </Typography>
+      </div>
     {
       (props.choices[2] === "n/a") ?
         (
-          <div>
+          <div className={classes.root}>
             <FormControl component={"fieldset"} className={classes.formControl}>
               <FormLabel component={"legend"}>
                 <RadioGroup className={classes.group}>
@@ -52,7 +58,7 @@ const WorkingMemoryQuestionDisplay = props => {
             </FormControl>
           </div>
       ) : (
-          <div>
+          <div className={classes.root}>
             <FormControl component={"fieldset"} className={classes.formControl}>
               <FormLabel component={"legend"}>
                 <RadioGroup className={classes.group}>

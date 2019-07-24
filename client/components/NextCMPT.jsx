@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,6 +11,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignContent: 'space-around',
     alignItems: 'center'
+  },
+  button: {
+    margin: theme.spacing(7)
   }
 }));
 
@@ -18,7 +22,10 @@ const NextCMPT = (props) => {
 
   return (
     <div className={classes.root}>
-      <Button onClick={props.changeSlide}>
+      <Typography className={classes.words} gutterBottom>
+        {props.text}
+      </Typography>
+      <Button className={classes.button} variant={"contained"} color={"inherit"} onClick={props.changeSlide}>
         Next
       </Button>
     </div>

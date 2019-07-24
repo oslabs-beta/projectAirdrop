@@ -123,7 +123,6 @@ class WM extends Component {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -132,7 +131,6 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -151,25 +149,18 @@ class WM extends Component {
   }
 
   startTest() {
-    console.log(this.props.currentSlide, "Current Slide");
-    // while(this.props.currentSlide < 18){
-    //   if()
-    // }
     this.startTimer();
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
       }
     )
       .then(() => {
-        console.log(this.props.currentSlide, "Current Slide")
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -187,8 +178,6 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
-            console.log(this.state.timeElapsed, "time")
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -206,7 +195,6 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -224,7 +212,6 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -242,7 +229,6 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -263,7 +249,8 @@ class WM extends Component {
   render() {
     // console.log('WM TIME ARRAY', this.state.answerTimeArray);
     // console.log('WM SECTION DATA', this.state.sectionData);
-    console.log('currentchoice', this.state.currentChoice);
+    console.log('currentchoice', this.state.currentChoice)    // console.log('WM ANSWER TIME ARRAY', this.state.answerTimeArray);
+    ;
     return (
       <div>
         <SectionHeader sectionName={this.props.WM.section_display_name}/>

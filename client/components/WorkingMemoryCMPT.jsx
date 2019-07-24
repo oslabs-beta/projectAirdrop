@@ -29,7 +29,7 @@ const WorkingMemoryCMPT = (props) => {
       submitted={props.submitted}
     />,
 
-    <NextCMPT changeSlide={props.changeSlide}/>,
+    <NextCMPT text={'Click next to continue.'} changeSlide={props.changeSlide}/>,
 
     <PracticeImageAnswerDisplay
       url={props.WM.practice[0].image_url}

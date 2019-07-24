@@ -19,7 +19,7 @@ const SectionEndScreen = (props) => {
   return(
     <div className={classes.root}>
       <Typography>
-        Congratulations! Please click next to continue to the next section.
+        Congratulations! Click next to move on to the next section.
       </Typography>
       <UserNextBTN changeSection={props.changeSection}/>
     </div>
