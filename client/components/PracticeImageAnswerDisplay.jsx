@@ -8,6 +8,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import NextCMPT from "./NextCMPT";
 import {Typography} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
+import Image from './Image';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +30,7 @@ const PracticeImageAnswerDisplay = (props) => {
 
   return (
     <div>
-      <img src={props.url}/>
+      <Image src={props.url}/>
       <div className={classes.root}>
         <Typography>
           <Box pt={5}>
