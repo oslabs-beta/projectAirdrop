@@ -74,7 +74,6 @@ class VPS extends Component {
 		this.setState({
 			timeToNext: 2000,
 			timerRunning: true,
-			practiceDone: true,
 			testStarted: true,
 		}, this.setAndNameInterval)
 	}
@@ -89,16 +88,29 @@ class VPS extends Component {
 					currentElementIndex: ++this.state.currentElementIndex,
 					timeRun: 0,
 				})
+				console.log(this.state.answerArray, "before")
 			}
 			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 				clearInterval(this.seriesTicker);
 				if(this.state.displayingAnswers){
-					console.log('clear answers')
+					if(!this.state.answerArray[this.state.currentSeriesIndex - 1] && this.state.practiceDone){
+						this.setState({
+							answerArray: [...this.state.answerArray, {
+								answer: this.state.currentChoice,
+								timeToRespond: this.state.timeRun
+							}]
+						})
+					}
+					if(!this.state.practiceDone) {
+						this.setState({
+							practiceDone: true
+						})
+					}
 					this.setState({
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 6,
+						currentSeriesIndex: this.state.currentSeriesIndex += 3,
 						timerRunning: false,
 						timeRun: 0,
 						submitted: false,
@@ -119,15 +131,17 @@ class VPS extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		this.setState({
-			answerArray: [...this.state.answerArray, {
-				answer: answerChoice,
-				timeToRespond: this.state.timeRun,
-			}],
-			// currentChoice: null,
-			submitted: true
-			// timeRun: this.state.timeToNext
-		});
+		if(this.state.practiceDone){
+			this.setState({
+				answerArray: [...this.state.answerArray, {
+					answer: answerChoice,
+					timeToRespond: this.state.timeRun,
+				}],
+				// currentChoice: null,
+				submitted: true
+				// timeRun: this.state.timeToNext
+			});
+		}
 		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
