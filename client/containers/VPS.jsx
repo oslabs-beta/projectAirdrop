@@ -32,6 +32,8 @@ class VPS extends Component {
 			answerArray: [],
 			currentChoice: null,
 			sectionId: 'VPS',
+			submitted: false,
+			// radioSubmitStatus: []
 		};
 		this.submitAnswer = this.submitAnswer.bind(this);
 		this.startNewSeries = this.startNewSeries.bind(this);
@@ -98,7 +100,9 @@ class VPS extends Component {
 						currentElementIndex: 0,
 						currentSeriesIndex: this.state.currentSeriesIndex += 1,
 						timerRunning: false,
-						timeRun: 0
+						timeRun: 0,
+						submitted: false,
+						currentChoice: null
 					})
 				}
 				if(this.state.timerRunning){
@@ -115,15 +119,16 @@ class VPS extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		console.log(this.state.answerArray)
 		this.setState({
 			answerArray: [...this.state.answerArray, {
 				answer: answerChoice,
 				timeToRespond: this.state.timeRun,
 			}],
-			currentChoice: null,
+			// currentChoice: null,
+			submitted: true
 			// timeRun: this.state.timeToNext
 		});
+		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
 		// console.log('does this work?')
@@ -157,6 +162,8 @@ class VPS extends Component {
 				currentChoice={this.state.currentChoice}
 				updateChoice={this.updateChoice}
 				sectionName={this.props.section.section_display_name}
+				submitted={this.state.submitted}
+				radioSubmitStatus={this.state.radioSubmitStatus}
 				/>
 			</div>
 		)

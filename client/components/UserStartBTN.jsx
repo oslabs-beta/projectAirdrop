@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   button: {
-    margin: theme.spacing(5)
+    margin: theme.spacing(7)
   }
 }));
 

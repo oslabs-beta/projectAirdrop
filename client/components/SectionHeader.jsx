@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   header: {
-    lineHeight: 2
+    lineHeight: 3
   }
 }));
 
@@ -20,7 +20,7 @@ const SectionHeader = props => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.header} variant={"h4"} gutterBottom>
+      <Typography className={classes.header} variant={"h4"}>
         {props.sectionName}
       </Typography>
     </div>
