@@ -22,17 +22,17 @@ class WM extends Component {
       currentChoice: '',
       sectionData: {},
       sectionId: 'img/q',
-      answerTimeArray: []
+      answerTimeArray: [],
+      submitted: false
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.updateChoice = this.updateChoice.bind(this);
     this.onPracticeHandler = this.onPracticeHandler.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
     this.stateReset = this.stateReset.bind(this);
-
   }
 
   componentWillUnmount() {
@@ -73,15 +73,20 @@ class WM extends Component {
 
   onSubmit() {
     this.setState({
-      // currentChoice: '',
       answerTimeArray: [
         ...this.state.answerTimeArray,
         this.state.timeElapsed
-      ]
-    })
+      ],
+      // sectionData: {
+      //   ...this.state.sectionData,
+      //   [qid]: e.target.value
+      // },
+      submitted: true
+    });
+    console.log('WM SUBMIT SECTION DATA', this.state.sectionData)
   }
 
-  onChangeHandler(e, qid) {
+  updateChoice(e, qid) {
     this.setState({
       currentChoice: e.target.value,
       sectionData: {
@@ -89,6 +94,9 @@ class WM extends Component {
         [qid]: e.target.value
       }
     })
+    // this.setState({
+    //   currentChoice: e.target.value
+    // }, () => console.log('WM CURRENT CHOICE', this.state.currentChoice))
   }
 
   onPracticeHandler(e) {
@@ -98,9 +106,10 @@ class WM extends Component {
   }
 
   optionReset () {
-    console.log('option reset')
+    console.log('option reset');
     this.setState({
       currentChoice: '',
+      submitted: false
     })
   }
 
@@ -265,10 +274,11 @@ class WM extends Component {
           changeSection={this.props.changeSection}
           startPractice={this.startPractice}
           startTest={this.startTest}
-          onChangeHandler={this.onChangeHandler}
+          updateChoice={this.updateChoice}
           currentChoice={this.state.currentChoice}
           onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
+          submitted={this.state.submitted}
         />
       </div>
     );

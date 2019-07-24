@@ -9,13 +9,9 @@ import UserSubmitBtn from "./UserSubmitBTN";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // display: 'inline-flex',
-    // justifyContent: 'center'
   },
   formControl: {
     margin: theme.spacing(3),
-    // display: 'flex',
-    // justifyContent: 'center'
   },
   group: {
     margin: theme.spacing(1, 0),
@@ -42,14 +38,14 @@ const WorkingMemoryQuestionDisplay = props => {
                     control={<Radio />}
                     label={props.choices[0]}
                     checked={props.currentChoice === props.choices[0]}
-                    onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                    onChange={props.qid ? (e) => props.updateChoice(e, props.qid) : props.onPracticeHandler}
                   />
                   <FormControlLabel
                     value={props.choices[1]}
                     control={<Radio />}
                     label={props.choices[1]}
                     checked={props.currentChoice === props.choices[1]}
-                    onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                    onChange={props.qid ? (e) => props.updateChoice(e, props.qid) : props.onPracticeHandler}
                   />
                 </RadioGroup>
               </FormLabel>
@@ -65,28 +61,28 @@ const WorkingMemoryQuestionDisplay = props => {
                     control={<Radio />}
                     label={props.choices[0]}
                     checked={props.currentChoice === props.choices[0]}
-                    onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                    onChange={props.qid ? (e) => props.updateChoice(e, props.qid) : props.onPracticeHandler}
                   />
                   <FormControlLabel
                     value={props.choices[1]}
                     control={<Radio />}
                     label={props.choices[1]}
                     checked={props.currentChoice === props.choices[1]}
-                    onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                    onChange={props.qid ? (e) => props.updateChoice(e, props.qid) : props.onPracticeHandler}
                   />
                   <FormControlLabel
                     value={props.choices[2]}
                     control={<Radio />}
                     label={props.choices[2]}
                     checked={props.currentChoice === props.choices[2]}
-                    onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                    onChange={props.qid ? (e) => props.updateChoice(e, props.qid) : props.onPracticeHandler}
                   />
                   <FormControlLabel
                     value={props.choices[3]}
                     control={<Radio />}
                     label={props.choices[3]}
                     checked={props.currentChoice === props.choices[3]}
-                    onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                    onChange={props.qid ? (e) => props.updateChoice(e, props.qid) : props.onPracticeHandler}
                   />
                 </RadioGroup>
               </FormLabel>
@@ -94,7 +90,7 @@ const WorkingMemoryQuestionDisplay = props => {
           </div>
       )
     }
-      <UserSubmitBtn onSubmit={props.onSubmit}/>
+      <UserSubmitBtn submitted={props.submitted} onSubmit={props.onSubmit}/>
     </div>
   )
 };
