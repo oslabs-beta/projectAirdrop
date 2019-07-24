@@ -13,7 +13,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
 	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
-	postVPS: data => dispatch(actions.vpsResponses(data)),
+	postVPS: (data) => dispatch(actions.vpsResponses(data)),
 });
 
 class VPS extends Component {
@@ -56,7 +56,13 @@ class VPS extends Component {
 			a.push(response);
 			return a
 		}, []);
+		console.log('VPS assesment ', vpsAnswers);
+		console.log('VPS SECTIONID ', this.state.sectionId);
+
+
 		this.props.postAnswers(this.state.sectionId, vpsAnswers);
+
+		
 		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
 			a.push(b.answer);
 			return a;

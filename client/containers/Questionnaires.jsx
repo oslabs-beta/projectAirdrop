@@ -63,6 +63,7 @@ class Questionnaires extends Component {
     console.log('cmsq unmount', cmsq);
     console.log('cnaaq unmount', cnaaq);
     const questionnaireResponses = { ...cmsq, ...cnaaq};
+    console.log('questionnaire assessment', questionnaireResponses)
     this.props.postAnswers(this.state.sectionId, questionnaireResponses);
 
     const cmsqResponses = Object.keys(this.state.cmsqCurrentChoice).reduce((a,b,c,d) => {
