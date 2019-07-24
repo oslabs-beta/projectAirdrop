@@ -5,7 +5,8 @@ import AdminDisplay from './Admin.jsx';
 import UserTestDisplay from './UserTest.jsx';
 
 const mapStateToProps = store => ({
-  //isAdmin: store.user.isAdmin,
+  username: store.userData.username,
+  isAdmin: store.userData.isAdmin
 
 });
 
@@ -17,12 +18,12 @@ class Main extends Component {
   render() {
     return(
         <div >
-            <h1 id="header"> Welcome {this.props.username} {this.props.role} </h1>
-            {!true ? <AdminDisplay key="admin" /> : <UserTestDisplay key="user" /> }
+            {/* <h3 id="header"> user: {this.props.username}  </h3> */}
+            {this.props.isAdmin ? <AdminDisplay/> : <UserTestDisplay/> }
         </div>
     )
   }
 }
 
-export default Main;
-//export default connect(mapStateToProps)(Main);
+//export default MainDisplay;
+export default connect(mapStateToProps)(Main);

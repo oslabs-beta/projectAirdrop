@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-//import * as userActions from '../Actions/userActions';
+import * as userActions from '../actions/userActions';
 
 
-const mapStateToProps = state => ({
-  // username: store.user.username,
-  // password: store.user.password,
-  // isAdmin: store.user.isAdmin,
-  // login: false,
+const mapStateToProps = store => ({
+  username: store.userData.username,
+  pw: store.userData.pw,
+  isAdmin: store.userData.isAdmin,
+  login: store.userData.login,
 
 });
 
 const mapDispatchtoProps = dispatch => ({
-  //update username
-  //update password
-  //update role?
+
 
 });
 
@@ -30,11 +28,11 @@ class Authentication extends Component {
   }
 
   componentDidMount() {
-    fetch('/verifyToken')
+    fetch('api/verifyToken')
     .then(res => res.json())
     .then(jwt => {
       if (jwt.hasOwnProperty('username') && jwt.hasOwnProperty('iat')) {
-        fetch('/getUserInfo', {
+        fetch('api/getUserInfo', {
           headers: {
             'Content-Type': 'application/json',
             name: jwt.username
@@ -47,7 +45,6 @@ class Authentication extends Component {
       
         });
       } else {
-
         this.setState({redirect: true});
       }
     });
@@ -59,13 +56,10 @@ class Authentication extends Component {
         <Redirect to='/login' />
       );
     }
-
     return (
       <div>  {this.props.children} </div>
     )
-
    }
-   
 }
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Authentication)
