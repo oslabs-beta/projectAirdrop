@@ -8,7 +8,7 @@ const initialState = {
   vpsAnswers: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 6,
+  currentSection: 7,
   currentSlide: 0,
 };
 

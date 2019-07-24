@@ -3,6 +3,8 @@ import QuestionnaireCMPT from './../components/QuestionnairesCMPT';
 import * as actions from "../actions/actions";
 import { connect } from 'react-redux';
 import SectionInstructions from '../components/SectionInstructions';
+import QuestionnaireHeader from "../components/QuestionnaireHeader";
+import UserSubmitBtn from "../components/UserSubmitBTN";
 
 const mapStateToProps = store => ({
 	aid: store.answers.aid,
@@ -105,23 +107,27 @@ class Questionnaires extends Component {
     console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
     return (
       <div>
+        <QuestionnaireHeader sectionName={this.props.test[4].section_display_name}/>
         <SectionInstructions instructions={this.state.instructions.instruction_text}/>
 
         {this.state.CNAAQ &&
         <QuestionnaireCMPT
         questions={this.state.CNAAQ}
         handleChange={this.handleChange}
-        cnaaqAnswers={this.state.cnaaqAnswers}
+        // cnaaqAnswers={this.state.cnaaqAnswers}
         cnaaqCurrentChoice={this.state.cnaaqCurrentChoice}
         />}
+
+        <QuestionnaireHeader sectionName={this.props.test[3].section_display_name}/>
+
         {this.state.CMSQ &&
         <QuestionnaireCMPT
         questions={this.state.CMSQ}
         handleChange={this.handleChangeCMSQ}
-        cmsqAnswers={this.state.cmsqAnswers}
+        // cmsqAnswers={this.state.cmsqAnswers}
         cmsqCurrentChoice={this.state.cmsqCurrentChoice}
         />}
-        <button onClick={this.onSubmit}>Submit</button>
+        <UserSubmitBtn onSubmit={this.onSubmit}/>
       </div>
     )
   }
