@@ -142,7 +142,7 @@ export const sendFailure = err => ({
 });
 
 export const postAnswers = (sectionId, data) => dispatch => {
-  console.log('POST ANSWERS DATA', data);
+  console.log('POST ANSWERS DATA AID CHECK \n', sectionId, 'data \n', data);
   dispatch(requestAPI)
 
   // TODO: Needs URL
