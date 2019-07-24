@@ -1,19 +1,11 @@
 img {
-    width: 600px;
+    width: 800px;
     display: block;
     margin-left: auto;
     margin-right: auto
 }
-/*.VPSchoices{*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    align-items: flex-start;*/
-/*    justify-content: space-around;*/
-/*}*/
-/*.VPSseries{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    background-color: #f64c72;*/
-/*    border-radius: 6px;*/
-/*    padding: 5px*/
-/*}*/
+
+.responsive {
+    max-width: 100%;
+    height: auto
+}

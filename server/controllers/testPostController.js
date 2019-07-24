@@ -3,41 +3,44 @@ const testPostController = {};
 
 testPostController.postAnswers = (req, res, next) => {
 	console.log('entered middleware')
-	console.log(req.body.sectionData);
-	console.log(req.body.sectionId);
+	console.log(req.body);
 	switch (req.body.sectionId){
-		case "VPS": //ask for values
+		case "VPS":
+			console.log(req.body.sectionData)
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i].timeTaken);
+				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i].timeTaken);
 				tpModel.postToVPS(row)
 			}
-			case "LTVR":
-				console.log('entered correct case')
-				let rightWords = {};
-				let wordArr = req.body.sectionData.wordArr
-				let respArr = req.body.sectionData.respArr
-				console.log(wordArr, "wordArr")
-				for(let i = 0; i < wordArr.length; i++){
-					rightWords[wordArr[i]] = true;
-				}
-				for(let i = 0; i < respArr.length; i++){
+			break;
+		case "LTVR":
+			console.log('entered correct case')
+			let rightWords = {};
+			let wordArr = req.body.sectionData.wordArr
+			let respArr = req.body.sectionData.respArr
+			console.log(wordArr, "wordArr")
+			for(let i = 0; i < wordArr.length; i++){
+				rightWords[wordArr[i]] = true;
+			}
+			for(let i = 0; i < respArr.length; i++){
 				let row = [];
-				row.push(req.body.sectionData.assessmentId, req.body.sectionData.respArr[i].word,req.body.sectionData.respArr[i].timeTaken)
+				row.push(req.body.sectionData.aid, req.body.sectionData.respArr[i].word,req.body.sectionData.respArr[i].timeTaken)
 				if(rightWords.hasOwnProperty(respArr[i].word)){
-					 row.push(true);
+					row.push(true);
 				} else row.push(false);
 				console.log(row);
 				tpModel.postToLTVR(row);
-			}
+			}	
+			break;
 		case "img/q":
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].assessmentId, req.body.sectionData[i].questionId, req.body.sectionData[i].userAnswer, req.body.sectionData[i].timeTaken);
+				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].qid, req.body.sectionData[i].answer, req.body.sectionData[i].timeTaken);
 				tpModel.postToImageAndQuestionnaire(row)
 				console.log("check check")
 			}
-		}
+			break;
+	}
 		console.log("Check 2")
 	return next();
 }

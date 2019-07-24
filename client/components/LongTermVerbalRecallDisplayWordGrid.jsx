@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,12 +14,11 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: 'black',
-    whiteSpace: 'nowrap',
+    whiteSpace: 'normal',
     marginBottom: theme.spacing(1)
   },
   gridList: {
-    width: 500,
+    padding: 10
   }
 }));
 
@@ -29,14 +29,16 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
     wordArr.push(
       <GridListTile key={i} cols={1}>
         <Paper square={false} className={classes.paper}>
-          {props.words[i]}
+          <Typography variant={"h5"}>
+            {props.words[i]}
+          </Typography>
         </Paper>
       </GridListTile>
     )
   }
   return (
-    <div>
-      <GridList spacing={1} cols={5} cellHeight={50} className={classes.gridList}>
+    <div className={classes.root}>
+      <GridList className={classes.gridList} spacing={10} cols={5} cellHeight={'auto'}>
         {wordArr}
       </GridList>
     </div>

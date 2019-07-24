@@ -27,6 +27,7 @@ class IR extends Component {
       sectionData: {},
       sectionId: 'img/q',
       answerTimeArray: [],
+      submitted: false
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -97,13 +98,15 @@ class IR extends Component {
       answerTimeArray: [
         ...this.state.answerTimeArray,
         this.state.timeElapsed
-      ]
+      ],
+      submitted: true
     })
   }
 
   optionReset () {
     this.setState({
       currentChoice: '',
+      submitted: false
     })
   }
 
@@ -117,7 +120,6 @@ class IR extends Component {
       this.props.changeSlide();
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -135,7 +137,6 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -158,7 +159,6 @@ class IR extends Component {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -176,7 +176,6 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -194,7 +193,6 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -212,7 +210,6 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -230,7 +227,6 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -265,6 +261,7 @@ class IR extends Component {
           currentChoice={this.state.currentChoice}
           onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
+          submitted={this.state.submitted}
         />
       </div>
     );

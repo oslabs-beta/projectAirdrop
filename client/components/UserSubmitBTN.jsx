@@ -10,14 +10,17 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignContent: 'space-around',
     alignItems: 'center'
+  },
+  button: {
+    margin: theme.spacing(7)
   }
 }));
 
 const UserSubmitBtn = (props) => {
   const classes = useStyles();
   return(
-    <div className={classes.root} onClick={props.onSubmit}>
-      <Button>Submit</Button>
+    <div className={classes.root}>
+      <Button onClick={props.onSubmit} disabled={props.submitted} className={classes.button} variant={"contained"} color={"inherit"}>Submit</Button>
     </div>
   )
 };

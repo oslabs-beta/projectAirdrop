@@ -64,6 +64,9 @@ const useStyles = makeStyles(theme => ({
     minWidth: 300,
 
   },
+  button: {
+    margin: theme.spacing(4),
+  },
   bullet: {},
   title: {},
   pos: {}
@@ -161,7 +164,7 @@ const Login = props => {
                     id="outlined-email-input"
                     label="Email"
                     className={classes.textField}
-                    type="email"
+                    // type="email"
                     name="email"
                     autoComplete="email"
                     margin="normal"

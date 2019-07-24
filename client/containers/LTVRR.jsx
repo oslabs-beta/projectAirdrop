@@ -18,7 +18,7 @@ class LTVRR extends Component {
 	constructor(props){
     super(props);
     this.state = {
-      timeLeft: 10000,
+      timeLeft: 120000,
       testStarted: false,
       testDone: false,
       answerArray: [],

@@ -149,12 +149,16 @@ import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    // width: 300,
   },
   card: {
-    minWidth: 275,
-    display: "flex",
-    flexDirection: 'column',
+    // minWidth: 275,
+    // display: "flex",
+    // flexDirection: 'column',
   },
   container: {
     // display: "flex",
@@ -175,13 +179,13 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     // display: 'flex',
-    marginLeft: theme.spacing(12),
+    marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
     // marginTop: theme.spacing(3),
-    // width: 300,
+    width: 500,
     // justifyContent: 'center',
     // alignItems: 'center',
-    width: 350
+    // width: 350
 
   },
   dense: {
@@ -197,13 +201,13 @@ const useStyles = makeStyles(theme => ({
     // padding: 400,
   },
   labelWidth: {
-    maxWidth: 350,
+    maxWidth: 500,
     display: "flex",
     flexDirection: 'column',
   },
   selectEmpty: {
     // marginTop: theme.spacing(4),
-    maxWidth: 350,
+    maxWidth: 500,
     // marginLeft: theme.spacing(4),
   },
 }));
@@ -246,6 +250,7 @@ const UserDemographicsCMPT = props => {
   return (
     // <div className={classes.root}>
     // <div className={classes.container}>
+    // <div className={classes.root}>
     <div>
       <form noValidate autoComplete="off" >
         {/* <label>
@@ -265,7 +270,7 @@ const UserDemographicsCMPT = props => {
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}> */}
-            <Card className={classes.card}>
+            <Card className={classes.root}>
             <FormControl required className={classes.formControl}>
 
             <TextField
@@ -362,7 +367,7 @@ const UserDemographicsCMPT = props => {
               <InputLabel
               ref={inputLabel}
               htmlFor="outlined-rank-simple"
-              >rank</InputLabel>
+              >Rank</InputLabel>
               <Select
                 native
 
@@ -396,7 +401,7 @@ const UserDemographicsCMPT = props => {
         </label> */}
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>             */}
-            <FormControl required className={classes.formControl}>
+            <FormControl required variant="outlined" className={classes.formControl}>
               <InputLabel
               ref={inputLabel}
               htmlFor="YearsInService-native-required">
@@ -433,7 +438,7 @@ const UserDemographicsCMPT = props => {
         </label> */}
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>             */}
-            <FormControl required className={classes.formControl}>
+            <FormControl variant="outlined" required className={classes.formControl}>
               <InputLabel
               ref={inputLabel}
               htmlFor="YearsInSO-native-required">
@@ -500,7 +505,7 @@ const UserDemographicsCMPT = props => {
         </label> */}
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>                         */}
-            <FormControl required className={classes.formControl}>
+            <FormControl variant="outlined" required className={classes.formControl}>
               <InputLabel
               ref={inputLabel}
               htmlFor="MOS-native-required">
@@ -578,7 +583,7 @@ const UserDemographicsCMPT = props => {
       </FormControl> */}
           {/* <Grid item xs={12}>
           <Paper className={classes.paper}>                         */}
-            <FormControl required className={classes.formControl}>
+            <FormControl variant="outlined" required className={classes.formControl}>
               <InputLabel
               ref={inputLabel}
               htmlFor="dold-d-native-required">
@@ -605,7 +610,7 @@ const UserDemographicsCMPT = props => {
             </Grid>
           <Grid item xs={12}>
           <Paper className={classes.paper}>                                    */}
-            <FormControl required className={classes.formControl}>
+            <FormControl variant="outlined" required className={classes.formControl}>
               <InputLabel
               ref={inputLabel}
               htmlFor="dold-m-native-required">

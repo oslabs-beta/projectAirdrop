@@ -2,16 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import NextCMPT from "./NextCMPT";
+import {Typography} from "@material-ui/core";
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // display: 'flex',
-    // justify: 'center'
+    display: 'flex',
+    justifyContent: 'center'
   },
   formControl: {
     margin: theme.spacing(3),
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   group: {
     margin: theme.spacing(1, 0),
     display: 'inline-table',
-    justifyContent: 'center'
+    // justifyContent: 'center'
   },
 }));
 
@@ -30,7 +31,11 @@ const PracticeImageAnswerDisplay = (props) => {
     <div>
       <img src={props.url}/>
       <div className={classes.root}>
-        {props.question}
+        <Typography>
+          <Box pt={5}>
+            {props.question}
+          </Box>
+        </Typography>
       </div>
       {
         (!props.choices[2] || props.choices[2] === 'n/a') ?
