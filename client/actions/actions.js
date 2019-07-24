@@ -83,10 +83,22 @@ export const fetchTest = () => dispatch => {
     });
 };
 
-export const handleChange = event => ({
-  type: types.HANDLE_CHANGE,
-  payload: event,
-});
+// export const handleChange = event => ({
+//   type: types.HANDLE_CHANGE,
+//   payload: event,
+// });
+
+export const handleChange = (event) => {
+  console.log('testing handle change prop', event.target.value)
+  
+   return {
+   type: types.HANDLE_CHANGE,
+   payload: {
+     name: event.target.name,
+     value: event.target.value
+   },
+ }
+ };
 
 export const handleChangeTwo = (event) => ({
   type: types.HANDLE_CHANGE_TWO,
