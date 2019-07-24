@@ -22,7 +22,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   showClicks: () => dispatch(actions.showClicks()),
-  fetchTest: () => dispatch(actions.fetchTest()),
+  // fetchTest: () => dispatch(actions.fetchTest()),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   handleChangeDeploy: () => dispatch(actions.handleChangeDeploy(event)),
   setDate: () => dispatch(actions.setDate()),
