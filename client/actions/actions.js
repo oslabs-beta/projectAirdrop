@@ -156,12 +156,12 @@ export const postAnswers = (sectionId, data) => dispatch => {
       sectionData: data
     })
   })
-    .then(res => res.json())
-    .then(res => {
-      if(!isValid(res)) throw new Error("something went wrong!")
-      console.log('POST ANSWERS RESPONSE OBJECT', res);
-      return dispatch(sendAPI(res))
-    })
+    // .then(res => res.json())
+    // .then(res => {
+    //   if(!isValid(res)) throw new Error("something went wrong!")
+    //   console.log('POST ANSWERS RESPONSE OBJECT', res);
+    //   return dispatch(sendAPI(res))
+    // })
     .catch(err => dispatch(sendFailure(err)));
 };
 
