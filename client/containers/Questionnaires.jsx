@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import SectionInstructions from '../components/SectionInstructions';
 import QuestionnaireHeader from "../components/QuestionnaireHeader";
 import UserSubmitBtn from "../components/UserSubmitBTN";
+import { timingSafeEqual } from 'crypto';
 
 const mapStateToProps = store => ({
 	aid: store.answers.aid,
@@ -25,14 +26,17 @@ class Questionnaires extends Component {
       CNAAQ: null,
       cmsqCurrentChoice: {},
       cnaaqCurrentChoice: {},
-      sectionId: 'img/q'
+      sectionId: 'img/q',
+      currentQuest: 0
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeCMSQ = this.handleChangeCMSQ.bind(this);
+    this.nextQuest = this.nextQuest.bind(this);
   }
 
   componentDidMount(){
+
     this.setState({
       ...this.state,
       instructions: this.props.test[3].instructions[0],
@@ -81,6 +85,13 @@ class Questionnaires extends Component {
     console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentQuest !== this.state.currentQuest) {
+      console.log('testing component did update')
+      window.scrollTo(0, 0)
+    }
+  }
+
   handleChange(e, qid) {
     this.setState({
       cnaaqCurrentChoice: {
@@ -99,24 +110,64 @@ class Questionnaires extends Component {
     });
   }
 
+  nextQuest() {
+    
+    this.setState({
+      currentQuest: this.state.currentQuest + 1,
+    });
+  };
+
+
+
   onSubmit (e) {
-    this.props.changeSection()
+    console.log('did it get here?')
+    e.preventDefault(e);
+    if(this.state.currentQuest === 1) {
+      this.props.changeSection()
+    } else {
+      this.setState({
+        currentQuest: this.state.currentQuest + 1,
+      })
+    }
+    
   }
 
   render() {
     console.log('CNAAQ STATE', this.state.cnaaqCurrentChoice);
     console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
+    const questionnaireRend = [
+    <QuestionnaireCMPT
+      sectionName={this.props.test[4].section_display_name}
+      questions={this.state.CNAAQ}
+      handleChange={this.handleChange}
+      // cnaaqAnswers={this.state.cnaaqAnswers}
+      cnaaqCurrentChoice={this.state.cnaaqCurrentChoice}
+      nextQuest={this.nextQuest}
+      onSubmit={this.onSubmit}
+      />,
+      <QuestionnaireCMPT
+      sectionName={this.props.test[3].section_display_name}
+      questions={this.state.CMSQ}
+      handleChange={this.handleChangeCMSQ}
+      // cmsqAnswers={this.state.cmsqAnswers}
+      cmsqCurrentChoice={this.state.cmsqCurrentChoice}
+      onSubmit={this.onSubmit}
+      />
+    ]
     return (
       <div>
-        <QuestionnaireHeader sectionName={this.props.test[4].section_display_name}/>
+        {/* <QuestionnaireHeader sectionName={this.props.test[4].section_display_name}/> */}
+        <br />
+        <br />
         <SectionInstructions instructions={this.state.instructions.instruction_text}/>
 
-        {this.state.CNAAQ &&
+        {/* {this.state.CNAAQ &&
         <QuestionnaireCMPT
         questions={this.state.CNAAQ}
         handleChange={this.handleChange}
         // cnaaqAnswers={this.state.cnaaqAnswers}
         cnaaqCurrentChoice={this.state.cnaaqCurrentChoice}
+
         />}
 
         <QuestionnaireHeader sectionName={this.props.test[3].section_display_name}/>
@@ -127,8 +178,10 @@ class Questionnaires extends Component {
         handleChange={this.handleChangeCMSQ}
         // cmsqAnswers={this.state.cmsqAnswers}
         cmsqCurrentChoice={this.state.cmsqCurrentChoice}
-        />}
-        <UserSubmitBtn onSubmit={this.onSubmit}/>
+        submit={this.onSubmit}
+        />} */}
+        {this.state.CNAAQ && questionnaireRend[this.state.currentQuest]}
+        {/* <UserSubmitBtn onSubmit={this.onSubmit}/> */}
       </div>
     )
   }
