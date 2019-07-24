@@ -8,6 +8,7 @@ import VisualProcessingSpeedElement from './VisualProcessingSpeedElement';
 import VisualProcessingSpeedChoices from "./VisualProcessingSpeedChoices";
 
 const VisualProcessingSpeed = (props) => {
+
   let currentEl;
   let currentBTN;
   let currentInstructions;
@@ -29,12 +30,13 @@ const VisualProcessingSpeed = (props) => {
   if(props.timerRunning) currentEl = props.vpsAnswers[0][props.currentSeriesIndex][props.currentElementIndex];
   if(!(props.displayingAnswers || props.timerRunning)) {
     if(!props.practiceDone) currentBTN = <UserStartBTN action={props.startPractice} buttonText={'Start Practice'}/>;
-    else currentBTN = <UserStartBTN action={props.startNewSeries} buttonText={'Start Test'}/>;
+    else currentBTN = <UserStartBTN action={props.startNewSeries} buttonText={'Start Round'}/>;
     if(props.currentSeriesIndex === 6) currentBTN = <SectionEndScreen changeSection={props.changeSection}/>
   }
   if(props.displayingAnswers){
     for(let j = 0; j < 4; j++) {
       let choiceRow = [];
+
       for(let i = 0; i < 5; i++){
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
@@ -49,14 +51,14 @@ const VisualProcessingSpeed = (props) => {
       choiceDisplay[randomIndex] = temp;
       props.recognizeSwap();
     }
-    currentBTN = <UserSubmitBtn onSubmit={() => props.submitAnswer(props.currentChoice)}/>
+    currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>
   }
   return (
   <div>
     <SectionHeader sectionName={props.sectionName}/>
     <SectionInstructions instructions={currentInstructions}/>
     <VisualProcessingSpeedElement currentEl={currentEl}/>
-    <div style={{display: "flex", justifyContent: "center"}}>
+    <div style={{display: "flex", justifyContent: "space-around"}}>
       {choiceDisplay}
     </div>
     {currentBTN}

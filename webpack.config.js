@@ -54,9 +54,9 @@ module.exports = {
       }],
     }),
     new WebpackPwaManifest({
-      name: 'My Applications Friendly Name',
-      short_name: 'Application',
-      description: 'Description!',
+      name: 'Legions MPA',
+      short_name: 'MPA',
+      description: 'Mental Performance Assessment',
       background_color: '#01579b',
       theme_color: '#01579b',
       start_url: '/?homescreen=1',
