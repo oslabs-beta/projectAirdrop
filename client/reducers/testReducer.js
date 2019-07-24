@@ -8,8 +8,8 @@ const initialState = {
   vpsAnswers: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 0,
-  currentSlide: 0,
+  currentSection: 4,
+  currentSlide: 6,
 };
 
 const testReducer = (state = initialState, action) => {
