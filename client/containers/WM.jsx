@@ -143,7 +143,7 @@ class WM extends Component {
             this.props.changeSlide();
             this.stateReset();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
   }
@@ -172,7 +172,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -189,7 +189,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -206,7 +206,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -223,7 +223,7 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
@@ -241,7 +241,7 @@ class WM extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
   }
