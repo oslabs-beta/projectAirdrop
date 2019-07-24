@@ -39,7 +39,7 @@ export const isAdmin = (value) => ({
 
 
 
-// on sign up, a post request is sent/stored into our database. 
+// on sign up, a post request is sent/stored into our database.
 // will return data of apt_id, name, pwd, and role
 export function signup () {
   return (dispatch, getState) => {
@@ -47,7 +47,7 @@ export function signup () {
     const url = '/api/signup'
     const state = getState();
     const body = {
-      "username": state.userData.newUsername,
+      "username": state.userData.username,
       "pw": state.userData.newPW,
     }
     return axios.post(url, body)
@@ -63,14 +63,14 @@ export function signup () {
           payload: userData
         })
       })
-    } 
+    }
 }
 
 // when signed in, we will send a post request to our database
 // will return data of apt_id, name, pwd, user_id, and role
 export function login () {
   return (dispatch, getState) => {
-  
+
     const url = '/api/login'
     const state = getState();
     const body = {
@@ -89,5 +89,5 @@ export function login () {
         })
       })
       .catch(err => console.log(err))
-    } 
+    }
 }

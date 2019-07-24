@@ -62,7 +62,7 @@ class VPS extends Component {
 
 		this.props.postAnswers(this.state.sectionId, vpsAnswers);
 
-		
+
 		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
 			a.push(b.answer);
 			return a;
