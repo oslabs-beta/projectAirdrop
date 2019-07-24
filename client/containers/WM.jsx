@@ -22,17 +22,17 @@ class WM extends Component {
       currentChoice: '',
       sectionData: {},
       sectionId: 'img/q',
-      answerTimeArray: []
+      answerTimeArray: [],
+      submitted: false
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.updateChoice = this.updateChoice.bind(this);
     this.onPracticeHandler = this.onPracticeHandler.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
     this.stateReset = this.stateReset.bind(this);
-
   }
 
   componentWillUnmount() {
@@ -73,15 +73,20 @@ class WM extends Component {
 
   onSubmit() {
     this.setState({
-      // currentChoice: '',
       answerTimeArray: [
         ...this.state.answerTimeArray,
         this.state.timeElapsed
-      ]
-    })
+      ],
+      // sectionData: {
+      //   ...this.state.sectionData,
+      //   [qid]: e.target.value
+      // },
+      submitted: true
+    });
+    console.log('WM SUBMIT SECTION DATA', this.state.sectionData)
   }
 
-  onChangeHandler(e, qid) {
+  updateChoice(e, qid) {
     this.setState({
       currentChoice: e.target.value,
       sectionData: {
@@ -89,6 +94,9 @@ class WM extends Component {
         [qid]: e.target.value
       }
     })
+    // this.setState({
+    //   currentChoice: e.target.value
+    // }, () => console.log('WM CURRENT CHOICE', this.state.currentChoice))
   }
 
   onPracticeHandler(e) {
@@ -98,9 +106,10 @@ class WM extends Component {
   }
 
   optionReset () {
-    console.log('option reset')
+    console.log('option reset');
     this.setState({
       currentChoice: '',
+      submitted: false
     })
   }
 
@@ -114,7 +123,6 @@ class WM extends Component {
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
@@ -123,7 +131,6 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -136,31 +143,24 @@ class WM extends Component {
             this.props.changeSlide();
             this.stateReset();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
   }
 
   startTest() {
-    console.log(this.props.currentSlide, "Current Slide");
-    // while(this.props.currentSlide < 18){
-    //   if()
-    // }
     this.startTimer();
     this.props.changeSlide();
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.optionReset();
           this.props.changeSlide();
           resolve()
         }, this.state.timeToNext)
       }
     )
       .then(() => {
-        console.log(this.props.currentSlide, "Current Slide")
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -172,14 +172,12 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
-            console.log(this.state.timeElapsed, "time")
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -191,13 +189,12 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -209,13 +206,12 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -227,13 +223,12 @@ class WM extends Component {
             this.optionReset();
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            this.optionReset();
             this.props.changeSlide();
             resolve()
           }, this.state.timeToNext)
@@ -246,7 +241,7 @@ class WM extends Component {
             clearInterval(this.interval);
             this.props.changeSlide();
             resolve()
-          }, 3000)
+          }, 5000)
         })
       })
   }
@@ -254,7 +249,8 @@ class WM extends Component {
   render() {
     // console.log('WM TIME ARRAY', this.state.answerTimeArray);
     // console.log('WM SECTION DATA', this.state.sectionData);
-    console.log('currentchoice', this.state.currentChoice);
+    console.log('currentchoice', this.state.currentChoice)    // console.log('WM ANSWER TIME ARRAY', this.state.answerTimeArray);
+    ;
     return (
       <div>
         <SectionHeader sectionName={this.props.WM.section_display_name}/>
@@ -265,10 +261,11 @@ class WM extends Component {
           changeSection={this.props.changeSection}
           startPractice={this.startPractice}
           startTest={this.startTest}
-          onChangeHandler={this.onChangeHandler}
+          updateChoice={this.updateChoice}
           currentChoice={this.state.currentChoice}
           onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
+          submitted={this.state.submitted}
         />
       </div>
     );

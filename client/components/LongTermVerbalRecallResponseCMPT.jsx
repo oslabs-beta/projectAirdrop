@@ -1,11 +1,28 @@
 import React from 'react';
 import UserNextBTN from './UserNextBTN.jsx';
 import SectionInstructions from "./SectionInstructions";
-import Button from '@material-ui/core/Button';
 import UserStartBTN from "./UserStartBTN";
 import UserSubmitBtn from "./UserSubmitBTN";
+import {makeStyles} from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  timer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'space-between'
+  }
+}));
 
 const LTVRR = (props) => {
+  const classes = useStyles();
   let currentBTN;
   let instructions;
   let timeLeft;
@@ -19,7 +36,7 @@ const LTVRR = (props) => {
   } else if(!props.testDone){
     timeLeft = props.timeLeft/1000;
     currentBTN = <UserSubmitBtn onSubmit={props.submitAnswer}/>;
-    fields.push(<input value={props.currentAnswer} onChange={props.handleChange} placeholder="Enter one word"/>)
+    fields.push(<TextField value={props.currentAnswer} onChange={props.handleChange} placeholder="Enter one word"/>)
   }
   if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
   if(props.answerArray.length > 5 && !props.testDone){
@@ -28,9 +45,13 @@ const LTVRR = (props) => {
   }
   return (
     <div>
-    {timeLeft}
     <SectionInstructions instructions={instructions}/>
-    {fields}
+      <div className={classes.timer}>
+        {timeLeft}
+      </div>
+      <div className={classes.root}>
+        {fields}
+      </div>
     {currentBTN}
   </div>
 )};

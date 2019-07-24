@@ -5,19 +5,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
     display: "inline-block",
   },
   card: {
-    minWidth: 100,
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
+    minWidth: 200
   },
 });
 
@@ -26,16 +21,18 @@ const VisualProcessingSpeedChoices = props => {
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
-        <CardContent>
-          {props.choiceRow}
-        </CardContent>
-        <CardActions>
-          <Radio
-            value={props.value}
-            checked={props.checked}
-            onChange={props.updateChoice}
-          />
-        </CardActions>
+         <CardContent>
+           <Typography className={classes.choices} variant={"h5"}>
+             {props.choiceRow}
+           </Typography>
+         </CardContent>
+         <CardActions>
+           <Radio
+             value={props.value}
+             checked={props.checked}
+             onChange={props.updateChoice}
+           />
+         </CardActions>
       </Card>
     </div>
   )
