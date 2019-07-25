@@ -33,5 +33,5 @@ const QuestionnairesCMPT = (props) => {
   );
 };
 
-export default QuestionnairesCMPT;
+export default (QuestionnairesCMPT);
 

@@ -11,6 +11,7 @@ import LTVRR from './LTVRR';
 import Introduction from '../components/IntroductionCMPT';
 import Instructions from '../components/Instructions.jsx';
 import Container from '@material-ui/core/Container';
+import UserResults from './UserResults';
 
 
 const mapStateToProps = store => ({
@@ -52,6 +53,7 @@ class MainTestDisplay extends Component {
       <ImageRecognition IR={this.props.test[0]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
       <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
       <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
+      <UserResults />,
       <Instructions />];
 
     // for (let i = 0; i < compArray.length; i++) {
