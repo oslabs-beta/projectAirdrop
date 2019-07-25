@@ -28,8 +28,8 @@ class VPS extends Component {
 			timerRunning: false,
 			practiceDone: false,
 			testStarted: false,
+			middleStop: false,
 			displayingAnswers: false,
-			swappedColumns: false,
 			answerArray: [],
 			currentChoice: null,
 			sectionId: 'VPS',
@@ -41,7 +41,7 @@ class VPS extends Component {
 		this.startPractice = this.startPractice.bind(this);
 		this.seriesIncrementer = this.seriesIncrementer.bind(this);
 		this.updateChoice = this.updateChoice.bind(this);
-		this.recognizeSwap = this.recognizeSwap.bind(this);
+		this.displayAnswers = this.displayAnswers.bind(this);
 	}
 
 	componentWillUnmount() {
@@ -51,7 +51,8 @@ class VPS extends Component {
 				'aid': this.props.aid,
 				'seriesIndex': i + 1,
 				'userChoice': b.answer,
-				'timeTaken': b.timeToRespond
+				'timeTaken': b.timeToRespond,
+				'correctAnswer': this.props.answerKey[i],
 			};
 			console.log('testing response', response);
 			a.push(response);
@@ -96,10 +97,13 @@ class VPS extends Component {
 					timeRun: 0,
 				})
 				console.log(this.state.answerArray, "before")
-			}
+			} 
+			// Checks if we are at the end of the current set of elements to be displayed
 			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 				clearInterval(this.seriesTicker);
+				//If we are displaying answers, we should stop
 				if(this.state.displayingAnswers){
+					//Auto-submit feature. 1st condition checks that the user hasn't done a manual submit. 2nd condition makes sure it isn't auto-submitting the practice question
 					if(!this.state.answerArray[this.state.currentSeriesIndex - 1] && this.state.practiceDone){
 						this.setState({
 							answerArray: [...this.state.answerArray, {
@@ -108,27 +112,31 @@ class VPS extends Component {
 							}]
 						})
 					}
+					//Sets practiceDone to true after the practice series finishes
 					if(!this.state.practiceDone) {
 						this.setState({
 							practiceDone: true
 						})
 					}
+					//Resets state for the next series
 					this.setState({
 						displayingAnswers: false,
-						swappedColumns: false,
+						middleStop: false,
 						currentElementIndex: 0,
 						currentSeriesIndex: this.state.currentSeriesIndex += 1,
 						timerRunning: false,
 						timeRun: 0,
 						submitted: false,
-						currentChoice: null
+						currentChoice: null,
 					})
 				}
+				//Controls when we display answers
 				if(this.state.timerRunning){
+					console.log("last step firing")
 					this.setState({
-						displayingAnswers: true,
-						timeToNext: 10000,
-					}, this.setAndNameInterval)
+						middleStop: true,
+						timeToNext: 0,
+					}, () => console.log(this.state.middleStop))
 				}
 			}
 		} else {
@@ -160,10 +168,13 @@ class VPS extends Component {
 			currentChoice: e.target.value
 		}, () => console.log(this.state.currentChoice))
 	}
-	recognizeSwap(){
+	displayAnswers(){
 		this.setState({
-			swappedColumns: true
-		})
+			timeToNext: 10000,
+			timerRunning: true,
+			middleStop: false,
+			displayingAnswers: true,
+		}, this.setAndNameInterval)
 	}
 	render () {
 		return (
@@ -179,13 +190,13 @@ class VPS extends Component {
 				practiceDone={this.state.practiceDone}
 				testStarted={this.state.testStarted}
 				displayingAnswers={this.state.displayingAnswers}
-				swappedColumns={this.state.swappedColumns}
-				recognizeSwap={this.recognizeSwap}
 				changeSection={this.props.changeSection}
 				instructions={this.props.section.instructions}
 				submitAnswer={this.submitAnswer}
 				currentChoice={this.state.currentChoice}
 				updateChoice={this.updateChoice}
+				displayAnswers={this.displayAnswers}
+				middleStop={this.state.middleStop}
 				sectionName={this.props.section.section_display_name}
 				submitted={this.state.submitted}
 				radioSubmitStatus={this.state.radioSubmitStatus}

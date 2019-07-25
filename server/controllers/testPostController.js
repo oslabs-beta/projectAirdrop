@@ -9,7 +9,7 @@ testPostController.postAnswers = (req, res, next) => {
 			console.log(req.body.sectionData)
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i].timeTaken);
+				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i].timeTaken, req.body.sectionData[i].correctAnswer);
 				tpModel.postToVPS(row)
 			}
 			break;
