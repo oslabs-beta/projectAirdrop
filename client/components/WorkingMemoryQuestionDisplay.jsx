@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   group: {
     margin: theme.spacing(1, 0),
     display: 'inline-table',
-  },
+  }
 }));
 
 const WorkingMemoryQuestionDisplay = props => {
@@ -97,6 +97,9 @@ const WorkingMemoryQuestionDisplay = props => {
       )
     }
       <UserSubmitBtn submitted={props.submitted} onSubmit={props.onSubmit}/>
+      <Typography className={classes.root} color={"secondary"}>
+        {props.submitError}
+      </Typography>
     </div>
   )
 };

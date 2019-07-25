@@ -27,6 +27,7 @@ const WorkingMemoryCMPT = (props) => {
       onPracticeHandler={props.onPracticeHandler}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <NextCMPT text={'Click next to continue.'} changeSlide={props.changeSlide}/>,
@@ -56,6 +57,7 @@ const WorkingMemoryCMPT = (props) => {
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[2].image_url}/>,
@@ -68,6 +70,7 @@ const WorkingMemoryCMPT = (props) => {
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[3].image_url}/>,
@@ -80,6 +83,7 @@ const WorkingMemoryCMPT = (props) => {
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[4].image_url}/>,
@@ -92,6 +96,7 @@ const WorkingMemoryCMPT = (props) => {
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[5].image_url}/>,
@@ -104,6 +109,7 @@ const WorkingMemoryCMPT = (props) => {
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <SectionEndScreen changeSection={props.changeSection}/>
