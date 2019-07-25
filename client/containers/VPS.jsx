@@ -8,6 +8,7 @@ import LTVRDCMPT from "../components/LongTermVerbalRecallDisplayCMPT";
 
 const mapStateToProps = store => ({
 	aid: store.answers.aid,
+	answerKey: store.test.answerKey,
 });
 
 
@@ -116,7 +117,7 @@ class VPS extends Component {
 						displayingAnswers: false,
 						swappedColumns: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 3,
+						currentSeriesIndex: this.state.currentSeriesIndex += 1,
 						timerRunning: false,
 						timeRun: 0,
 						submitted: false,
@@ -166,6 +167,7 @@ class VPS extends Component {
 			<div>
 				<VisualProcessingSpeedCMPT
 				timerRunning={this.state.timerRunning}
+				answerKey={this.props.answerKey}
 				startNewSeries={this.startNewSeries}
 				startPractice={this.startPractice}
 				currentElementIndex={this.state.currentElementIndex}
