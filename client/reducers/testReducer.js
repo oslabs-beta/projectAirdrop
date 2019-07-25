@@ -106,15 +106,18 @@ function generateVPS(answerKey) {
     retArr[i].splice(3, 1);
   }
   for(let i = 0; i < 6; i++){
-    let aSet = []
+    let rightElement = 0;
     for(let j = 0; j < 4; j++){
       console.log(retArr[j][i]);
       let swapIndex = Math.floor(Math.random()*4);
       [retArr[j][i], retArr[swapIndex][i]] = [retArr[swapIndex][i], retArr[j][i]];
-      aSet.push(swapIndex);
+      if(rightElement === swapIndex){
+        rightElement = j;
+      } else if (rightElement === j){
+        rightElement === swapIndex
+      }
     }
-    console.log(aSet, "ASET")
-    answerKey.push(aSet);
+    answerKey.push(rightElement);
   }
   return retArr;
 }
