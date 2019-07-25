@@ -45,6 +45,9 @@ const VisualProcessingSpeed = (props) => {
     }
     currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>
   }
+  if(props.middleStop){
+    currentBTN = <UserStartBTN action={props.displayAnswers} buttonText={'Display Answers'} />;
+  }
   return (
   <div>
     <SectionHeader sectionName={props.sectionName}/>
