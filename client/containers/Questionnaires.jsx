@@ -6,6 +6,13 @@ import SectionInstructions from '../components/SectionInstructions';
 import QuestionnaireHeader from "../components/QuestionnaireHeader";
 import UserSubmitBtn from "../components/UserSubmitBTN";
 import { timingSafeEqual } from 'crypto';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const mapStateToProps = store => ({
 	aid: store.answers.aid,
@@ -27,12 +34,14 @@ class Questionnaires extends Component {
       cmsqCurrentChoice: {},
       cnaaqCurrentChoice: {},
       sectionId: 'img/q',
-      currentQuest: 0
+      currentQuest: 0,
+      toggled: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeCMSQ = this.handleChangeCMSQ.bind(this);
     this.nextQuest = this.nextQuest.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount(){
@@ -117,20 +126,39 @@ class Questionnaires extends Component {
     });
   };
 
+  handleClose() {
+    this.setState({
+      toggled: !this.state.toggled,
+    })
+  }
 
 
   onSubmit (e) {
     console.log('did it get here?')
     e.preventDefault(e);
-    if(this.state.currentQuest === 1) {
+    if (this.state.currentQuest === 1 && Object.keys(this.state.cmsqCurrentChoice).length === 20) {
       this.props.changeSection()
-    } else {
+    } else if (this.state.currentQuest === 1) {
       this.setState({
-        currentQuest: this.state.currentQuest + 1,
+        toggled: !this.state.toggled
       })
+    } else {
+      console.log('did it get here tho?')
+      if(Object.keys(this.state.cnaaqCurrentChoice).length === 12){
+      console.log('did it get here tho? what about here?')
+      console.log(this.state.cnaaqCurrentChoice.length)
+        this.setState({
+          currentQuest: this.state.currentQuest + 1,
+        }) 
+      } else {
+          this.setState({
+            toggled: !this.state.toggled
+          })
+        }
+      }
     }
     
-  }
+  // }
 
   render() {
     console.log('CNAAQ STATE', this.state.cnaaqCurrentChoice);
@@ -180,6 +208,29 @@ class Questionnaires extends Component {
         cmsqCurrentChoice={this.state.cmsqCurrentChoice}
         submit={this.onSubmit}
         />} */}
+      { this.state.toggled ?
+      (
+      <Dialog
+        open={this.state.toggled}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"It looks like some of the questions were not answered."}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Please complete every item in the questionnaire before submitting.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+      )
+      :
+      null}
         {this.state.CNAAQ && questionnaireRend[this.state.currentQuest]}
         {/* <UserSubmitBtn onSubmit={this.onSubmit}/> */}
       </div>
