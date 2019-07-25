@@ -149,6 +149,9 @@ class VPS extends Component {
 				// timeRun: this.state.timeToNext
 			});
 		}
+		this.setState({
+			submitted: true
+		});
 		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
