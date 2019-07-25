@@ -47,8 +47,8 @@ export function signup () {
     const url = '/api/signup'
     const state = getState();
     const body = {
-      "username": state.userData.newUsername,
-      "pw": state.userData.newPW,
+      "username": state.userData.username,
+      "pw": state.userData.pw,
     }
     return axios.post(url, body)
       .then(response => {

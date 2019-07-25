@@ -34,23 +34,29 @@ const VisualProcessingSpeed = (props) => {
     if(props.currentSeriesIndex === 6) currentBTN = <SectionEndScreen changeSection={props.changeSection}/>
   }
   if(props.displayingAnswers){
+    let rightAnswer = 0;
+    for(let i = 0; i < props.answerKey[props.currentSeriesIndex].length; i++){
+      if(i === rightAnswer){
+        rightAnswer = props.answerKey[props.currentSeriesIndex][i]
+      } else if(rightAnswer === props.answerKey[props.currentSeriesIndex][i]){
+        rightAnswer = i;
+      }
+    }
     for(let j = 0; j < 4; j++) {
       let choiceRow = [];
-
       for(let i = 0; i < 5; i++){
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
-      choiceDisplay.push(
-        <VisualProcessingSpeedChoices choiceRow={choiceRow} value={j} checked={props.currentChoice == j} updateChoice={props.updateChoice}/>
-      )
-    }
-    if(!props.swappedColumns){
-      let randomIndex = (Math.ceil(Math.random()*3))
-      let temp = choiceDisplay[0];
-      choiceDisplay[0] = choiceDisplay[randomIndex];
-      choiceDisplay[randomIndex] = temp;
-      props.recognizeSwap();
-    }
+      if(j === rightAnswer){
+        choiceDisplay.push(
+          <VisualProcessingSpeedChoices choiceRow={choiceRow} value={5} checked={props.currentChoice == j} updateChoice={props.updateChoice}/>
+        )
+      } else {
+        choiceDisplay.push(
+          <VisualProcessingSpeedChoices choiceRow={choiceRow} value={j} checked={props.currentChoice == j} updateChoice={props.updateChoice}/>
+        )
+      }
+      }
     currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>
   }
   return (
