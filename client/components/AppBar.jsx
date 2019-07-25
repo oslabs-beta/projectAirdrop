@@ -18,7 +18,7 @@ export default function SimpleAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit">
-            The Legion Mental Performance Assessment
+            Legion Mental Performance Assessment
           </Typography>
         </Toolbar>
       </AppBar>
