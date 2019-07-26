@@ -88,7 +88,7 @@ app.get('/api/test',
 app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
-  res.status(200);
+  res.status(200).send();
 });
 
 app.post('/api/demo', tpController.postDemoData, (req, res) => {

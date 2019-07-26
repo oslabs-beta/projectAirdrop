@@ -57,7 +57,7 @@ class IR extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('assessment', assessment);
+    console.log('ir assessment', assessment);
 
     this.props.postAnswers(this.state.sectionId, assessment);
 
