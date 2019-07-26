@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
   group: {
     margin: theme.spacing(1, 0),
     display: 'inline-table',
-    // justifyContent: 'center'
   },
 }));
 

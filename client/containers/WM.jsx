@@ -145,6 +145,8 @@ class WM extends Component {
   stateReset() {
     this.setState({
       answerTimeArray: [],
+      sectionData: {},
+      currentIndex: 0
     })
   }
 
@@ -281,11 +283,10 @@ class WM extends Component {
   }
 
   render() {
-    // console.log('WM TIME ARRAY', this.state.answerTimeArray);
-    // console.log('WM SECTION DATA', this.state.sectionData);
+    console.log('WM TIME ARRAY', this.state.answerTimeArray);
+    console.log('WM SECTION DATA', this.state.sectionData);
     // console.log('currentchoice', this.state.currentChoice)
-    console.log('submit error', this.state.submitError)
-    ;
+    // console.log('submit error', this.state.submitError);
     return (
       <div>
         <SectionHeader sectionName={this.props.WM.section_display_name}/>

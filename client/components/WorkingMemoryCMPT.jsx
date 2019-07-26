@@ -24,7 +24,7 @@ const WorkingMemoryCMPT = (props) => {
           props.WM.practice[0]['choice3'],
           props.WM.practice[0]['choice4']]}
       currentChoice={props.currentChoice}
-      onPracticeHandler={props.onPracticeHandler}
+      updateChoice={props.updateChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
       submitError={props.submitError}

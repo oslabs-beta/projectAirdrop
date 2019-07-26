@@ -21,9 +21,10 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[0]['choice2']]
         }
         currentChoice={props.currentChoice}
-        onPracticeHandler={props.onPracticeHandler}
+        updateChoice={props.updateChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
 
@@ -36,9 +37,10 @@ const ImageRecognitionCMPT = (props) => {
             props.IR.practice[1]['choice2']]
         }
         currentChoice={props.currentChoice}
-        onPracticeHandler={props.onPracticeHandler}
+        updateChoice={props.updateChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
       <NextCMPT text={'Click next to continue.'} changeSlide={props.changeSlide}/>,
@@ -67,10 +69,11 @@ const ImageRecognitionCMPT = (props) => {
         question={props.IR.images[0].questions[0].question_text}
         qid={props.IR.images[0].questions[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
-        onChangeHandler={props.onChangeHandler}
+        updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
       <Image url={props.IR.images[1].image_url}/> ,
@@ -79,10 +82,11 @@ const ImageRecognitionCMPT = (props) => {
         question={props.IR.images[1].questions[0].question_text}
         qid={props.IR.images[1].questions[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
-        onChangeHandler={props.onChangeHandler}
+        updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
       <Image url={props.IR.images[2].image_url}/>,
@@ -91,10 +95,11 @@ const ImageRecognitionCMPT = (props) => {
         question={props.IR.images[2].questions[0].question_text}
         qid={props.IR.images[2].questions[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
-        onChangeHandler={props.onChangeHandler}
+        updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
       <Image url={props.IR.images[3].image_url}/> ,
@@ -103,10 +108,11 @@ const ImageRecognitionCMPT = (props) => {
         question={props.IR.images[3].questions[0].question_text}
         qid={props.IR.images[3].questions[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
-        onChangeHandler={props.onChangeHandler}
+        updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
       <Image url={props.IR.images[4].image_url}/>,
@@ -115,10 +121,11 @@ const ImageRecognitionCMPT = (props) => {
         question={props.IR.images[4].questions[0].question_text}
         qid={props.IR.images[4].questions[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
-        onChangeHandler={props.onChangeHandler}
+        updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
         onSubmit={props.onSubmit}
         submitted={props.submitted}
+        submitError={props.submitError}
       />,
 
       <SectionEndScreen
