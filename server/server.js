@@ -10,6 +10,7 @@ const encryptionController = require('./controllers/encryptionController');
 const userController = require('./controllers/userController');
 const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -23,6 +24,13 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 //LOGIN AND AUTH
 //signup to create account for new users
 //creating middleware
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.post('/api/signup',
   encryptionController.encryptPassword,
   userController.createUser,
