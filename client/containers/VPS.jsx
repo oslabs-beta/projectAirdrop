@@ -29,6 +29,7 @@ class VPS extends Component {
 			practiceDone: false,
 			testStarted: false,
 			middleStop: false,
+			seenPracticeAnswers: false,
 			displayingAnswers: false,
 			answerArray: [],
 			currentChoice: null,
@@ -102,7 +103,7 @@ class VPS extends Component {
 			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 				clearInterval(this.seriesTicker);
 				//If we are displaying answers, we should stop
-				if(this.state.displayingAnswers){
+				if(this.state.displayingAnswers && this.state.seenPracticeAnswers){
 					//Auto-submit feature. 1st condition checks that the user hasn't done a manual submit. 2nd condition makes sure it isn't auto-submitting the practice question
 					if(!this.state.answerArray[this.state.currentSeriesIndex - 1] && this.state.practiceDone){
 						this.setState({
@@ -113,7 +114,7 @@ class VPS extends Component {
 						})
 					}
 					//Sets practiceDone to true after the practice series finishes
-					if(!this.state.practiceDone) {
+					if(!this.state.practiceDone && this.state.seenPracticeAnswers) {
 						this.setState({
 							practiceDone: true
 						})
@@ -136,7 +137,7 @@ class VPS extends Component {
 					this.setState({
 						middleStop: true,
 						timeToNext: 0,
-					}, () => console.log(this.state.middleStop))
+					})
 				}
 			}
 		} else {
@@ -160,7 +161,6 @@ class VPS extends Component {
 		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
-		// console.log('does this work?')
 		this.setState({
 			currentChoice: e.target.value
 		}, () => console.log(this.state.currentChoice))

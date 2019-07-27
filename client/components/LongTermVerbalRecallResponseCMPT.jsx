@@ -39,7 +39,7 @@ const LTVRR = (props) => {
     fields.push(<TextField value={props.currentAnswer} onChange={props.handleChange} placeholder="Enter one word"/>)
   }
   if(props.testDone) currentBTN = <UserNextBTN changeSection={props.changeSection}/>
-  if(props.answerArray.length > 5 && !props.testDone){
+  if(props.answerArray.length > 20 && !props.testDone){
     instructions = "No more answers can be submitted. Thank for time";
     props.earlyFinish();
   }

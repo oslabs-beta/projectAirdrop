@@ -45,7 +45,7 @@ class WM extends Component {
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
         'aid': this.props.aid,
-        'qid': b,
+        'cid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
       };
@@ -79,19 +79,19 @@ class WM extends Component {
       ],
       // sectionData: {
       //   ...this.state.sectionData,
-      //   [qid]: e.target.value
+      //   [cid]: e.target.value
       // },
       submitted: true
     });
     console.log('WM SUBMIT SECTION DATA', this.state.sectionData)
   }
 
-  updateChoice(e, qid) {
+  updateChoice(e, cid) {
     this.setState({
       currentChoice: e.target.value,
       sectionData: {
         ...this.state.sectionData,
-        [qid]: e.target.value
+        [cid]: e.target.value
       }
     })
     // this.setState({

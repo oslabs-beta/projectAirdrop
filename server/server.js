@@ -83,6 +83,10 @@ app.post('/api/test',
   res.status(200).send();
 });
 
+app.get('/api/results', (req, res) => {
+  res.status(200).send(res.locals.means);
+})
+
 app.post('/api/demo', tpController.postDemoData, (req, res) => {
   res.json(res.locals.aID)
 })
