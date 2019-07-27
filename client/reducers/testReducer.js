@@ -6,9 +6,10 @@ const initialState = {
   answers: [],
   // new answer array for each section
   vpsAnswers: [],
+  answerKey: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 0,
+  currentSection: 2,
   currentSlide: 0,
 };
 
@@ -59,7 +60,7 @@ const testReducer = (state = initialState, action) => {
     case BUILD_VPS_ANSWERS:
       return (console.log('building VPS'), {
         ...state,
-        vpsAnswers: generateVPS()
+        vpsAnswers: generateVPS(state.answerKey)
       });
 
     default:
@@ -67,7 +68,7 @@ const testReducer = (state = initialState, action) => {
   }
 };
 
-function generateVPS() {
+function generateVPS(answerKey) {
   const randArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
   'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   let retArr = [];
@@ -102,7 +103,22 @@ function generateVPS() {
   retArr.push(rightAnswers, nearlyRight, kindaRight, veryWrong);
   for(let i = 0; i < retArr.length; i++){
     retArr[i].unshift(retArr[i][3]);
-    retArr[i].splice(3, 1);
+    retArr[i].splice(4, 1);
+  }
+  for(let i = 0; i < 6; i++){
+    let rightElement = 0;
+    for(let j = 0; j < 4; j++){
+      let swapIndex = Math.floor(Math.random()*4);
+      console.log(rightElement);
+      [retArr[j][i], retArr[swapIndex][i]] = [retArr[swapIndex][i], retArr[j][i]];
+      if(rightElement === swapIndex){
+        rightElement = j;
+      } else if (rightElement === j){
+        rightElement = swapIndex
+      }
+      console.log(retArr[rightElement][i], "right element")
+    }
+    answerKey.push(rightElement);
   }
   return retArr;
 }

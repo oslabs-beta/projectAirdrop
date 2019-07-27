@@ -36,7 +36,6 @@ const VisualProcessingSpeed = (props) => {
   if(props.displayingAnswers){
     for(let j = 0; j < 4; j++) {
       let choiceRow = [];
-
       for(let i = 0; i < 5; i++){
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
@@ -44,14 +43,10 @@ const VisualProcessingSpeed = (props) => {
         <VisualProcessingSpeedChoices choiceRow={choiceRow} value={j} checked={props.currentChoice == j} updateChoice={props.updateChoice}/>
       )
     }
-    if(!props.swappedColumns){
-      let randomIndex = (Math.ceil(Math.random()*3))
-      let temp = choiceDisplay[0];
-      choiceDisplay[0] = choiceDisplay[randomIndex];
-      choiceDisplay[randomIndex] = temp;
-      props.recognizeSwap();
-    }
     currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>
+  }
+  if(props.middleStop){
+    currentBTN = <UserStartBTN action={props.displayAnswers} buttonText={'Display Answers'} />;
   }
   return (
   <div>
