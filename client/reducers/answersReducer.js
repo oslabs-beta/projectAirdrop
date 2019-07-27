@@ -17,28 +17,40 @@ const initialState = {
   aid: null,
   ltvr: {
     words: [],
-    responses: [],
-    mean: null
+    responses: {},
+    mean: null,
   },
   vps: {
     responses: [],
-    mean: null
+    mean: null,
   },
   wm: {
     correct: [],
     responses: [],
-    mean: null
+    // new
+    userResponse: {
+      correctResponses: [],
+    },
+    mean: null,
   },
   ir: {
     correct: [],
     responses: [],
+    // new
+    userResponse: {
+      correctResponses: [],
+    },
     mean: null,
   },
   cmsq: {
-    responses: [],
+    // responses: [],
+    // responses: ["6","4","5","6","4","3","5","6","4","3","4", "6", "4", "4", "5", "4", "3", "5", "6", "3"],
+    responses: {},
   },
   cnaaq: {
-    responses: [],
+    // responses: [],
+    // responses: ["3","4","5","5","4","3","5","5","4","3","4","3"],
+    responses: {},
   },
 };
 
@@ -108,31 +120,105 @@ const answersReducer = (state = initialState, action) => {
         }
       }
     case SEND_WM_RESPONSES:
-      return {
-        ...state,
-        wm: {
-          ...state.wm,
-          responses: action.payload
+
+      const totalRightWm = state.wm.correct.reduce((a,b,c)=>{
+          if (b === action.payload[c]) {
+            a.push(b)
+          }
+          return a; 
+         },[])
+
+         return {
+          ...state,
+          wm: {
+            ...state.wm,
+            responses: [...action.payload],
+            userResponse: {
+              correctResponses: totalRightWm,
+              // correct,
+              // responses,
+              // mean,
+            }
+          }
         }
-      }
+      // return {
+      //   ...state,
+      //   wm: {
+      //     ...state.wm,
+      //     responses: action.payload
+      //   }
+      // }
+
+      // return {
+      //   ...state,
+      //   wm: {
+      //     ...state.wm,
+          
+      //   }
+      // }
     case SEND_IR_RESPONSES:
+        // ir: {
+        //   correct: [],
+        //   responses: [],
+        //   mean: null,
+
+      const totalRightIr = state.ir.correct.reduce((a,b,c)=>{
+       if (b === action.payload[c]) {
+         a.push(b)
+       }
+       return a; 
+      },[])
       return {
         ...state,
         ir: {
           ...state.ir,
-          responses: action.payload,
+          responses: [...action.payload],
+          userResponse: {
+            correctResponses: totalRightIr,
+            // correct,
+            // responses,
+            // mean,
+          }
         }
       }
+      // return {
+      //   ...state,
+      //   ir: {
+      //     ...state.ir,
+      //     responses: action.payload,
+      //   }
+      // }
     case SEND_LTVR_RESPONSES:
+      const key = Object.values(state.ltvr.words)
+      .map(key => {
+        return key = key.word.toLowerCase()});
+      const sanitizedAnswers = action.payload.map(word => {
+        word = word.toLowerCase().trim();
+        return word;
+      });
+      const correctResponses = sanitizedAnswers.filter(a=> key.includes(a));
+      const numberCorrect = correctResponses.length;
       return {
         ...state,
         ltvr:{
           ...state.ltvr,
-          responses: action.payload
+          responses: {
+            ...state.ltvr.responses,
+            key,
+            sanitizedAnswers,
+            correctResponses,
+            numberCorrect: numberCorrect || 0,
+          // }
         }
+      // }
+      // return {
+      //   ...state,
       }
+    }
     default:
-      return state;
+      return {
+        ...state,
+      }
   }
 };
 
