@@ -10,6 +10,7 @@ const encryptionController = require('./controllers/encryptionController');
 const userController = require('./controllers/userController');
 const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
