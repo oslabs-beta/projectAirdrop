@@ -4,6 +4,7 @@ import './../styles.css'
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 import SectionHeader from "../components/SectionHeader";
+import WorkingMemoryCMPT from "../components/WorkingMemoryCMPT";
 
 const mapStateToProps = store => ({
   apiStatus: store.answers.apiStatus,
@@ -27,11 +28,14 @@ class IR extends Component {
       sectionData: {},
       sectionId: 'img/q',
       answerTimeArray: [],
-      submitted: false
+      submitted: false,
+      isChecked: false,
+      submitError: '',
+      currentIndex: 0
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.updateChoice = this.updateChoice.bind(this);
     this.onPracticeHandler = this.onPracticeHandler.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -68,13 +72,14 @@ class IR extends Component {
     this.props.postResponses(irResponses);
   }
 
-  onChangeHandler(e, qid) {
+  updateChoice(e, qid) {
     this.setState({
       currentChoice: e.target.value,
       sectionData: {
         ...this.state.sectionData,
         [qid]: e.target.value
-      }
+      },
+      isChecked: true
     })
   }
 
@@ -93,26 +98,60 @@ class IR extends Component {
   }
 
   onSubmit() {
-    this.setState({
-      // currentChoice: '',
-      answerTimeArray: [
-        ...this.state.answerTimeArray,
-        this.state.timeElapsed
-      ],
-      submitted: true
-    })
+    if (this.state.isChecked) {
+      this.setState({
+        answerTimeArray: [
+          ...this.state.answerTimeArray,
+          this.state.timeElapsed
+        ],
+        submitted: true,
+        submitError: ''
+      })
+    } else {
+      this.setState({
+        submitError: 'Please select an answer before submitting.'
+      })
+    }
   }
 
   optionReset () {
     this.setState({
       currentChoice: '',
-      submitted: false
+      submitted: false,
+      isChecked: false,
+      submitError: '',
+      currentIndex: this.state.currentIndex += 1
     })
+  }
+
+  autoSubmit() {
+    if (this.state.isChecked && !this.state.submitted) {
+      this.setState({
+        answerTimeArray: [
+          ...this.state.answerTimeArray,
+          Math.floor(this.state.timeElapsed / 1000) * 1000
+        ],
+      })
+    }
+    if (!this.state.isChecked && !this.state.submitted) {
+      this.setState({
+        answerTimeArray: [
+          ...this.state.answerTimeArray,
+          Math.floor(this.state.timeElapsed / 1000) * 1000
+        ],
+        sectionData: {
+          ...this.state.sectionData,
+          [this.props.IR.images[this.state.currentIndex].questions[0].id]: null
+        }
+      })
+    }
   }
 
   stateReset() {
     this.setState({
       answerTimeArray: [],
+      sectionData: {},
+      currentIndex: 0
     })
   }
 
@@ -128,6 +167,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -145,6 +185,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             this.stateReset();
@@ -167,6 +208,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -184,6 +226,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -201,6 +244,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -218,6 +262,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -235,6 +280,7 @@ class IR extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             clearInterval(this.interval);
             this.props.changeSlide();
@@ -257,11 +303,12 @@ class IR extends Component {
           changeSection={this.props.changeSection}
           startPractice={this.startPractice}
           startTest={this.startTest}
-          onChangeHandler={this.onChangeHandler}
+          updateChoice={this.updateChoice}
           currentChoice={this.state.currentChoice}
-          onPracticeHandler={this.onPracticeHandler}
+          // onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
           submitted={this.state.submitted}
+          submitError={this.state.submitError}
         />
       </div>
     );

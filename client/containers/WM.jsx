@@ -23,7 +23,10 @@ class WM extends Component {
       sectionData: {},
       sectionId: 'img/q',
       answerTimeArray: [],
-      submitted: false
+      submitted: false,
+      isChecked: false,
+      submitError: '',
+      currentIndex: 0
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -72,31 +75,32 @@ class WM extends Component {
   }
 
   onSubmit() {
-    this.setState({
-      answerTimeArray: [
-        ...this.state.answerTimeArray,
-        this.state.timeElapsed
-      ],
-      // sectionData: {
-      //   ...this.state.sectionData,
-      //   [cid]: e.target.value
-      // },
-      submitted: true
-    });
-    console.log('WM SUBMIT SECTION DATA', this.state.sectionData)
+    console.log(this.state.isChecked, "Checked?")
+    if (this.state.isChecked) {
+      this.setState({
+        answerTimeArray: [
+          ...this.state.answerTimeArray,
+          this.state.timeElapsed
+        ],
+        submitted: true,
+        submitError: ''
+      })
+    } else {
+      this.setState({
+        submitError: 'Please select an answer before submitting.'
+      })
+    }
   }
 
   updateChoice(e, cid) {
     this.setState({
+      isChecked: true,
       currentChoice: e.target.value,
       sectionData: {
         ...this.state.sectionData,
         [cid]: e.target.value
       }
     })
-    // this.setState({
-    //   currentChoice: e.target.value
-    // }, () => console.log('WM CURRENT CHOICE', this.state.currentChoice))
   }
 
   onPracticeHandler(e) {
@@ -109,13 +113,41 @@ class WM extends Component {
     console.log('option reset');
     this.setState({
       currentChoice: '',
-      submitted: false
+      submitted: false,
+      isChecked: false,
+      submitError: '',
+      currentIndex: this.state.currentIndex += 1
     })
+  }
+
+  autoSubmit() {
+    if (this.state.isChecked && !this.state.submitted) {
+      this.setState({
+        answerTimeArray: [
+          ...this.state.answerTimeArray,
+          Math.floor(this.state.timeElapsed / 1000) * 1000
+        ],
+      })
+    }
+    if (!this.state.isChecked && !this.state.submitted) {
+      this.setState({
+        answerTimeArray: [
+          ...this.state.answerTimeArray,
+          Math.floor(this.state.timeElapsed / 1000) * 1000
+        ],
+        sectionData: {
+          ...this.state.sectionData,
+          [this.props.WM.images[this.state.currentIndex].questions[0].id]: null
+        }
+      })
+    }
   }
 
   stateReset() {
     this.setState({
       answerTimeArray: [],
+      sectionData: {},
+      currentIndex: 0
     })
   }
 
@@ -169,6 +201,7 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -186,6 +219,7 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -203,6 +237,7 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -220,6 +255,7 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             this.props.changeSlide();
             resolve()
@@ -237,6 +273,7 @@ class WM extends Component {
       .then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
+            this.autoSubmit();
             this.optionReset();
             clearInterval(this.interval);
             this.props.changeSlide();
@@ -247,10 +284,10 @@ class WM extends Component {
   }
 
   render() {
-    // console.log('WM TIME ARRAY', this.state.answerTimeArray);
-    // console.log('WM SECTION DATA', this.state.sectionData);
-    console.log('currentchoice', this.state.currentChoice)    // console.log('WM ANSWER TIME ARRAY', this.state.answerTimeArray);
-    ;
+    console.log('WM TIME ARRAY', this.state.answerTimeArray);
+    console.log('WM SECTION DATA', this.state.sectionData);
+    // console.log('currentchoice', this.state.currentChoice)
+    // console.log('submit error', this.state.submitError);
     return (
       <div>
         <SectionHeader sectionName={this.props.WM.section_display_name}/>
@@ -266,6 +303,7 @@ class WM extends Component {
           onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
           submitted={this.state.submitted}
+          submitError={this.state.submitError}
         />
       </div>
     );
