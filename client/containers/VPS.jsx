@@ -64,7 +64,7 @@ class VPS extends Component {
 
 		this.props.postAnswers(this.state.sectionId, vpsAnswers);
 
-		
+
 		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
 			a.push(b.answer);
 			return a;
@@ -97,7 +97,7 @@ class VPS extends Component {
 					timeRun: 0,
 				})
 				console.log(this.state.answerArray, "before")
-			} 
+			}
 			// Checks if we are at the end of the current set of elements to be displayed
 			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 				clearInterval(this.seriesTicker);
@@ -123,7 +123,7 @@ class VPS extends Component {
 						displayingAnswers: false,
 						middleStop: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 1,
+						currentSeriesIndex: this.state.currentSeriesIndex += 3,
 						timerRunning: false,
 						timeRun: 0,
 						submitted: false,
@@ -157,6 +157,9 @@ class VPS extends Component {
 				// timeRun: this.state.timeToNext
 			});
 		}
+		this.setState({
+			submitted: true
+		});
 		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
