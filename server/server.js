@@ -23,6 +23,13 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 //LOGIN AND AUTH
 //signup to create account for new users
 //creating middleware
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.post('/api/signup',
   encryptionController.encryptPassword,
   userController.createUser,
@@ -80,7 +87,7 @@ app.get('/api/test',
 app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
-  res.status(200).send();
+  res.status(200);
 });
 
 app.post('/api/demo', tpController.postDemoData, (req, res) => {
