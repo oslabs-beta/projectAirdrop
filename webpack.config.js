@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+var CompressionPlugin = require('compression-webpack-plugin');
+
 
 const NODE_DEV_SERVER_URL = 'http://[::1]:3000';
 
@@ -46,12 +49,34 @@ module.exports = {
           backgroundSync: {
             name: 'background-queue',
             options: {
-              maxRetentionTime: 60 * 60,
+              maxRetentionTime: 24 * 60,
             }
           }
         }
       }],
-    })
+    }),
+    new WebpackPwaManifest({
+      name: 'Legions MPA',
+      short_name: 'MPA',
+      description: 'Mental Performance Assessment',
+      background_color: '#01579b',
+      theme_color: '#01579b',
+      start_url: '/?homescreen=1',
+      icons: [
+        {
+          src: path.resolve('client/src/images//5th_SFG_ICON.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          destination: path.join('assets', 'icons')
+        }
+      ]
+    }),
+    new webpack.DefinePlugin({ 
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new CompressionPlugin(),
   ],
   devServer: {
     contentBase: '/',
