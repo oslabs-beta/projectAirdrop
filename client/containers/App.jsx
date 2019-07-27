@@ -48,12 +48,12 @@ class App extends Component {
          <CssBaseline>
             <AppBar/>
            <Container maxWidth={'md'}>
-             <Switch>
+             {/*<Switch>*/}
                {/*<Route path='/login' component={Login} />*/}
                {/*<Authentication>*/}
                  <Route path='/main' component={Main}/>
                {/*</Authentication>*/}
-             </Switch>
+             {/*</Switch>*/}
            </Container>
           </CssBaseline>
         </MuiThemeProvider>
