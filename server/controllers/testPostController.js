@@ -35,7 +35,7 @@ testPostController.postAnswers = (req, res, next) => {
 		case "img/q":
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].qid, req.body.sectionData[i].answer, req.body.sectionData[i].timeTaken);
+				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].cid, req.body.sectionData[i].answer, req.body.sectionData[i].timeTaken);
 				tpModel.postToImageAndQuestionnaire(row)
 				console.log("check check")
 			}
