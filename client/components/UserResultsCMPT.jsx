@@ -38,7 +38,7 @@ const UserResults = props => {
       </ul>
       <ul>
         <li>VPS:</li>
-        <li>Number you got right: ? ? ? </li>
+        <li>Number you got right: {props.vps.userResponse.correctResponses.length} / 6 </li>
       </ul>
       <ul>
         <li>Working Memory</li>

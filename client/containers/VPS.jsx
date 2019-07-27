@@ -65,8 +65,14 @@ class VPS extends Component {
 		this.props.postAnswers(this.state.sectionId, vpsAnswers);
 
 		
-		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
-			a.push(b.answer);
+		const vpsResponses = this.state.answerArray.reduce((a,b,i) => {
+			const response = {
+				'seriesIndex': i + 1,
+				'userChoice': b.answer,
+				'timeTaken': b.timeToRespond,
+				'correctAnswer': this.props.answerKey[i],
+			}
+			a.push(response);
 			return a;
 		},[])
 		this.props.postVPS(vpsResponses)
@@ -123,7 +129,7 @@ class VPS extends Component {
 						displayingAnswers: false,
 						middleStop: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 1,
+						currentSeriesIndex: this.state.currentSeriesIndex += 2,
 						timerRunning: false,
 						timeRun: 0,
 						submitted: false,

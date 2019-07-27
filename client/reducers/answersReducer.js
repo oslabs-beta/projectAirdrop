@@ -22,6 +22,9 @@ const initialState = {
   },
   vps: {
     responses: [],
+    userResponse: {
+      correctResponses: [],
+    },
     mean: null,
   },
   wm: {
@@ -112,13 +115,36 @@ const answersReducer = (state = initialState, action) => {
         }
       }
     case SEND_VPS_RESPONSES:
+
+        // responses: Array(4)
+        // 0: {seriesIndex: 1, userChoice: "0", timeTaken: 2000, correctAnswer: 2}
+        // 1: {seriesIndex: 2, userChoice: "0", timeTaken: 10000, correctAnswer: 0}
+        // 2: {seriesIndex: 3, userChoice: "3", timeTaken: 2300, correctAnswer: 0}
+        // 3: {seriesIndex: 4, userChoice: "3", timeTaken: 10000, correctAnswer: 3}
+        const totalRightVPS = Object.keys(action.payload).reduce((a,b,c,d) => {
+            if (Number(action.payload[b].userChoice) === action.payload[b].correctAnswer) {
+              a.push(action.payload[b].userChoice)
+            };
+            return a;
+        }, []);
+
       return {
         ...state,
         vps: {
           ...state.vps,
-          responses: action.payload
-        }
+          responses: [...action.payload],
+          userResponse: {
+            correctResponses: totalRightVPS,
+          },
+        },
       }
+      // return {
+      //   ...state,
+      //   vps: {
+      //     ...state.vps,
+      //     responses: action.payload
+      //   }
+      // }
     case SEND_WM_RESPONSES:
 
       const totalRightWm = state.wm.correct.reduce((a,b,c)=>{
