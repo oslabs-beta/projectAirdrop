@@ -25,7 +25,7 @@ class IR extends Component {
       timeToNext: 2000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'img/q',
+      sectionId: 'img',
       answerTimeArray: [],
       submitted: false
     };

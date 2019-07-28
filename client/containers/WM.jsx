@@ -21,7 +21,7 @@ class WM extends Component {
       timeToNext: 3000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'img/q',
+      sectionId: 'img',
       answerTimeArray: [],
       submitted: false
     };

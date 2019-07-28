@@ -33,7 +33,7 @@ class Questionnaires extends Component {
       CNAAQ: null,
       cmsqCurrentChoice: {},
       cnaaqCurrentChoice: {},
-      sectionId: 'img/q',
+      sectionId: 'q',
       currentQuest: 0,
       toggled: false,
     };
@@ -75,7 +75,7 @@ class Questionnaires extends Component {
     }, []);
     console.log('cmsq unmount', cmsq);
     console.log('cnaaq unmount', cnaaq);
-    const questionnaireResponses = { ...cmsq, ...cnaaq};
+    const questionnaireResponses = [ ...cmsq, ...cnaaq];
     console.log('questionnaire assessment', questionnaireResponses)
     this.props.postAnswers(this.state.sectionId, questionnaireResponses);
 
