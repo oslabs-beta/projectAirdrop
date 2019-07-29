@@ -24,7 +24,8 @@ class LTVRR extends Component {
       answerArray: [],
       currentAnswer: '',
       sectionId: 'LTVR',
-      answerTimeArray: []
+      answerTimeArray: [],
+      submitError: ''
     };
 
 		this.startTimer = this.startTimer.bind(this);
@@ -76,10 +77,18 @@ class LTVRR extends Component {
     }
 
     submitAnswer () {
+	    if (this.state.currentAnswer !== '') {
         this.setState({
           answerArray: [...this.state.answerArray, this.state.currentAnswer],
-          answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft]
+          answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft],
+          submitError: ''
         })
+      }
+	    if (this.state.currentAnswer === '') {
+	      this.setState({
+          submitError: 'Please type an answer before submitting.'
+        })
+      }
     }
 
     handleChange (e) {
@@ -124,6 +133,7 @@ class LTVRR extends Component {
                 handleChange={this.handleChange}
                 submitAnswer={this.submitAnswer}
                 earlyFinish={this.earlyFinish}
+                submitError={this.state.submitError}
 				/>
 			</div>
 		)

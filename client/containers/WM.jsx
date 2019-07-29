@@ -300,7 +300,7 @@ class WM extends Component {
           startTest={this.startTest}
           updateChoice={this.updateChoice}
           currentChoice={this.state.currentChoice}
-          onPracticeHandler={this.onPracticeHandler}
+          // onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
           submitted={this.state.submitted}
           submitError={this.state.submitError}

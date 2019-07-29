@@ -3,7 +3,7 @@ import UserNextBTN from './UserNextBTN.jsx';
 import SectionInstructions from "./SectionInstructions";
 import UserStartBTN from "./UserStartBTN";
 import UserSubmitBtn from "./UserSubmitBTN";
-import {makeStyles} from "@material-ui/core";
+import {makeStyles, Typography} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
@@ -53,6 +53,9 @@ const LTVRR = (props) => {
         {fields}
       </div>
     {currentBTN}
+      <Typography className={classes.root} color={"secondary"}>
+        {props.submitError}
+      </Typography>
   </div>
 )};
 
