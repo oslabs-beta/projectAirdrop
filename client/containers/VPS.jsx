@@ -29,6 +29,7 @@ class VPS extends Component {
 			practiceDone: false,
 			testStarted: false,
 			middleStop: false,
+			seenPracticeAnswers: false,
 			displayingAnswers: false,
 			answerArray: [],
 			currentChoice: null,
@@ -113,7 +114,7 @@ class VPS extends Component {
 						})
 					}
 					//Sets practiceDone to true after the practice series finishes
-					if(!this.state.practiceDone) {
+					if(!this.state.practiceDone && this.state.seenPracticeAnswers) {
 						this.setState({
 							practiceDone: true
 						})
@@ -136,7 +137,7 @@ class VPS extends Component {
 					this.setState({
 						middleStop: true,
 						timeToNext: 0,
-					}, () => console.log(this.state.middleStop))
+					})
 				}
 			}
 		} else {
@@ -163,14 +164,13 @@ class VPS extends Component {
 		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
-		// console.log('does this work?')
 		this.setState({
 			currentChoice: e.target.value
 		}, () => console.log(this.state.currentChoice))
 	}
 	displayAnswers(){
 		this.setState({
-			timeToNext: 10000,
+			timeToNext: 3000,
 			timerRunning: true,
 			middleStop: false,
 			displayingAnswers: true,

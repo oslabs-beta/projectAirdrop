@@ -44,14 +44,14 @@ const WorkingMemoryQuestionDisplay = props => {
                     control={<Radio />}
                     label={props.choices[0]}
                     checked={props.currentChoice === props.choices[0]}
-                    onChange={(e) => props.updateChoice(e, props.qid)}
+                    onChange={(e) => props.updateChoice(e, props.cid)}
                   />
                   <FormControlLabel
                     value={props.choices[1]}
                     control={<Radio />}
                     label={props.choices[1]}
                     checked={props.currentChoice === props.choices[1]}
-                    onChange={(e) => props.updateChoice(e, props.qid)}
+                    onChange={(e) => props.updateChoice(e, props.cid)}
                   />
                 </RadioGroup>
               </FormLabel>
@@ -67,28 +67,28 @@ const WorkingMemoryQuestionDisplay = props => {
                     control={<Radio />}
                     label={props.choices[0]}
                     checked={props.currentChoice === props.choices[0]}
-                    onChange={(e) => props.updateChoice(e, props.qid)}
+                    onChange={(e) => props.updateChoice(e, props.cid)}
                   />
                   <FormControlLabel
                     value={props.choices[1]}
                     control={<Radio />}
                     label={props.choices[1]}
                     checked={props.currentChoice === props.choices[1]}
-                    onChange={(e) => props.updateChoice(e, props.qid)}
+                    onChange={(e) => props.updateChoice(e, props.cid)}
                   />
                   <FormControlLabel
                     value={props.choices[2]}
                     control={<Radio />}
                     label={props.choices[2]}
                     checked={props.currentChoice === props.choices[2]}
-                    onChange={(e) => props.updateChoice(e, props.qid)}
+                    onChange={(e) => props.updateChoice(e, props.cid)}
                   />
                   <FormControlLabel
                     value={props.choices[3]}
                     control={<Radio />}
                     label={props.choices[3]}
                     checked={props.currentChoice === props.choices[3]}
-                    onChange={(e) => props.updateChoice(e, props.qid)}
+                    onChange={(e) => props.updateChoice(e, props.cid)}
                   />
                 </RadioGroup>
               </FormLabel>

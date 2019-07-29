@@ -27,7 +27,7 @@ const get_question_by_image = `SELECT DISTINCT ON (image_id) id, question_text F
 
 const get_question_by_section = `SELECT id, question_text FROM questions WHERE section_id=$1 ORDER BY section_id;`;
 
-const get_choices = `SELECT choice1, choice2, choice3, choice4, correct_choice FROM choices WHERE question_id=$1;`;
+const get_choices = `SELECT choice1, choice2, choice3, choice4, correct_choice, id FROM choices WHERE question_id=$1;`;
 
 const get_instructions = `SELECT section_id, instruction_text, is_practice FROM instructions WHERE section_id=$1;`;
 

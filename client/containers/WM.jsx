@@ -21,7 +21,7 @@ class WM extends Component {
       timeToNext: 3000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'img/q',
+      sectionId: 'img',
       answerTimeArray: [],
       submitted: false,
       isChecked: false,
@@ -48,7 +48,7 @@ class WM extends Component {
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
         'aid': this.props.aid,
-        'qid': b,
+        'cid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
       };
@@ -75,6 +75,7 @@ class WM extends Component {
   }
 
   onSubmit() {
+    console.log(this.state.isChecked, "Checked?")
     if (this.state.isChecked) {
       this.setState({
         answerTimeArray: [
@@ -91,14 +92,14 @@ class WM extends Component {
     }
   }
 
-  updateChoice(e, qid) {
+  updateChoice(e, cid) {
     this.setState({
+      isChecked: true,
       currentChoice: e.target.value,
       sectionData: {
         ...this.state.sectionData,
-        [qid]: e.target.value
-      },
-      isChecked: true
+        [cid]: e.target.value
+      }
     })
   }
 
