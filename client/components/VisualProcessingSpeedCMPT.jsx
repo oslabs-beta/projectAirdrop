@@ -49,7 +49,12 @@ const VisualProcessingSpeed = (props) => {
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
       choiceDisplay.push(
-        <VisualProcessingSpeedChoices choiceRow={choiceRow} value={j} checked={props.currentChoice == j} updateChoice={props.updateChoice}/>
+        <VisualProcessingSpeedChoices
+          disabled={props.disabled}
+          choiceRow={choiceRow}
+          value={j}
+          checked={props.currentChoice == j}
+          updateChoice={props.updateChoice}/>
       )
     }
     currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>

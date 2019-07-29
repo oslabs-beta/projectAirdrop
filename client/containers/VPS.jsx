@@ -38,6 +38,7 @@ class VPS extends Component {
 			submitted: false,
 			isChecked: false,
 			submitError: '',
+			disabled: false
 			// radioSubmitStatus: []
 		};
 		this.submitAnswer = this.submitAnswer.bind(this);
@@ -133,7 +134,8 @@ class VPS extends Component {
 						submitted: false,
 						currentChoice: null,
 						isChecked: false,
-						submitError: ''
+						submitError: '',
+						disabled: false
 					})
 				}
 				//Controls when we display answers
@@ -161,14 +163,16 @@ class VPS extends Component {
 				}],
 				// currentChoice: null,
 				submitted: true,
-				submitError: ''
+				submitError: '',
+				disabled: true
 				// timeRun: this.state.timeToNext
 			});
 		}
 		if (!this.state.practiceDone && this.state.isChecked) {
 			this.setState({
 				submitted: true,
-				submitError: ''
+				submitError: '',
+				disabled: true
 			});
 		}
 		if (!this.state.isChecked) {
@@ -218,6 +222,7 @@ class VPS extends Component {
 				submitted={this.state.submitted}
 				radioSubmitStatus={this.state.radioSubmitStatus}
 				submitError={this.state.submitError}
+				disabled={this.state.disabled}
 				/>
 			</div>
 		)
