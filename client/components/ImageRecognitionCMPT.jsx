@@ -67,7 +67,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <IRQuestion
         question={props.IR.images[0].questions[0].question_text}
-        qid={props.IR.images[0].questions[0].id}
+        cid={props.IR.images[0].questions[0].choices[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
@@ -80,7 +80,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <IRQuestion
         question={props.IR.images[1].questions[0].question_text}
-        qid={props.IR.images[1].questions[0].id}
+        cid={props.IR.images[1].questions[0].choices[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
@@ -93,7 +93,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <IRQuestion
         question={props.IR.images[2].questions[0].question_text}
-        qid={props.IR.images[2].questions[0].id}
+        cid={props.IR.images[2].questions[0].choices[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
@@ -106,7 +106,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <IRQuestion
         question={props.IR.images[3].questions[0].question_text}
-        qid={props.IR.images[3].questions[0].id}
+        cid={props.IR.images[3].questions[0].choices[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}
@@ -119,7 +119,7 @@ const ImageRecognitionCMPT = (props) => {
 
       <IRQuestion
         question={props.IR.images[4].questions[0].question_text}
-        qid={props.IR.images[4].questions[0].id}
+        cid={props.IR.images[4].questions[0].choices[0].id}
         choices={Object.values(props.IR.images[0].questions[0].choices[0])}
         updateChoice={props.updateChoice}
         currentChoice={props.currentChoice}

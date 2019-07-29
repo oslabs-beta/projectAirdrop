@@ -51,7 +51,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[0].questions[0].question_text}
-      qid={props.WM.images[0].questions[0].id}
+      cid={props.WM.images[0].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[0].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
@@ -64,7 +64,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[1].questions[0].question_text}
-      qid={props.WM.images[1].questions[0].id}
+      cid={props.WM.images[1].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[1].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
@@ -77,7 +77,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[2].questions[0].question_text}
-      qid={props.WM.images[2].questions[0].id}
+      cid={props.WM.images[2].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[2].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
@@ -90,7 +90,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[3].questions[0].question_text}
-      qid={props.WM.images[3].questions[0].id}
+      cid={props.WM.images[3].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[3].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
@@ -103,7 +103,7 @@ const WorkingMemoryCMPT = (props) => {
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[4].questions[0].question_text}
-      qid={props.WM.images[4].questions[0].id}
+      cid={props.WM.images[4].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[4].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
