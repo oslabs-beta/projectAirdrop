@@ -12,12 +12,12 @@ const Instructions = props => {
 
   return (
     <div>
-      <Typography className={classes.root} gutterBottom variant={"h4"}>
-        Thank you for taking the assessment.
+      <Typography className={classes.root} gutterBottom variant={"h1"}>
+        HOOAH!
       </Typography>
-      <Typography className={classes.root} gutterBottom variant={"h6"}>
-        Please check your socom email address for results within 24 hrs.
-      </Typography>
+      {/*<Typography className={classes.root} gutterBottom variant={"h6"}>*/}
+      {/*  Please wait until we finish coding to see your results.*/}
+      {/*</Typography>*/}
     </div>
   )
 };

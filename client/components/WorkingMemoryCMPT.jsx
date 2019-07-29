@@ -24,9 +24,10 @@ const WorkingMemoryCMPT = (props) => {
           props.WM.practice[0]['choice3'],
           props.WM.practice[0]['choice4']]}
       currentChoice={props.currentChoice}
-      onPracticeHandler={props.onPracticeHandler}
+      updateChoice={props.updateChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <NextCMPT text={'Click next to continue.'} changeSlide={props.changeSlide}/>,
@@ -50,60 +51,65 @@ const WorkingMemoryCMPT = (props) => {
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[0].questions[0].question_text}
-      qid={props.WM.images[0].questions[0].id}
+      cid={props.WM.images[0].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[0].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[2].image_url}/>,
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[1].questions[0].question_text}
-      qid={props.WM.images[1].questions[0].id}
+      cid={props.WM.images[1].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[1].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[3].image_url}/>,
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[2].questions[0].question_text}
-      qid={props.WM.images[2].questions[0].id}
+      cid={props.WM.images[2].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[2].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[4].image_url}/>,
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[3].questions[0].question_text}
-      qid={props.WM.images[3].questions[0].id}
+      cid={props.WM.images[3].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[3].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <Image url={props.WM.images[5].image_url}/>,
 
     <WorkingMemoryQuestionDisplay
       question={props.WM.images[4].questions[0].question_text}
-      qid={props.WM.images[4].questions[0].id}
+      cid={props.WM.images[4].questions[0].choices[0].id}
       choices={Object.values(props.WM.images[4].questions[0].choices[0])}
       updateChoice={props.updateChoice}
       currentChoice={props.currentChoice}
       onSubmit={props.onSubmit}
       submitted={props.submitted}
+      submitError={props.submitError}
     />,
 
     <SectionEndScreen changeSection={props.changeSection}/>
