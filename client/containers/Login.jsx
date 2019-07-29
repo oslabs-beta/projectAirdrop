@@ -89,24 +89,10 @@ const Login = props => {
                   }}
                 >
                   <h1>LOG IN:</h1>
-                  {/* <input
-                  type="text"
-                  value={props.username}
-                  placeholder="username"
-                  onChange={e => props.updateUsername(e.target.value)}
-                />
-                <input
-                  type="password"
-                  value={props.pw}
-                  placeholder="password"
-                  onChange={e => props.updatePassword(e.target.value)}
-                /> */}
-
                   <TextField
                     id="outlined-email-input"
                     label="Email"
                     className={classes.textField}
-                    // type="email"
                     name="email"
                     autoComplete="email"
                     margin="normal"
@@ -123,9 +109,8 @@ const Login = props => {
                     variant="outlined"
                     onChange={e => props.updatePassword(e.target.value)}
                   />
-                  {/* <button type="submit">Login</button> */}
-                  <Button 
-                  variant="contained" 
+                  <Button
+                  variant="contained"
                   className={classes.button}
                   type="submit"
                   >
@@ -147,24 +132,11 @@ const Login = props => {
                     props.signup();
                   }}
                 >
-                  {/* <input
-                    type="text"
-                    value={props.newUsername}
-                    placeholder="create username"
-                    onChange={e => props.createUsername(e.target.value)}
-                  />
-                  <input
-                    type="password"
-                    value={props.newPW}
-                    placeholder="create password"
-                    onChange={e => props.createPassword(e.target.value)}
-                  /> */}
                   <h1>SIGN UP:</h1>
                     <TextField
                     id="outlined-email-input"
                     label="Email"
                     className={classes.textField}
-                    // type="email"
                     name="email"
                     autoComplete="email"
                     margin="normal"
@@ -181,9 +153,8 @@ const Login = props => {
                     variant="outlined"
                     onChange={e => props.updatePassword(e.target.value)}
                   />
-                  {/* <button type="submit">Sign Up</button> */}
-                  <Button 
-                  variant="contained" 
+                  <Button
+                  variant="contained"
                   className={classes.button}
                   type="submit"
                   >
