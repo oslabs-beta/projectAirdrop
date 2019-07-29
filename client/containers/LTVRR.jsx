@@ -81,7 +81,8 @@ class LTVRR extends Component {
         this.setState({
           answerArray: [...this.state.answerArray, this.state.currentAnswer],
           answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft],
-          submitError: ''
+          submitError: '',
+          currentAnswer: ''
         })
       }
 	    if (this.state.currentAnswer === '') {
@@ -92,9 +93,9 @@ class LTVRR extends Component {
     }
 
     handleChange (e) {
-        this.setState({
-            currentAnswer: e.target.value
-        })
+      this.setState({
+        currentAnswer: e.target.value
+      })
     }
 
 	tick() {
@@ -119,7 +120,8 @@ class LTVRR extends Component {
 
 	render () {
 	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
-		return (
+    console.log('LTVRR ANSWER ARRAY', this.state.answerArray);
+    return (
 			<div>
         <SectionHeader sectionName={this.props.section.section_display_name}/>
         <LTVRRCMPT
