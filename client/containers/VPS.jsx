@@ -39,7 +39,6 @@ class VPS extends Component {
 			isChecked: false,
 			submitError: '',
 			disabled: false
-			// radioSubmitStatus: []
 		};
 		this.submitAnswer = this.submitAnswer.bind(this);
 		this.startNewSeries = this.startNewSeries.bind(this);

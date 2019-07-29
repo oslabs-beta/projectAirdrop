@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import UserSubmitBtn from "./UserSubmitBTN";
 import {Typography} from "@material-ui/core";
+import VisualProcessingSpeedChoices from "./VisualProcessingSpeedChoices";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,6 +46,7 @@ const WorkingMemoryQuestionDisplay = props => {
                     label={props.choices[0]}
                     checked={props.currentChoice === props.choices[0]}
                     onChange={(e) => props.updateChoice(e, props.cid)}
+                    disabled={props.disabled}
                   />
                   <FormControlLabel
                     value={props.choices[1]}
@@ -52,6 +54,7 @@ const WorkingMemoryQuestionDisplay = props => {
                     label={props.choices[1]}
                     checked={props.currentChoice === props.choices[1]}
                     onChange={(e) => props.updateChoice(e, props.cid)}
+                    disabled={props.disabled}
                   />
                 </RadioGroup>
               </FormLabel>
@@ -68,6 +71,7 @@ const WorkingMemoryQuestionDisplay = props => {
                     label={props.choices[0]}
                     checked={props.currentChoice === props.choices[0]}
                     onChange={(e) => props.updateChoice(e, props.cid)}
+                    disabled={props.disabled}
                   />
                   <FormControlLabel
                     value={props.choices[1]}
@@ -75,6 +79,7 @@ const WorkingMemoryQuestionDisplay = props => {
                     label={props.choices[1]}
                     checked={props.currentChoice === props.choices[1]}
                     onChange={(e) => props.updateChoice(e, props.cid)}
+                    disabled={props.disabled}
                   />
                   <FormControlLabel
                     value={props.choices[2]}
@@ -82,6 +87,7 @@ const WorkingMemoryQuestionDisplay = props => {
                     label={props.choices[2]}
                     checked={props.currentChoice === props.choices[2]}
                     onChange={(e) => props.updateChoice(e, props.cid)}
+                    disabled={props.disabled}
                   />
                   <FormControlLabel
                     value={props.choices[3]}
@@ -89,6 +95,7 @@ const WorkingMemoryQuestionDisplay = props => {
                     label={props.choices[3]}
                     checked={props.currentChoice === props.choices[3]}
                     onChange={(e) => props.updateChoice(e, props.cid)}
+                    disabled={props.disabled}
                   />
                 </RadioGroup>
               </FormLabel>
