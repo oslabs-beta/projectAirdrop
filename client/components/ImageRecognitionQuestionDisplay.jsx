@@ -41,20 +41,23 @@ const ImageRecognitionQuestionDisplay = props => {
                 control={<Radio />}
                 label={props.choices[0]}
                 checked={props.currentChoice === props.choices[0]}
-                onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                onChange={(e) => props.updateChoice(e, props.cid)}
               />
               <FormControlLabel
                 value={props.choices[1]}
                 control={<Radio />}
                 label={props.choices[1]}
                 checked={props.currentChoice === props.choices[1]}
-                onChange={props.qid ? (e) => props.onChangeHandler(e, props.qid) : props.onPracticeHandler}
+                onChange={(e) => props.updateChoice(e, props.cid)}
               />
             </RadioGroup>
           </FormLabel>
         </FormControl>
       </div>
       <UserSubmitBtn submitted={props.submitted} onSubmit={props.onSubmit}/>
+      <Typography className={classes.root} color={"secondary"}>
+        {props.submitError}
+      </Typography>
     </div>
   )
 };

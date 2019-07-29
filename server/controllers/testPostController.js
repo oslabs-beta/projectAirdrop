@@ -32,14 +32,21 @@ testPostController.postAnswers = (req, res, next) => {
 				tpModel.postToLTVR(row);
 			}	
 			break;
-		case "img/q":
+		case "img":
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
-				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].qid, req.body.sectionData[i].answer, req.body.sectionData[i].timeTaken);
-				tpModel.postToImageAndQuestionnaire(row)
+				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].cid, req.body.sectionData[i].answer, req.body.sectionData[i].timeTaken);
+				tpModel.postToImage(row)
 				console.log("check check")
 			}
 			break;
+		case "q":
+			for(let i = 0; i < req.body.sectionData.length; i++){
+				let row = [];
+				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].qid, req.body.sectionData[i].answer);
+				tpModel.postToQuestionnaire(row)
+			}
+			
 	}
 		console.log("Check 2")
 	return next();
