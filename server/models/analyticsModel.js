@@ -13,6 +13,7 @@ const pool = new Pool({
 });
 
 const get_img_means = `SELECT image_responses.user_answer, choices.correct_choice FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id`;
+const get_ltvr_means = `SELECT ltvr_responses.user_answer, choices.correct_choice FROM assessments INNER JOIN ltvr_responses ON ltvr_responses.assessment_id = assessments.id INNER JOIN choices ON ltvr_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id`;
 
 const analyticsController = {
   get_img_means(filterObj){
