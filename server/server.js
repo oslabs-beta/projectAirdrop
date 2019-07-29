@@ -10,6 +10,7 @@ const encryptionController = require('./controllers/encryptionController');
 const userController = require('./controllers/userController');
 const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
+const aController = require('./controllers/analyticsController')
 var CompressionPlugin = require('compression-webpack-plugin');
 
 app.use(cookieParser());
@@ -91,13 +92,13 @@ app.post('/api/test',
   res.status(200).send();
 });
 
-app.get('/api/results', (req, res) => {
+app.get('/api/results', aController.getMeans, (req, res) => {
   res.status(200).send(res.locals.means);
-})
+});
 
 app.post('/api/demo', tpController.postDemoData, (req, res) => {
   res.json(res.locals.aID)
-})
+});
 
 //error handling
 app.get('/*', (req, res) => {

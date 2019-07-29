@@ -103,7 +103,7 @@ class VPS extends Component {
 			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 				clearInterval(this.seriesTicker);
 				//If we are displaying answers, we should stop
-				if(this.state.displayingAnswers && this.state.seenPracticeAnswers){
+				if(this.state.displayingAnswers){
 					//Auto-submit feature. 1st condition checks that the user hasn't done a manual submit. 2nd condition makes sure it isn't auto-submitting the practice question
 					if(!this.state.answerArray[this.state.currentSeriesIndex - 1] && this.state.practiceDone){
 						this.setState({
@@ -170,7 +170,7 @@ class VPS extends Component {
 	}
 	displayAnswers(){
 		this.setState({
-			timeToNext: 10000,
+			timeToNext: 3000,
 			timerRunning: true,
 			middleStop: false,
 			displayingAnswers: true,

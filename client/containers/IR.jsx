@@ -26,7 +26,7 @@ class IR extends Component {
       timeToNext: 2000,
       currentChoice: '',
       sectionData: {},
-      sectionId: 'img/q',
+      sectionId: 'img',
       answerTimeArray: [],
       submitted: false,
       isChecked: false,
@@ -54,7 +54,7 @@ class IR extends Component {
     const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
       const answer = {
         'aid': this.props.aid,
-        'qid': b,
+        'cid': b,
         'answer': this.state.sectionData[b],
         'timeTaken': answerTimeArrayCopy[i]
       };
@@ -72,12 +72,12 @@ class IR extends Component {
     this.props.postResponses(irResponses);
   }
 
-  updateChoice(e, qid) {
+  updateChoice(e, cid) {
     this.setState({
       currentChoice: e.target.value,
       sectionData: {
         ...this.state.sectionData,
-        [qid]: e.target.value
+        [cid]: e.target.value
       },
       isChecked: true
     })
