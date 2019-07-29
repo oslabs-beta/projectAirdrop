@@ -92,7 +92,7 @@ app.post('/api/test',
   res.status(200).send();
 });
 
-app.get('/api/results', aController.getMeans, (req, res) => {
+app.get('/api/results', aController.getMeans, aController.calculateMeans, (req, res) => {
   res.status(200).send(res.locals.means);
 });
 

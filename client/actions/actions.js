@@ -335,3 +335,20 @@ export const irResponses = data => {
 //   type: types.LOAD_ANSWERS,
 //   payload: data,
 // });
+
+
+export const fetchMeans = () => dispatch => {
+  dispatch(requestAPI);
+
+  return fetch("/api/test")
+    .then(res => res.json())
+    .then(res => {
+      console.log('TESTING FETCH TEST RESPONSE', res)
+      if (!isValid(res)) throw new Error("something went wrong");
+      return dispatch(receiveAPI(res));
+    })
+    .catch(err => {
+      console.log('TESTING FETCH TEST CATCH ERROR');
+      dispatch(receiveFailure(err))
+    });
+};
