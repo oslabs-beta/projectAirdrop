@@ -92,8 +92,8 @@ app.post('/api/test',
   res.status(200).send();
 });
 
-app.get('/api/results', aController.getMeans, (req, res) => {
-  res.json();
+app.get('/api/results', aController.getMeanData, aController.getMeanScores, (req, res) => {
+  res.json(res.locals.calculatedMean);
 });
 
 app.post('/api/demo', tpController.postDemoData, (req, res) => {
