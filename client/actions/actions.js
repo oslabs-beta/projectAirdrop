@@ -1,4 +1,12 @@
 import * as types from "./../constants/actionTypes";
+const querystring = require('querystring');
+const data = {"table": "all", "column": ['questions.section_id'], "value": []} 
+const test = Object.keys(data).forEach(key => url)
+var url = require('url')
+
+// const userResults = new URL("/api/userresults");
+
+
 
 export const showClicks = () => ({
   type: types.TEST_TEST
@@ -336,16 +344,25 @@ export const irResponses = data => {
 //   payload: data,
 // });
 
+export const receiveMeans = data => {
+  console.log('did we get the means?', data);
+  return {
+    type: types.RECEIVE_MEANS,
+    payload: data,
+  }
+}
 
 export const fetchMeans = () => dispatch => {
   dispatch(requestAPI);
-
-  return fetch("/api/test")
+  const data1 = {"table": "all", "column": ['questions.section_id'], "value": "[]"};
+  const userResultsGet = url.format({ query: data1 });
+  console.log('testing url query param', userResultsGet)
+  return fetch(`/api/userresults${userResultsGet}`)
     .then(res => res.json())
     .then(res => {
-      console.log('TESTING FETCH TEST RESPONSE', res)
-      if (!isValid(res)) throw new Error("something went wrong");
-      return dispatch(receiveAPI(res));
+      console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)
+      // if (!isValid(res)) throw new Error("something went wrong");
+      return dispatch(receiveMeans(res));
     })
     .catch(err => {
       console.log('TESTING FETCH TEST CATCH ERROR');

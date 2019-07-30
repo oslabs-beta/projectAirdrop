@@ -57,7 +57,7 @@ class Questionnaires extends Component {
     const cmsq = Object.keys(this.state.cmsqCurrentChoice).reduce((a, b) => {
       const answer = {
         'aid': this.props.aid,
-        'qid': b,
+        'qid': Number(b),
         'answer': Number(this.state.cmsqCurrentChoice[b])
       };
       a.push(answer);
@@ -67,7 +67,7 @@ class Questionnaires extends Component {
     const cnaaq = Object.keys(this.state.cnaaqCurrentChoice).reduce((a, b) => {
       const answer = {
         'aid': this.props.aid,
-        'qid': b,
+        'qid': Number(b),
         'answer': Number(this.state.cnaaqCurrentChoice[b])
       };
       a.push(answer);

@@ -8,6 +8,12 @@ const UserResults = props => {
   const cnaaq = Object.keys(props.cnaaq.responses).map((a, i) => {
     return <li key={i}> {a}: {props.cnaaq.responses[a]} </li>;
   })
+  const cmsqMeans = Object.keys(props.cmsq.mean).map((a, i) => {
+    return <li key={i}> {a}: {props.cmsq.mean[a]} </li>;
+  })
+  const cnaaqMeans = Object.keys(props.cnaaq.mean).map((a, i) => {
+    return <li key={i}> {a}: {props.cnaaq.mean[a]} </li>;
+  })
   // let ltvrCorrectNumber = 0;
   // let vpsCorrectNumber = 0;
   // let wmCorrectNumber = 0;
@@ -35,26 +41,36 @@ const UserResults = props => {
       <ul>
         <li>Long Term Verbal Recall:</li>
         <li>Number you got right: {props.ltvr.responses.numberCorrect} / 20 </li>
+        <li>Compared to other Green Berets: {props.ltvr.mean} / 20 </li>
       </ul>
       <ul>
         <li>VPS:</li>
         <li>Number you got right: {props.vps.userResponse.correctResponses.length} / 6 </li>
+        <li>Compared to other Green Berets: {props.vps.mean} / 6 </li>
+
       </ul>
       <ul>
         <li>Working Memory</li>
         <li>Number you got right: {props.wm.userResponse.correctResponses.length || 0} / {props.wm.correct.length}</li>
+        <li>Compared to other Green Berets : {props.wm.mean || 0} / {props.wm.correct.length}</li>
+
       </ul>
       <ul>
         <li>Image Recognition</li>
         <li>Number you got right: {props.ir.userResponse.correctResponses.length || 0} / {props.ir.correct.length}</li>
+        <li>Compared to other Green Berets : {props.ir.mean || 0} / {props.ir.correct.length}</li>
+
       </ul>
       <ul>
         <li>CMSQ</li>
         {cmsq}
+        {cmsqMeans}
+
       </ul>
       <ul>
         <li>cnaaq</li>
         {cnaaq}
+        {cnaaqMeans}
       </ul>
     </div>
   )

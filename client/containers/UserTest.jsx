@@ -28,6 +28,7 @@ const mapDispatchToProps = dispatch => ({
   buildVPSAnswers: () => dispatch(actions.buildVPSAnswers()),
   fetchTest: () => dispatch(actions.fetchTest()),
   setDate: () => dispatch(actions.setDate()),
+  fetchMeans: () => dispatch(actions.fetchMeans()),
 });
 
 class MainTestDisplay extends Component {
@@ -40,6 +41,7 @@ class MainTestDisplay extends Component {
   componentDidMount() {
     console.log('USER TEST DISPLAY COMPONENT DID MOUNT');
     this.props.fetchTest();
+    this.props.fetchMeans();
   }
 
   render () {

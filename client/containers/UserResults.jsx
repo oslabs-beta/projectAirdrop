@@ -12,6 +12,7 @@ const mapStateToProps = store => ({
   cmsq: store.answers.cmsq,
   cnaaq: store.answers.cnaaq,
   userData: store.userData.userData,
+  means: store.answers,
 })
 
 class UserResults extends Component {
@@ -19,9 +20,14 @@ class UserResults extends Component {
     super(props);
 
   }
-  
+  componentDidMount() {
+    
+  }  
   render(){
     console.log('props cmsq', this.props.cnaaq)
+    console.log('props cmsq', this.props.cnaaq)
+    console.log('testing means', this.props.means)
+
     // const cnaaq = this.props.cnaaq.responses.reduce((a,b,c,d) => {
     //   c = c+1;
     //   console.log('testing c', c)
