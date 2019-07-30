@@ -93,7 +93,7 @@ app.post('/api/test',
 });
 
 app.get('/api/results', aController.getMeans, (req, res) => {
-  res.status(200).send(res.locals.means);
+  res.json();
 });
 
 app.post('/api/demo', tpController.postDemoData, (req, res) => {
@@ -103,6 +103,7 @@ app.post('/api/demo', tpController.postDemoData, (req, res) => {
 //error handling
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    console.log("ERROR: ", err);
     if (err) {
       res.status(500).send(err)
     }

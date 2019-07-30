@@ -41,6 +41,7 @@ testPostController.postAnswers = (req, res, next) => {
 			}
 			break;
 		case "q":
+			console.log("and they say 'WHY?, WHY?' tell them");
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
 				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].qid, req.body.sectionData[i].answer);
