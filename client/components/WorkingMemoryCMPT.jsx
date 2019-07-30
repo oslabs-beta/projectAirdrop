@@ -6,7 +6,6 @@ import PracticeImageAnswerDisplay from './PracticeImageAnswerDisplay';
 import SectionInstructions from './SectionInstructions';
 import UserStartBTN from "./UserStartBTN";
 import Image from './Image';
-import VisualProcessingSpeedChoices from "./VisualProcessingSpeedChoices";
 
 const WorkingMemoryCMPT = (props) => {
 
