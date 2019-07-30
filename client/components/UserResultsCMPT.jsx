@@ -1,4 +1,5 @@
 import React from "react";
+import Chart from "./Chart";
 import { POINT_CONVERSION_COMPRESSED } from "constants";
 
 const UserResults = props => {
@@ -34,6 +35,77 @@ const UserResults = props => {
     
   // })
   // console.log('userresult props',props)
+
+  const data = {
+    labels: [
+      "January",
+      "February",
+      "March",
+
+    ],
+    datasets: [
+      {
+        label: "My First dataset",
+        data: [
+          20,
+          30,
+          40
+        ],
+        // fill: true,
+        // borderDash: [5, 5]
+      }, 
+      // {
+      //   hidden: true,
+      //   label: 'hidden dataset',
+      //   data: [
+
+      //   ]
+      // }, {
+      //   label: "My Second dataset",
+      //   data: [
+
+      //   ]
+      // }
+    ]
+  }
+
+  const options = {
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'label'
+    },
+    hover: {
+      mode: 'dataset'
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: 'Month'
+          }
+        }
+      ],
+      yAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: 'Value'
+          },
+          ticks: {
+            suggestedMin: -10,
+            suggestedMax: 250
+          }
+        }
+      ]
+    }
+  }
   return (
     <div>
       {/* {ltvrCorrectNumber} */}
@@ -42,6 +114,20 @@ const UserResults = props => {
         <li>Long Term Verbal Recall:</li>
         <li>Number you got right: {props.ltvr.responses.numberCorrect} / 20 </li>
         <li>Compared to other Green Berets: {props.ltvr.mean} / 20 </li>
+        <div>
+          <header>
+              {/* <img src={chartIcon} alt="bar chart icon" /> */}
+              <h1>Long Term Verbal Recall</h1>
+          </header>
+              <Chart
+                  // data={props.ltvr.responses.numberCorrect}
+                  // average={props.ltvr.mean}
+                  // labels={labels} 
+                  // data={props.chartData}
+                  data={data}
+                  options={options}
+                  />
+            </div>
       </ul>
       <ul>
         <li>VPS:</li>

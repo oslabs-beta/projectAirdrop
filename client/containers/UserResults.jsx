@@ -4,6 +4,8 @@ import * as actions from '../actions/actions';
 import UserResultsCMPT from '../components/UserResultsCMPT.jsx';
 import UserInfo from '../components/UserInfo';
 
+
+
 const mapStateToProps = store => ({
   ltvr: store.answers.ltvr,
   vps: store.answers.vps,
@@ -18,11 +20,48 @@ const mapStateToProps = store => ({
 class UserResults extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      chartData: {
 
+      }
+    }
+    this.getChartData = this.getChartData.bind(this);
   }
   componentDidMount() {
-    
-  }  
+    this.getChartData()
+  };
+
+  getChartData(){
+    // Ajax calls here
+    this.setState({
+      chartData:{
+        labels: [],
+        datasets:[
+          {
+            label:'Population',
+            data:[
+              617594,
+              181045,
+              153060,
+              106519,
+              105162,
+              95072
+            ],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)'
+            ]
+          }
+        ]
+      }
+    });
+  }
+
   render(){
     console.log('props cmsq', this.props.cnaaq)
     console.log('props cmsq', this.props.cnaaq)
@@ -104,6 +143,8 @@ class UserResults extends Component {
     console.log('testing output wm', this.props.wm)
     console.log('testing output ir', this.props.ir)
     console.log('testing output', this.props.userData)
+    console.log('testing output chartData', this.state.chartData)
+
 
 
     return (
@@ -125,6 +166,7 @@ class UserResults extends Component {
         ir={this.props.ir}
         cmsq={this.props.cmsq}
         cnaaq={this.props.cnaaq}
+        chartData={this.state.chartData}
         />
 
       </div>
