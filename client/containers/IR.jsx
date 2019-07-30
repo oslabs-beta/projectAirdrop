@@ -31,7 +31,8 @@ class IR extends Component {
       submitted: false,
       isChecked: false,
       submitError: '',
-      currentIndex: 0
+      currentIndex: 0,
+      disabled: false
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -41,7 +42,6 @@ class IR extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.optionReset = this.optionReset.bind(this);
     this.stateReset = this.stateReset.bind(this);
-
   }
 
   componentWillUnmount() {
@@ -105,7 +105,8 @@ class IR extends Component {
           this.state.timeElapsed
         ],
         submitted: true,
-        submitError: ''
+        submitError: '',
+        disabled: true
       })
     } else {
       this.setState({
@@ -120,7 +121,8 @@ class IR extends Component {
       submitted: false,
       isChecked: false,
       submitError: '',
-      currentIndex: this.state.currentIndex += 1
+      currentIndex: this.state.currentIndex += 1,
+      disabled: false
     })
   }
 
@@ -305,10 +307,10 @@ class IR extends Component {
           startTest={this.startTest}
           updateChoice={this.updateChoice}
           currentChoice={this.state.currentChoice}
-          // onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
           submitted={this.state.submitted}
           submitError={this.state.submitError}
+          disabled={this.state.disabled}
         />
       </div>
     );

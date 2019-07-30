@@ -4,6 +4,7 @@ import * as actions from '../actions/actions';
 import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
 import Button from "@material-ui/core/Button";
 import LTVRDCMPT from "../components/LongTermVerbalRecallDisplayCMPT";
+import WorkingMemoryCMPT from "../components/WorkingMemoryCMPT";
 
 
 const mapStateToProps = store => ({
@@ -35,7 +36,9 @@ class VPS extends Component {
 			currentChoice: null,
 			sectionId: 'VPS',
 			submitted: false,
-			// radioSubmitStatus: []
+			isChecked: false,
+			submitError: '',
+			disabled: false
 		};
 		this.submitAnswer = this.submitAnswer.bind(this);
 		this.startNewSeries = this.startNewSeries.bind(this);
@@ -124,11 +127,14 @@ class VPS extends Component {
 						displayingAnswers: false,
 						middleStop: false,
 						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 3,
+						currentSeriesIndex: this.state.currentSeriesIndex += 1,
 						timerRunning: false,
 						timeRun: 0,
 						submitted: false,
 						currentChoice: null,
+						isChecked: false,
+						submitError: '',
+						disabled: false
 					})
 				}
 				//Controls when we display answers
@@ -147,25 +153,39 @@ class VPS extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		if(this.state.practiceDone){
+		console.log('VPS SUBMIT ANSWER BUTTON')
+		if(this.state.practiceDone && this.state.isChecked){
 			this.setState({
 				answerArray: [...this.state.answerArray, {
 					answer: answerChoice,
 					timeToRespond: this.state.timeRun,
 				}],
 				// currentChoice: null,
-				submitted: true
+				submitted: true,
+				submitError: '',
+				disabled: true
 				// timeRun: this.state.timeToNext
 			});
 		}
-		this.setState({
-			submitted: true
-		});
+		if (!this.state.practiceDone && this.state.isChecked) {
+			this.setState({
+				submitted: true,
+				submitError: '',
+				disabled: true
+			});
+		}
+		if (!this.state.isChecked) {
+			console.log('SUBMIT ERROR?')
+			this.setState({
+				submitError: 'Please select an answer before submitting.'
+			})
+		}
 		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
 		this.setState({
-			currentChoice: e.target.value
+			currentChoice: e.target.value,
+			isChecked: true
 		}, () => console.log(this.state.currentChoice))
 	}
 	displayAnswers(){
@@ -200,6 +220,8 @@ class VPS extends Component {
 				sectionName={this.props.section.section_display_name}
 				submitted={this.state.submitted}
 				radioSubmitStatus={this.state.radioSubmitStatus}
+				submitError={this.state.submitError}
+				disabled={this.state.disabled}
 				/>
 			</div>
 		)

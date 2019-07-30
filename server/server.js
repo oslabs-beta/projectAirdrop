@@ -20,11 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use('/static', express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// testing route for post requests from front-end to back-end at the end of each section
-
-//LOGIN AND AUTH
-
-
 //gzipping route
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
@@ -32,77 +27,24 @@ app.get('*.js', function (req, res, next) {
   next();
 });
 
-
-//two-factor auth email automation routes
+//LOGIN AND AUTH
 const smtpTransport = nodemailer.createTransport({
   host: 'smtp.ethereal.email',
   port: 587,
   secure: false,
   auth: {
-      user: 'hildegard.olson@ethereal.email',
-      pass: 'UQ4nbs84eFSW89hwZF'
+    user: 'shania.braun35@ethereal.email',
+    pass: 'G9FcXAqksXCZspsrmC'
   }
 });
 
-
-///const hash = hash some stuff 
-app.get('/sendemail',function(req,res) {
-
-  const hash = Math.floor((Math.random() * 100000) + 54);
-  //store hash in database
-  //store random somehow for /login/verify route
-  
-  const host=req.get('host');
-  const link="http://"+req.get('host')+"/login/verify";
-  const mailOptions = {
-    to : 'arshia.masih@bmail.com',
-    subject : "Please confirm your Email account",
-    html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-  }
-  console.log(mailOptions);
-  smtpTransport.sendMail(mailOptions, function(error, response){
-    if(error){
-      console.log(error);
-      res.end("error");
-    } else {
-      console.log("Message sent: " + response);
-      res.send("sent");
-     }
-     //hash 
+app.get('/login/verify/:id',
+  userController.compareEmailHash,
+  userController.verifyUser,
+  (req,res) => {
+    console.log('test this route')
+    res.redirect('/login')
   });
-});
-
-
-
-
-// app.get('/login/verify',function(req,res){
-//   //hash 
-//   console.log('test this route')
-//   console.log(req.protocol+"://"+req.get('host'));
-//   if(true){
-//     res.redirect('/login')
-//   }
-//   host=req.get('host');
-  
-//   if((req.protocol+"://"+req.get('host'))==("http://"+host))
-//   {
-//       console.log("Domain is matched. Information is from Authentic email");
-//       if(req.query.id===random)
-//       {
-//           console.log("email is verified");
-//           res.end("<h1>Email "+mailOptions.to+" is been Successfully verified");
-//       }
-//       else
-//       {
-//           console.log("email is not verified");
-//           res.end("<h1>Bad Request</h1>");
-//       }
-//   }
-//   else
-//   {
-//       res.end("<h1>Request is from unknown source");
-//   }
-//   });
 
 
 //signup and login routes - single factor auth
@@ -110,7 +52,24 @@ app.post('/api/signup',
   encryptionController.encryptPassword,
   userController.createUser,
   (req, res) => {
-  res.status(200).json(res.locals.result);
+    console.log('signup post route', req.body)
+    const host=req.get('host');
+    const link="http://"+req.get('host')+"/login/verify/" + res.locals.result[0].verification_code;
+    const mailOptions = {
+      to : req.body.username,
+      subject : "Please confirm your Email account",
+      html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+    }
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+      if(error){
+        console.log(error);
+        res.end("error");
+      } else {
+        console.log("Message sent: " + response);
+        res.status(200).send("sent");
+      }
+    });
 });
 
 app.post('/api/login',
