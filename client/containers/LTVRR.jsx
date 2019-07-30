@@ -24,7 +24,8 @@ class LTVRR extends Component {
       answerArray: [],
       currentAnswer: '',
       sectionId: 'LTVR',
-      answerTimeArray: []
+      answerTimeArray: [],
+      submitError: ''
     };
 
 		this.startTimer = this.startTimer.bind(this);
@@ -76,16 +77,25 @@ class LTVRR extends Component {
     }
 
     submitAnswer () {
+	    if (this.state.currentAnswer !== '') {
         this.setState({
           answerArray: [...this.state.answerArray, this.state.currentAnswer],
-          answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft]
+          answerTimeArray: [...this.state.answerTimeArray, this.state.timeLeft],
+          submitError: '',
+          currentAnswer: ''
         })
+      }
+	    if (this.state.currentAnswer === '') {
+	      this.setState({
+          submitError: 'Please type an answer before submitting.'
+        })
+      }
     }
 
     handleChange (e) {
-        this.setState({
-            currentAnswer: e.target.value
-        })
+      this.setState({
+        currentAnswer: e.target.value
+      })
     }
 
 	tick() {
@@ -110,7 +120,8 @@ class LTVRR extends Component {
 
 	render () {
 	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
-		return (
+    console.log('LTVRR ANSWER ARRAY', this.state.answerArray);
+    return (
 			<div>
         <SectionHeader sectionName={this.props.section.section_display_name}/>
         <LTVRRCMPT
@@ -124,6 +135,7 @@ class LTVRR extends Component {
                 handleChange={this.handleChange}
                 submitAnswer={this.submitAnswer}
                 earlyFinish={this.earlyFinish}
+                submitError={this.state.submitError}
 				/>
 			</div>
 		)

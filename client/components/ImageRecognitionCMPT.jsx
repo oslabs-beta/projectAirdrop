@@ -25,6 +25,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
 
@@ -41,6 +42,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
       <NextCMPT text={'Click next to continue.'} changeSlide={props.changeSlide}/>,
@@ -74,6 +76,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
       <Image url={props.IR.images[1].image_url}/> ,
@@ -87,6 +90,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
       <Image url={props.IR.images[2].image_url}/>,
@@ -100,6 +104,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
       <Image url={props.IR.images[3].image_url}/> ,
@@ -113,6 +118,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
       <Image url={props.IR.images[4].image_url}/>,
@@ -126,6 +132,7 @@ const ImageRecognitionCMPT = (props) => {
         onSubmit={props.onSubmit}
         submitted={props.submitted}
         submitError={props.submitError}
+        disabled={props.disabled}
       />,
 
       <SectionEndScreen
