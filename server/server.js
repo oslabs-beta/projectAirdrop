@@ -11,7 +11,7 @@ const userController = require('./controllers/userController');
 const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
 const aController = require('./controllers/analyticsController')
-var CompressionPlugin = require('compression-webpack-plugin');
+const nodemailer = require("nodemailer");
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -23,15 +23,89 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // testing route for post requests from front-end to back-end at the end of each section
 
 //LOGIN AND AUTH
-//signup to create account for new users
-//creating middleware
 
+
+//gzipping route
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
   res.set('Content-Encoding', 'gzip');
   next();
 });
 
+
+//two-factor auth email automation routes
+const smtpTransport = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  secure: false,
+  auth: {
+      user: 'hildegard.olson@ethereal.email',
+      pass: 'UQ4nbs84eFSW89hwZF'
+  }
+});
+
+
+///const hash = hash some stuff 
+app.get('/sendemail',function(req,res) {
+
+  const hash = Math.floor((Math.random() * 100000) + 54);
+  //store hash in database
+  //store random somehow for /login/verify route
+  
+  const host=req.get('host');
+  const link="http://"+req.get('host')+"/login/verify";
+  const mailOptions = {
+    to : 'arshia.masih@bmail.com',
+    subject : "Please confirm your Email account",
+    html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
+  }
+  console.log(mailOptions);
+  smtpTransport.sendMail(mailOptions, function(error, response){
+    if(error){
+      console.log(error);
+      res.end("error");
+    } else {
+      console.log("Message sent: " + response);
+      res.send("sent");
+     }
+     //hash 
+  });
+});
+
+
+
+
+// app.get('/login/verify',function(req,res){
+//   //hash 
+//   console.log('test this route')
+//   console.log(req.protocol+"://"+req.get('host'));
+//   if(true){
+//     res.redirect('/login')
+//   }
+//   host=req.get('host');
+  
+//   if((req.protocol+"://"+req.get('host'))==("http://"+host))
+//   {
+//       console.log("Domain is matched. Information is from Authentic email");
+//       if(req.query.id===random)
+//       {
+//           console.log("email is verified");
+//           res.end("<h1>Email "+mailOptions.to+" is been Successfully verified");
+//       }
+//       else
+//       {
+//           console.log("email is not verified");
+//           res.end("<h1>Bad Request</h1>");
+//       }
+//   }
+//   else
+//   {
+//       res.end("<h1>Request is from unknown source");
+//   }
+//   });
+
+
+//signup and login routes - single factor auth
 app.post('/api/signup',
   encryptionController.encryptPassword,
   userController.createUser,
@@ -40,6 +114,9 @@ app.post('/api/signup',
 });
 
 app.post('/api/login',
+  //check if verified true, if yes - next()
+  //if not verified check hash codes, if match to database then set is verified to true then next()
+  //or create separate route but that seems redundant
   userController.comparePassword,
   userController.login,
   tokenController.signToken,
@@ -61,11 +138,14 @@ app.get('/api/getUserInfo',
   res.json(res.locals.result[0]);
 });
 
+//destroy cookie at logout
 app.get('/logout', (req, res) => {
   res.clearCookie('token');
   res.status(200).send()
 });
 
+
+//server html file at root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
@@ -89,7 +169,7 @@ app.get('/api/test',
 app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
-  res.status(200).send();
+  res.status(200);
 });
 
 app.get('/api/results', aController.getMeans, (req, res) => {
