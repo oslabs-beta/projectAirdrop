@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use('/static', express.static(path.join(__dirname, 'dist')))
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 //gzipping route
@@ -27,7 +27,7 @@ app.get('*.js', function (req, res, next) {
   next();
 });
 
-//LOGIN AND AUTH
+//2-Factor LOGIN AND AUTH Email Verification
 const smtpTransport = nodemailer.createTransport({
   service: 'gmail',
   port: 587,
@@ -51,7 +51,7 @@ app.get('/login/verify/:id',
   });
 
 
-//signup and login routes - single factor auth
+//signup and login routes for encryption and jwts authentication
 app.post('/api/signup',
   encryptionController.encryptPassword,
   userController.createUser,
@@ -77,9 +77,6 @@ app.post('/api/signup',
 });
 
 app.post('/api/login',
-  //check if verified true, if yes - next()
-  //if not verified check hash codes, if match to database then set is verified to true then next()
-  //or create separate route but that seems redundant
   userController.comparePassword,
   userController.login,
   tokenController.signToken,
@@ -95,6 +92,7 @@ app.get('/api/verifytoken',
  res.json(req.token);
 });
 
+//to verify token
 app.get('/api/getUserInfo',
   userController.getUserInfo,
   (req, res) => {
@@ -117,6 +115,8 @@ app.get('/', (req, res) => {
   })
 });
 
+
+//fetch test from database
 app.get('/api/test',
   dbController.getSections,
   dbController.getWords,
@@ -129,6 +129,7 @@ app.get('/api/test',
   res.json(res.locals.test);
 });
 
+//post test to database
 app.post('/api/test',
   tpController.postAnswers,
   (req, res) => {
@@ -146,7 +147,7 @@ app.post('/api/demo', tpController.postDemoData, (req, res) => {
 //error handling
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
-    console.log("ERROR: ", err);
+    
     if (err) {
       res.status(500).send(err)
     }
