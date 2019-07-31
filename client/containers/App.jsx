@@ -35,13 +35,14 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
 
      <React.Fragment>
         <MuiThemeProvider theme={theme}>
          <CssBaseline>
-            <AppBar/>
+            <AppBar />
            <Container maxWidth={'md'}>
              <Switch>
                <Route path='/login' component={Login} />
