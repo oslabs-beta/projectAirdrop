@@ -9,7 +9,7 @@ const initialState = {
   answerKey: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 2,
+  currentSection: 9,
   currentSlide: 0,
 };
 
