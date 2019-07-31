@@ -17,6 +17,22 @@ const mapStateToProps = store => ({
   means: store.answers,
 })
 
+const data = {
+  labels: [
+    "January",
+    "February",
+  ],
+  datasets: [
+    {
+      label: "My First dataset",
+      data: [
+        20,
+        30,
+      ],
+    }, 
+  ]
+}
+
 class UserResults extends Component {
   constructor(props){
     super(props);
@@ -166,7 +182,10 @@ class UserResults extends Component {
         ir={this.props.ir}
         cmsq={this.props.cmsq}
         cnaaq={this.props.cnaaq}
-        chartData={this.state.chartData}
+        // chartData={this.state.chartData}
+        // ltvrData={ltvrData}
+        // ltvrOptions={ltvrOptions}
+        // vpsData={vpsData}
         />
 
       </div>

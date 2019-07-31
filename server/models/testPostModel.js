@@ -17,7 +17,7 @@ const post_vps_choices = `INSERT INTO vps_responses (assessment_id, series_index
 const post_image_choices = `INSERT INTO image_responses (assessment_id, choices_id, user_answer, time_taken) VALUES ($1, $2, $3, $4);`;
 const post_demo_data = `INSERT INTO assessments (user_id, first_name, middle_initial, last_name, rank, years_in_service, years_in_special_ops, oda, mos, last_deployed_date, date_now) 
 												VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id;`;
-const post_questionnaire_choices = `INSERT INTO questionnaire_responses (aid, qid, answer);`;
+const post_questionnaire_choices = `INSERT INTO questionnaire_responses (aid, qid, answer) VALUES ($1, $2, $3);`;
 
 const testPostModel = {
 	postToLTVR(responseArray){
