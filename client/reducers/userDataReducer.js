@@ -7,6 +7,7 @@ const initialState = {
   newPW: '',
   isAdmin: null,
   isLoggedIn: false,
+  createAccount: false,
   // userLoginErrors: {
   //   username: null,
   //   pw: null,
@@ -71,7 +72,7 @@ const userDataReducer = (state = initialState, action) => {
             [action.payload.name]: true,
           },
         };
-      } else if (action.payload.name === 'middleInitial') 
+      } else if (action.payload.name === 'middleInitial')
       {
         if (action.payload.value.length > 1) {
           return {
@@ -99,7 +100,7 @@ const userDataReducer = (state = initialState, action) => {
           };
         }
       }
-      else if (action.payload.name === 'ODANumber') 
+      else if (action.payload.name === 'ODANumber')
       {
         if (action.payload.value.length > 4 || action.payload.value.length < 4) {
           return {
@@ -139,7 +140,7 @@ const userDataReducer = (state = initialState, action) => {
           [action.payload.name]: false,
         },
         };
-      } 
+      }
 
     case HANDLE_CHANGE_TWO:
       const event2 = action.payload;
@@ -171,7 +172,7 @@ const userDataReducer = (state = initialState, action) => {
           },
         };
       }
-      
+
 
     case HANDLE_CHANGE_DATES:
       return {
@@ -209,10 +210,10 @@ const userDataReducer = (state = initialState, action) => {
       return {
         ...state,
         newPW: action.payload
-      };  
+      };
     case UPDATE_LOGIN:
       console.log('is update login working omg')
-      return { 
+      return {
         ...state,
         pw: '',
         isAdmin: action.payload.isAdmin,
@@ -220,15 +221,15 @@ const userDataReducer = (state = initialState, action) => {
       };
     case CREATE_LOGIN:
       console.log('is CREATELOGIN WORKING')
-        return { 
+        return {
           ...state,
           // isLoggedIn: true,
-        };  
+        };
     case IS_ADMIN:
       return {
         ...state,
         isAdmin: action.payload,
-      }         
+      }
     default:
       return state;
   }
