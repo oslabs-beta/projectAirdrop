@@ -12,7 +12,7 @@ import Introduction from '../components/IntroductionCMPT';
 import Instructions from '../components/Instructions.jsx';
 import Container from '@material-ui/core/Container';
 import UserResults from './UserResults';
-
+import Admin from './Admin';
 
 const mapStateToProps = store => ({
   test: store.test.test,
@@ -56,6 +56,7 @@ class MainTestDisplay extends Component {
       <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
       <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
       <UserResults />,
+      <Admin />,
       <Instructions />];
 
     // for (let i = 0; i < compArray.length; i++) {
