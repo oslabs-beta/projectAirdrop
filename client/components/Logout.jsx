@@ -14,6 +14,7 @@ class Logout extends Component {
       {
       mode: 'no-cors'
     });
+    window.location.reload(true)
   }
 
   render () {
