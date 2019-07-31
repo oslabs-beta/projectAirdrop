@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Logout from '../components/Logout';
 
 const useStyles = makeStyles({
   root: {
@@ -34,7 +34,7 @@ export default function SimpleAppBar() {
             <Typography className={classes.title} variant="title" color="inherit">
             Legion Mental Performance Assessment
           </Typography>
-          <Button color="inherit">Logout</Button>
+          <Logout color="inherit">Logout</Logout>
         </Toolbar>
       </AppBar>
     </div>

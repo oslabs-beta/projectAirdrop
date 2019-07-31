@@ -98,7 +98,7 @@ app.get('/api/getUserInfo',
 });
 
 //destroy cookie at logout
-app.get('/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
   res.clearCookie('token');
   res.status(200).send()
 });
