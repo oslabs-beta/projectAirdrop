@@ -29,12 +29,16 @@ app.get('*.js', function (req, res, next) {
 
 //LOGIN AND AUTH
 const smtpTransport = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
+  service: 'gmail',
   port: 587,
   secure: false,
   auth: {
-    user: 'shania.braun35@ethereal.email',
-    pass: 'G9FcXAqksXCZspsrmC'
+      user: 'legionmpaverify@gmail.com',
+      pass: 'thelegion123!'
+  },
+  tls: {
+      rejectUnauthorized: false
+
   }
 });
 
@@ -131,8 +135,8 @@ app.post('/api/test',
   res.status(200);
 });
 
-app.get('/api/results', aController.getMeans, (req, res) => {
-  res.json();
+app.get('/api/results', aController.getMeanData, aController.getMeanScores, (req, res) => {
+  res.json(res.locals.calculatedMean);
 });
 
 app.post('/api/demo', tpController.postDemoData, (req, res) => {

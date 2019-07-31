@@ -12,19 +12,22 @@ const pool = new Pool({
 	port: 5432
 });
 
-const get_img_mean = `SELECT image_responses.user_answer, choices.correct_choice, questions.section_id FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id`;
+const get_wm_mean = `SELECT image_responses.user_answer, choices.correct_choice, questions.section_id FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id WHERE questions.section_id = 1`;
+const get_ir_mean = `SELECT image_responses.user_answer, choices.correct_choice, questions.section_id FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id WHERE questions.section_id = 2`;
 const get_ltvr_mean = `SELECT ltvr_responses.user_word, ltvr_responses.is_correct FROM assessments INNER JOIN ltvr_responses ON ltvr_responses.assessment_id = assessments.id`;
 const get_vps_mean = `SELECT vps_responses.user_choice, vps_responses.correct_choice FROM assessments INNER JOIN vps_responses ON vps_responses.assessment_id = assessments.id`;
 const get_q_mean = `SELECT questionnaire_responses.answer, questionnaire_responses.qid FROM assessments INNER JOIN questionnaire_responses ON questionnaire_responses.aid = assessments.id`;
-const get_ALL_means = `SELECT image_responses.user_answer, choices.correct_choice FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id`;
 
 const analyticsModel = {
   get_filtered_means(filterObj){
-    console.log("i break it here?")
+    // console.log("i break it here?")
     let newQuery;
     switch(filterObj.section){
-      case "img":
-        newQuery = get_img_mean;
+      case "wm":
+        newQuery = get_wm_mean;
+        break;
+      case "ir":
+        newQuery = get_ir_mean;
         break;
       case "ltvr":
         newQuery = get_ltvr_mean;
@@ -36,18 +39,18 @@ const analyticsModel = {
         newQuery = get_q_mean;
         break;
     }
-    console.log(filterObj.column, "thing")
+    // console.log(filterObj.column, "thing")
+    for(let i = 0; i < filterObj.column.length; i++){
+      if(i === 0 && filterObj.section !== "ir" && filterObj.section !== "wm"){
+        newQuery += ` WHERE ${filterObj.column[i]} = ${filterObj.value[i]}`;
+      } else newQuery += ` AND ${filterObj.column[i]} = ${filterObj.value[i]}`
+    }
+    newQuery += ';';
     return new Promise((resolve, reject) => {
-      for(let i = 0; i < filterObj.column.length; i++){
-        if(i === 0){
-          newQuery += ` WHERE ${filterObj.column[i]} = ${filterObj.value[i]}`;
-        } else newQuery += ` AND ${filterObj.column[i]} = ${filterObj.value[i]}`
-      }
-      newQuery += ';';
-      console.log(newQuery)
+      // console.log(newQuery)
       pool.query(newQuery, (err, result) => {
         if(err) return reject(err)
-        console.log(result);
+        // console.log(result);
         resolve(result);
       })
     })
