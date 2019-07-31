@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   }
 });
 
-const UserResults = props => {
+const AdminResultsCMPT = props => {
   const classes = useStyles();
   const cmsq = Object.keys(props.cmsq.responses).map((a, i) => {
     return (
@@ -629,7 +629,7 @@ const UserResults = props => {
   );
 };
 
-export default UserResults;
+export default AdminResultsCMPT;
 
 // Conception of the Nature of Athletic Ability – 2 Questionnaire 
 

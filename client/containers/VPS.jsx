@@ -70,6 +70,14 @@ class VPS extends Component {
 
 
 		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
+			// const vpsResponses = this.state.answerArray.reduce((a,b,i) => {
+			// 	const response = {
+			// 		'seriesIndex': i + 1,
+			// 		'userChoice': b.answer,
+			// 		'timeTaken': b.timeToRespond,
+			// 		'correctAnswer': this.props.answerKey[i],
+			// 	}
+			// 	a.push(response);
 			a.push(b.answer);
 			return a;
 		},[])
