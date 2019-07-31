@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     maxWidth: '3rem',
     paddingRight: 15
   },
+  title: {
+    flexGrow: 1,
+  },
 });
 
 export default function SimpleAppBar() {
@@ -23,16 +26,15 @@ export default function SimpleAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <div>
             <img
               src={'https://res.cloudinary.com/dnugcin6k/image/upload/v1564537989/icon_256x256.20d7baeeac439ace1ad581a42a4c5b12_fr7qin.png'}
               alt="logo"
               className={classes.logo}
             />
-          </div>
-            <Typography variant="title" color="inherit">
+            <Typography className={classes.title} variant="title" color="inherit">
             Legion Mental Performance Assessment
           </Typography>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>
