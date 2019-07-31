@@ -145,7 +145,6 @@ export const postAnswers = (sectionId, data) => dispatch => {
   console.log('POST ANSWERS DATA AID CHECK \n', sectionId, 'data \n', data);
   dispatch(requestAPI)
 
-  // TODO: Needs URL
   return fetch('/api/test', {
     method: 'POST',
     headers: {
@@ -182,7 +181,6 @@ export const postDemo = (data) => dispatch => {
       return res.json()
     })
     .then(res => {
-      // if (!isValid(res)) throw new Error("something went wrong!");
       console.log('POST DEMO RESPONSE OBJECT', res);
       return dispatch(receiveAID(res))
     })
@@ -266,3 +264,27 @@ export const irResponses = data => {
 //   type: types.LOAD_ANSWERS,
 //   payload: data,
 // });
+
+export const receiveMeans = data => {
+  console.log('did we get the means?', data);
+  return {
+    type: types.RECEIVE_MEANS,
+    payload: data,
+  }
+}
+// api/results?objString={"section": "all", "column": [], "value": []}
+export const fetchMeans = (data) => dispatch => {
+  dispatch(requestAPI);
+  const url = '/api/results?objString=' + JSON.stringify(data);
+  return fetch(url)
+    .then(res => res.json())
+    .then(res => {
+      console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)
+      // if (!isValid(res)) throw new Error("something went wrong");
+      return dispatch(receiveMeans(res));
+    })
+    .catch(err => {
+      console.log('TESTING FETCH TEST CATCH ERROR');
+      dispatch(receiveFailure(err))
+    });
+};
