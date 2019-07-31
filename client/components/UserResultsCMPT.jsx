@@ -16,9 +16,11 @@ import Paper from "@material-ui/core/Paper";
 
 import { POINT_CONVERSION_COMPRESSED } from "constants";
 
+const comp = '#FF7700';
+const you = '#16DB93';
 const useStyles = makeStyles({
   card: {
-    minWidth: 275
+    minWidth: 400
   },
   bullet: {
     display: "inline-block",
@@ -26,7 +28,7 @@ const useStyles = makeStyles({
     transform: "scale(0.8)"
   },
   title: {
-    fontSize: 14
+    fontSize: 14,
   },
   pos: {
     marginBottom: 12
@@ -73,10 +75,10 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: "rgba(220,220,220,0.5)",
+        backgroundColor: you,
         data: [
-          // props.ltvr.responses.numberCorrect,
-          props.ltvr.mean
+          props.ltvr.responses.numberCorrect,
+          // props.ltvr.mean
         ],
         // backgroundColor: 'red',
         // borderColor: "#98B9AB"
@@ -84,7 +86,7 @@ const UserResults = props => {
       },
       {
         label: "Your Competitors",
-        backgroundColor: "rgba(151,187,205,0.5)",
+        backgroundColor: comp,
         data: [props.ltvr.mean]
       }
     ]
@@ -93,7 +95,7 @@ const UserResults = props => {
   const ltvrOptions = {
     responsive: true,
     title: {
-      display: true,
+      display: false,
       text:
         "Comparison Score between you and the average score for other Green Berets"
     },
@@ -134,10 +136,10 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: "rgba(220,220,220,0.5)",
+        backgroundColor: you,
         data: [
-          // props.ltvr.responses.numberCorrect,
-          props.vps.mean
+          props.ltvr.responses.numberCorrect,
+          // props.vps.mean
         ],
         // backgroundColor: 'red',
         // borderColor: "#98B9AB"
@@ -145,7 +147,7 @@ const UserResults = props => {
       },
       {
         label: "Your Competitors",
-        backgroundColor: "rgba(151,187,205,0.5)",
+        backgroundColor: comp,
         data: [props.vps.mean]
       }
     ]
@@ -154,7 +156,7 @@ const UserResults = props => {
   const vpsOptions = {
     responsive: true,
     title: {
-      display: true,
+      display: false,
       text:
         "Comparison Score between you and the average score for other Green Berets"
     },
@@ -195,10 +197,10 @@ const UserResults = props => {
     datasets: [
       {
         label: "Long Term Verbal Recall Score",
-        backgroundColor: "rgba(220,220,220,0.5)",
+        backgroundColor: you,
         data: [
-          // props.wm.responses.numberCorrect,
-          props.wm.mean
+          props.wm.responses.numberCorrect,
+          // props.wm.mean
         ],
         // backgroundColor: 'red',
         // borderColor: "#98B9AB"
@@ -206,7 +208,7 @@ const UserResults = props => {
       },
       {
         label: "blabalb",
-        backgroundColor: "rgba(151,187,205,0.5)",
+        backgroundColor: comp,
         data: [props.wm.mean]
       }
     ]
@@ -215,7 +217,7 @@ const UserResults = props => {
   const wmOptions = {
     responsive: true,
     title: {
-      display: true,
+      display: false,
       text:
         "Comparison Score between you and the average score for other Green Berets"
     },
@@ -256,10 +258,10 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: "rgba(220,220,220,0.5)",
+        backgroundColor: you,
         data: [
-          // props.ltvr.responses.numberCorrect,
-          props.ltvr.mean
+          props.ltvr.responses.numberCorrect,
+          // props.ltvr.mean
         ],
         // backgroundColor: 'red',
         // borderColor: "#98B9AB"
@@ -267,7 +269,7 @@ const UserResults = props => {
       },
       {
         label: "blabalb",
-        backgroundColor: "rgba(151,187,205,0.5)",
+        backgroundColor: comp,
         data: [props.ltvr.mean]
       }
     ]
@@ -276,7 +278,7 @@ const UserResults = props => {
   const irOptions = {
     responsive: true,
     title: {
-      display: true,
+      display: false,
       text:
         "Comparison Score between you and the average score for other Green Berets"
     },
@@ -321,16 +323,24 @@ const UserResults = props => {
   );
   console.log("what is cmsq label", props.cmsq.responses);
   const cmsqData = {
-    labels: Object.keys(props.cmsq.mean),
+    labels: Object.keys(props.cmsq.mean).map(a => {
+      if (a === 'DF') a = 'Development Focused';
+      if (a === 'DO') a = 'Doubt Oriented';
+      if (a === 'FE') a = 'Failure Evander';
+      if (a === 'WF') a = 'Win Fixated';
+      return a;
+    }),
     datasets: [
       {
-        label: "Long Term Verbal Recall Score",
+        label: "You",
+        backgroundColor: you,
         data: Object.keys(props.cmsq.responses).map(
           a => props.cmsq.responses[a]
         )
       },
       {
-        label: "Long Term Verbal Recall Score",
+        label: "Your competitors",
+        backgroundColor: comp,
         data: Object.keys(props.cmsq.mean).map(a => props.cmsq.mean[a])
       }
     ]
@@ -342,7 +352,7 @@ const UserResults = props => {
     },
     title: {
       display: true,
-      text: "Chart.js Radar Chart"
+      text: "Competitive Motivational Styles Questionnaire"
     },
     scale: {
       reverse: false,
@@ -365,16 +375,18 @@ const UserResults = props => {
   };
 
   const cnaaqData = {
-    labels: Object.keys(props.cnaaq.mean),
+    labels: Object.keys(props.cnaaq.mean).map(a => a[0] + a.slice(1).toLowerCase()),
     datasets: [
       {
-        label: "Long Term Verbal Recall Score",
+        label: "You",
+        backgroundColor: you,
         data: Object.keys(props.cnaaq.responses).map(
           a => props.cnaaq.responses[a]
         )
       },
       {
-        label: "Long Term Verbal Recall Score",
+        label: "Your Competitors",
+        backgroundColor: comp,
         data: Object.keys(props.cnaaq.mean).map(a => props.cnaaq.mean[a])
       }
     ]
@@ -386,7 +398,7 @@ const UserResults = props => {
     },
     title: {
       display: true,
-      text: "Chart.js Radar Chart"
+      text: "Conception of the Nature of Athletic Ability - 2"
     },
     scale: {
       reverse: false,
@@ -424,8 +436,14 @@ const UserResults = props => {
   }
 
   const cmsqRow = Object.keys(props.cmsq.mean).reduce((a, b, c, d) => {
+    console.log('what are you', props.cmsq.responses[b])
+    let e;
+    if (b === 'DF') e = 'Development Focused';
+    if (b === 'DO') e = 'Doubt Oriented';
+    if (b === 'FE') e = 'Failure Evander';
+    if (b === 'WF') e = 'Win Fixated';
     const row = createQ(
-      b,
+      e,
       props.cmsq.responses[b] || 0,
       props.cmsq.mean[b] || 0
     );
@@ -439,13 +457,9 @@ const UserResults = props => {
 // •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER 
 
   const cnaaqRow = Object.keys(props.cnaaq.mean).reduce((a, b, c, d) => {
-    let e;
-    if (b === 'DF') e = 'Development Focused';
-    if (b === 'DO') e = 'Doubt Oriented';
-    if (b === 'FE') e = 'Failure Evander';
-    if (b === 'WF') e = 'Win Fixated';
+
     const row = createQ(
-      e,
+      b,
       props.cnaaq.responses[b] || 0,
       props.cnaaq.mean[b] || 0
     );
@@ -524,13 +538,15 @@ const UserResults = props => {
                 Compared to other Green Berets : {props.ir.mean || 0} /{" "}
                 {props.ir.correct.length}
               </li> */}
+              <br />
+              <br />
+              <Radar data={cnaaqData} options={cnaaqOptions} />
 
               {/* <li>CMSQ</li> */}
               <Radar data={cmsqData} options={cmsqOptions} />
               {/* {cmsq} */}
               {/* {cmsqMeans} */}
 
-              <Radar data={cnaaqData} options={cnaaqOptions} />
               {/* {cnaaq} */}
               {/* {cnaaqMeans} */}
             </Typography>
@@ -560,14 +576,15 @@ const UserResults = props => {
                           {row.name}
                         </TableCell>
                         <TableCell align="right">{row.score}</TableCell>
-                        <TableCell align="right">{row.mean}</TableCell>
+                        <TableCell align="right">{(row.mean * 100).toFixed(2)}</TableCell>
                       </TableRow>
                     );
                   })}
 
                   <TableRow>
                     <TableCell>
-                      Competitive Motivational Styles Questionnaire
+                    Conceptions Of The Nature Of Athletic Ability
+                      Questionnaire -- 2
                     </TableCell>
                     <TableCell align="left" />
                   </TableRow>
@@ -576,18 +593,17 @@ const UserResults = props => {
                     return (
                       <TableRow>
                         <TableCell component="th" scope="row">
-                          {row.questTrait}
+                        {row.questTrait[0] + row.questTrait.slice(1).toLowerCase()}
                         </TableCell>
                         <TableCell align="right">{row.score}</TableCell>
-                        <TableCell align="right">{row.mean}</TableCell>
+                        <TableCell align="right">{(row.mean).toFixed(2)}</TableCell>
                       </TableRow>
                     );
                   })}
 
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      Conceptions Of The Nature Of Athletic Ability
-                      Questionnaire -- 2
+                    Competitive Motivational Styles Questionnaire
                     </TableCell>
                     <TableCell align="left" />
                   </TableRow>
@@ -596,10 +612,10 @@ const UserResults = props => {
                     return (
                       <TableRow>
                         <TableCell component="th" scope="row">
-                          {row.questTrait}
+                        {row.questTrait}
                         </TableCell>
                         <TableCell align="right">{row.score}</TableCell>
-                        <TableCell align="right">{row.mean}</TableCell>
+                        <TableCell align="right">{(row.mean).toFixed(2)}</TableCell>
                       </TableRow>
                     );
                   })}
@@ -614,3 +630,25 @@ const UserResults = props => {
 };
 
 export default UserResults;
+
+// Conception of the Nature of Athletic Ability – 2 Questionnaire 
+
+// Biddle, S. J., Wang, C. J., Chatzisarantis, N. L., & Spray, C. M. (2003). Motivation for physical activity in young people: Entity and incremental beliefs about athletic ability. Journal of Sports Sciences, 21, 973-989.
+
+// 12 item instrument:
+// •	Items 2, 5, 8 averaged for the LEARN dimension
+// •	Items 6, 9, 12 averaged for the IMPROVE dimension
+// •	Items 1, 3, 10 averaged for the STABLE dimension
+// •	Items 4, 7, 11 averaged for the GIFT dimension
+// •	LEARN mean + IMPROVE mean = INCREMENTAL
+// •	STABLE mean + GIFT mean = ENTITY 
+
+// Competitive Motivational Styles Questionnaire 
+
+// Gillham, E., Gillham, A. D., & Burton, D. (2013). Competitive motivational styles questionnaire (CSMQ): Development and preliminary validation. Manuscript in preparation.
+
+// 20 item instrument: 
+// •	Items 1, 5, 11, 15, 18 averaged for the DEVELOPMENT FOCUSED dimension
+// •	Items 4, 7, 9, 19 averaged for the WIN FIXATED dimension
+// •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension
+// •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER dimension

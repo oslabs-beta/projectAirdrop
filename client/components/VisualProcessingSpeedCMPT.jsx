@@ -6,8 +6,17 @@ import SectionEndScreen from "./SectionEndScreen";
 import UserSubmitBtn from "./UserSubmitBTN";
 import VisualProcessingSpeedElement from './VisualProcessingSpeedElement';
 import VisualProcessingSpeedChoices from "./VisualProcessingSpeedChoices";
+import {makeStyles, Typography} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center'
+  }
+}));
 
 const VisualProcessingSpeed = (props) => {
+  const classes = useStyles();
 
   let currentEl;
   let currentBTN;
@@ -40,7 +49,12 @@ const VisualProcessingSpeed = (props) => {
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
       choiceDisplay.push(
-        <VisualProcessingSpeedChoices choiceRow={choiceRow} value={j} checked={props.currentChoice == j} updateChoice={props.updateChoice}/>
+        <VisualProcessingSpeedChoices
+          disabled={props.disabled}
+          choiceRow={choiceRow}
+          value={j}
+          checked={props.currentChoice == j}
+          updateChoice={props.updateChoice}/>
       )
     }
     currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>
@@ -57,6 +71,9 @@ const VisualProcessingSpeed = (props) => {
       {choiceDisplay}
     </div>
     {currentBTN}
+    <Typography className={classes.root} color={"secondary"}>
+      {props.submitError}
+    </Typography>
   </div>
 )};
 

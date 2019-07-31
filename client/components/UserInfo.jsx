@@ -8,7 +8,11 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275,
+    minWidth: 400,
+    marginTop: 10,
+    // maxWidth: 400,
+    display: 'flex',
+
   },
   bullet: {
     display: 'inline-block',
@@ -16,7 +20,7 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: '1.5rem',
   },
   pos: {
     marginBottom: 12,
@@ -29,7 +33,7 @@ const UserInfo = (props) => {
     <Card className={classes.card}>
     <CardContent>
       <Typography className={classes.title} color="textSecondary" gutterBottom>
-      <ul>
+      <ul style={{listStyle: 'none', display: 'flex', flexDirection: 'column'}}>
       <li>First Name: {props.firstName}</li>
       <li>Last Name: {props.middleInitial}</li>
       <li>Middle Initial: {props.lastName}</li>

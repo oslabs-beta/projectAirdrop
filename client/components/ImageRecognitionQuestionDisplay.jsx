@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import UserSubmitBtn from "./UserSubmitBTN";
 import {Typography} from "@material-ui/core";
+import WorkingMemoryQuestionDisplay from "./WorkingMemoryQuestionDisplay";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +43,7 @@ const ImageRecognitionQuestionDisplay = props => {
                 label={props.choices[0]}
                 checked={props.currentChoice === props.choices[0]}
                 onChange={(e) => props.updateChoice(e, props.cid)}
+                disabled={props.disabled}
               />
               <FormControlLabel
                 value={props.choices[1]}
@@ -49,6 +51,7 @@ const ImageRecognitionQuestionDisplay = props => {
                 label={props.choices[1]}
                 checked={props.currentChoice === props.choices[1]}
                 onChange={(e) => props.updateChoice(e, props.cid)}
+                disabled={props.disabled}
               />
             </RadioGroup>
           </FormLabel>

@@ -10,12 +10,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import Container from '@material-ui/core/Container';
 
-import Amplify, { Auth } from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react';
-import awsconfig from '../aws-exports';
-
-Amplify.configure(awsconfig);
-
 const theme = createMuiTheme({
   typography: {
     fontSize: 20
@@ -33,9 +27,9 @@ const theme = createMuiTheme({
   },
 });
 
-// const mapStateToProps = store => ({
-//   login: store.userData.login
-// });
+const mapStateToProps = store => ({
+  login: store.userData.login
+});
 
 class App extends Component {
   constructor(props) {
@@ -43,17 +37,18 @@ class App extends Component {
   }
   render() {
     return (
+
      <React.Fragment>
         <MuiThemeProvider theme={theme}>
          <CssBaseline>
             <AppBar/>
            <Container maxWidth={'md'}>
-             {/*<Switch>*/}
-               {/*<Route path='/login' component={Login} />*/}
-               {/*<Authentication>*/}
+             <Switch>
+               <Route path='/login' component={Login} />
+               <Authentication>
                  <Route path='/main' component={Main}/>
-               {/*</Authentication>*/}
-             {/*</Switch>*/}
+               </Authentication>
+             </Switch>
            </Container>
           </CssBaseline>
         </MuiThemeProvider>
@@ -62,7 +57,4 @@ class App extends Component {
   }
 }
 
-export default withAuthenticator(App, {
-  includeGreetings: true
-});
-// export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App);

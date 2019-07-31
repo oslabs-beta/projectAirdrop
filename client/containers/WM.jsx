@@ -3,6 +3,7 @@ import WorkingMemoryCMPT from '../components/WorkingMemoryCMPT.jsx'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import SectionHeader from "../components/SectionHeader";
+import VisualProcessingSpeedCMPT from "../components/VisualProcessingSpeedCMPT";
 
 const mapStateToProps = store => ({
 	aid: store.answers.aid,
@@ -26,7 +27,8 @@ class WM extends Component {
       submitted: false,
       isChecked: false,
       submitError: '',
-      currentIndex: 0
+      currentIndex: 0,
+      disabled: false
     };
     this.startPractice = this.startPractice.bind(this);
     this.startTest = this.startTest.bind(this);
@@ -83,7 +85,8 @@ class WM extends Component {
           this.state.timeElapsed
         ],
         submitted: true,
-        submitError: ''
+        submitError: '',
+        disabled: true
       })
     } else {
       this.setState({
@@ -116,7 +119,8 @@ class WM extends Component {
       submitted: false,
       isChecked: false,
       submitError: '',
-      currentIndex: this.state.currentIndex += 1
+      currentIndex: this.state.currentIndex += 1,
+      disabled: false
     })
   }
 
@@ -300,10 +304,10 @@ class WM extends Component {
           startTest={this.startTest}
           updateChoice={this.updateChoice}
           currentChoice={this.state.currentChoice}
-          onPracticeHandler={this.onPracticeHandler}
           onSubmit={this.onSubmit}
           submitted={this.state.submitted}
           submitError={this.state.submitError}
+          disabled={this.state.disabled}
         />
       </div>
     );

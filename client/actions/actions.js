@@ -351,13 +351,15 @@ export const receiveMeans = data => {
     payload: data,
   }
 }
+// api/results?objString={"section": "all", "column": [], "value": []}
 
 export const fetchMeans = () => dispatch => {
   dispatch(requestAPI);
-  const data1 = {"table": "all", "column": ['questions.section_id'], "value": "[]"};
+  // const data1 = {"section": "all", "column": ['questions.section_id'], "value": "[]"};
+  const data1 = {"section": "all", "column": [], "value": []};
   const userResultsGet = url.format({ query: data1 });
   console.log('testing url query param', userResultsGet)
-  return fetch(`/api/userresults${userResultsGet}`)
+  return fetch(`/api/results?objString={"section": "all", "column": [], "value": []}`)
     .then(res => res.json())
     .then(res => {
       console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)

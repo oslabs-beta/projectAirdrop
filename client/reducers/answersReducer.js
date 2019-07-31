@@ -250,6 +250,20 @@ const answersReducer = (state = initialState, action) => {
       // return {
       //   ...state,
       // }
+//       ir: 0.45
+// ltvr: 0.03286384976525822
+// q:
+// df: 17888
+// do: 4.348717948717948
+// fe: 15808
+// g: 13173.333333333332
+// i: 13866.666666666664
+// l: 16640
+// s: 12479.999999999998
+// wf: 17160
+// __proto__: Object
+// vps: 0.16666666666666666
+// wm: 0.24
       return {
         ...state,
         ltvr: {
@@ -271,21 +285,21 @@ const answersReducer = (state = initialState, action) => {
         cnaaq: {
           ...state.cnaaq,
           mean: {
-            DF: action.payload.cnaaq.DF,
-            WF: action.payload.cnaaq.WF,
-            DO: action.payload.cnaaq.DO,
-            FE: action.payload.cnaaq.FE,
+            LEARN: action.payload.q.l,
+            IMPROVE: action.payload.q.i,
+            STABLE: action.payload.q.s,
+            GIFT: action.payload.q.g,
+            INCREMENTAL: action.payload.q.i + action.payload.q.l,
+            ENTITY: action.payload.q.s + action.payload.q.g,
           }
         },
         cmsq: {
           ...state.cmsq,
           mean: {
-            LEARN: action.payload.cmsq.LEARN,
-            IMPROVE: action.payload.cmsq.IMPROVE,
-            STABLE: action.payload.cmsq.STABLE,
-            GIFT: action.payload.cmsq.GIFT,
-            INCREMENTAL: action.payload.cmsq.INCREMENTAL,
-            ENTITY: action.payload.cmsq.ENTITY,
+            DF: action.payload.q.df,
+            WF: action.payload.q.wf,
+            DO: action.payload.q.do,
+            FE: action.payload.q.fe,
           }
         }
       };
@@ -316,3 +330,5 @@ export default answersReducer;
 //       INCREMENTAL: 6,
 //       ENTITY: 7,
 //     },
+
+

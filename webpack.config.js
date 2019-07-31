@@ -3,8 +3,7 @@ const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-var CompressionPlugin = require('compression-webpack-plugin');
-
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const NODE_DEV_SERVER_URL = 'http://[::1]:3000';
 
@@ -70,7 +69,7 @@ module.exports = {
         }
       ]
     }),
-    new webpack.DefinePlugin({ 
+    new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }

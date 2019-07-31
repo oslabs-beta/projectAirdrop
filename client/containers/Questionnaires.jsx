@@ -45,7 +45,7 @@ class Questionnaires extends Component {
   }
 
   componentDidMount(){
-
+    window.scrollTo(0, 0)
     this.setState({
       ...this.state,
       instructions: this.props.test[3].instructions[0],

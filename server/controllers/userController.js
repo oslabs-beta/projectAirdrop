@@ -5,7 +5,8 @@ const userController = {};
 
 userController.createUser = (req, res, next) => {
   console.log('create a user')
-  const loginInfo = [req.body.username, req.body.pw];
+  const hash = Math.floor((Math.random() * 100000) + 54);
+  const loginInfo = [req.body.username, req.body.pw, hash];
   return new Promise((resolve, reject) => {
     userModel.createUser(loginInfo)
       .then(result => {
@@ -65,6 +66,35 @@ userController.getUserInfo = (req, res, next) => {
       })
       .catch(err => reject(err))
   })
+};
+
+userController.compareEmailHash = (req, res, next) => {
+  const hash = [req.url.substring(14)];
+  return new Promise((resolve, reject) => {
+    userModel.compareEmailHash(hash)
+      .then(result => {
+        console.log('are we in compare email hash?', typeof result.rows[0].verification_code, typeof hash[0]);
+        if (result.rows[0].verification_code === hash[0]) {
+          res.locals.hash = result.rows[0].verification_code
+        }
+        next()
+      })
+      .catch(err => reject(err))
+  })
+};
+
+userController.verifyUser = (req, res, next) => {
+  console.log('are we in verify user?', res.locals.hash)
+  if (res.locals.hash) {
+    return new Promise((resolve, reject) => {
+      userModel.verifyUser([res.locals.hash])
+        .then(result => {
+          console.log('VERIFY USER CONTROLLER', result);
+          next()
+        })
+        .catch(err => reject(err))
+    })
+  }
 };
 
 module.exports = userController;
