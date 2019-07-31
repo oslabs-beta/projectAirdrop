@@ -15,7 +15,7 @@ const mapStateToProps = store => ({
   newUsername: store.userData.newUsername,
   newPW: store.userData.newPW,
   isAdmin: store.userData.isAdmin,
-  isLoggedIn: store.userData.isLoggedIn
+  isLoggedIn: store.userData.isLoggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
   // signup: () => dispatch(userActions.signup()),
   login: () => dispatch(userActions.login()),
   updateLogin: data => dispatch(userActions.updateLogin(data)),
-  signup: data => dispatch(userActions.signup(data))
+  signup: data => dispatch(userActions.signup(data)),
 });
 
 const useStyles = makeStyles(theme => ({
@@ -52,6 +52,40 @@ const useStyles = makeStyles(theme => ({
 
 const Login = props => {
   const classes = useStyles();
+
+  let button;
+  let placeholder;
+  if (props.userStatus === 'Create Account') {
+    button = <Button
+      variant="contained"
+      className={classes.button}
+      type="submit"
+      size={"large"}
+      fullWidth
+      onClick={e => {
+        e.preventDefault();
+        props.signup();
+      }}
+    >
+      Sign Up
+    </Button>;
+    placeholder = 'Member Signup'
+  } else {
+    button = <Button
+      variant="contained"
+      className={classes.button}
+      type="submit"
+      size={"large"}
+      fullWidth
+      onClick={e => {
+        e.preventDefault();
+        props.login();
+      }}
+    >
+      Log In
+    </Button>;
+    placeholder = 'Member Login'
+  }
   return (
     <div>
       {props.isLoggedIn === false ? (
@@ -59,7 +93,7 @@ const Login = props => {
           <div id="loginPage">
             <Container maxWidth="xs">
             <form className={classes.root}>
-              <Typography gutterBottom className={classes.header} variant={"h5"}>Member Login</Typography>
+              <Typography gutterBottom className={classes.header} variant={"h5"}>{placeholder}</Typography>
               <TextField
                 id="outlined-email-input"
                 label="Email"
@@ -82,32 +116,7 @@ const Login = props => {
                 onChange={e => props.updatePassword(e.target.value)}
                 fullWidth
               />
-              <Button
-                variant="contained"
-                className={classes.button}
-                type="submit"
-                size={"large"}
-                fullWidth
-                onClick={e => {
-                  e.preventDefault();
-                  props.login();
-                }}
-              >
-                Log In
-              </Button>
-              <Button
-                variant="contained"
-                className={classes.button}
-                type="submit"
-                size={"large"}
-                fullWidth
-                onClick={e => {
-                  e.preventDefault();
-                  props.signup();
-                }}
-              >
-                Sign Up
-              </Button>
+              {button}
               <div />
             </form>
             </Container>

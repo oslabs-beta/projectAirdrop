@@ -34,6 +34,37 @@ const mapStateToProps = store => ({
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userStatus: 'Logging In'
+    };
+    this.createAccount = this.createAccount.bind(this);
+    this.loggingIn = this.loggingIn.bind(this);
+    this.loggedIn = this.loggedIn.bind(this);
+    this.loggedOut = this.loggedOut.bind(this);
+  }
+
+  createAccount() {
+    this.setState({
+      userStatus: 'Create Account'
+    })
+  }
+
+  loggingIn() {
+    this.setState({
+      userStatus: 'Logging In'
+    })
+  }
+
+  loggedIn() {
+    this.setState({
+      userStatus: 'Logged In'
+    })
+  }
+
+  loggedOut() {
+    this.setState({
+      userStatus: 'Logging In'
+    })
   }
 
   render() {
@@ -42,12 +73,22 @@ class App extends Component {
      <React.Fragment>
         <MuiThemeProvider theme={theme}>
          <CssBaseline>
-            <AppBar />
+            <AppBar
+              userStatus={this.state.userStatus}
+              createAccount={this.createAccount}
+              loggingIn={this.loggingIn}
+            />
            <Container maxWidth={'md'}>
              <Switch>
-               <Route path='/login' component={Login} />
+               <Route
+                 path='/login'
+                 render={(props) => <Login {...props} userStatus={this.state.userStatus}/>}
+               />
                <Authentication>
-                 <Route path='/main' component={Main}/>
+                 <Route
+                   path='/main'
+                   render={(props) => <Main {...props} loggedOut={this.loggedOut} loggedIn={this.loggedIn}/>}
+                   />
                </Authentication>
              </Switch>
            </Container>

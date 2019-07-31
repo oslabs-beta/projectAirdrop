@@ -15,6 +15,14 @@ class Main extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.loggedIn()
+  }
+
+  componentWillUnmount() {
+    this.props.loggedOut()
+  }
+
   render() {
     return(
         <div >
