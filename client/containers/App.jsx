@@ -40,7 +40,7 @@ class App extends Component {
      <React.Fragment>
         <MuiThemeProvider theme={theme}>
          <CssBaseline>
-            <AppBar iconElementLeft={<img src='https://res.cloudinary.com/dnugcin6k/image/upload/v1564537989/icon_256x256.20d7baeeac439ace1ad581a42a4c5b12_fr7qin.png' alt="Logo" />} />
+            <AppBar/>
            <Container maxWidth={'md'}>
              <Switch>
                <Route path='/login' component={Login} />
