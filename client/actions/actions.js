@@ -1,4 +1,12 @@
 import * as types from "./../constants/actionTypes";
+const querystring = require('querystring');
+const data = {"table": "all", "column": ['questions.section_id'], "value": []} 
+const test = Object.keys(data).forEach(key => url)
+var url = require('url')
+
+// const userResults = new URL("/api/userresults");
+
+
 
 export const showClicks = () => ({
   type: types.TEST_TEST
@@ -145,7 +153,6 @@ export const postAnswers = (sectionId, data) => dispatch => {
   console.log('POST ANSWERS DATA AID CHECK \n', sectionId, 'data \n', data);
   dispatch(requestAPI)
 
-  // TODO: Needs URL
   return fetch('/api/test', {
     method: 'POST',
     headers: {
@@ -182,7 +189,6 @@ export const postDemo = (data) => dispatch => {
       return res.json()
     })
     .then(res => {
-      // if (!isValid(res)) throw new Error("something went wrong!");
       console.log('POST DEMO RESPONSE OBJECT', res);
       return dispatch(receiveAID(res))
     })
@@ -204,9 +210,78 @@ export const receiveAID = (aid) => ({
 
 export const questionnaireResponses = data => {
   console.log('testing arrival', data)
+  const cnaaqResponses = data.cnaaqResponses.reduce((a,b,c,d) => {
+    c = c+1;
+    console.log('testing c', c)
+    if (c === 1 || c === 2 || c === 10) {
+      a.STABLE += Number(b);
+    };
+    if (c === 2 || c === 5 || c === 8) {
+      a.LEARN += Number(b);
+    };
+    if (c === 4 || c === 7 || c === 11) {
+      a.GIFT += Number(b);
+    };
+    if (c === 6 || c === 9 || c === 12) {
+      a.IMPROVE += Number(b)
+    };
+    if (c === 12) {
+      a.STABLE = a.STABLE / 3;
+      a.LEARN = a.LEARN / 3;
+      a.GIFT = a.GIFT / 3;
+      a.IMPROVE = a.IMPROVE / 3;
+      a.INCREMENTAL += Number((a.IMPROVE + a.LEARN).toFixed(2));
+      a.ENTITY += Number((a.STABLE + a.GIFT).toFixed(2));
+      a.IMPROVE = Number(a.IMPROVE.toFixed(2));
+      a.GIFT = Number(a.GIFT.toFixed(2));
+      a.LEARN = Number(a.LEARN.toFixed(2));
+      a.STABLE = Number(a.STABLE.toFixed(2));
+    }
+    return a;
+  }, {
+    LEARN: 0,
+    IMPROVE: 0,
+    STABLE: 0,
+    GIFT: 0,
+    INCREMENTAL: 0,
+    ENTITY: 0,
+  });
+
+
+  const cmsqResponses = data.cmsqResponses.reduce((a,b,c,d) => {
+    c = c + 1;
+    if (c === 1 || c === 5 || c === 11 || c === 15 || c === 18) {
+      a.DF += Number(b);
+    };
+    if (c === 4 || c === 7 || c === 9 || c === 19) {
+      a.WF += Number(b);
+    };
+    if (c === 2 || c === 6 || c === 10 || c === 12 || c === 14 || c === 16) {
+      a.DO += Number(b);
+    };
+    if (c === 3 || c === 8 || c === 13 || c === 17 || c === 20) {
+      a.FE += Number(b);
+    }
+    if (c === 20) {
+      a.DF = Number((a.DF / 5).toFixed(2));
+      a.WF = Number((a.WF / 4).toFixed(2));
+      a.DO = Number((a.DO / 6).toFixed(2));
+      a.FE = Number((a.FE / 5).toFixed(2));
+    }
+    return a;
+  }, {
+    DF: 0,
+    WF: 0,
+    DO: 0,
+    FE: 0,
+  });
+
   return {
     type: types.SEND_QUESTIONNAIRE_RESPONSES,
-    payload: data,
+    payload: {
+      cmsqResponses,
+      cnaaqResponses
+    },
   }
 };
 
@@ -266,3 +341,27 @@ export const irResponses = data => {
 //   type: types.LOAD_ANSWERS,
 //   payload: data,
 // });
+
+export const receiveMeans = data => {
+  console.log('did we get the means?', data);
+  return {
+    type: types.RECEIVE_MEANS,
+    payload: data,
+  }
+}
+// api/results?objString={"section": "all", "column": [], "value": []}
+export const fetchMeans = (data) => dispatch => {
+  dispatch(requestAPI);
+  const url = '/api/results?objString=' + JSON.stringify(data);
+  return fetch(url)
+    .then(res => res.json())
+    .then(res => {
+      console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)
+      // if (!isValid(res)) throw new Error("something went wrong");
+      return dispatch(receiveMeans(res));
+    })
+    .catch(err => {
+      console.log('TESTING FETCH TEST CATCH ERROR');
+      dispatch(receiveFailure(err))
+    });
+};

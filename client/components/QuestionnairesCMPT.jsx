@@ -1,5 +1,7 @@
 import React from 'react';
 import QuestionnairesBTN from './QuestionnaireBTN';
+import UserSubmitBtn from './UserSubmitBTN';
+
 
 const QuestionnairesCMPT = (props) => {
   const questions = [];
@@ -20,11 +22,16 @@ const QuestionnairesCMPT = (props) => {
   </div>)
 }
   return (
+    <div>
+    <h4>{props.sectionName}</h4>
     <ul>
       {questions}
+      {/* {props.nextQuest ? <button onClick={props.nextQuest}>Submit</button> : <UserSubmitBtn onSubmit={props.onSubmit} />} */}
+      <UserSubmitBtn onSubmit={props.onSubmit} />
     </ul>
+    </div>
   );
 };
 
-export default QuestionnairesCMPT;
+export default (QuestionnairesCMPT);
 
