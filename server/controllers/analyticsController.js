@@ -198,4 +198,28 @@ analyticsController.getMeanScores = (req, res, next) => {
   next();
 }
 
+analyticsController.sendMeans = (req, res, next) => {
+  res.locals.means = {
+    vps: 5,
+    ir: 3,
+    wm: 4,
+    ltvr: 10,
+    cnaaq: {
+      DF: 5,
+      WF: 4,
+      DO: 3,
+      FE: 6,
+    },
+    cmsq: {
+      LEARN: 3,
+      IMPROVE: 4,
+      STABLE: 3,
+      GIFT: 4,
+      INCREMENTAL: 6,
+      ENTITY: 7,
+    },
+  }
+  next();
+};
+
 module.exports = analyticsController;

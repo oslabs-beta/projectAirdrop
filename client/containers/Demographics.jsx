@@ -157,7 +157,10 @@ class Demographics extends Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose} color="primary" autoFocus>
+          <Button 
+          onClick={this.handleClose} autoFocus
+          color="primary"
+          >
             Agree
           </Button>
         </DialogActions>

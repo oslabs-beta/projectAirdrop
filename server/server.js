@@ -1,9 +1,9 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
 const { PORT } = process.env;
 const app = express();
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 const dbController = require('./controllers/testController');
 const encryptionController = require('./controllers/encryptionController');
@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.use('/static', express.static(path.join(__dirname, 'dist')))
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 //gzipping route
 app.get('*.js', function (req, res, next) {
@@ -84,20 +84,17 @@ app.post('/api/login',
   userController.login,
   tokenController.signToken,
   (req, res) => {
-  res.cookie('token', res.locals.token, {httpOnly: true});
-  res.status(200).json(res.locals);
-});
+    res.cookie("token", res.locals.token, { httpOnly: true });
+    res.status(200).json(res.locals);
+  }
+);
 
 //for authentication component at login
-app.get('/api/verifytoken',
-  tokenController.checkToken,
-  (req, res) => {
- res.json(req.token);
+app.get("/api/verifytoken", tokenController.checkToken, (req, res) => {
+  res.json(req.token);
 });
 
-app.get('/api/getUserInfo',
-  userController.getUserInfo,
-  (req, res) => {
+app.get("/api/getUserInfo", userController.getUserInfo, (req, res) => {
   res.json(res.locals.result[0]);
 });
 
@@ -112,12 +109,13 @@ app.get('/api/logout', (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) {
-      res.status(500).send(err)
+      res.status(500).send(err);
     }
-  })
+  });
 });
 
-app.get('/api/test',
+app.get(
+  "/api/test",
   dbController.getSections,
   dbController.getWords,
   dbController.getInstructions,
@@ -126,8 +124,9 @@ app.get('/api/test',
   dbController.getChoices,
   dbController.getQuestionBySection,
   (req, res) => {
-  res.json(res.locals.test);
-});
+    res.json(res.locals.test);
+  }
+);
 
 app.post('/api/test',
   tpController.postAnswers,
@@ -135,12 +134,27 @@ app.post('/api/test',
   res.status(200);
 });
 
-app.get('/api/results', aController.getMeanData, aController.getMeanScores, (req, res) => {
+app.get('/api/results', 
+aController.getMeanData, 
+aController.getMeanScores, 
+(req, res) => {
+  console.log('query', req.query)
   res.json(res.locals.calculatedMean);
 });
 
-app.post('/api/demo', tpController.postDemoData, (req, res) => {
-  res.json(res.locals.aID)
+// DF: 5.4
+// WF: 5.25
+// DO: 4.17
+// FE: 4.2
+// cnaaq
+// LEARN: 3.33
+// IMPROVE: 4.33
+// STABLE: 3.33
+// GIFT: 4.67
+// INCREMENTAL: 7.67
+// ENTITY: 8
+app.post("/api/demo", tpController.postDemoData, (req, res) => {
+  res.json(res.locals.aID);
 });
 
 //error handling
@@ -148,21 +162,20 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     console.log("ERROR: ", err);
     if (err) {
-      res.status(500).send(err)
+      res.status(500).send(err);
     }
-  })
+  });
 });
 
 app.use((req, res) => {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).send("Sorry can't find that!");
 });
 
-app.use((err, req, res, next) =>{
+app.use((err, req, res, next) => {
   console.log(err);
-  res.status(400).json({'msg':err});
+  res.status(400).json({ msg: err });
 });
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 });
-
