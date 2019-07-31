@@ -112,7 +112,7 @@ class VPS extends Component {
 						this.setState({
 							answerArray: [...this.state.answerArray, {
 								answer: this.state.currentChoice,
-								timeToRespond: this.state.timeRun
+								timeToRespond: this.state.timeRun,
 							}]
 						})
 					}
@@ -123,19 +123,25 @@ class VPS extends Component {
 						})
 					}
 					//Resets state for the next series
-					this.setState({
-						displayingAnswers: false,
-						middleStop: false,
-						currentElementIndex: 0,
-						currentSeriesIndex: this.state.currentSeriesIndex += 1,
-						timerRunning: false,
-						timeRun: 0,
-						submitted: false,
-						currentChoice: null,
-						isChecked: false,
-						submitError: '',
-						disabled: false
-					})
+					// if(this.state.seenPracticeAnswers){
+						this.setState({
+							displayingAnswers: false,
+							middleStop: false,
+							currentElementIndex: 0,
+							currentSeriesIndex: this.state.currentSeriesIndex += 1,
+							timerRunning: false,
+							timeRun: 0,
+							submitted: false,
+							currentChoice: null,
+							isChecked: false,
+							submitError: '',
+							disabled: false
+						})
+					// } else {
+					// 	this.setState({
+					// 		seenPracticeAnswers: true
+					// 	}, () => setTimeout)
+					// }
 				}
 				//Controls when we display answers
 				if(this.state.timerRunning){
