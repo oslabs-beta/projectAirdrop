@@ -20,13 +20,31 @@ const mapDispatchToProps = dispatch => ({
   
 });
 class AdminView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      suggestions: [{ label: 'Long Term Verbal Recall' }, { label:'Visual Processing Speed' }, { label: 'Working Memory' }, { label: 'Image Recognition' }, { label: 'Psychological Questionnaires' }],
+      tables: [],
+    }
+    this.updateTable = this.updateTable.bind(this);
+  }
+
+  updateTable(val) {
+    this.setState({
+      tables: [...val]
+    })
+  }
+
   render() {
+    console.log('Please update the table?', this.state.tables)
     return (
       <div>
         <button> Get Results </button>
         <h1>Hi</h1>
         <AdminQueryFilterCMPT 
         changeHandler={this.props.changeHandler}
+        suggestions={this.state.suggestions}
+        updateTable={this.updateTable}
         />
         <AdminResultsCMPT
           ltvr={this.props.ltvr}

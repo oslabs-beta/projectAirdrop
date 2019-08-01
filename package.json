@@ -29,6 +29,7 @@
     "chart.js": "^2.8.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
+    "downshift": "^3.2.10",
     "express": "^4.17.1",
     "html-webpack-plugin": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
