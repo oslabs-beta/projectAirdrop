@@ -45,7 +45,7 @@ const ImageRecognitionCMPT = (props) => {
         disabled={props.disabled}
       />,
 
-      <NextCMPT text={'Click next to continue.'} changeSlide={props.changeSlide}/>,
+      <NextCMPT text={'The practice round has ended. Click next to see the answer.'} changeSlide={props.changeSlide}/>,
 
       <PracticeImageAnswerDisplay
         url={props.IR.practice[0].image_url}

@@ -3,6 +3,7 @@ import UserStartBTN from './UserStartBTN';
 import SectionInstructions from './SectionInstructions';
 import LongTermVerbalRecallDisplayWordGrid from './LongTermVerbalRecallDisplayWordGrid';
 import SectionHeader from './SectionHeader';
+
 import SectionEndScreen from "./SectionEndScreen";
 import {makeStyles} from "@material-ui/core";
 
@@ -36,7 +37,10 @@ const LTVRDCMPT = (props) => {
     <div>
       <div className={classes.root}>
         <SectionHeader sectionName={props.sectionName}/>
+
         <SectionInstructions instructions={instructions}/>
+        
+        
         {props.testStarted && !props.testDone && <LongTermVerbalRecallDisplayWordGrid words={formatWords}/>}
         {currentBTN}
       </div>

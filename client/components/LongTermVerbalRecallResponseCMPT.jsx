@@ -32,7 +32,7 @@ const LTVRR = (props) => {
   }
   if(!props.testStarted) {
     currentBTN = <UserStartBTN action={props.startTimer} buttonText={'Start Test'}/>;
-    instructions = props.instructions[0].instruction_text;
+    instructions = props.instructions[1].instruction_text;
   } else if(!props.testDone){
     timeLeft = props.timeLeft/1000;
     currentBTN = <UserSubmitBtn onSubmit={props.submitAnswer}/>;
