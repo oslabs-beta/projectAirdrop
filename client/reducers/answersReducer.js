@@ -151,8 +151,8 @@ const answersReducer = (state = initialState, action) => {
     //   }
     // }
     case SEND_WM_RESPONSES:
-      const totalRightWm = state.wm.correct.reduce((a, b, c) => {
-        if (b === action.payload[c]) {
+      const totalRightWm = state.wm.correct.reduce((a, b, c, d) => {
+        if (d[c+1] === action.payload[c]) {
           a.push(b);
         }
         return a;

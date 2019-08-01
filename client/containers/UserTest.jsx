@@ -47,14 +47,15 @@ class MainTestDisplay extends Component {
   render () {
     console.log('THIS PROPS TEST 0', this.props.test[0]);
     console.log('results test', this.props.results)
-    const compArray = [<UserDemographics changeSection={this.changeSection}/>,
-      <Introduction intro={this.props.test[2]} changeSection={this.changeSection}/>,
+    const compArray = [
+      // <UserDemographics changeSection={this.changeSection}/>,
+      // <Introduction intro={this.props.test[2]} changeSection={this.changeSection}/>,
       <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[6]}/>,
       <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[5]}/>,
-      <WorkingMemory WM={this.props.test[1]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <ImageRecognition IR={this.props.test[0]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
-      <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
+      // <WorkingMemory WM={this.props.test[1]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      // <ImageRecognition IR={this.props.test[0]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      // <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
+      // <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
       <UserResults />,
       <Instructions />];
 

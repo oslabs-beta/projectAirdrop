@@ -138,7 +138,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ltvr.responses.numberCorrect,
+          props.vps.userResponse.correctResponses.length || 0,
           // props.vps.mean
         ],
         // backgroundColor: 'red',
@@ -191,15 +191,16 @@ const UserResults = props => {
       ]
     }
   };
-
+  // same change for table value
+  // stagger reducer values + 1
   const wmData = {
     labels: ["Working Memory"],
     datasets: [
       {
-        label: "Long Term Verbal Recall Score",
+        label: "You",
         backgroundColor: you,
         data: [
-          props.wm.responses.numberCorrect,
+          props.wm.userResponse.correctResponses.length || 0,
           // props.wm.mean
         ],
         // backgroundColor: 'red',
@@ -207,7 +208,7 @@ const UserResults = props => {
         fill: false
       },
       {
-        label: "blabalb",
+        label: "Your Competitor",
         backgroundColor: comp,
         data: [props.wm.mean]
       }
@@ -260,7 +261,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ltvr.responses.numberCorrect,
+          props.ir.userResponse.correctResponses.length || 0,
           // props.ltvr.mean
         ],
         // backgroundColor: 'red',
@@ -268,9 +269,9 @@ const UserResults = props => {
         fill: false
       },
       {
-        label: "blabalb",
+        label: "Your Competitor",
         backgroundColor: comp,
-        data: [props.ltvr.mean]
+        data: [props.ir.mean]
       }
     ]
   };
@@ -475,17 +476,17 @@ const UserResults = props => {
     ),
     createData(
       "Visual Processing Speed",
-      props.vps.responses.numberCorrect,
+      props.vps.userResponse.correctResponses.length || 0,
       props.vps.mean
     ),
     createData(
       "Working Memory",
-      props.wm.responses.numberCorrect,
+      props.wm.userResponse.correctResponses.length || 0,
       props.wm.mean
     ),
     createData(
       "Image Recognition",
-      props.ir.responses.numberCorrect,
+      props.ir.userResponse.correctResponses.length || 0,
       props.ir.mean
     )
   ];
@@ -576,7 +577,7 @@ const UserResults = props => {
                           {row.name}
                         </TableCell>
                         <TableCell align="right">{row.score}</TableCell>
-                        <TableCell align="right">{(row.mean * 100).toFixed(2)}</TableCell>
+                        <TableCell align="right">{(row.mean).toFixed(2)}</TableCell>
                       </TableRow>
                     );
                   })}
