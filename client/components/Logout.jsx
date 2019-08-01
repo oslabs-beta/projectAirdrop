@@ -13,7 +13,11 @@ class Logout extends Component {
     fetch('api/logout',
       {
       mode: 'no-cors'
-    });
+    })
+      .then(result => {
+        window.location.reload(true)
+      })
+      .catch(err => reject(err))
   }
 
   render () {

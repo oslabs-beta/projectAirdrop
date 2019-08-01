@@ -143,25 +143,14 @@ app.post('/api/test',
   res.status(200);
 });
 
-app.get('/api/results', 
-aController.getMeanData, 
-aController.getMeanScores, 
+app.get('/api/results',
+aController.getMeanData,
+aController.getMeanScores,
 (req, res) => {
   console.log('query', req.query)
   res.json(res.locals.calculatedMean);
 });
 
-// DF: 5.4
-// WF: 5.25
-// DO: 4.17
-// FE: 4.2
-// cnaaq
-// LEARN: 3.33
-// IMPROVE: 4.33
-// STABLE: 3.33
-// GIFT: 4.67
-// INCREMENTAL: 7.67
-// ENTITY: 8
 app.post("/api/demo", tpController.postDemoData, (req, res) => {
   res.json(res.locals.aID);
 });
@@ -181,7 +170,7 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.log('error handler', err);
   res.status(400).json({ msg: err });
 });
 
