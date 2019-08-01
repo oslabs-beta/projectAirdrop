@@ -64,6 +64,8 @@ module.exports = {
       background_color: '#01579b',
       theme_color: '#01579b',
       start_url: '/?homescreen=1',
+      display: 'standalone',
+      orientation: 'portrait-primary',
       icons: [
         {
           src: path.resolve('client/src/images//5th_SFG_ICON.png'),

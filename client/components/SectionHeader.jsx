@@ -11,7 +11,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   header: {
-    lineHeight: 3
+    lineHeight: 1.5,
+    paddingBottom: '.5em',
+    paddingTop: '2em',
+    fontSize: '2em'
   }
 }));
 
@@ -20,7 +23,7 @@ const SectionHeader = props => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.header} variant={"h4"}>
+      <Typography className={classes.header} variant={"h5"}>
         {props.sectionName}
       </Typography>
     </div>
