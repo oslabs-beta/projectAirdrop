@@ -4,10 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
     display: 'flex',
     justifyContent: 'center',
   },
@@ -37,10 +37,10 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
     )
   }
   return (
-    <div className={classes.root}>
+    <Container className={classes.root}>
       <GridList className={classes.gridList} spacing={10} cols={5} cellHeight={'auto'}>
         {wordArr}
       </GridList>
-    </div>
+    </Container>
   );
 }
