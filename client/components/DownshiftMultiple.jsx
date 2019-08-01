@@ -9,13 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import Chip from "@material-ui/core/Chip";
 
-const suggestions = [
-  { label: "Long Term Verbal Recall" },
-  { label: "Visual Processing Speed" },
-  { label: "Working Memory" },
-  { label: "Image Recognition" },
-  { label: "Questionnaires" }
-];
+function DownshiftMultiple(props) {
+const suggestions = props.suggestions;
 
 function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps;
@@ -112,7 +107,6 @@ function getSuggestions(value, { showEmpty = false } = {}) {
       });
 }
 
-function DownshiftMultiple(props) {
   const classes = useStyles();
   // const { classes } = props;
   const [inputValue, setInputValue] = React.useState("");
@@ -129,10 +123,12 @@ function DownshiftMultiple(props) {
   }
 
   function handleInputChange(event) {
+    console.log(event.target.value)
     setInputValue(event.target.value);
   }
 
   function handleChange(item) {
+    console.log("thing")
     let newSelectedItem = [...selectedItem];
     if (newSelectedItem.indexOf(item) === -1) {
       newSelectedItem = [...newSelectedItem, item];
@@ -193,8 +189,8 @@ function DownshiftMultiple(props) {
                 )),
                 onBlur,
                 onChange: event => {
-                  handleInputChange(event);
                   onChange(event);
+                  handleInputChange(event);
                 },
                 onFocus
               },
