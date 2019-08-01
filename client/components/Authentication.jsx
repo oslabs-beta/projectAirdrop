@@ -12,10 +12,6 @@ const mapStateToProps = store => ({
 
 });
 
-const mapDispatchtoProps = dispatch => ({
-
-
-});
 
 
 class Authentication extends Component {
@@ -62,4 +58,4 @@ class Authentication extends Component {
    }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(Authentication)
+export default connect(mapStateToProps)(Authentication)
