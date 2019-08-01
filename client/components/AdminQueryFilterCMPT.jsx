@@ -6,10 +6,16 @@ import FilledInput from "@material-ui/core/FilledInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
+import MenuItem from '@material-ui/core/MenuItem';
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import Chip from "@material-ui/core/Chip";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import DownshiftMultiple from './DownshiftMultiple';
+
+// import DownshiftTest from './DownshiftTest';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -28,43 +34,60 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const AdminQueryFilterCMPT = props => {
   const classes = useStyles();
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+  let columnField;
+  let valueField;
+  let valueSuggestions;
+  // const inputLabel = React.useRef(null);
+  // const [labelWidth, setLabelWidth] = React.useState(0);
+  // React.useEffect(() => {
+  //   setLabelWidth(inputLabel.current.offsetWidth);
+  // }, []);
+  switch(props.currentColumn){
+    case "Rank":
+      valueSuggestions = props.valueSuggestions.rank;
+      break;
+    case "MOS":
+      valueSuggestions = props.valueSuggestions.mos;
+      break;
+    case "Years in Service":
+      valueSuggestions = props.valueSuggestions.years;
+      break;
+    default:
+      valueSuggestions = [];
+  }
+  if(props.displayValueField){
+    console.log("help")
+    valueField = 
+    <span>
+      <p> = </p>
+      <DownshiftMultiple
+        suggestions={valueSuggestions}
+        updateTable={props.updateColumns}
+      />
+    </span>
+  }
+  if(props.displayColumnField){
+    columnField = <div> 
+      <p>Filter By</p>
+      <DownshiftMultiple
+        suggestions={props.columnSuggestions}
+        updateTable={props.updateColumns}
+      />
+      {valueField}
+  </div>
+  }
 
   return (
     <div>
-      <Card >
-        <CardContent>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel ref={inputLabel} htmlFor="outlined-age-native-simple">
-          Age
-        </InputLabel>
-        <Select
-          native
-          // value={state.age}
-          // onChange={handleChange("age")}
-          onChange={props.handleChange}
-          input={
-            <OutlinedInput
-              name="age"
-              labelWidth={labelWidth}
-              id="outlined-age-native-simple"
-            />
-          }
-        >
-          <option value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-      </FormControl>
-      </CardContent>
-      </Card>
+      <button onClick={props.addFilter}>Add Filter</button>
+      {columnField}
+      <DownshiftMultiple 
+      suggestions={props.sectionSuggestions}
+      updateTable={props.updateTable}
+      />
     </div>
   );
 };
