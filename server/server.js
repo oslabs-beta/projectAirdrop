@@ -30,12 +30,16 @@ app.get('*.js', function (req, res, next) {
 
 //LOGIN AND AUTH
 const smtpTransport = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
+  service: 'gmail',
   port: 587,
   secure: false,
   auth: {
-    user: 'shania.braun35@ethereal.email',
-    pass: 'G9FcXAqksXCZspsrmC'
+      user: 'legionmpaverify@gmail.com',
+      pass: 'thelegion123!'
+  },
+  tls: {
+      rejectUnauthorized: false
+
   }
 });
 
@@ -96,7 +100,7 @@ app.get("/api/getUserInfo", userController.getUserInfo, (req, res) => {
 });
 
 //destroy cookie at logout
-app.get('/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
   res.clearCookie('token');
   res.status(200).send()
 });
