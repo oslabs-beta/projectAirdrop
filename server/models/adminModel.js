@@ -13,18 +13,23 @@ const pool = new Pool({
 	port: 5432
 });
 
-const set_new_password = `INSERT INTO users (pw) VALUES $1 WHERE username = $2;`;
+const set_new_password = `UPDATE users SET pw = $1 WHERE username = $2;`;
+const set_new_admin = `UPDATE users SET is_admin = true WHERE username = $1`
 
 const adminModel = {
-  setPassword(adminObj){
-    bcrypt.genSalt(10, (err, salt) => {
-      if(err) return next(err);
-      bcrypt.hash(adminObj.newPass, hash, (err, hash) => {
-        if(err) return next(err);
-        pool.query(set_new_password, [adminObj.newPass, adminObj.user], (err, result) => {
-          if(err) return reject(err)
-          resolve(result);
-        })
+  setPassword(body){
+    return new Promise((resolve, reject) => {
+      pool.query(set_new_password, [body.pw, body.username], (err, result) => {
+        if(err) return reject(err)
+        resolve(result);
+      })
+    })
+  },
+  setNewAdmin(body){
+    return new Promise((resolve, reject) => {
+      pool.query(set_new_admin, [body.username], (err, result) => {
+        if(err) return reject(err);
+        resolve(result);
       })
     })
   }
