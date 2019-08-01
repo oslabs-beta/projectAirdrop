@@ -53,7 +53,7 @@ const SimpleAppBar = props => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
             <img
               src={'https://res.cloudinary.com/dnugcin6k/image/upload/v1564537989/icon_256x256.20d7baeeac439ace1ad581a42a4c5b12_fr7qin.png'}
@@ -61,7 +61,7 @@ const SimpleAppBar = props => {
               className={classes.logo}
             />
             <Typography className={classes.title} variant="title" color="inherit">
-            Legion Mental Performance Assessment
+            Legion MPA
           </Typography>
           {button}
         </Toolbar>
