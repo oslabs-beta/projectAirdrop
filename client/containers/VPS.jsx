@@ -82,185 +82,164 @@ class VPS extends Component {
     this.props.postVPS(vpsResponses);
   }
 
-  startNewSeries() {
-    this.setState(
-      {
-        // 4500 500
-        timeToNext: 1500 - this.state.currentSeriesIndex * 100,
-        timerRunning: true
-      },
-      this.setAndNameInterval
-    );
-  }
-  startPractice() {
-    this.setState(
-      {
-        // 2000
-        timeToNext: 200,
-        timerRunning: true,
-        testStarted: true
-      },
-      this.setAndNameInterval
-    );
-  }
-  setAndNameInterval() {
-    console.log(this.state);
-    this.seriesTicker = setInterval(this.seriesIncrementer, 100);
-  }
-  seriesIncrementer() {
-    if (this.state.timeToNext === this.state.timeRun) {
-      if (!this.state.displayingAnswers) {
-        this.setState({
-          currentElementIndex: ++this.state.currentElementIndex,
-          timeRun: 0
-        });
-        console.log(this.state.answerArray, "before");
-      }
-      // Checks if we are at the end of the current set of elements to be displayed
-      if (
-        this.state.currentElementIndex ===
-        this.props.vpsAnswers[0][this.state.currentSeriesIndex].length
-      ) {
-        clearInterval(this.seriesTicker);
-        //If we are displaying answers, we should stop
-        if (this.state.displayingAnswers) {
-          //Auto-submit feature. 1st condition checks that the user hasn't done a manual submit. 2nd condition makes sure it isn't auto-submitting the practice question
-          if (
-            !this.state.answerArray[this.state.currentSeriesIndex - 1] &&
-            this.state.practiceDone
-          ) {
-            this.setState({
-              answerArray: [
-                ...this.state.answerArray,
-                {
-                  answer: this.state.currentChoice,
-                  timeToRespond: this.state.timeRun
-                }
-              ]
-            });
-          }
-          //Sets practiceDone to true after the practice series finishes
-          if (!this.state.practiceDone && this.state.seenPracticeAnswers) {
-            this.setState({
-              practiceDone: true
-            });
-          }
-          //Resets state for the next series
-          this.setState({
-            displayingAnswers: false,
-            middleStop: false,
-            currentElementIndex: 0,
-            currentSeriesIndex: (this.state.currentSeriesIndex += 3),
-            timerRunning: false,
-            timeRun: 0,
-            submitted: false,
-            currentChoice: null,
-            isChecked: false,
-            submitError: "",
-            disabled: false
-          });
-        }
-        //Controls when we display answers
-        if (this.state.timerRunning) {
-          console.log("last step firing");
-          this.setState({
-            middleStop: true,
-            timeToNext: 0
-          });
-        }
-      }
-    } else {
-      this.setState({
-        timeRun: (this.state.timeRun += 100)
-      });
-    }
-  }
-  submitAnswer(answerChoice) {
-    console.log("VPS SUBMIT ANSWER BUTTON");
-    if (this.state.practiceDone && this.state.isChecked) {
-      this.setState(
-        {
-          answerArray: [
-            ...this.state.answerArray,
-            {
-              answer: answerChoice,
-              timeToRespond: this.state.timeRun
-            }
-          ],
-          // currentChoice: null,
-          submitted: true,
-          submitError: "",
-          disabled: true
-          // timeRun: this.state.timeToNext
-        },
-        () => console.log(this.state.answerArray, "Ans Arr")
-      );
-    }
-    if (!this.state.practiceDone && this.state.isChecked) {
-      this.setState({
-        submitted: true,
-        submitError: "",
-        disabled: true
-      });
-    }
-    if (!this.state.isChecked) {
-      console.log("SUBMIT ERROR?");
-      this.setState({
-        submitError: "Please select an answer before submitting."
-      });
-    }
-    console.log(this.state.answerArray);
-  }
-  updateChoice(e) {
-    this.setState(
-      {
-        currentChoice: e.target.value,
-        isChecked: true
-      },
-      () => console.log(this.state.currentChoice)
-    );
-  }
-  displayAnswers() {
-    this.setState(
-      {
-        timeToNext: 10000,
-        timerRunning: true,
-        middleStop: false,
-        displayingAnswers: true
-      },
-      this.setAndNameInterval
-    );
-  }
-  render() {
-    return (
-      <div>
-        <VisualProcessingSpeedCMPT
-          timerRunning={this.state.timerRunning}
-          answerKey={this.props.answerKey}
-          startNewSeries={this.startNewSeries}
-          startPractice={this.startPractice}
-          currentElementIndex={this.state.currentElementIndex}
-          currentSeriesIndex={this.state.currentSeriesIndex}
-          vpsAnswers={this.props.vpsAnswers}
-          practiceDone={this.state.practiceDone}
-          testStarted={this.state.testStarted}
-          displayingAnswers={this.state.displayingAnswers}
-          changeSection={this.props.changeSection}
-          instructions={this.props.section.instructions}
-          submitAnswer={this.submitAnswer}
-          currentChoice={this.state.currentChoice}
-          updateChoice={this.updateChoice}
-          displayAnswers={this.displayAnswers}
-          middleStop={this.state.middleStop}
-          sectionName={this.props.section.section_display_name}
-          submitted={this.state.submitted}
-          radioSubmitStatus={this.state.radioSubmitStatus}
-          submitError={this.state.submitError}
-          disabled={this.state.disabled}
-        />
-      </div>
-    );
-  }
+	startNewSeries() {
+		this.setState({
+			timeToNext: 4500 - (this.state.currentSeriesIndex*500),
+			timerRunning: true,
+		}, this.setAndNameInterval)
+	}
+	startPractice(){
+		this.setState({
+			timeToNext: 2000,
+			timerRunning: true,
+			testStarted: true,
+		}, this.setAndNameInterval)
+	}
+	setAndNameInterval(){
+		console.log(this.state);
+		this.seriesTicker = setInterval(this.seriesIncrementer, 100);
+	}
+	seriesIncrementer() {
+		if(this.state.timeToNext === this.state.timeRun){
+			if(!this.state.displayingAnswers){
+				this.setState({
+					currentElementIndex: ++this.state.currentElementIndex,
+					timeRun: 0,
+				})
+				console.log(this.state.answerArray, "before")
+			}
+			// Checks if we are at the end of the current set of elements to be displayed
+			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
+				clearInterval(this.seriesTicker);
+				//If we are displaying answers, we should stop
+				console.log('AND WHAT DO THEY SAY?????')
+				if(this.state.displayingAnswers){
+					//Auto-submit feature. 1st condition checks that the user hasn't done a manual submit. 2nd condition makes sure it isn't auto-submitting the practice question
+					if(!this.state.answerArray[this.state.currentSeriesIndex - 1] && this.state.practiceDone){
+						this.setState({
+							answerArray: [...this.state.answerArray, {
+								answer: this.state.currentChoice,
+								timeToRespond: this.state.timeRun,
+							}]
+						})
+					}
+					//Sets practiceDone to true after the practice series finishes
+					if(!this.state.practiceDone && this.state.seenPracticeAnswers) {
+						console.log('and THEY SAY WHY? WHY????????????????')
+						this.setState({
+							practiceDone: true
+						})
+					}
+					//Resets state for the next series
+					// if(this.state.seenPracticeAnswers){
+						this.setState({
+							displayingAnswers: false,
+							middleStop: false,
+							currentElementIndex: 0,
+							currentSeriesIndex: this.state.currentSeriesIndex += 1,
+							timerRunning: false,
+							timeRun: 0,
+							submitted: false,
+							currentChoice: null,
+							isChecked: false,
+							submitError: '',
+							disabled: false
+						})
+					// } else {
+					// 	this.setState({
+					// 		seenPracticeAnswers: true
+					// 	}, () => setTimeout)
+					// }
+				}
+				//Controls when we display answers
+				if(this.state.timerRunning){
+					console.log("last step firing")
+					this.setState({
+						middleStop: true,
+						timeToNext: 0,
+					})
+				}
+			}
+		} else {
+			this.setState({
+				timeRun: this.state.timeRun += 100
+			})
+		}
+	}
+	submitAnswer(answerChoice){
+		console.log('VPS SUBMIT ANSWER BUTTON', answerChoice)
+		if(this.state.practiceDone && this.state.isChecked){
+			this.setState({
+				answerArray: [...this.state.answerArray, {
+					answer: answerChoice,
+					timeToRespond: this.state.timeRun,
+				}],
+				// currentChoice: null,
+				submitted: true,
+				submitError: '',
+				disabled: true
+				// timeRun: this.state.timeToNext
+			});
+		}
+		if (!this.state.practiceDone && this.state.isChecked) {
+			this.setState({
+				submitted: true,
+				submitError: '',
+				disabled: true
+			});
+		}
+		if (!this.state.isChecked) {
+			console.log('SUBMIT ERROR?')
+			this.setState({
+				submitError: 'Please select an answer before submitting.'
+			})
+		}
+		console.log(this.state.answerArray)
+	}
+	updateChoice(e){
+		this.setState({
+			currentChoice: e.target.value,
+			isChecked: true
+		}, () => console.log(this.state.currentChoice))
+	}
+	displayAnswers(){
+		this.setState({
+			timeToNext: 3000,
+			timerRunning: true,
+			middleStop: false,
+			displayingAnswers: true,
+		}, this.setAndNameInterval)
+	}
+	render () {
+		return (
+			<div>
+				<VisualProcessingSpeedCMPT
+				timerRunning={this.state.timerRunning}
+				answerKey={this.props.answerKey}
+				startNewSeries={this.startNewSeries}
+				startPractice={this.startPractice}
+				currentElementIndex={this.state.currentElementIndex}
+				currentSeriesIndex={this.state.currentSeriesIndex}
+				vpsAnswers={this.props.vpsAnswers}
+				practiceDone={this.state.practiceDone}
+				testStarted={this.state.testStarted}
+				displayingAnswers={this.state.displayingAnswers}
+				changeSection={this.props.changeSection}
+				instructions={this.props.section.instructions}
+				submitAnswer={this.submitAnswer}
+				currentChoice={this.state.currentChoice}
+				updateChoice={this.updateChoice}
+				displayAnswers={this.displayAnswers}
+				middleStop={this.state.middleStop}
+				sectionName={this.props.section.section_display_name}
+				submitted={this.state.submitted}
+				radioSubmitStatus={this.state.radioSubmitStatus}
+				submitError={this.state.submitError}
+				disabled={this.state.disabled}
+				/>
+			</div>
+		)
+	}
 }
 
 export default connect(

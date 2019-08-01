@@ -12,7 +12,7 @@ import Introduction from '../components/IntroductionCMPT';
 import Instructions from '../components/Instructions.jsx';
 import Container from '@material-ui/core/Container';
 import UserResults from './UserResults';
-
+import Admin from './Admin';
 
 const mapStateToProps = store => ({
   test: store.test.test,
@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
   buildVPSAnswers: () => dispatch(actions.buildVPSAnswers()),
   fetchTest: () => dispatch(actions.fetchTest()),
   setDate: () => dispatch(actions.setDate()),
-  fetchMeans: () => dispatch(actions.fetchMeans()),
+  fetchMeans: (data) => dispatch(actions.fetchMeans(data)),
 });
 
 class MainTestDisplay extends Component {
@@ -41,7 +41,7 @@ class MainTestDisplay extends Component {
   componentDidMount() {
     console.log('USER TEST DISPLAY COMPONENT DID MOUNT');
     this.props.fetchTest();
-    this.props.fetchMeans();
+    this.props.fetchMeans({"section": "all", "column": [], "value": []});
   }
 
   render () {
@@ -57,6 +57,7 @@ class MainTestDisplay extends Component {
       // <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
       // <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
       <UserResults />,
+      <Admin />,
       <Instructions />];
 
     // for (let i = 0; i < compArray.length; i++) {

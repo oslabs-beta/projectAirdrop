@@ -149,7 +149,6 @@ analyticsController.getMeanScores = (req, res, next) => {
           console.log(res.locals.calculatedMean)
           if(key.length === 2){
             if(key === "do"){
-              console.log(res.locals.calculatedMean.q[key], "key")
               res.locals.calculatedMean.q[key] *= (32/(6*res.locals.meanData[i].length));
             } else if(key === "wf"){
               res.locals.calculatedMean.q[key] *= (32/(4*res.locals.meanData[i].length));

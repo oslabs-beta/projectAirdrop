@@ -153,7 +153,6 @@ export const postAnswers = (sectionId, data) => dispatch => {
   console.log('POST ANSWERS DATA AID CHECK \n', sectionId, 'data \n', data);
   dispatch(requestAPI)
 
-  // TODO: Needs URL
   return fetch('/api/test', {
     method: 'POST',
     headers: {
@@ -190,7 +189,6 @@ export const postDemo = (data) => dispatch => {
       return res.json()
     })
     .then(res => {
-      // if (!isValid(res)) throw new Error("something went wrong!");
       console.log('POST DEMO RESPONSE OBJECT', res);
       return dispatch(receiveAID(res))
     })
@@ -352,14 +350,10 @@ export const receiveMeans = data => {
   }
 }
 // api/results?objString={"section": "all", "column": [], "value": []}
-
-export const fetchMeans = () => dispatch => {
+export const fetchMeans = (data) => dispatch => {
   dispatch(requestAPI);
-  // const data1 = {"section": "all", "column": ['questions.section_id'], "value": "[]"};
-  const data1 = {"section": "all", "column": [], "value": []};
-  const userResultsGet = url.format({ query: data1 });
-  console.log('testing url query param', userResultsGet)
-  return fetch(`/api/results?objString={"section": "all", "column": [], "value": []}`)
+  const url = '/api/results?objString=' + JSON.stringify(data);
+  return fetch(url)
     .then(res => res.json())
     .then(res => {
       console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)
