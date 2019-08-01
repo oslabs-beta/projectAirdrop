@@ -1,4 +1,4 @@
-import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, CREATE_USERNAME, CREATE_PASSWORD, CREATE_LOGIN, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
+import { CLEAR_API, SEND_API, SEND_API_FAILURE, STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, CREATE_USERNAME, CREATE_PASSWORD, CREATE_LOGIN, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
 
 const initialState = {
   username: '',
@@ -7,10 +7,12 @@ const initialState = {
   newPW: '',
   isAdmin: null,
   isLoggedIn: false,
-  // userLoginErrors: {
-  //   username: null,
-  //   pw: null,
-  // },
+  apiStatus: null,
+  // apiError: null,
+  userLoginErrors: {
+    username: null,
+    pw: null,
+  },
   userData: {
     userID: '',
     firstName: '',
@@ -51,6 +53,25 @@ const initialState = {
 const userDataReducer = (state = initialState, action) => {
   console.log('testing action', action);
   switch (action.type) {
+
+    case CLEAR_API:
+      return {
+        ...state,
+        apiStatus: null
+      };
+
+    case SEND_API:
+      return {
+        ...state,
+        apiStatus: action.payload
+      };
+
+    case SEND_API_FAILURE:
+      return {
+        ...state,
+        apiStatus: action.payload
+      };
+
     case STORE_DEMOGRAPHIC_DATA:
       return { ...state };
 

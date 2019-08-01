@@ -20,6 +20,7 @@ export const TEST_TEST = 'TEST_TEST';
 export const CALL_API = 'CALL_API';
 export const RECEIVE_API = 'RECEIVE_API';
 export const API_FAILURE = 'API_FAILURE';
+export const CLEAR_API = 'CLEAR_API';
 
 //Update User Demo State
 export const HANDLE_CHANGE = 'HANDLE_CHANGE';

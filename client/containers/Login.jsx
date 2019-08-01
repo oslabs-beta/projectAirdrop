@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as userActions from "../actions/userActions";
@@ -8,14 +8,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Container from '@material-ui/core/Container';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 
 const mapStateToProps = store => ({
   username: store.userData.username,
-  pw: store.userData.password,
+  pw: store.userData.pw,
   newUsername: store.userData.newUsername,
   newPW: store.userData.newPW,
   isAdmin: store.userData.isAdmin,
   isLoggedIn: store.userData.isLoggedIn,
+  apiStatus: store.userData.apiStatus,
+  userLoginErrors: store.userData.userLoginErrors
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,10 +31,10 @@ const mapDispatchToProps = dispatch => ({
   createUsername: username => dispatch(userActions.createUsername(username)),
   createPassword: pw => dispatch(userActions.createPassword(pw)),
 
-  // signup: () => dispatch(userActions.signup()),
   login: () => dispatch(userActions.login()),
   updateLogin: data => dispatch(userActions.updateLogin(data)),
   signup: data => dispatch(userActions.signup(data)),
+  clearAPI: () => dispatch(userActions.clearAPI())
 });
 
 const useStyles = makeStyles(theme => ({
@@ -50,8 +57,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+
+
+
 const Login = props => {
+
   const classes = useStyles();
+
+  const [emailToggle, setEmailToggle] = React.useState(false);
+  const [pwToggle, setPwToggle] = React.useState(false);
+
+  const checkPassword = password => {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(password)
+  };
+
+  console.log(checkPassword('Hkis1919##3'));
+
+  const checkEmail = email => {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+  };
+
+  const validate = (email, pw) => {
+    return {
+      email: checkEmail(email),
+      password: checkPassword(pw)
+    }
+  };
+
+  const errors = validate(props.username, props.pw);
+
+  const hold = Object.keys(errors).reduce((a,b,c,d) => {
+    if (errors[b] === false) a.push(b);
+    return a;
+  }, []);
 
   let button;
   let placeholder;
@@ -64,7 +103,7 @@ const Login = props => {
       fullWidth
       onClick={e => {
         e.preventDefault();
-        props.signup();
+        hold.length === 0 && props.signup();
       }}
     >
       Sign Up
@@ -104,6 +143,10 @@ const Login = props => {
                 variant="outlined"
                 onChange={e => props.updateUsername(e.target.value)}
                 fullWidth
+                value={props.username}
+                error={emailToggle && !checkEmail(props.username)}
+                helperText={emailToggle && !checkEmail(props.username) ? "Please enter a valid email." : null}
+                onBlur={!checkEmail(props.username) ? () => {setEmailToggle(true)} : null}
               />
               <TextField
                 id="outlined-password-input"
@@ -115,6 +158,10 @@ const Login = props => {
                 variant="outlined"
                 onChange={e => props.updatePassword(e.target.value)}
                 fullWidth
+                value={props.pw}
+                error={pwToggle && !checkPassword(props.pw)}
+                helperText={pwToggle && !checkPassword(props.pw) ? "Must be 8 characters long and contain at least one lowercase, one uppercase, one numeric and one special character." : null}
+                onBlur={!checkPassword(props.pw) ? () => {setPwToggle(true)} : null}
               />
               {button}
               <div />
@@ -125,6 +172,35 @@ const Login = props => {
       ) : (
         <Redirect to="/main" />
       )}
+      {props.apiStatus === 'signed up' &&
+        <Dialog
+          open={props.apiStatus === 'signed up'}
+          onClose={props.clearAPI}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Verify Your Email Address!"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              We've sent an email to the email address you used to sign up. Please click the link in that email to continue.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={props.clearAPI} autoFocus
+              color="primary"
+            >
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
+      }
+      {
+        props.apiStatus === 'sign up error' &&
+        <Typography className={classes.root} color={"secondary"}>
+          Email already in use. Please try again.
+        </Typography>
+      }
     </div>
   );
 };

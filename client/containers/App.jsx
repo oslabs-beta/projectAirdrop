@@ -28,14 +28,14 @@ const theme = createMuiTheme({
 });
 
 const mapStateToProps = store => ({
-  login: store.userData.login
+  login: store.userData.login,
 });
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userStatus: 'Logging In'
+      userStatus: 'Logging In',
     };
     this.createAccount = this.createAccount.bind(this);
     this.loggingIn = this.loggingIn.bind(this);
@@ -68,6 +68,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
 
      <React.Fragment>
