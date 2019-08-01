@@ -29,7 +29,7 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
     wordArr.push(
       <GridListTile key={i} cols={1}>
         <Paper square={false} className={classes.paper}>
-          <Typography variant={"h5"}>
+          <Typography variant={"button"}>
             {props.words[i]}
           </Typography>
         </Paper>
@@ -38,7 +38,7 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
   }
   return (
     <Container className={classes.root}>
-      <GridList className={classes.gridList} spacing={10} cols={5} cellHeight={'auto'}>
+      <GridList className={classes.root} className={classes.gridList} spacing={10} cols={5} cellHeight={'auto'}>
         {wordArr}
       </GridList>
     </Container>
