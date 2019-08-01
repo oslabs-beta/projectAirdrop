@@ -48,6 +48,7 @@ userController.login = (req, res, next) => {
     userModel.userLogin(loginInfo)
       .then(result => {
         res.locals.result = result.rows;
+        console.log('are we in usercontroler.login?', res.locals.result)
         res.locals.username = req.body.username;
         return next()
       })

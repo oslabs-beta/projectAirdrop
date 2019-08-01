@@ -12,7 +12,7 @@ const initialState = {
   //   pw: null,
   // },
   userData: {
-    userID: 5,
+    userID: '',
     firstName: '',
     middleInitial: '',
     lastName: '',
@@ -216,6 +216,10 @@ const userDataReducer = (state = initialState, action) => {
         ...state,
         pw: '',
         isAdmin: action.payload.isAdmin,
+        userData: {
+          ...state.userData,
+          userID: action.payload.userID
+        },
         isLoggedIn: true
       };
     case CREATE_LOGIN:

@@ -134,9 +134,9 @@ app.post('/api/test',
   res.status(200);
 });
 
-app.get('/api/results', 
-aController.getMeanData, 
-aController.getMeanScores, 
+app.get('/api/results',
+aController.getMeanData,
+aController.getMeanScores,
 (req, res) => {
   console.log('query', req.query)
   res.json(res.locals.calculatedMean);

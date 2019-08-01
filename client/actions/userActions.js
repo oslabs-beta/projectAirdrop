@@ -81,7 +81,8 @@ export function login () {
       .then(response => {
         console.log('response', response)
         let userData = {
-          isAdmin: response.data.result[0]['is_admin']
+          isAdmin: response.data.result[0]['is_admin'],
+          userID: response.data.result[0]['id']
         }
         dispatch({
           type: types.UPDATE_LOGIN,
