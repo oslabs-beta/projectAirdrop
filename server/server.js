@@ -11,6 +11,7 @@ const userController = require('./controllers/userController');
 const tokenController = require('./tokenController');
 const tpController = require('./controllers/testPostController');
 const aController = require('./controllers/analyticsController')
+const adController = require('./controllers/adminController');
 const nodemailer = require("nodemailer");
 
 app.use(cookieParser());
@@ -100,6 +101,13 @@ app.get('/logout', (req, res) => {
   res.status(200).send()
 });
 
+app.post('/api/newAdmin', adController.setNewAdmin, (req, res) => {
+  res.status(200).send();
+})
+
+app.post('/api/resetPassword', encryptionController.encryptPassword, adController.setPassword, (req, res) => {
+  res.status(200).send();
+})
 
 //server html file at root
 app.get('/', (req, res) => {
