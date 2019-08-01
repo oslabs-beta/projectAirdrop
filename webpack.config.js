@@ -45,6 +45,9 @@ module.exports = {
         handler: 'CacheFirst',
         options: {
           cacheName: 'api-cache',
+          expiration: {
+            maxAgeSeconds: 1200,
+          },
           backgroundSync: {
             name: 'background-queue',
             options: {
