@@ -10,6 +10,8 @@ import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import DownshiftMultiple from './DownshiftMultiple';
+// import DownshiftTest from './DownshiftTest';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -30,15 +32,15 @@ const useStyles = makeStyles(theme => ({
 
 const AdminQueryFilterCMPT = props => {
   const classes = useStyles();
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+  // const inputLabel = React.useRef(null);
+  // const [labelWidth, setLabelWidth] = React.useState(0);
+  // React.useEffect(() => {
+  //   setLabelWidth(inputLabel.current.offsetWidth);
+  // }, []);
 
   return (
     <div>
-      <Card >
+      {/* <Card >
         <CardContent>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel ref={inputLabel} htmlFor="outlined-age-native-simple">
@@ -64,7 +66,15 @@ const AdminQueryFilterCMPT = props => {
         </Select>
       </FormControl>
       </CardContent>
-      </Card>
+      </Card> */}
+
+      <DownshiftMultiple 
+      suggestions={props.suggestions}
+      updateTable={props.updateTable}
+      />
+      {/* <DownshiftTest 
+
+      /> */}
     </div>
   );
 };
