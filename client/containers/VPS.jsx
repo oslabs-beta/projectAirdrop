@@ -124,7 +124,7 @@ class VPS extends Component {
 						})
 					}
 					//Sets practiceDone to true after the practice series finishes
-					if(!this.state.practiceDone && this.state.seenPracticeAnswers) {
+					if(!this.state.practiceDone) {
 						console.log('and THEY SAY WHY? WHY????????????????')
 						this.setState({
 							practiceDone: true
