@@ -17,13 +17,14 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   changeSection: () => dispatch(actions.changeSection()),
-  
+  fetchMeans: (data) => dispatch(actions.fetchMeans(data)),
 });
+
 class AdminView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sectionSuggestions: [{ label: 'Long Term Verbal Recall' }, { label:'Visual Processing Speed' }, { label: 'Working Memory' }, { label: 'Image Recognition' }, { label: 'Psychological Questionnaires' }],
+      sectionSuggestions: [{ label: 'Long Term Verbal Recall' }, { label:'Visual Processing Speed' }, { label: 'Working Memory' }, { label: 'Image Recognition' }, { label: 'Psychological Questionnaires' }, {label: "All"}],
       columnSuggestions: [{label: 'User ID'}, {label: 'Rank'}, {label: 'Years in Service'}, {label: "ODA"}, {label: 'MOS'}],
       valueSuggestions: {
         rank: [{label: 'SGT'}, {label: 'SSG'}, {label: 'SFC'}, {label: 'MSG'}, {label: '1SG'}, {label: 'SGM'}, {label: 'CPT'}, {label: 'MAJ'}, {label: 'LTCOL'}, {label: 'COL'}],
@@ -39,8 +40,64 @@ class AdminView extends Component {
     }
     this.updateTable = this.updateTable.bind(this);
     this.updateColumns = this.updateColumns.bind(this);
+    this.updateValues = this.updateValues.bind(this);
     this.addFilter = this.addFilter.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
+    this.addChip = this.addChip.bind(this);
+    this.fireQuery = this.fireQuery.bind(this);
+  }
+
+  fireQuery(){
+    let queryObj = {
+      section: "",
+      column: [],
+      value: [],
+      test: "test"
+    };
+    for(let i = 0; i < this.state.tables.length; i++){
+      switch(this.state.tables[i]){
+        case "Long Term Verbal Recall":
+          queryObj.section = "ltvr";
+          break;
+        case "Visual Processing Speed":
+          queryObj.section = "vps";
+          break;
+        case "Working Memory":
+          queryObj.section = "wm";
+          break;
+        case "Image Recognition":
+          queryObj.section = "ir";
+          break;
+        case "Psychological Questionnaires":
+          queryObj.section = "q";
+          break;
+        case "All":
+          queryObj.section = "all";
+          break;
+      }
+      for(let j = 0; j < this.state.columns.length; j++){
+        switch(this.state.columns[j]){
+          case 'User ID':
+            queryObj.column.push("user_id");
+            break;
+          case 'Rank':
+            queryObj.column.push("rank");
+            break;
+          case 'Years in Service':
+            queryObj.column.push("years_in_service");
+            break;
+          case "ODA":
+            queryObj.column.push("oda");
+            break;
+          case "MOS":
+            queryObj.column.push("mos");
+            break;
+        }
+        queryObj.value.push(this.state.values[j])
+      }
+    }
+    console.log(queryObj)
+    this.props.fetchMeans(queryObj);
   }
 
   updateTable(val) {
@@ -51,22 +108,29 @@ class AdminView extends Component {
 
   updateColumns(val){
     this.setState({
-      columns: [...val],
+      columns: [...this.state.columns, ...val],
       displayValueField: true,
     })
   }
 
   updateValues(val){
     this.setState({
-      values: [...val],
-      displayColumnField: false,
-      displayValueField: false,
+      values: [...this.state.values, ...val],
     })
   }
 
   addFilter(){
     this.setState({
       displayColumnField: true
+    })
+  }
+
+  addChip(val){
+    console.log("PLEASE", this.state.chips);
+    this.setState({
+      chips: [...this.state.chips, val],
+      displayColumnField: false,
+      displayValueField: false,
     })
   }
 
@@ -81,8 +145,9 @@ class AdminView extends Component {
   render() {
     return (
       <div>
-        <button> Get Results </button>
+        <button onClick={this.fireQuery}> Get Results </button>
         <h1>Hi</h1>
+        {this.state.chips}
         <AdminQueryFilterCMPT 
         changeHandler={this.props.changeHandler}
         sectionSuggestions={this.state.sectionSuggestions}
@@ -93,7 +158,9 @@ class AdminView extends Component {
         displayValueField={this.state.displayValueField}
         updateTable={this.updateTable}
         updateColumns={this.updateColumns}
+        updateValues={this.updateValues}
         addFilter={this.addFilter}
+        addChip={this.addChip}
         removeFilter={this.removeFilter}
         />
         <AdminResultsCMPT

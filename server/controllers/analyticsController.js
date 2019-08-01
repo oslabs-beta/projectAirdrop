@@ -35,6 +35,7 @@ analyticsController.getMeanData = async (req, res, next) => {
       next()
     });
   } else { 
+    console.log(res.locals.queryObj)
     res.locals.queryRet = await aModel.get_filtered_means(res.locals.queryObj)
     res.locals.meanData = res.locals.queryRet.rows;
     return next();
@@ -42,6 +43,7 @@ analyticsController.getMeanData = async (req, res, next) => {
 }
 
 analyticsController.getMeanScores = (req, res, next) => {
+  res.locals.calculatedMean = {};
   console.log("start", res.locals.meanData, "end");
   if(Array.isArray(res.locals.meanData[0])){
     res.locals.calculatedMean = {
@@ -163,36 +165,36 @@ analyticsController.getMeanScores = (req, res, next) => {
       }
     }
   } else {
-    res.locals.calculatedMean = 0;
+    res.locals.calculatedMean[res.locals.queryObj.section] = 0;
     for(let i = 0; i < res.locals.meanData.length; i++){
       switch(res.locals.queryObj.section){
         case "wm":
           console.log("wm")
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
-          res.locals.calculatedMean++;
+          res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "ir":
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
-          res.locals.calculatedMean++;
+          res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "ltvr":
           console.log("ltvr");
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
-          res.locals.calculatedMean++;
+          res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "vps":
           console.log("vps")
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
-          res.locals.calculatedMean++;
+          res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "q":
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
-          res.locals.calculatedMean++;
+          res.locals.calculatedMean[res.locals.queryObj.section]++;
           console.log("q")
           break;
       }
     }
-    res.locals.calculatedMean = res.locals.calculatedMean/res.locals.meanData.length;
+    res.locals.calculatedMean[res.locals.queryObj.section] = res.locals.calculatedMean[res.locals.queryObj.section]/res.locals.meanData.length;
     console.log(res.locals.calculatedMean);
   }
   next();

@@ -56,23 +56,30 @@ const AdminQueryFilterCMPT = props => {
       valueSuggestions = props.valueSuggestions.years;
       break;
     default:
+      console.log("hello?", props.currentColumn)
       valueSuggestions = [];
   }
   if(props.displayValueField){
-    console.log("help")
     valueField = 
-    <span>
+    <div>
       <p> = </p>
       <DownshiftMultiple
+        label={"Value"}
+        placeholder={"Select Value"}
         suggestions={valueSuggestions}
-        updateTable={props.updateColumns}
+        updateTable={props.updateValues}
+        addChip={props.addChip}
+        currentColumn={props.currentColumn}
       />
-    </span>
+    </div>
   }
   if(props.displayColumnField){
+    console.log(props.displayColumnField, "should be true")
     columnField = <div> 
       <p>Filter By</p>
       <DownshiftMultiple
+        label={"Column"}
+        placeholder={"Select Criterium"}
         suggestions={props.columnSuggestions}
         updateTable={props.updateColumns}
       />
@@ -83,11 +90,13 @@ const AdminQueryFilterCMPT = props => {
   return (
     <div>
       <button onClick={props.addFilter}>Add Filter</button>
-      {columnField}
       <DownshiftMultiple 
+      label={"Section"}
+      placeholder={"Select Section"}
       suggestions={props.sectionSuggestions}
       updateTable={props.updateTable}
       />
+      {columnField}
     </div>
   );
 };
