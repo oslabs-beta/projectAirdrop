@@ -22,7 +22,7 @@ const mapStateToProps = store => ({
   isAdmin: store.userData.isAdmin,
   isLoggedIn: store.userData.isLoggedIn,
   apiStatus: store.userData.apiStatus,
-  userLoginErrors: store.userData.userLoginErrors
+  userStatus: store.userData.userStatus
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -57,10 +57,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
-
-
 const Login = props => {
 
   const classes = useStyles();
@@ -71,8 +67,6 @@ const Login = props => {
   const checkPassword = password => {
     return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(password)
   };
-
-  console.log(checkPassword('Hkis1919##3'));
 
   const checkEmail = email => {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
@@ -94,7 +88,41 @@ const Login = props => {
 
   let button;
   let placeholder;
+  let emailInput;
+  let pwInput;
   if (props.userStatus === 'Create Account') {
+    emailInput =
+      <TextField
+        id="outlined-email-input"
+        label="Email"
+        className={classes.textField}
+        name="email"
+        autoComplete="email"
+        margin="normal"
+        variant="outlined"
+        onChange={e => props.updateUsername(e.target.value)}
+        fullWidth
+        value={props.username}
+        error={emailToggle && !checkEmail(props.username)}
+        helperText={emailToggle && !checkEmail(props.username) ? "Please enter a valid email." : null}
+        onBlur={!checkEmail(props.username) ? () => {setEmailToggle(true)} : null}
+      />;
+    pwInput =
+      <TextField
+        id="outlined-password-input"
+        label="Password"
+        className={classes.textField}
+        type="password"
+        autoComplete="current-password"
+        margin="normal"
+        variant="outlined"
+        onChange={e => props.updatePassword(e.target.value)}
+        fullWidth
+        value={props.pw}
+        error={pwToggle && !checkPassword(props.pw)}
+        helperText={pwToggle && !checkPassword(props.pw) ? "Must be 8 characters long and contain at least one lowercase, one uppercase, one numeric and one special character." : null}
+        onBlur={!checkPassword(props.pw) ? () => {setPwToggle(true)} : null}
+      />;
     button = <Button
       variant="contained"
       className={classes.button}
@@ -110,6 +138,32 @@ const Login = props => {
     </Button>;
     placeholder = 'Member Signup'
   } else {
+    emailInput =
+      <TextField
+        id="outlined-email-input"
+        label="Email"
+        className={classes.textField}
+        name="email"
+        autoComplete="email"
+        margin="normal"
+        variant="outlined"
+        onChange={e => props.updateUsername(e.target.value)}
+        fullWidth
+        value={props.username}
+      />;
+    pwInput =
+      <TextField
+        id="outlined-password-input"
+        label="Password"
+        className={classes.textField}
+        type="password"
+        autoComplete="current-password"
+        margin="normal"
+        variant="outlined"
+        onChange={e => props.updatePassword(e.target.value)}
+        fullWidth
+        value={props.pw}
+      />;
     button = <Button
       variant="contained"
       className={classes.button}
@@ -133,36 +187,8 @@ const Login = props => {
             <Container maxWidth="xs">
             <form className={classes.root}>
               <Typography gutterBottom className={classes.header} variant={"h5"}>{placeholder}</Typography>
-              <TextField
-                id="outlined-email-input"
-                label="Email"
-                className={classes.textField}
-                name="email"
-                autoComplete="email"
-                margin="normal"
-                variant="outlined"
-                onChange={e => props.updateUsername(e.target.value)}
-                fullWidth
-                value={props.username}
-                error={emailToggle && !checkEmail(props.username)}
-                helperText={emailToggle && !checkEmail(props.username) ? "Please enter a valid email." : null}
-                onBlur={!checkEmail(props.username) ? () => {setEmailToggle(true)} : null}
-              />
-              <TextField
-                id="outlined-password-input"
-                label="Password"
-                className={classes.textField}
-                type="password"
-                autoComplete="current-password"
-                margin="normal"
-                variant="outlined"
-                onChange={e => props.updatePassword(e.target.value)}
-                fullWidth
-                value={props.pw}
-                error={pwToggle && !checkPassword(props.pw)}
-                helperText={pwToggle && !checkPassword(props.pw) ? "Must be 8 characters long and contain at least one lowercase, one uppercase, one numeric and one special character." : null}
-                onBlur={!checkPassword(props.pw) ? () => {setPwToggle(true)} : null}
-              />
+              {emailInput}
+              {pwInput}
               {button}
               <div />
             </form>
@@ -200,6 +226,11 @@ const Login = props => {
         <Typography className={classes.root} color={"secondary"}>
           Email already in use. Please try again.
         </Typography>
+      }
+      {props.apiStatus === 'log in error' &&
+      <Typography className={classes.root} color={"secondary"}>
+        Oops, that login information was incorrect. Please try again.
+      </Typography>
       }
     </div>
   );

@@ -1,4 +1,26 @@
-import { CLEAR_API, SEND_API, SEND_API_FAILURE, STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, CREATE_USERNAME, CREATE_PASSWORD, CREATE_LOGIN, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
+import {
+  CLEAR_API,
+  SEND_API,
+  SEND_API_FAILURE,
+  STORE_DEMOGRAPHIC_DATA,
+  HANDLE_CHANGE,
+  HANDLE_CHANGE_DATES,
+  SET_DATE,
+  HANDLE_CHANGE_TWO,
+  UPDATE_USERNAME,
+  UPDATE_PASSWORD,
+  CREATE_USERNAME,
+  CREATE_PASSWORD,
+  CREATE_LOGIN,
+  UPDATE_LOGIN,
+  SIGN_UP,
+  LOG_IN,
+  IS_ADMIN,
+  CREATING_ACCOUNT,
+  LOGGING_IN,
+  LOGGED_IN,
+  LOGGED_OUT,
+} from "../constants/actionTypes";
 
 const initialState = {
   username: '',
@@ -8,11 +30,7 @@ const initialState = {
   isAdmin: null,
   isLoggedIn: false,
   apiStatus: null,
-  // apiError: null,
-  userLoginErrors: {
-    username: null,
-    pw: null,
-  },
+  userStatus: 'Logging In',
   userData: {
     userID: '',
     firstName: '',
@@ -53,6 +71,36 @@ const initialState = {
 const userDataReducer = (state = initialState, action) => {
   console.log('testing action', action);
   switch (action.type) {
+
+    case CREATING_ACCOUNT:
+      return {
+        ...state,
+        userStatus: 'Create Account',
+        username: '',
+        pw: '',
+        apiStatus: null
+      };
+
+    case LOGGING_IN:
+      return {
+        ...state,
+        userStatus: 'Logging In',
+        username: '',
+        pw: '',
+        apiStatus: null
+      };
+
+    case LOGGED_IN:
+      return {
+        ...state,
+        userStatus: 'Logged In'
+      };
+
+    case LOGGED_OUT:
+      return {
+        ...state,
+        userStatus: 'Logging In'
+      };
 
     case CLEAR_API:
       return {

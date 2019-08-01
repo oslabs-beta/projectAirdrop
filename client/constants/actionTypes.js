@@ -52,7 +52,10 @@ export const SIGN_UP = 'SIGN_UP';
 export const IS_ADMIN = 'IS_ADMIN';
 export const LOG_IN = 'LOG_IN';
 export const UPDATE_LOGIN = 'UPDATE_LOGIN';
-
+export const CREATING_ACCOUNT = 'CREATING_ACCOUNT';
+export const LOGGING_IN = 'LOGGING_IN';
+export const LOGGED_IN = 'LOGGED_IN';
+export const LOGGED_OUT = 'LOGGED_OUT';
 
 //POST ANSWERS
 export const SEND_QUESTIONNAIRE_RESPONSES = 'SEND_QUESTIONNAIRE_RESPONSES';

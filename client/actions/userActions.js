@@ -1,6 +1,26 @@
 import * as types from "../constants/actionTypes"
 import axios from 'axios';
 
+export const creatingAccount = () => ({
+  type: types.CREATING_ACCOUNT,
+  payload: null
+});
+
+export const loggingIn = () => ({
+  type: types.LOGGING_IN,
+  payload: null
+});
+
+export const loggedIn = () => ({
+  type: types.LOGGED_IN,
+  payload: null
+});
+
+export const loggedOut = () => ({
+  type: types.LOGGED_OUT,
+  payload: null
+});
+
 export const clearAPI = () => ({
   type: types.CLEAR_API,
   payload: null
@@ -113,6 +133,9 @@ export function login () {
           payload: userData
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log('log in error userActions', err);
+        dispatch(sendFailure('log in error'))
+      })
     }
 }
