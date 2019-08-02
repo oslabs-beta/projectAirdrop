@@ -17,13 +17,14 @@ tokenController.checkToken = (req, res, next) => {
 };
 
 tokenController.signToken = (req, res, next) => {
-  // console.log('SIGN TOKEN VERIFY EMAIL CHECK', typeof res.locals.result[0].is_verified, typeof 'TRUE')
-  if (res.locals.result[0].is_verified) {
+  // console.log('SIGN TOKEN VERIFY EMAIL CHECK', res.locals.result[0].is_verified === true)
+  if (res.locals.result[0].is_verified === true) {
     let token = jwt.sign({username: res.locals.username}, secret);
     res.locals.token = `Bearer ${token}`;
-    next();
+    return next();
+  } else {
+    return next('Please.')
   }
-  return next('Please verify user email first.')
 };
 
 module.exports = tokenController;

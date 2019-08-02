@@ -125,7 +125,7 @@ class VPS extends Component {
 						})
 					}
 					//Sets practiceDone to true after the practice series finishes
-					if(!this.state.practiceDone && this.state.seenPracticeAnswers) {
+					if(!this.state.practiceDone) {
 						this.setState({
 							practiceDone: true
 						})
@@ -136,7 +136,7 @@ class VPS extends Component {
 							displayingAnswers: false,
 							middleStop: false,
 							currentElementIndex: 0,
-							currentSeriesIndex: this.state.currentSeriesIndex += 1,
+							currentSeriesIndex: this.state.currentSeriesIndex += 6,
 							timerRunning: false,
 							timeRun: 0,
 							submitted: false,

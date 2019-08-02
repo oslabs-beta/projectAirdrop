@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 });
 
 const mapStateToProps = store => ({
-  login: store.userData.login
+  login: store.userData.login,
 });
 
 class App extends Component {
@@ -37,17 +37,24 @@ class App extends Component {
   }
 
   render() {
+
     return (
 
      <React.Fragment>
         <MuiThemeProvider theme={theme}>
          <CssBaseline>
-            <AppBar />
+            <AppBar/>
            <Container maxWidth={'md'}>
              <Switch>
-               <Route path='/login' component={Login} />
+               <Route
+                 path='/login'
+                 component={Login}
+               />
                <Authentication>
-                 <Route path='/main' component={Main}/>
+                 <Route
+                   path='/main'
+                   component={Main}
+                   />
                </Authentication>
              </Switch>
            </Container>
