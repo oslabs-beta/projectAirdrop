@@ -126,7 +126,15 @@ function getSuggestions(value, { showEmpty = false } = {}) {
     console.log(event.target.value)
     setInputValue(event.target.value);
   }
-
+  const handleDelete = item => () => {
+    console.log(item)
+    const newSelectedItem = [...selectedItem];
+    newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
+    setSelectedItem(newSelectedItem);
+    props.handleDelete(item);
+    // props.updateTable(newSelectedItem);
+  };
+  
   function handleChange(item) {
     console.log("thing")
     let newSelectedItem = [...selectedItem];
@@ -136,14 +144,19 @@ function getSuggestions(value, { showEmpty = false } = {}) {
     setInputValue("");
     setSelectedItem(newSelectedItem);
     props.updateTable(newSelectedItem);
+    if(props.addChip){
+      props.addChip({
+        "key": item,
+        "val" : <Chip
+                  key={item}
+                  tabIndex={-1}
+                  label={props.columnToAdd + " = " + item}
+                  className={classes.chip}
+                  onDelete={handleDelete(item)}
+                />
+      })
+    }
   }
-
-  const handleDelete = item => () => {
-    const newSelectedItem = [...selectedItem];
-    newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
-    setSelectedItem(newSelectedItem);
-    props.updateTable(newSelectedItem);
-  };
 
   return (
     <Downshift
@@ -165,7 +178,7 @@ function getSuggestions(value, { showEmpty = false } = {}) {
       }) => {
         const { onBlur, onChange, onFocus, ...inputProps } = getInputProps({
           onKeyDown: handleKeyDown,
-          placeholder: "Select Sections",
+          placeholder: props.placeholder,
           onFocus: () => {
             openMenu();
           }
@@ -175,18 +188,10 @@ function getSuggestions(value, { showEmpty = false } = {}) {
             {renderInput({
               fullWidth: true,
               classes,
-              label: "Sections",
+              label: props.label,
               InputLabelProps: getLabelProps(),
               InputProps: {
-                startAdornment: selectedItem.map(item => (
-                  <Chip
-                    key={item}
-                    tabIndex={-1}
-                    label={item}
-                    className={classes.chip}
-                    onDelete={handleDelete(item)}
-                  />
-                )),
+                startAdornment: selectedItem,
                 onBlur,
                 onChange: event => {
                   onChange(event);
