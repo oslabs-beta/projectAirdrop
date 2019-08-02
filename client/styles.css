@@ -9,3 +9,17 @@ img {
     max-width: 100%;
     height: auto
 }
+
+.responsivefont {
+    font-size: 12px;
+}
+
+
+@media only screen and (min-width: 768px) {
+ 
+    .responsivefont {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+}   

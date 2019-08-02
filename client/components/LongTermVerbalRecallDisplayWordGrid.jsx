@@ -9,7 +9,9 @@ import Container from '@material-ui/core/Container';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'center',
+    fontSize: '1em'
   },
   paper: {
     padding: theme.spacing(1),
@@ -29,9 +31,11 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
     wordArr.push(
       <GridListTile key={i} cols={1}>
         <Paper square={false} className={classes.paper}>
-          <Typography variant={"button"}>
+          <div className={"responsivefont"}>
+          <Typography className={classes.root} variant={"button"}>
             {props.words[i]}
           </Typography>
+          </div>
         </Paper>
       </GridListTile>
     )
