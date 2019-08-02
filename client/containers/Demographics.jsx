@@ -57,7 +57,7 @@ function checkNum (input) {
 class Demographics extends Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
       toggled: false,
     }
@@ -72,9 +72,9 @@ class Demographics extends Component {
 
   validate (userData) {
     return {
-      firstName: userData.firstName.length > 1 && checkStr(userData.firstName),
-      lastName: userData.lastName.length > 1 && checkStr(userData.lastName),
-      middleInitial: userData.middleInitial.length === 1 && checkStr(userData.middleInitial),
+      firstName: userData.firstName.length > 0 && checkStr(userData.firstName),
+      lastName: userData.lastName.length > 0 && checkStr(userData.lastName),
+      // middleInitial: userData.middleInitial.length >= 0 && checkStr(userData.middleInitial),
       ODANumber: userData.ODANumber.length === 4 && checkNum(userData.ODANumber),
       rank: userData.rank.length > 2,
       yearsInService: userData.yearsInService.length > 1,
@@ -120,7 +120,7 @@ class Demographics extends Component {
         toggled: !this.state.toggled,
       })
     }
-    
+
     e.preventDefault()
   }
 
@@ -157,7 +157,7 @@ class Demographics extends Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button 
+          <Button
           onClick={this.handleClose} autoFocus
           color="primary"
           >

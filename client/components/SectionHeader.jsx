@@ -12,8 +12,8 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     lineHeight: 1.5,
-    paddingBottom: '.5em',
-    paddingTop: '2em',
+    paddingBottom: '1em',
+    paddingTop: '1em',
     fontSize: '2em'
   }
 }));
