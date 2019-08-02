@@ -1,30 +1,61 @@
 import {
+  RECEIVE_AID,
   CALL_API,
   SEND_API,
   SEND_API_FAILURE,
   RECEIVE_API,
-  RECEIVE_MEANS
+  SEND_QUESTIONNAIRE_RESPONSES,
+  SEND_VPS_RESPONSES,
+  SEND_WM_RESPONSES,
+  SEND_IR_RESPONSES,
+  SEND_LTVR_RESPONSES,
+  RECEIVE_ANALYTICS_MEANS
 } from "../constants/actionTypes";
 
 const initialState = {
   apiStatus: "",
   apiError: "",
+  aid: null,
   ltvr: {
+    words: [],
+    responses: {},
     mean: null
   },
   vps: {
+    responses: [],
+    userResponse: {
+      correctResponses: []
+    },
     mean: null
   },
   wm: {
+    correct: [],
+    responses: [],
+    // new
+    userResponse: {
+      correctResponses: []
+    },
     mean: null
   },
   ir: {
+    correct: [],
+    responses: [],
+    // new
+    userResponse: {
+      correctResponses: []
+    },
     mean: null
   },
   cmsq: {
+    // responses: [],
+    // responses: ["6","4","5","6","4","3","5","6","4","3","4", "6", "4", "4", "5", "4", "3", "5", "6", "3"],
+    responses: {},
     mean: {}
   },
   cnaaq: {
+    // responses: [],
+    // responses: ["3","4","5","5","4","3","5","5","4","3","4","3"],
+    responses: {},
     mean: {}
   }
 };
@@ -215,7 +246,7 @@ const answersReducer = (state = initialState, action) => {
         }
       };
 
-    case RECEIVE_MEANS:
+    case RECEIVE_ANALYTIC_MEANS:
       let newMeans = {...state};
       if(action.payload.ltvr){
         newMeans.ltvr = {
@@ -230,7 +261,6 @@ const answersReducer = (state = initialState, action) => {
         }
       }
       if(action.payload.wm){
-        console.log(action.payload.wm)
         newMeans.wm = {
           ...state.wm,
           mean: action.payload.wm,

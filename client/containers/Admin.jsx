@@ -31,12 +31,13 @@ class AdminView extends Component {
         mos: [{label: '18A'}, {label: '180A'}, {label: '18B'}, {label: '18C'}, {label: '18D'}, {label: '18E'}, {label: '18F'}, {label: '18Z'}],
         years: [{label: '<2'}, {label: '3-6'}, {label: '7-10'}, {label: '11-15'}, {label: '16-20'}, {label: '20+'}]
       },
+      columnToAdd: null,
       displayColumnField: false,
       displayValueField: false,
       tables: [],
       columns: [],
       values: [],
-      chips: [],
+      chips: {},
     }
     this.updateTable = this.updateTable.bind(this);
     this.updateColumns = this.updateColumns.bind(this);
@@ -108,13 +109,14 @@ class AdminView extends Component {
 
   updateColumns(val){
     this.setState({
-      columns: [...this.state.columns, ...val],
+      columnToAdd: val[0],
       displayValueField: true,
     })
   }
 
   updateValues(val){
     this.setState({
+      columns: [...this.state.columns, this.state.columnToAdd],
       values: [...this.state.values, ...val],
     })
   }
@@ -126,30 +128,51 @@ class AdminView extends Component {
   }
 
   addChip(val){
-    console.log("PLEASE", this.state.chips);
     this.setState({
-      chips: [...this.state.chips, val],
+      chips: {
+        ...this.state.chips,
+        [val.key]: val.val,
+      },
       displayColumnField: false,
       displayValueField: false,
     })
   }
 
-  removeFilter(target){
+  removeFilter(item){
+    console.log(item, "item")
+    let columnIndex = 0;
+    let valueIndex = 0;
+    for(let i = 0; i < this.state.values.length; i++){
+      console.log(i, "index")
+      if(this.state.values[i] === item){
+        console.log("bool valid")
+        columnIndex = i;
+        valueIndex = i;
+        break;
+      }
+    }
+    let newColumns = this.state.columns.slice(0, columnIndex).concat(this.state.columns.slice(columnIndex + 1, this.state.columns.length))
+    let newValues = this.state.values.slice(0, valueIndex).concat(this.state.values.slice(valueIndex + 1, this.state.values.length))
     this.setState({
-      columns: [...this.state.columns].splice(target, 1),
-      values: [...this.state.values].splice(target, 1),
-      chips: [...this.state.chips].splice(target, 1)
+      columns: newColumns,
+      values: newValues,
+      chips: {
+        ...this.state.chips,
+        [item]: ""
+      }
     })
   }
 
   render() {
+    console.log(this.state.columns, this.state.values)
     return (
       <div>
         <button onClick={this.fireQuery}> Get Results </button>
         <h1>Hi</h1>
-        {this.state.chips}
+        {Object.values(this.state.chips)}
         <AdminQueryFilterCMPT 
         changeHandler={this.props.changeHandler}
+        columnToAdd={this.state.columnToAdd}
         sectionSuggestions={this.state.sectionSuggestions}
         columnSuggestions={this.state.columnSuggestions}
         currentColumn={this.state.columns[this.state.columns.length - 1]}

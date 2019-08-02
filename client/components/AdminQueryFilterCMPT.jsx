@@ -14,6 +14,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import DownshiftMultiple from './DownshiftMultiple';
+import { getThemeProps } from "@material-ui/styles";
 
 // import DownshiftTest from './DownshiftTest';
 
@@ -45,7 +46,7 @@ const AdminQueryFilterCMPT = props => {
   // React.useEffect(() => {
   //   setLabelWidth(inputLabel.current.offsetWidth);
   // }, []);
-  switch(props.currentColumn){
+  switch(props.columnToAdd){
     case "Rank":
       valueSuggestions = props.valueSuggestions.rank;
       break;
@@ -56,7 +57,6 @@ const AdminQueryFilterCMPT = props => {
       valueSuggestions = props.valueSuggestions.years;
       break;
     default:
-      console.log("hello?", props.currentColumn)
       valueSuggestions = [];
   }
   if(props.displayValueField){
@@ -69,7 +69,8 @@ const AdminQueryFilterCMPT = props => {
         suggestions={valueSuggestions}
         updateTable={props.updateValues}
         addChip={props.addChip}
-        currentColumn={props.currentColumn}
+        columnToAdd={props.columnToAdd}
+        handleDelete={props.removeFilter}
       />
     </div>
   }
@@ -82,6 +83,8 @@ const AdminQueryFilterCMPT = props => {
         placeholder={"Select Criterium"}
         suggestions={props.columnSuggestions}
         updateTable={props.updateColumns}
+        handleDelete={props.removeFilter}
+        columnToAdd={props.columnToAdd}
       />
       {valueField}
   </div>
@@ -95,6 +98,8 @@ const AdminQueryFilterCMPT = props => {
       placeholder={"Select Section"}
       suggestions={props.sectionSuggestions}
       updateTable={props.updateTable}
+      handleDelete={props.removeFilter}
+      columnToAdd={props.columnToAdd}
       />
       {columnField}
     </div>

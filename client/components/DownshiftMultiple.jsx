@@ -127,10 +127,12 @@ function getSuggestions(value, { showEmpty = false } = {}) {
     setInputValue(event.target.value);
   }
   const handleDelete = item => () => {
+    console.log(item)
     const newSelectedItem = [...selectedItem];
     newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
     setSelectedItem(newSelectedItem);
-    props.updateTable(newSelectedItem);
+    props.handleDelete(item);
+    // props.updateTable(newSelectedItem);
   };
   
   function handleChange(item) {
@@ -143,15 +145,16 @@ function getSuggestions(value, { showEmpty = false } = {}) {
     setSelectedItem(newSelectedItem);
     props.updateTable(newSelectedItem);
     if(props.addChip){
-      props.addChip(
-        <Chip
-          key={item}
-          tabIndex={-1}
-          label={props.currentColumn + " = " + item}
-          className={classes.chip}
-          onDelete={handleDelete(item)}
-        />
-      )
+      props.addChip({
+        "key": item,
+        "val" : <Chip
+                  key={item}
+                  tabIndex={-1}
+                  label={props.columnToAdd + " = " + item}
+                  className={classes.chip}
+                  onDelete={handleDelete(item)}
+                />
+      })
     }
   }
 
@@ -191,15 +194,6 @@ function getSuggestions(value, { showEmpty = false } = {}) {
                 startAdornment: selectedItem,
                 onBlur,
                 onChange: event => {
-                  props.addChip(
-                  <Chip
-                    key={item}
-                    tabIndex={-1}
-                    label={item}
-                    className={classes.chip}
-                    onDelete={handleDelete(item)}
-                  />
-                  )
                   onChange(event);
                   handleInputChange(event);
                 },
