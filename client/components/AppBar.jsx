@@ -38,12 +38,14 @@ const SimpleAppBar = props => {
   if (props.userStatus === 'Logging In') {
     button = <Button
       onClick={props.creatingAccount}
+      color={"inherit"}
     >
       Create Account
     </Button>
   } else if (props.userStatus === 'Create Account') {
     button = <Button
       onClick={props.loggingIn}
+      color={"inherit"}
     >
       Log In
     </Button>

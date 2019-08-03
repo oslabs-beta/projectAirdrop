@@ -12,7 +12,7 @@ const pool = new Pool({
 	port: 5432
 });
 
-const get_sections = `SELECT * FROM sections;`;
+const get_sections = `SELECT * FROM sections ORDER BY id ASC;`;
 
 const get_words = `SELECT word FROM words WHERE id IN (
 	$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 

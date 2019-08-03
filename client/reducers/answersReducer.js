@@ -90,6 +90,7 @@ const answersReducer = (state = initialState, action) => {
     //   results: action.payload.results,
     // };
     case RECEIVE_API:
+      console.log('answersReducer state:', state);
       return {
         ...state,
         ltvr: {
