@@ -20,8 +20,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   button: {
-    marginTop: theme.spacing(3),
-  }
+    margin: theme.spacing(2),
+    borderRadius: 100,
+  },
 }));
 
 const UserDemographicsCMPT = props => {
@@ -263,6 +264,7 @@ const UserDemographicsCMPT = props => {
             onClick={props.submit}
             variant="contained"
             className={classes.button}
+            color={"secondary"}
           >
             Submit
           </Button>
