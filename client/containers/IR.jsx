@@ -72,7 +72,7 @@ class IR extends Component {
 
     this.props.postAnswers(this.state.sectionId, assessment);
 
-    const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+    const irResponses = this.state.choiceArray.reduce((a,b,c,d) => {
       a.push(this.state.sectionData[b]);
       return a;
     }, []);

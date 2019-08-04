@@ -68,7 +68,7 @@ class WM extends Component {
 
     this.props.postAnswers(this.state.sectionId, assessment)
 
-    const wmResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+    const wmResponses = this.state.choiceArray.reduce((a,b,c,d) => {
       a.push(this.state.sectionData[b]);
       return a;
     }, []);
