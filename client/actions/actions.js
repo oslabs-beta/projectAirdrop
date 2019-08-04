@@ -76,7 +76,7 @@ export const fetchTest = () => dispatch => {
   return fetch("/api/test")
     .then(res => res.json())
     .then(res => {
-      console.log('TESTING FETCH TEST RESPONSE', res)
+   
       if (!isValid(res)) throw new Error("something went wrong");
       return dispatch(receiveAPI(res));
     })
@@ -351,12 +351,12 @@ export const fetchMeans = (data) => dispatch => {
   return fetch(url)
     .then(res => res.json())
     .then(res => {
-      console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)
+      console.log('TESTING FETCH MEANS', res)
       // if (!isValid(res)) throw new Error("something went wrong");
       return dispatch(receiveMeans(res));
     })
     .catch(err => {
-      console.log('TESTING FETCH TEST CATCH ERROR');
+      console.log('TESTING FETCH MEANS');
       dispatch(receiveFailure(err))
     });
 };
