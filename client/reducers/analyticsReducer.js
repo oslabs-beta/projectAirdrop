@@ -9,7 +9,7 @@ import {
   SEND_WM_RESPONSES,
   SEND_IR_RESPONSES,
   SEND_LTVR_RESPONSES,
-  RECEIVE_MEANS
+  RECEIVE_ANALYTICS_MEANS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -90,7 +90,6 @@ const answersReducer = (state = initialState, action) => {
     //   results: action.payload.results,
     // };
     case RECEIVE_API:
-      console.log('answersReducer state:', state);
       return {
         ...state,
         ltvr: {
@@ -247,7 +246,7 @@ const answersReducer = (state = initialState, action) => {
         }
       };
 
-    case RECEIVE_MEANS:
+    case RECEIVE_ANALYTIC_MEANS:
       let newMeans = {...state};
       if(action.payload.ltvr){
         newMeans.ltvr = {
@@ -262,7 +261,6 @@ const answersReducer = (state = initialState, action) => {
         }
       }
       if(action.payload.wm){
-        console.log(action.payload.wm)
         newMeans.wm = {
           ...state.wm,
           mean: action.payload.wm,

@@ -125,6 +125,7 @@ const Login = props => {
       />;
     button = <Button
       variant="contained"
+      color={"secondary"}
       className={classes.button}
       type="submit"
       size={"large"}
@@ -166,6 +167,7 @@ const Login = props => {
       />;
     button = <Button
       variant="contained"
+      color={"secondary"}
       className={classes.button}
       type="submit"
       size={"large"}

@@ -12,18 +12,20 @@ import Container from '@material-ui/core/Container';
 
 const theme = createMuiTheme({
   typography: {
-    fontSize: 20
+    fontSize: 16,
   },
   palette: {
     primary: {
-      light: '#ffffff',
-      main: '#fafafa',
-      dark: '#c7c7c7',
-      background: '#ffffff',
-    }
+      main: '#00acc1',
+      contrastText: '#fafafa',
+    },
+    secondary: {
+      main: '#ff7043',
+      contrastText: '#fafafa',
+    },
   },
   status: {
-    danger: 'orange',
+    danger: 'red',
   },
 });
 

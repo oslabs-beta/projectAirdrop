@@ -128,7 +128,7 @@ const userDataReducer = (state = initialState, action) => {
       if (
         (action.payload.name !== 'middleInitial'
       && action.payload.name !== 'ODANumber')
-      && action.payload.value.length < 2) {
+      && action.payload.value.length < 1) {
         return {
           ...state,
           userData: {
