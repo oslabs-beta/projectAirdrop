@@ -29,7 +29,7 @@ const PracticeImageAnswerDisplay = (props) => {
 
   return (
     <div>
-      <Image src={props.url}/>
+      <Image url={props.url}/>
       <div className={classes.root}>
         <Typography>
           <Box pt={5}>
