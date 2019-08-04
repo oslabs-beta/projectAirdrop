@@ -188,7 +188,7 @@ export const postDemo = (data) => dispatch => {
       return dispatch(receiveAID(res))
     })
     .catch(err => {
-      console.log(err, "ERROR")
+      console.log(err, "POST DEMO DATA ERROR")
       dispatch(sendFailure(err))});
 };
 

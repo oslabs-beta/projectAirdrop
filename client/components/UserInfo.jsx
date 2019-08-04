@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 const UserInfo = (props) => {
-  console.log('userdata', props)
+  
   const classes = useStyles();
   return (
     <Card className={classes.card}>

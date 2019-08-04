@@ -23,18 +23,18 @@ class UserResults extends Component {
   };
 
   render(){
-    console.log('props cnaaq', this.props.cnaaq)
-    console.log('props cmsq', this.props.cmsq)
-    console.log('testing means', this.props.means)
+    console.log('TESTING THIS RESPONSE', this.props.cnaaq)
+    console.log('TESTING props cmsq', this.props.cmsq)
+    console.log('MOAR DAMN TESTING testing means', this.props.means)
 
-    console.log('testing output', this.props.cnaaq)
-    console.log('testing output', this.props.cmsq)
-    // console.log('testing output', cmsq)
-    console.log('testing output', this.props.ltvr)
-    console.log('testing output vps', this.props.vps)
-    console.log('testing output wm', this.props.wm)
-    console.log('testing output ir', this.props.ir)
-    console.log('testing output', this.props.userData)
+    // console.log('testing output', this.props.cnaaq)
+    // console.log('testing output', this.props.cmsq)
+    // // console.log('testing output', cmsq)
+    // console.log('testing output', this.props.ltvr)
+    // console.log('testing output vps', this.props.vps)
+    // console.log('testing output wm', this.props.wm)
+    // console.log('testing output ir', this.props.ir)
+    // console.log('testing output', this.props.userData)
 
 
 
