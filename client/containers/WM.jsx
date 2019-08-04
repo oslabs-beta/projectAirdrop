@@ -24,6 +24,7 @@ class WM extends Component {
       sectionData: {},
       sectionId: 'img',
       answerTimeArray: [],
+      choiceArray: [],
       submitted: false,
       isChecked: false,
       submitError: '',
@@ -40,6 +41,12 @@ class WM extends Component {
     this.stateReset = this.stateReset.bind(this);
   }
 
+  componentDidMount() {
+    for (let i = 0; i < this.props.WM.images.length - 1; i += 1) {
+      this.state.choiceArray.push(this.props.WM.images[i].questions[0].choices[0].id)
+    }
+  }
+
   componentWillUnmount() {
     let subtractTime = this.state.timeToNext * 2;
     let answerTimeArrayCopy = [...this.state.answerTimeArray];
@@ -47,7 +54,7 @@ class WM extends Component {
       answerTimeArrayCopy[i] -= subtractTime;
       subtractTime += 8000
     }
-    const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
+    const assessment = this.state.choiceArray.reduce((a, b, i) => {
       const answer = {
         'aid': this.props.aid,
         'cid': b,
@@ -290,8 +297,7 @@ class WM extends Component {
   render() {
     console.log('WM TIME ARRAY', this.state.answerTimeArray);
     console.log('WM SECTION DATA', this.state.sectionData);
-    // console.log('currentchoice', this.state.currentChoice)
-    // console.log('submit error', this.state.submitError);
+    console.log('WM CHOICE ARRAY', this.state.choiceArray);
     return (
       <div>
         <SectionHeader sectionName={this.props.WM.section_display_name}/>
