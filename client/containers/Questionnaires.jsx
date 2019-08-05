@@ -73,10 +73,8 @@ class Questionnaires extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('cmsq unmount', cmsq);
-    console.log('cnaaq unmount', cnaaq);
+
     const questionnaireResponses = [ ...cmsq, ...cnaaq];
-    console.log('questionnaire assessment', questionnaireResponses)
     this.props.postAnswers(this.state.sectionId, questionnaireResponses);
 
     const cmsqResponses = Object.keys(this.state.cmsqCurrentChoice).reduce((a,b,c,d) => {
@@ -91,12 +89,12 @@ class Questionnaires extends Component {
       cmsqResponses,
       cnaaqResponses,
     });
-    console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
+ 
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentQuest !== this.state.currentQuest) {
-      console.log('testing component did update')
+     
       window.scrollTo(0, 0)
     }
   }
@@ -134,7 +132,7 @@ class Questionnaires extends Component {
 
 
   onSubmit (e) {
-    console.log('did it get here?')
+  
     e.preventDefault(e);
     if (this.state.currentQuest === 1 && Object.keys(this.state.cmsqCurrentChoice).length === 20) {
       this.props.changeSection()
@@ -143,10 +141,9 @@ class Questionnaires extends Component {
         toggled: !this.state.toggled
       })
     } else {
-      console.log('did it get here tho?')
+     
       if(Object.keys(this.state.cnaaqCurrentChoice).length === 12){
-      console.log('did it get here tho? what about here?')
-      console.log(this.state.cnaaqCurrentChoice.length)
+   
         this.setState({
           currentQuest: this.state.currentQuest + 1,
         })
@@ -158,11 +155,8 @@ class Questionnaires extends Component {
       }
     }
 
-  // }
-
   render() {
-    console.log('CNAAQ STATE', this.state.cnaaqCurrentChoice);
-    console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
+
     const questionnaireRend = [
     <QuestionnaireCMPT
       sectionName={this.props.test[6].section_display_name}
@@ -184,30 +178,12 @@ class Questionnaires extends Component {
     ]
     return (
       <div>
-        {/* <QuestionnaireHeader sectionName={this.props.test[6].section_display_name}/> */}
+       
         <br />
         <br />
         <SectionInstructions instructions={this.state.instructions.instruction_text}/>
 
-        {/* {this.state.CNAAQ &&
-        <QuestionnaireCMPT
-        questions={this.state.CNAAQ}
-        handleChange={this.handleChange}
-        // cnaaqAnswers={this.state.cnaaqAnswers}
-        cnaaqCurrentChoice={this.state.cnaaqCurrentChoice}
-
-        />}
-
-        <QuestionnaireHeader sectionName={this.props.test[5].section_display_name}/>
-
-        {this.state.CMSQ &&
-        <QuestionnaireCMPT
-        questions={this.state.CMSQ}
-        handleChange={this.handleChangeCMSQ}
-        // cmsqAnswers={this.state.cmsqAnswers}
-        cmsqCurrentChoice={this.state.cmsqCurrentChoice}
-        submit={this.onSubmit}
-        />} */}
+  
       { this.state.toggled ?
       (
       <Dialog
@@ -224,7 +200,7 @@ class Questionnaires extends Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose} color="primary" autoFocus>
-            Agree
+            OK
           </Button>
         </DialogActions>
       </Dialog>
@@ -239,13 +215,7 @@ class Questionnaires extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires);
-//  {/* {this.state.CMSQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CMSQ} />} */}
-//         {/* {this.state.CNAAQ && <QuestionnaireCMPT addVal={this.addVal} questions={this.state.CNAAQ} />} */}
-//         {/* {this.state.CMSQ && <QuestionnaireCMPT questions={this.state.CMSQ} />} */}
-        // {/* <h2>q1{this.state.cnaaqAnswers[1]}</h2> */}
-        // {/* <h2>q2{this.state.cnaaqAnswers[2]}</h2> */}
-        // {/* <h2>q3{this.state.cnaaqAnswers[3]}</h2> */}
-        // {/* <h2>q4{this.state.cnaaqAnswers[12]}</h2> */}
+
 // •	Items 2, 5, 8 averaged for the LEARN dimension
 // •	Items 6, 9, 12 averaged for the IMPROVE dimension
 // •	Items 1, 3, 10 averaged for the STABLE dimension

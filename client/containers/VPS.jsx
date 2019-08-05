@@ -136,7 +136,7 @@ class VPS extends Component {
 							displayingAnswers: false,
 							middleStop: false,
 							currentElementIndex: 0,
-							currentSeriesIndex: this.state.currentSeriesIndex += 6,
+							currentSeriesIndex: this.state.currentSeriesIndex += 1,
 							timerRunning: false,
 							timeRun: 0,
 							submitted: false,
@@ -204,7 +204,7 @@ class VPS extends Component {
 	}
 	displayAnswers(){
 		this.setState({
-			timeToNext: 3000,
+			timeToNext: 10000,
 			timerRunning: true,
 			middleStop: false,
 			displayingAnswers: true,

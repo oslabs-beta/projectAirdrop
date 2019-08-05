@@ -14,12 +14,11 @@ class LTVRD extends Component {
 		this.startTimer = this.startTimer.bind(this);
 	}
 	componentDidMount(){
-    console.log('hi?', this.props)
     this.props.buildVPSAnswers();
   }
 	displayWords(){
 		this.setState({
-			timeToDisplay: 1000,
+			timeToDisplay: 10000,
 			testStarted: true,
 		}, this.startTimer)
 	}

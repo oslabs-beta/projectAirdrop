@@ -8,10 +8,11 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    display: "inline-block",
+    display: 'inline-block',
   },
   card: {
-    minWidth: 200
+    minWidth: 200,
+    
   },
 });
 
@@ -19,14 +20,14 @@ const VisualProcessingSpeedChoices = props => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Card className={classes.card}>
-         <CardContent>
+      <Card className={classes.card} >
+         <CardContent   >
            <Typography className={classes.choices} variant={"h5"}>
              {props.choiceRow}
            </Typography>
          </CardContent>
-         <CardActions>
-           <Radio
+         <CardActions >
+           <Radio 
              value={props.value}
              checked={props.checked}
              onChange={props.updateChoice}

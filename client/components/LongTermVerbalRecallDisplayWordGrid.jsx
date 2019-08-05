@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1)
   },
   gridList: {
-    padding: 10
+    padding: 10,
+    textAlign: 'center'
   }
 }));
 
@@ -42,7 +43,7 @@ export default function LongTermVerbalRecallDisplayWordGrid(props) {
   }
   return (
     <Container className={classes.root}>
-      <GridList className={classes.root} className={classes.gridList} spacing={10} cols={5} cellHeight={'auto'}>
+      <GridList className={classes.root} className={classes.gridList} spacing={10} cols={2} cellHeight={'auto'}>
         {wordArr}
       </GridList>
     </Container>

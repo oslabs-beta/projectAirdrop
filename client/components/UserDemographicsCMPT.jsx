@@ -272,10 +272,6 @@ const UserDemographicsCMPT = props => {
         </Grid>
         </Container>
       </React.Fragment>
-<<<<<<< HEAD
-  
-=======
->>>>>>> 6d568541df7477c94d31f5b64496eeba4fe43222
     </div>
   );
 };
