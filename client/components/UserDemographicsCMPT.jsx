@@ -217,7 +217,7 @@ const UserDemographicsCMPT = props => {
               <InputLabel
                 ref={inputLabel}
                 htmlFor="dold-d-native-required">
-                Last Deployment: Day
+                Last Deployment: Month
               </InputLabel>
               <Select
                 native
@@ -240,7 +240,7 @@ const UserDemographicsCMPT = props => {
               <InputLabel
                 ref={inputLabel}
                 htmlFor="dold-m-native-required">
-                Last Deployment: Month
+                Last Deployment: Year
               </InputLabel>
               <Select
                 native
@@ -272,207 +272,7 @@ const UserDemographicsCMPT = props => {
         </Grid>
         </Container>
       </React.Fragment>
-      {/*<form noValidate autoComplete="off" >*/}
-      {/*      <FormControl required className={classes.formControl}>*/}
-      {/*      <TextField*/}
-      {/*        required*/}
-      {/*        variant="outlined"*/}
-      {/*        id="standard-fname"*/}
-      {/*        label="First Name:"*/}
-      {/*        name="firstName"*/}
-      {/*        className={classes.textField}*/}
-      {/*        value={props.userData.firstName}*/}
-      {/*        onChange={props.handleChange}*/}
-      {/*        margin="normal"*/}
-      {/*        error={/[0-9]/.test(props.userData.firstName) || props.userDataErrors.firstName === true}*/}
-      {/*        helperText={/[0-9]/.test(props.userData.firstName) ? "Numbers are not allowed" : props.userDataErrors.firstName ? 'Insert your First Name' : null}*/}
-      {/*      />*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl required className={classes.formControl}>*/}
-      {/*      <TextField*/}
-      {/*        required*/}
-      {/*        variant="outlined"*/}
-      {/*        id="standard-lname"*/}
-      {/*        label="Last Name:"*/}
-      {/*        name="lastName"*/}
-      {/*        className={classes.textField}*/}
-      {/*        value={props.userData.lastName}*/}
-      {/*        onChange={props.handleChange}*/}
-      {/*        margin="normal"*/}
-      {/*        error={/[0-9]/.test(props.userData.lastName) || props.userDataErrors.lastName === true}*/}
-      {/*        helperText={/[0-9]/.test(props.userData.lastName) ? "Numbers are not allowed" : props.userDataErrors.lastName ? 'Insert your Last Name' : null}*/}
-      {/*      />*/}
-      {/*      </FormControl>*/}
-
-      {/*      <FormControl required className={classes.formControl}>*/}
-
-      {/*      <TextField*/}
-      {/*        required*/}
-      {/*        variant="outlined"*/}
-
-      {/*        id="standard-mi"*/}
-      {/*        label="Middle Initial:"*/}
-      {/*        name="middleInitial"*/}
-      {/*        className={classes.textField}*/}
-      {/*        value={props.userData.middleInitial}*/}
-      {/*        onChange={props.handleChange}*/}
-      {/*        margin="normal"*/}
-      {/*        error={/[0-9]/.test(props.userData.middleInitial) || props.userDataErrors.middleInitial === true}*/}
-      {/*        helperText={/[0-9]/.test(props.userData.middleInitial) ? "Numbers are not allowed" : props.userDataErrors.middleInitial ? 'Insert your Middle Initial (Only 1 letter)' : null}*/}
-      {/*      />*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl variant="outlined" required className={classes.formControl}>*/}
-      {/*        <InputLabel*/}
-      {/*        ref={inputLabel}*/}
-      {/*        htmlFor="outlined-rank-simple"*/}
-      {/*        >Rank</InputLabel>*/}
-      {/*        <Select*/}
-      {/*          native*/}
-      {/*          value={props.userData.rank}*/}
-      {/*          onChange={props.handleChange}*/}
-      {/*          name="rank"*/}
-      {/*          inputProps={{*/}
-      {/*            id: "rank-native-required"*/}
-      {/*          }}*/}
-      {/*          error={props.userDataErrors.rank === true}*/}
-      {/*          input={<OutlinedInput labelWidth={labelWidth} name="rank" id="outlined-rank-simple" />}*/}
-      {/*        >*/}
-      {/*          {[<option key={0} value="" />, ...dropDownsRank]}*/}
-      {/*        </Select>*/}
-      {/*        <FormHelperText>{props.userDataErrors.rank ? 'Select your rank' : null}</FormHelperText>*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl required variant="outlined" className={classes.formControl}>*/}
-      {/*        <InputLabel*/}
-      {/*        ref={inputLabel}*/}
-      {/*        htmlFor="YearsInService-native-required">*/}
-      {/*          Years In Service*/}
-      {/*        </InputLabel>*/}
-      {/*        <Select*/}
-      {/*          native*/}
-      {/*          value={props.userData.yearsInService}*/}
-      {/*          onChange={props.handleChange}*/}
-      {/*          name="yearsInService"*/}
-      {/*          input={<OutlinedInput labelWidth={labelWidth} name="yearsInService" id="outlined-yearsInService-simple" />}*/}
-      {/*          inputProps={{*/}
-      {/*            id: "YearsInService-native-required"*/}
-      {/*          }}*/}
-      {/*          error={props.userDataErrors.yearsInService === true}*/}
-      {/*        >*/}
-      {/*          {[<option key={0} value="" />, ...years]}*/}
-      {/*        </Select>*/}
-      {/*        <FormHelperText>{props.userDataErrors.yearsInService ? 'Select your years of Service' : null }</FormHelperText>*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl variant="outlined" required className={classes.formControl}>*/}
-      {/*        <InputLabel*/}
-      {/*        ref={inputLabel}*/}
-      {/*        htmlFor="YearsInSO-native-required">*/}
-      {/*          Years In Special Ops*/}
-      {/*        </InputLabel>*/}
-      {/*        <Select*/}
-      {/*          native*/}
-      {/*          value={props.userData.yearsInSpecialOps}*/}
-      {/*          onChange={props.handleChange}*/}
-      {/*          name="yearsInSpecialOps"*/}
-      {/*          input={<OutlinedInput labelWidth={labelWidth} name="yearsInSpecialOps" id="outlined-yearsInSpecialOps-simple" /> }*/}
-      {/*          inputProps={{*/}
-      {/*            id: "YearsInSO-native-required"*/}
-      {/*          }}*/}
-      {/*          error={props.userDataErrors.yearsInSpecialOps === true}*/}
-      {/*        >*/}
-      {/*          {[<option key={0} value="" />, ...yearsSO]}*/}
-      {/*        </Select>*/}
-      {/*        <FormHelperText>{props.userDataErrors.yearsInSpecialOps ? 'Select your years in Special Ops' : null}</FormHelperText>*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl required className={classes.formControl}>*/}
-      {/*      <TextField*/}
-      {/*        required*/}
-      {/*        variant="outlined"*/}
-      {/*        id="standard-oda"*/}
-      {/*        label="ODA:"*/}
-      {/*        name="ODANumber"*/}
-      {/*        className={classes.textField}*/}
-      {/*        value={props.userData.ODANumber}*/}
-      {/*        onChange={props.handleChange}*/}
-      {/*        // input={<OutlinedInput labelWidth={labelWidth} name="ODANumber" id="outlined-ODANumber-simple" /> }*/}
-      {/*        margin="normal"*/}
-      {/*        error={/[\D+]/gi.test(props.userData.ODANumber) || props.userDataErrors.ODANumber === true}*/}
-      {/*        helperText={/[\D+]/gi.test(props.userData.ODANumber) ? 'The ODA Number should be 4 digis' : props.userDataErrors.ODANumber ? 'Insert your ODA Number' : null }*/}
-      {/*      />*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl variant="outlined" required className={classes.formControl}>*/}
-      {/*        <InputLabel*/}
-      {/*        ref={inputLabel}*/}
-      {/*        htmlFor="MOS-native-required">*/}
-      {/*          Military Occupational Specialty*/}
-      {/*        </InputLabel>*/}
-      {/*        <Select*/}
-      {/*          native*/}
-      {/*          value={props.userData.MOS}*/}
-      {/*          onChange={props.handleChange}*/}
-      {/*          name="MOS"*/}
-      {/*          input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }*/}
-      {/*          inputProps={{*/}
-      {/*            id: "MOS-native-required"*/}
-      {/*          }}*/}
-      {/*          error={props.userDataErrors.MOS === true}*/}
-      {/*        >*/}
-      {/*          {[<option key={0} value="" />, ...dropDownsMos]}*/}
-      {/*        </Select>*/}
-      {/*        <FormHelperText>{props.userDataErrors.yearsInSpecialOps ? 'You must select your Military Occupational Specialty' : null}</FormHelperText>*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl variant="outlined" required className={classes.formControl}>*/}
-      {/*        <InputLabel*/}
-      {/*        ref={inputLabel}*/}
-      {/*        htmlFor="dold-d-native-required">*/}
-      {/*          Date Of Last Deployment: Day*/}
-      {/*        </InputLabel>*/}
-      {/*        <Select*/}
-      {/*          native*/}
-      {/*          value={props.userData.monthLD}*/}
-      {/*          onChange={props.handleChangeTwo}*/}
-      {/*          onBlur={props.handleChangeDeploy}*/}
-      {/*          name="monthLD"*/}
-      {/*          input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }*/}
-      {/*          inputProps={{*/}
-      {/*            id: "dold-d-native-required"*/}
-      {/*          }}*/}
-      {/*          error={props.userDataErrors.monthLD === true}*/}
-      {/*        >*/}
-      {/*          {[<option key={0} value="" />, ...listOfDays]}*/}
-      {/*        </Select>*/}
-      {/*        <FormHelperText>{props.userDataErrors.monthLD  ? 'You must select your month of last deployment' : null}</FormHelperText>*/}
-      {/*      </FormControl>*/}
-
-      {/*      <FormControl variant="outlined" required className={classes.formControl}>*/}
-      {/*        <InputLabel*/}
-      {/*        ref={inputLabel}*/}
-      {/*        htmlFor="dold-m-native-required">*/}
-      {/*          Date Of Last Deployment: Month{" "}*/}
-      {/*        </InputLabel>*/}
-      {/*        <Select*/}
-      {/*          native*/}
-      {/*          value={props.userData.yearLD}*/}
-      {/*          onChange={props.handleChangeTwo}*/}
-      {/*          onBlur={props.handleChangeDeploy}*/}
-      {/*          name="yearLD"*/}
-      {/*          input={<OutlinedInput labelWidth={labelWidth} name="MOS" id="outlined-MOS-simple" /> }*/}
-      {/*          inputProps={{*/}
-      {/*            id: "dold-m-native-required"*/}
-      {/*          }}*/}
-      {/*          error={props.userDataErrors.yearLD === true}*/}
-      {/*        >*/}
-      {/*          {[<option key={0} value="" />, ...listOfYears]}*/}
-      {/*        </Select>*/}
-      {/*        <FormHelperText>{props.userDataErrors.yearLD  ? 'You must select your last year of deployment' : null}</FormHelperText>*/}
-      {/*      </FormControl>*/}
-      {/*      <FormControl required className={classes.formControl}>*/}
-      {/*    <Button*/}
-      {/*      onClick={props.submit}*/}
-      {/*      className={classes.button}*/}
-      {/*      variant="contained"*/}
-      {/*      >Submit</Button>*/}
-      {/*      </FormControl>*/}
-      {/*</form>*/}
+  
     </div>
   );
 };
