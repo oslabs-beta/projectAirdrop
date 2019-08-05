@@ -138,7 +138,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ltvr.responses.numberCorrect,
+          props.vps.responses.numberCorrect,
           // props.vps.mean
         ],
         // backgroundColor: 'red',
@@ -260,7 +260,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ltvr.responses.numberCorrect,
+          props.ir.responses.numberCorrect,
           // props.ltvr.mean
         ],
         // backgroundColor: 'red',
@@ -270,7 +270,7 @@ const UserResults = props => {
       {
         label: "Your Competitors",
         backgroundColor: comp,
-        data: [props.ltvr.mean]
+        data: [props.ir.mean]
       }
     ]
   };
