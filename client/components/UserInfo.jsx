@@ -35,7 +35,7 @@ const UserInfo = (props) => {
       <Typography className={classes.title} color="textSecondary" gutterBottom>
       <ul style={{listStyle: 'none', display: 'flex', flexDirection: 'column'}}>
       <li>First Name: {props.firstName}</li>
-      <li>Last Name: {props.lastname}</li>
+      <li>Last Name: {props.lastName}</li>
       <li>Middle Initial: {props.middleInitial}</li>
       <li>Rank: {props.rank}</li>
       <li>Years In Service: {props.yearsInService}</li>
