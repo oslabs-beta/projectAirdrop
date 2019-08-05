@@ -28,6 +28,7 @@ class IR extends Component {
       sectionData: {},
       sectionId: 'img',
       answerTimeArray: [],
+      choiceArray: [],
       submitted: false,
       isChecked: false,
       submitError: '',
@@ -44,6 +45,12 @@ class IR extends Component {
     this.stateReset = this.stateReset.bind(this);
   }
 
+  componentDidMount() {
+    for (let i = 0; i < this.props.IR.images.length; i += 1) {
+      this.state.choiceArray.push(this.props.IR.images[i].questions[0].choices[0].id)
+    }
+  }
+
   componentWillUnmount() {
     let subtractTime = this.state.timeToNext;
     let answerTimeArrayCopy = [...this.state.answerTimeArray];
@@ -51,7 +58,7 @@ class IR extends Component {
       answerTimeArrayCopy[i] -= subtractTime;
       subtractTime += (this.state.timeToNext * 3)
     }
-    const assessment = Object.keys(this.state.sectionData).reduce((a, b, i) => {
+    const assessment = this.state.choiceArray.reduce((a, b, i) => {
       const answer = {
         'aid': this.props.aid,
         'cid': b,
@@ -65,7 +72,7 @@ class IR extends Component {
 
     this.props.postAnswers(this.state.sectionId, assessment);
 
-    const irResponses = Object.keys(this.state.sectionData).reduce((a,b,c,d) => {
+    const irResponses = this.state.choiceArray.reduce((a,b,c,d) => {
       a.push(this.state.sectionData[b]);
       return a;
     }, []);

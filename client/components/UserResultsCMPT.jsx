@@ -138,7 +138,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ltvr.responses.numberCorrect,
+          props.vps.responses.numberCorrect,
           // props.vps.mean
         ],
         // backgroundColor: 'red',
@@ -207,7 +207,7 @@ const UserResults = props => {
         fill: false
       },
       {
-        label: "blabalb",
+        label: "Your Competitors",
         backgroundColor: comp,
         data: [props.wm.mean]
       }
@@ -260,7 +260,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ltvr.responses.numberCorrect,
+          props.ir.responses.numberCorrect,
           // props.ltvr.mean
         ],
         // backgroundColor: 'red',
@@ -268,9 +268,9 @@ const UserResults = props => {
         fill: false
       },
       {
-        label: "blabalb",
+        label: "Your Competitors",
         backgroundColor: comp,
-        data: [props.ltvr.mean]
+        data: [props.ir.mean]
       }
     ]
   };
@@ -454,7 +454,7 @@ const UserResults = props => {
 //   DEVELOPMENT FOCUSED dimension
 // •	Items 4, 7, 9, 19 averaged for the WIN FIXATED dimension
 // •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension
-// •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER 
+// •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER
 
   const cnaaqRow = Object.keys(props.cnaaq.mean).reduce((a, b, c, d) => {
 
@@ -631,7 +631,7 @@ const UserResults = props => {
 
 export default UserResults;
 
-// Conception of the Nature of Athletic Ability – 2 Questionnaire 
+// Conception of the Nature of Athletic Ability – 2 Questionnaire
 
 // Biddle, S. J., Wang, C. J., Chatzisarantis, N. L., & Spray, C. M. (2003). Motivation for physical activity in young people: Entity and incremental beliefs about athletic ability. Journal of Sports Sciences, 21, 973-989.
 
@@ -641,13 +641,13 @@ export default UserResults;
 // •	Items 1, 3, 10 averaged for the STABLE dimension
 // •	Items 4, 7, 11 averaged for the GIFT dimension
 // •	LEARN mean + IMPROVE mean = INCREMENTAL
-// •	STABLE mean + GIFT mean = ENTITY 
+// •	STABLE mean + GIFT mean = ENTITY
 
-// Competitive Motivational Styles Questionnaire 
+// Competitive Motivational Styles Questionnaire
 
 // Gillham, E., Gillham, A. D., & Burton, D. (2013). Competitive motivational styles questionnaire (CSMQ): Development and preliminary validation. Manuscript in preparation.
 
-// 20 item instrument: 
+// 20 item instrument:
 // •	Items 1, 5, 11, 15, 18 averaged for the DEVELOPMENT FOCUSED dimension
 // •	Items 4, 7, 9, 19 averaged for the WIN FIXATED dimension
 // •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension
