@@ -9,7 +9,7 @@ const initialState = {
   answerKey: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 0,
+  currentSection: 2,
   currentSlide: 0,
 };
 
@@ -60,7 +60,7 @@ const testReducer = (state = initialState, action) => {
     case BUILD_VPS_ANSWERS:
       return (console.log('building VPS'), {
         ...state,
-        vpsAnswers: generateVPS(state.answerKey)
+        vpsAnswers: generateVPS(state.answerKey),
       });
 
     default:

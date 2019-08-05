@@ -138,7 +138,8 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.vps.responses.numberCorrect,
+          props.vps.userResponse.correctResponses
+          // props.vps.responses.numberCorrect,
           // props.vps.mean
         ],
         // backgroundColor: 'red',
@@ -199,7 +200,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.wm.responses.numberCorrect,
+          props.wm.userResponse.correctResponses,
           // props.wm.mean
         ],
         // backgroundColor: 'red',
@@ -260,7 +261,8 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ir.responses.numberCorrect,
+          props.ir.userResponse.correctResponses
+          // props.ir.responses.numberCorrect,
           // props.ltvr.mean
         ],
         // backgroundColor: 'red',
@@ -475,17 +477,17 @@ const UserResults = props => {
     ),
     createData(
       "Visual Processing Speed",
-      props.vps.responses.numberCorrect,
+      props.vps.userResponse.correctResponses,
       props.vps.mean
     ),
     createData(
       "Working Memory",
-      props.wm.responses.numberCorrect,
+      props.wm.userResponse.correctResponses,
       props.wm.mean
     ),
     createData(
       "Image Recognition",
-      props.ir.responses.numberCorrect,
+      props.ir.userResponse.correctResponses,
       props.ir.mean
     )
   ];

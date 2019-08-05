@@ -81,6 +81,7 @@ class VPS extends Component {
 			a.push(b.answer);
 			return a;
 		},[])
+		console.log('VPS CONTAINER VPS RESPONSES PRE-POST VPS', vpsResponses)
 		this.props.postVPS(vpsResponses)
 	}
 
@@ -136,7 +137,7 @@ class VPS extends Component {
 							displayingAnswers: false,
 							middleStop: false,
 							currentElementIndex: 0,
-							currentSeriesIndex: this.state.currentSeriesIndex += 6,
+							currentSeriesIndex: this.state.currentSeriesIndex += 1,
 							timerRunning: false,
 							timeRun: 0,
 							submitted: false,
@@ -204,13 +205,14 @@ class VPS extends Component {
 	}
 	displayAnswers(){
 		this.setState({
-			timeToNext: 3000,
+			timeToNext: 10000,
 			timerRunning: true,
 			middleStop: false,
 			displayingAnswers: true,
 		}, this.setAndNameInterval)
 	}
 	render () {
+		console.log('VPS Container VPS Answer Key from store', this.props.answerKey);
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT

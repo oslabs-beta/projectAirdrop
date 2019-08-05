@@ -140,7 +140,7 @@ const answersReducer = (state = initialState, action) => {
           ...state.vps,
           responses: [...action.payload],
           userResponse: {
-            correctResponses: totalRightVPS
+            correctResponses: totalRightVPS.length
           }
         }
       };
@@ -165,7 +165,7 @@ const answersReducer = (state = initialState, action) => {
           ...state.wm,
           responses: [...action.payload],
           userResponse: {
-            correctResponses: totalRightWm
+            correctResponses: totalRightWm.length
             // correct,
             // responses,
             // mean,
@@ -205,7 +205,7 @@ const answersReducer = (state = initialState, action) => {
           ...state.ir,
           responses: [...action.payload],
           userResponse: {
-            correctResponses: totalRightIr
+            correctResponses: totalRightIr.length
             // correct,
             // responses,
             // mean,
