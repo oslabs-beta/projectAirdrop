@@ -114,7 +114,7 @@ export const handleChangeDeploy = () => ({
 
 export const setDate = () => {
   const newDate = new Date();
-  const today = `${newDate.getMonth()}/${newDate.getDay()}/${newDate.getFullYear()}`;
+  const today = `${newDate.getMonth() + 1}/${newDate.getDate()}/${newDate.getFullYear()}`;
   return {
     type: types.SET_DATE,
     payload: today,

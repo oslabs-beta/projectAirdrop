@@ -19,7 +19,7 @@ class LTVRD extends Component {
   }
 	displayWords(){
 		this.setState({
-			timeToDisplay: 10000,
+			timeToDisplay: 1000,
 			testStarted: true,
 		}, this.startTimer)
 	}
