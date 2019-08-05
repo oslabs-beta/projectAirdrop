@@ -196,7 +196,7 @@ const UserResults = props => {
     labels: ["Working Memory"],
     datasets: [
       {
-        label: "Long Term Verbal Recall Score",
+        label: "You",
         backgroundColor: you,
         data: [
           props.wm.responses.numberCorrect,
