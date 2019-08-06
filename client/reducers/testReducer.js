@@ -9,7 +9,7 @@ const initialState = {
   answerKey: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 2,
+  currentSection: 7,
   currentSlide: 0,
 };
 
@@ -101,6 +101,7 @@ function generateVPS(answerKey) {
   let kindaRight = makeKindaRight(rightAnswers);
   let veryWrong = makeVeryWrong(rightAnswers);
   retArr.push(rightAnswers, nearlyRight, kindaRight, veryWrong);
+  console.log('VPS BUILD ANSWERS RET ATT', retArr)
   for(let i = 0; i < retArr.length; i++){
     retArr[i].unshift(retArr[i][3]);
     retArr[i].splice(4, 1);

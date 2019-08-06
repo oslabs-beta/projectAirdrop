@@ -16,8 +16,8 @@ import Paper from "@material-ui/core/Paper";
 
 import { POINT_CONVERSION_COMPRESSED } from "constants";
 
-const comp = '#FF7700';
-const you = '#16DB93';
+const comp = '#ff7043';
+const you = '#4dd0e1';
 const useStyles = makeStyles({
   card: {
     minWidth: 400
@@ -335,14 +335,14 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: you,
+        backgroundColor: 'rgba(0, 171, 194, 0.5)',
         data: Object.keys(props.cmsq.responses).map(
           a => props.cmsq.responses[a]
         )
       },
       {
         label: "Your competitors",
-        backgroundColor: comp,
+        backgroundColor: 'rgba(255, 110, 66, 0.5)',
         data: Object.keys(props.cmsq.mean).map(a => props.cmsq.mean[a])
       }
     ]
@@ -381,14 +381,14 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: you,
-        data: Object.keys(props.cnaaq.responses).map(
-          a => props.cnaaq.responses[a]
+        backgroundColor: 'rgba(0, 171, 194, 0.5)',
+        data: Object.keys(props.cnaaqResponses).map(
+          a => props.cnaaqResponses[a]
         )
       },
       {
         label: "Your Competitors",
-        backgroundColor: comp,
+        backgroundColor: 'rgba(255, 110, 66, 0.5)',
         data: Object.keys(props.cnaaq.mean).map(a => props.cnaaq.mean[a])
       }
     ]
