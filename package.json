@@ -4,7 +4,8 @@
   "description": "Cognitive testing app for the military.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r dotenv/config server/server.js & webpack-dev-server --config webpack.config.js --mode development",
+    "start": "node ./server/server.js",
+    "dev": "nodemon -r dotenv/config server/server.js & webpack-dev-server --config webpack.config.js --mode development",
     "build": "NODE_ENV=production webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
