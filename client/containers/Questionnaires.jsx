@@ -91,7 +91,7 @@ class Questionnaires extends Component {
       cmsqResponses,
       cnaaqResponses,
     });
-    console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
+    console.log('Q CONT POST cmsq, cnaaq responses', cmsqResponses, cnaaqResponses)
   }
 
   componentDidUpdate(prevProps, prevState) {
