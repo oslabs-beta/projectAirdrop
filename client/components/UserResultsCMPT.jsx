@@ -422,6 +422,128 @@ const UserResults = props => {
     }
   };
 
+  const incData = {
+    labels: ["INCREMENTAL"],
+    datasets: [
+      {
+        label: "You",
+        backgroundColor: you,
+        data: [
+          props.cnaaqComposite['INCREMENTAL']
+        ],
+        // backgroundColor: 'red',
+        // borderColor: "#98B9AB"
+        fill: false
+      },
+      {
+        label: "Your Competitors",
+        backgroundColor: comp,
+        data: [props.cnaaq.composite['INCREMENTAL']]
+      }
+    ]
+  };
+
+  const incOptions = {
+    responsive: true,
+    title: {
+      display: false,
+      text:
+        "Comparison Score between you and the average score for other Green Berets"
+    },
+    tooltips: {
+      mode: "label"
+    },
+    hover: {
+      mode: "dataset"
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Month"
+          }
+        }
+      ],
+      yAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Value"
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: props.ir.mean + 2
+          }
+        }
+      ]
+    }
+  };
+
+  const entData = {
+    labels: ["ENTITY"],
+    datasets: [
+      {
+        label: "You",
+        backgroundColor: you,
+        data: [
+          props.cnaaqComposite['ENTITY']
+          // props.ir.responses.numberCorrect,
+          // props.ltvr.mean
+        ],
+        // backgroundColor: 'red',
+        // borderColor: "#98B9AB"
+        fill: false
+      },
+      {
+        label: "Your Competitors",
+        backgroundColor: comp,
+        data: [props.cnaaq.composite['ENTITY']]
+      }
+    ]
+  };
+
+  const entOptions = {
+    responsive: true,
+    title: {
+      display: false,
+      text:
+        "Comparison Score between you and the average score for other Green Berets"
+    },
+    tooltips: {
+      mode: "label"
+    },
+    hover: {
+      mode: "dataset"
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Month"
+          }
+        }
+      ],
+      yAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Value"
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: props.ir.mean + 2
+          }
+        }
+      ]
+    }
+  };
+
   // const cmsqMeans = Object.keys(props.cmsq.mean).map((a, i) => {
   //   return <li key={i}> {a}: {props.cmsq.mean[a]} </li>;
   // });
@@ -458,6 +580,18 @@ const UserResults = props => {
 // •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension
 // •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER
 
+  const incRow = createQ(
+    'Incremental',
+    props.cnaaqComposite['INCREMENTAL'],
+    props.cnaaq.composite['INCREMENTAL']
+  )
+
+  const entRow = createQ(
+    'Entity',
+    props.cnaaqComposite['ENTITY'],
+    props.cnaaq.composite['ENTITY']
+  )
+
   const cnaaqRow = Object.keys(props.cnaaq.mean).reduce((a, b, c, d) => {
 
     const row = createQ(
@@ -467,7 +601,7 @@ const UserResults = props => {
     );
     a.push(row);
     return a;
-  }, []);
+  }, [incRow, entRow]);
 
   const rows = [
     createData(
@@ -543,9 +677,11 @@ const UserResults = props => {
               <br />
               <br />
               <Radar data={cnaaqData} options={cnaaqOptions} />
-
+              <Bar data={incData} options={incOptions} />
+              <Bar data={entData} options={entOptions} />
               {/* <li>CMSQ</li> */}
               <Radar data={cmsqData} options={cmsqOptions} />
+
               {/* {cmsq} */}
               {/* {cmsqMeans} */}
 

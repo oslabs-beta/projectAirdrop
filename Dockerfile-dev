@@ -1,0 +1,6 @@
+FROM node:10.15
+WORKDIR /usr/src/app
+RUN npm install webpack -g
+COPY package* /usr/src/app/
+RUN npm install
+EXPOSE 3000

@@ -9,7 +9,7 @@ const initialState = {
   answerKey: [],
   apiStatus: null,
   apiError: null,
-  currentSection: 7,
+  currentSection: 2,
   currentSlide: 0,
 };
 
@@ -100,28 +100,43 @@ function generateVPS(answerKey) {
   let nearlyRight = makeNearlyRight(rightAnswers);
   let kindaRight = makeKindaRight(rightAnswers);
   let veryWrong = makeVeryWrong(rightAnswers);
-  retArr.push(rightAnswers, nearlyRight, kindaRight, veryWrong);
-  console.log('VPS BUILD ANSWERS RET ATT', retArr)
-  for(let i = 0; i < retArr.length; i++){
-    retArr[i].unshift(retArr[i][3]);
-    retArr[i].splice(4, 1);
-  }
+  retArr.push(rightAnswers);
+  retArr.push(nearlyRight);
+  retArr.push(kindaRight);
+  retArr.push(veryWrong);
+  // console.log(rightAnswers, "right Answers");
+  // for(let i = 0; i < retArr.length; i++){
+  //   retArr[i].unshift(retArr[i][3]);
+  //   retArr[i].splice(4, 1);
+  // }
+  let stupidTestMalarkey = JSON.parse(JSON.stringify(retArr));
   for(let i = 0; i < 6; i++){
+    stupidTestMalarkey = JSON.parse(JSON.stringify(retArr));
+    console.log('Check against margle farg in for', stupidTestMalarkey);
     let rightElement = 0;
-    for(let j = 0; j < 4; j++){
-      let swapIndex = Math.floor(Math.random()*4);
-      console.log(rightElement);
-      [retArr[j][i], retArr[swapIndex][i]] = [retArr[swapIndex][i], retArr[j][i]];
-      if(rightElement === swapIndex){
-        rightElement = j;
-      } else if (rightElement === j){
-        rightElement = swapIndex
+    for(let j = 0; j < 1; j++) {
+      let swapIndex1 = Math.floor(Math.random() * 4);
+      let swapIndex2 = Math.floor(Math.random() * 4);
+      // console.log(rightElement);
+      console.log(swapIndex2, swapIndex1, "preswap");
+      let temp;
+      temp = retArr[swapIndex1][i];
+      retArr[swapIndex1][i] = retArr[swapIndex2][i];
+      retArr[swapIndex2][i] = temp;
+      // console.log(retArr[swapIndex1][i], retArr[swapIndex2][i], "postswap");
+      if (rightElement === swapIndex1) {
+        rightElement = swapIndex2;
+      } else if (rightElement === swapIndex2) {
+        rightElement = swapIndex1;
       }
-      console.log(retArr[rightElement][i], "right element")
+      // console.log(retArr[rightElement][i], "right element")
     }
+    // console.log(retArr, "swap check1");
     answerKey.push(rightElement);
   }
-  return retArr;
+  stupidTestMalarkey = JSON.parse(JSON.stringify(retArr));
+  console.log(stupidTestMalarkey, "swap check2");
+  return stupidTestMalarkey;
 }
 
 function makeNearlyRight(rightAnswers){

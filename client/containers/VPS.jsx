@@ -213,6 +213,7 @@ class VPS extends Component {
 	}
 	render () {
 		console.log('VPS Container VPS Answer Key from store', this.props.answerKey);
+		console.log("validating test on arrival", this.props.vpsAnswers)
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT
