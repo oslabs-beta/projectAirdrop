@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "007913098611.dkr.ecr.us-west-2.amazonaws.com/frosty_mahavira:<VERSION>",
+    "Name": "007913098611.dkr.ecr.us-west-1.amazonaws.com/legionmpa:<VERSION>",
     "Update": "true"
   },
   "Ports": [{
