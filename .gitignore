@@ -57,6 +57,9 @@ typings/
 # next.js build output
 .next
 
+# environment variables
+.env
+
 .DS_STORE
 node_modules
 scripts/flow/*/.flowconfig
