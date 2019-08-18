@@ -1,0 +1,11 @@
+services:
+  - docker
+before_deploy:
+  - pip install --user awscli
+  - pip install --user awsebcli
+  - export PATH=$PATH:$HOME/.local/bin
+deploy:
+  provider: script
+  skip_cleanup: true
+  on: master
+  script: sh $TRAVIS_BUILD_DIR/scripts/deploy.sh
