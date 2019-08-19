@@ -98,8 +98,6 @@ class Demographics extends Component {
   }
 
   render () {
-    console.log('DEMO SECTION', this.props.test)
-    console.log('toggled', this.state.toggled)
     return (
       <div>
         <SectionHeader sectionName={this.props.test[7].section_display_name}/>

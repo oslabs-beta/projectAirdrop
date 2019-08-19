@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserSubmitBtn = (props) => {
-  console.log('user submit', props)
   const classes = useStyles();
   return(
     <div className={classes.root}>

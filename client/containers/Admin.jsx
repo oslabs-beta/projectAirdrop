@@ -97,7 +97,6 @@ class AdminView extends Component {
         queryObj.value.push(this.state.values[j])
       }
     }
-    console.log(queryObj)
     this.props.fetchMeans(queryObj);
   }
 
@@ -139,13 +138,10 @@ class AdminView extends Component {
   }
 
   removeFilter(item){
-    console.log(item, "item")
     let columnIndex = 0;
     let valueIndex = 0;
     for(let i = 0; i < this.state.values.length; i++){
-      console.log(i, "index")
       if(this.state.values[i] === item){
-        console.log("bool valid")
         columnIndex = i;
         valueIndex = i;
         break;
@@ -164,7 +160,6 @@ class AdminView extends Component {
   }
 
   render() {
-    console.log(this.state.columns, this.state.values)
     return (
       <div>
         <button onClick={this.fireQuery}> Get Results </button>

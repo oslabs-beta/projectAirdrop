@@ -2,11 +2,8 @@ const tpModel = require('../models/testPostModel');
 const testPostController = {};
 
 testPostController.postAnswers = (req, res, next) => {
-	console.log('entered middleware')
-	console.log(req.body);
 	switch (req.body.sectionId){
 		case "VPS":
-			console.log(req.body.sectionData)
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
 				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].seriesIndex, req.body.sectionData[i].userChoice, req.body.sectionData[i].timeTaken, req.body.sectionData[i].correctAnswer);
@@ -14,11 +11,9 @@ testPostController.postAnswers = (req, res, next) => {
 			}
 			break;
 		case "LTVR":
-			console.log('entered correct case')
 			let rightWords = {};
 			let wordArr = req.body.sectionData.wordArr
 			let respArr = req.body.sectionData.respArr
-			console.log(wordArr, "wordArr")
 			for(let i = 0; i < wordArr.length; i++){
 				rightWords[wordArr[i]] = true;
 			}
@@ -28,7 +23,6 @@ testPostController.postAnswers = (req, res, next) => {
 				if(rightWords.hasOwnProperty(respArr[i].word)){
 					row.push(true);
 				} else row.push(false);
-				console.log(row);
 				tpModel.postToLTVR(row);
 			}	
 			break;
@@ -37,11 +31,9 @@ testPostController.postAnswers = (req, res, next) => {
 				let row = [];
 				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].cid, req.body.sectionData[i].answer, req.body.sectionData[i].timeTaken);
 				tpModel.postToImage(row)
-				console.log("check check")
 			}
 			break;
 		case "q":
-			console.log("and they say 'WHY?, WHY?' tell them");
 			for(let i = 0; i < req.body.sectionData.length; i++){
 				let row = [];
 				row.push(req.body.sectionData[i].aid, req.body.sectionData[i].qid, req.body.sectionData[i].answer);
@@ -49,13 +41,11 @@ testPostController.postAnswers = (req, res, next) => {
 			}
 			
 	}
-		console.log("Check 2")
 	return next();
 }
 
 testPostController.postDemoData = async (req, res, next) => {
 	let demoArray = [];
-	console.log(req.body, 'first name')
 	demoArray.push(
 		req.body.demoData.userID,
 		req.body.demoData.firstName,

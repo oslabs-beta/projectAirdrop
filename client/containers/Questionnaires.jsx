@@ -73,10 +73,8 @@ class Questionnaires extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('cmsq unmount', cmsq);
-    console.log('cnaaq unmount', cnaaq);
+
     const questionnaireResponses = [ ...cmsq, ...cnaaq];
-    console.log('questionnaire assessment', questionnaireResponses)
     this.props.postAnswers(this.state.sectionId, questionnaireResponses);
 
     const cmsqResponses = Object.keys(this.state.cmsqCurrentChoice).reduce((a,b,c,d) => {
@@ -91,12 +89,10 @@ class Questionnaires extends Component {
       cmsqResponses,
       cnaaqResponses,
     });
-    console.log('Q CONT POST cmsq, cnaaq responses', cmsqResponses, cnaaqResponses)
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentQuest !== this.state.currentQuest) {
-      console.log('testing component did update')
       window.scrollTo(0, 0)
     }
   }
@@ -134,7 +130,6 @@ class Questionnaires extends Component {
 
 
   onSubmit (e) {
-    console.log('did it get here?')
     e.preventDefault(e);
     if (this.state.currentQuest === 1 && Object.keys(this.state.cmsqCurrentChoice).length === 20) {
       this.props.changeSection()
@@ -143,10 +138,8 @@ class Questionnaires extends Component {
         toggled: !this.state.toggled
       })
     } else {
-      console.log('did it get here tho?')
       if(Object.keys(this.state.cnaaqCurrentChoice).length === 12){
-      console.log('did it get here tho? what about here?')
-      console.log(this.state.cnaaqCurrentChoice.length)
+
         this.setState({
           currentQuest: this.state.currentQuest + 1,
         })
@@ -161,8 +154,6 @@ class Questionnaires extends Component {
   // }
 
   render() {
-    console.log('CNAAQ STATE', this.state.cnaaqCurrentChoice);
-    console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
     const questionnaireRend = [
     <QuestionnaireCMPT
       sectionName={this.props.test[6].section_display_name}

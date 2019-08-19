@@ -20,7 +20,6 @@ const get_q_mean = `SELECT questionnaire_responses.answer, questionnaire_respons
 
 const analyticsModel = {
   get_filtered_means(filterObj){
-    // console.log("i break it here?")
     let newQuery;
     switch(filterObj.section){
       case "wm":
@@ -39,7 +38,6 @@ const analyticsModel = {
         newQuery = get_q_mean;
         break;
     }
-    console.log(filterObj.column, "thing")
     for(let i = 0; i < filterObj.column.length; i++){
       console.log(filterObj.column[i], filterObj.value[i], "please")
       if(i === 0 && filterObj.section !== "ir" && filterObj.section !== "wm"){
@@ -48,10 +46,8 @@ const analyticsModel = {
     }
     newQuery += ';';
     return new Promise((resolve, reject) => {
-      console.log(newQuery)
       pool.query(newQuery, (err, result) => {
         if(err) return reject(err)
-        // console.log(result);
         resolve(result);
       })
     })

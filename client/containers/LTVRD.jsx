@@ -14,7 +14,6 @@ class LTVRD extends Component {
 		this.startTimer = this.startTimer.bind(this);
 	}
 	componentDidMount(){
-    console.log('hi?', this.props)
     this.props.buildVPSAnswers();
   }
 	displayWords(){
@@ -32,7 +31,6 @@ class LTVRD extends Component {
 		})
 	}
 	render () {
-		console.log(this.props.section)
 		return (
 			<div>
 				<LTVRDCMPT

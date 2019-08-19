@@ -69,7 +69,7 @@ const initialState = {
 };
 
 const userDataReducer = (state = initialState, action) => {
-  console.log('testing action', action);
+
   switch (action.type) {
 
     case CREATING_ACCOUNT:
@@ -280,7 +280,6 @@ const userDataReducer = (state = initialState, action) => {
         newPW: action.payload
       };
     case UPDATE_LOGIN:
-      console.log('is update login working omg')
       return {
         ...state,
         pw: '',
@@ -292,7 +291,6 @@ const userDataReducer = (state = initialState, action) => {
         isLoggedIn: true
       };
     case CREATE_LOGIN:
-      console.log('is CREATELOGIN WORKING')
         return {
           ...state,
           // isLoggedIn: true,

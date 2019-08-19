@@ -60,7 +60,6 @@ class LTVRR extends Component {
       'wordArr': wordArr,
       'respArr': respArr,
     };
-    console.log('ltvrr assessment', assessment)
 
     this.props.postAnswers(this.state.sectionId, assessment);
     // const ltvrrAnswers = this.state.answerArray
@@ -71,7 +70,6 @@ class LTVRR extends Component {
 		this.setState({
 			testStarted: true,
 		}, () => {
-            // console.log(this.state);
 		    this.timer = setInterval(this.tick, 100);
         })
     }
@@ -119,8 +117,6 @@ class LTVRR extends Component {
     }
 
 	render () {
-	  console.log('LTVRR ANSWER TIME ARRAY', this.state.answerTimeArray);
-    console.log('LTVRR ANSWER ARRAY', this.state.answerArray);
     return (
 			<div>
         <SectionHeader sectionName={this.props.section.section_display_name}/>

@@ -313,15 +313,6 @@ const AdminResultsCMPT = props => {
       ]
     }
   };
-  console.log(
-    "what is cmsq mean",
-    Object.keys(props.cmsq.mean).map(a => props.cmsq.mean[a])
-  );
-  console.log(
-    "what is cmsq res",
-    Object.keys(props.cmsq.responses).map(a => props.cmsq.responses[a])
-  );
-  console.log("what is cmsq label", props.cmsq.responses);
   const cmsqData = {
     labels: Object.keys(props.cmsq.mean).map(a => {
       if (a === 'DF') a = 'Development Focused';
@@ -436,7 +427,6 @@ const AdminResultsCMPT = props => {
   }
 
   const cmsqRow = Object.keys(props.cmsq.mean).reduce((a, b, c, d) => {
-    console.log('what are you', props.cmsq.responses[b])
     let e;
     if (b === 'DF') e = 'Development Focused';
     if (b === 'DO') e = 'Doubt Oriented';
@@ -450,7 +440,6 @@ const AdminResultsCMPT = props => {
     a.push(row);
     return a;
   }, []);
-  console.log("cmsqRow", cmsqRow);
 //   DEVELOPMENT FOCUSED dimension
 // •	Items 4, 7, 9, 19 averaged for the WIN FIXATED dimension
 // •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension

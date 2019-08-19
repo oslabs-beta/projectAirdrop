@@ -52,16 +52,16 @@ const testReducer = (state = initialState, action) => {
       };
 
     case CHANGE_SLIDE:
-      return (console.log('change Slide'), {
+      return {
         ...state,
         currentSlide: state.currentSlide + 1,
-      });
+      };
 
     case BUILD_VPS_ANSWERS:
-      return (console.log('building VPS'), {
+      return {
         ...state,
         vpsAnswers: generateVPS(state.answerKey),
-      });
+      };
 
     default:
       return state;
@@ -104,38 +104,26 @@ function generateVPS(answerKey) {
   retArr.push(nearlyRight);
   retArr.push(kindaRight);
   retArr.push(veryWrong);
-  // console.log(rightAnswers, "right Answers");
-  // for(let i = 0; i < retArr.length; i++){
-  //   retArr[i].unshift(retArr[i][3]);
-  //   retArr[i].splice(4, 1);
-  // }
   let stupidTestMalarkey = JSON.parse(JSON.stringify(retArr));
   for(let i = 0; i < 6; i++){
     stupidTestMalarkey = JSON.parse(JSON.stringify(retArr));
-    console.log('Check against margle farg in for', stupidTestMalarkey);
     let rightElement = 0;
     for(let j = 0; j < 1; j++) {
       let swapIndex1 = Math.floor(Math.random() * 4);
       let swapIndex2 = Math.floor(Math.random() * 4);
-      // console.log(rightElement);
-      console.log(swapIndex2, swapIndex1, "preswap");
       let temp;
       temp = retArr[swapIndex1][i];
       retArr[swapIndex1][i] = retArr[swapIndex2][i];
       retArr[swapIndex2][i] = temp;
-      // console.log(retArr[swapIndex1][i], retArr[swapIndex2][i], "postswap");
       if (rightElement === swapIndex1) {
         rightElement = swapIndex2;
       } else if (rightElement === swapIndex2) {
         rightElement = swapIndex1;
       }
-      // console.log(retArr[rightElement][i], "right element")
     }
-    // console.log(retArr, "swap check1");
     answerKey.push(rightElement);
   }
   stupidTestMalarkey = JSON.parse(JSON.stringify(retArr));
-  console.log(stupidTestMalarkey, "swap check2");
   return stupidTestMalarkey;
 }
 
