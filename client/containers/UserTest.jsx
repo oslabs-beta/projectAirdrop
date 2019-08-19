@@ -9,7 +9,6 @@ import LTVRD from './LTVRD';
 import QuestionnaireCont from './Questionnaires.jsx';
 import LTVRR from './LTVRR';
 import Introduction from '../components/IntroductionCMPT';
-import Instructions from '../components/Instructions.jsx';
 import Container from '@material-ui/core/Container';
 import UserResults from './UserResults';
 import Admin from './Admin';
@@ -50,15 +49,14 @@ class MainTestDisplay extends Component {
     const compArray = [
       <UserDemographics changeSection={this.changeSection}/>,
       <Introduction intro={this.props.test[2]} changeSection={this.changeSection}/>,
-      <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[6]}/>,
-      <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[5]}/>,
-      <WorkingMemory WM={this.props.test[1]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <ImageRecognition IR={this.props.test[0]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
-      <LTVRR changeSection={this.props.changeSection} section={this.props.test[6]} />,
+      <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[3]}/>,
+      <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[4]}/>,
+      <WorkingMemory WM={this.props.test[0]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      <ImageRecognition IR={this.props.test[1]} changeSlide={this.props.changeSlide} currentSlide={this.props.currentSlide} changeSection={this.changeSection}/>,
+      <LTVRR changeSection={this.props.changeSection} section={this.props.test[3]} />,
       <QuestionnaireCont changeSection={this.changeSection} test={this.props.test}/>,
       <UserResults />,
-      <Admin />,
-      <Instructions />];
+      <Admin />];
 
     // for (let i = 0; i < compArray.length; i++) {
     //   if (i % 2 === 1) compArray.splice(i, 0, <SectionEndScreen changeSection={this.changeSection}/>)

@@ -39,15 +39,16 @@ const analyticsModel = {
         newQuery = get_q_mean;
         break;
     }
-    // console.log(filterObj.column, "thing")
+    console.log(filterObj.column, "thing")
     for(let i = 0; i < filterObj.column.length; i++){
+      console.log(filterObj.column[i], filterObj.value[i], "please")
       if(i === 0 && filterObj.section !== "ir" && filterObj.section !== "wm"){
-        newQuery += ` WHERE ${filterObj.column[i]} = ${filterObj.value[i]}`;
-      } else newQuery += ` AND ${filterObj.column[i]} = ${filterObj.value[i]}`
+        newQuery += ` WHERE ${filterObj.column[i]} = '${filterObj.value[i]}'`;
+      } else newQuery += ` AND ${filterObj.column[i]} = '${filterObj.value[i]}'`
     }
     newQuery += ';';
     return new Promise((resolve, reject) => {
-      // console.log(newQuery)
+      console.log(newQuery)
       pool.query(newQuery, (err, result) => {
         if(err) return reject(err)
         // console.log(result);

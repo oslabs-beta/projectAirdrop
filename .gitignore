@@ -54,11 +54,11 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-
 # next.js build output
 .next
+
+# environment variables
+.env
 
 .DS_STORE
 node_modules
@@ -90,4 +90,3 @@ client/dist/bundle.js
 client/dist/index.js
 client/dist
 package-lock.json
-config.js

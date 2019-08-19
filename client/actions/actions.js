@@ -1,6 +1,6 @@
 import * as types from "./../constants/actionTypes";
 const querystring = require('querystring');
-const data = {"table": "all", "column": ['questions.section_id'], "value": []} 
+const data = {"table": "all", "column": ['questions.section_id'], "value": []}
 const test = Object.keys(data).forEach(key => url)
 var url = require('url')
 
@@ -31,18 +31,13 @@ export const requestAPI = () => ({
   type: types.CALL_API
 });
 
-// export const receiveAPI = json => ({
-//   type: types.RECEIVE_API,
-//   payload: json
-// });
-
 export const receiveAPI = json => {
-  const words = json[6].words;
-  const wm = json[1].images.reduce((a,b) => {
+  const words = json[3].words;
+  const wm = json[0].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
   }, []);
-  const ir = json[0].images.reduce((a,b) => {
+  const ir = json[1].images.reduce((a,b) => {
     a.push(b.questions[0].choices[0].correct_choice);
     return a;
   }, []);
@@ -86,7 +81,7 @@ export const fetchTest = () => dispatch => {
       return dispatch(receiveAPI(res));
     })
     .catch(err => {
-      console.log('TESTING FETCH TEST CATCH ERROR');
+      console.log('TESTING FETCH TEST CATCH ERROR:', err);
       dispatch(receiveFailure(err))
     });
 };
@@ -98,7 +93,7 @@ export const fetchTest = () => dispatch => {
 
 export const handleChange = (event) => {
   console.log('testing handle change prop', event.target.value)
-  
+
    return {
    type: types.HANDLE_CHANGE,
    payload: {
@@ -119,7 +114,7 @@ export const handleChangeDeploy = () => ({
 
 export const setDate = () => {
   const newDate = new Date();
-  const today = `${newDate.getMonth()}/${newDate.getDay()}/${newDate.getFullYear()}`;
+  const today = `${newDate.getMonth() + 1}/${newDate.getDate()}/${newDate.getFullYear()}`;
   return {
     type: types.SET_DATE,
     payload: today,

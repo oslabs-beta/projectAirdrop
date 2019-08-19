@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   button: {
-    margin: theme.spacing(7)
+    margin: theme.spacing(7),
+    borderRadius: 100,
   }
 }));
 
@@ -25,7 +26,7 @@ const NextCMPT = (props) => {
       <Typography className={classes.words} gutterBottom>
         {props.text}
       </Typography>
-      <Button className={classes.button} variant={"contained"} color={"inherit"} onClick={props.changeSlide}>
+      <Button className={classes.button} variant={"contained"} color={"secondary"} onClick={props.changeSlide}>
         Next
       </Button>
     </div>

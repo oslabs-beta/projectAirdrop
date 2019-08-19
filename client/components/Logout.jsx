@@ -13,13 +13,20 @@ class Logout extends Component {
     fetch('api/logout',
       {
       mode: 'no-cors'
-    });
+    })
+      .then(result => {
+        window.location.reload(true)
+      })
+      .catch(err => reject(err))
   }
 
   render () {
     return (
       <div>
-        <Button onClick={this.logout}> Logout </Button>
+        <Button
+          color={"inherit"}
+          onClick={this.logout}>
+          Logout </Button>
       </div>
     )
   }

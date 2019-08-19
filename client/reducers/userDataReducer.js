@@ -1,4 +1,26 @@
-import { STORE_DEMOGRAPHIC_DATA, HANDLE_CHANGE, HANDLE_CHANGE_DATES, SET_DATE, HANDLE_CHANGE_TWO, UPDATE_USERNAME, UPDATE_PASSWORD, CREATE_USERNAME, CREATE_PASSWORD, CREATE_LOGIN, UPDATE_LOGIN, SIGN_UP, LOG_IN, IS_ADMIN} from "../constants/actionTypes";
+import {
+  CLEAR_API,
+  SEND_API,
+  SEND_API_FAILURE,
+  STORE_DEMOGRAPHIC_DATA,
+  HANDLE_CHANGE,
+  HANDLE_CHANGE_DATES,
+  SET_DATE,
+  HANDLE_CHANGE_TWO,
+  UPDATE_USERNAME,
+  UPDATE_PASSWORD,
+  CREATE_USERNAME,
+  CREATE_PASSWORD,
+  CREATE_LOGIN,
+  UPDATE_LOGIN,
+  SIGN_UP,
+  LOG_IN,
+  IS_ADMIN,
+  CREATING_ACCOUNT,
+  LOGGING_IN,
+  LOGGED_IN,
+  LOGGED_OUT,
+} from "../constants/actionTypes";
 
 const initialState = {
   username: '',
@@ -7,13 +29,10 @@ const initialState = {
   newPW: '',
   isAdmin: null,
   isLoggedIn: false,
-  createAccount: false,
-  // userLoginErrors: {
-  //   username: null,
-  //   pw: null,
-  // },
+  apiStatus: null,
+  userStatus: 'Logging In',
   userData: {
-    userID: 5,
+    userID: '',
     firstName: '',
     middleInitial: '',
     lastName: '',
@@ -52,6 +71,55 @@ const initialState = {
 const userDataReducer = (state = initialState, action) => {
   console.log('testing action', action);
   switch (action.type) {
+
+    case CREATING_ACCOUNT:
+      return {
+        ...state,
+        userStatus: 'Create Account',
+        username: '',
+        pw: '',
+        apiStatus: null
+      };
+
+    case LOGGING_IN:
+      return {
+        ...state,
+        userStatus: 'Logging In',
+        username: '',
+        pw: '',
+        apiStatus: null
+      };
+
+    case LOGGED_IN:
+      return {
+        ...state,
+        userStatus: 'Logged In'
+      };
+
+    case LOGGED_OUT:
+      return {
+        ...state,
+        userStatus: 'Logging In'
+      };
+
+    case CLEAR_API:
+      return {
+        ...state,
+        apiStatus: null
+      };
+
+    case SEND_API:
+      return {
+        ...state,
+        apiStatus: action.payload
+      };
+
+    case SEND_API_FAILURE:
+      return {
+        ...state,
+        apiStatus: action.payload
+      };
+
     case STORE_DEMOGRAPHIC_DATA:
       return { ...state };
 
@@ -60,7 +128,7 @@ const userDataReducer = (state = initialState, action) => {
       if (
         (action.payload.name !== 'middleInitial'
       && action.payload.name !== 'ODANumber')
-      && action.payload.value.length < 2) {
+      && action.payload.value.length < 1) {
         return {
           ...state,
           userData: {
@@ -217,6 +285,10 @@ const userDataReducer = (state = initialState, action) => {
         ...state,
         pw: '',
         isAdmin: action.payload.isAdmin,
+        userData: {
+          ...state.userData,
+          userID: action.payload.userID
+        },
         isLoggedIn: true
       };
     case CREATE_LOGIN:

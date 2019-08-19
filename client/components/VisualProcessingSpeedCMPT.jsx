@@ -7,6 +7,7 @@ import UserSubmitBtn from "./UserSubmitBTN";
 import VisualProcessingSpeedElement from './VisualProcessingSpeedElement';
 import VisualProcessingSpeedChoices from "./VisualProcessingSpeedChoices";
 import {makeStyles, Typography} from "@material-ui/core";
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,12 +51,14 @@ const VisualProcessingSpeed = (props) => {
         choiceRow.push(<div>{props.vpsAnswers[j][props.currentSeriesIndex][i]}</div>)
       }
       choiceDisplay.push(
-        <VisualProcessingSpeedChoices
-          disabled={props.disabled}
-          choiceRow={choiceRow}
-          value={j}
-          checked={props.currentChoice == j}
-          updateChoice={props.updateChoice}/>
+        <Grid item xs={12} sm={3}>
+          <VisualProcessingSpeedChoices
+            disabled={props.disabled}
+            choiceRow={choiceRow}
+            value={j}
+            checked={props.currentChoice == j}
+            updateChoice={props.updateChoice}/>
+        </Grid>
       )
     }
     currentBTN = <UserSubmitBtn submitted={props.submitted} onSubmit={() => props.submitAnswer(props.currentChoice)}/>
@@ -68,9 +71,11 @@ const VisualProcessingSpeed = (props) => {
     <SectionHeader sectionName={props.sectionName}/>
     <SectionInstructions instructions={currentInstructions}/>
     <VisualProcessingSpeedElement currentEl={currentEl}/>
-    <div style={{display: "flex", justifyContent: "space-around"}}>
+    {/*<div style={{display: "flex", justifyContent: "space-around"}}>*/}
+    <Grid container spacing={3}>
       {choiceDisplay}
-    </div>
+    </Grid>
+    {/*</div>*/}
     {currentBTN}
     <Typography className={classes.root} color={"secondary"}>
       {props.submitError}

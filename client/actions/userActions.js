@@ -1,6 +1,41 @@
 import * as types from "../constants/actionTypes"
 import axios from 'axios';
 
+export const creatingAccount = () => ({
+  type: types.CREATING_ACCOUNT,
+  payload: null
+});
+
+export const loggingIn = () => ({
+  type: types.LOGGING_IN,
+  payload: null
+});
+
+export const loggedIn = () => ({
+  type: types.LOGGED_IN,
+  payload: null
+});
+
+export const loggedOut = () => ({
+  type: types.LOGGED_OUT,
+  payload: null
+});
+
+export const clearAPI = () => ({
+  type: types.CLEAR_API,
+  payload: null
+});
+
+export const sendAPI = msg => ({
+  type: types.SEND_API,
+  payload: msg
+});
+
+export const sendFailure = err => ({
+  type: types.SEND_API_FAILURE,
+  payload: err
+});
+
 export const updateUsername = (value) => ({
   type: types.UPDATE_USERNAME,
   payload: value
@@ -46,15 +81,20 @@ export function signup () {
     console.log('am i in signup')
     const url = '/api/signup'
     const state = getState();
+
+
+
+
     const body = {
       "username": state.userData.username,
       "pw": state.userData.pw,
     }
     return axios.post(url, body)
       .then(response => {
-        console.log('response', response)
-        //return response.data
-      }).then(data => {
+        console.log('signup user action success response', response)
+        dispatch(sendAPI('signed up'))
+      })
+      .then(data => {
         let userData = {
           isAdmin: false,
         }
@@ -62,6 +102,10 @@ export function signup () {
           type: types.CREATE_LOGIN,
           payload: userData
         })
+      })
+      .catch(err => {
+        console.log('signup user action error', err)
+        dispatch(sendFailure('sign up error'))
       })
     }
 }
@@ -81,13 +125,17 @@ export function login () {
       .then(response => {
         console.log('response', response)
         let userData = {
-          isAdmin: response.data.result[0]['is_admin']
+          isAdmin: response.data.result[0]['is_admin'],
+          userID: response.data.result[0]['id']
         }
         dispatch({
           type: types.UPDATE_LOGIN,
           payload: userData
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log('log in error userActions', err);
+        dispatch(sendFailure('log in error'))
+      })
     }
 }

@@ -5,7 +5,7 @@ import LTVRRCMPT from '../components/LongTermVerbalRecallResponseCMPT';
 import SectionHeader from "../components/SectionHeader";
 
 const mapStateToProps = (store) => ({
-  words: store.test.test[6].words,
+  words: store.test.test[3].words,
   aid: store.answers.aid,
 });
 
@@ -18,7 +18,7 @@ class LTVRR extends Component {
 	constructor(props){
     super(props);
     this.state = {
-      timeLeft: 30000,
+      timeLeft: 120000,
       testStarted: false,
       testDone: false,
       answerArray: [],

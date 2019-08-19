@@ -9,7 +9,7 @@ import {
   SEND_WM_RESPONSES,
   SEND_IR_RESPONSES,
   SEND_LTVR_RESPONSES,
-  RECEIVE_MEANS
+  RECEIVE_ANALYTICS_MEANS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -56,8 +56,7 @@ const initialState = {
     // responses: [],
     // responses: ["3","4","5","5","4","3","5","5","4","3","4","3"],
     responses: {},
-    mean: {},
-    composite: {}
+    mean: {}
   }
 };
 
@@ -91,7 +90,6 @@ const answersReducer = (state = initialState, action) => {
     //   results: action.payload.results,
     // };
     case RECEIVE_API:
-      console.log('answersReducer state:', state);
       return {
         ...state,
         ltvr: {
@@ -141,7 +139,7 @@ const answersReducer = (state = initialState, action) => {
           ...state.vps,
           responses: [...action.payload],
           userResponse: {
-            correctResponses: totalRightVPS.length
+            correctResponses: totalRightVPS
           }
         }
       };
@@ -153,8 +151,8 @@ const answersReducer = (state = initialState, action) => {
     //   }
     // }
     case SEND_WM_RESPONSES:
-      const totalRightWm = state.wm.correct.reduce((a, b, c, d) => {
-        if (d[c+1] === action.payload[c]) {
+      const totalRightWm = state.wm.correct.reduce((a, b, c) => {
+        if (b === action.payload[c]) {
           a.push(b);
         }
         return a;
@@ -166,7 +164,7 @@ const answersReducer = (state = initialState, action) => {
           ...state.wm,
           responses: [...action.payload],
           userResponse: {
-            correctResponses: totalRightWm.length
+            correctResponses: totalRightWm
             // correct,
             // responses,
             // mean,
@@ -206,7 +204,7 @@ const answersReducer = (state = initialState, action) => {
           ...state.ir,
           responses: [...action.payload],
           userResponse: {
-            correctResponses: totalRightIr.length
+            correctResponses: totalRightIr
             // correct,
             // responses,
             // mean,
@@ -248,57 +246,56 @@ const answersReducer = (state = initialState, action) => {
         }
       };
 
-    case RECEIVE_MEANS:
-      // let newMeans = {...state};
-      // if(action.payload.ltvr){
-      //   newMeans.ltvr = {
-      //     ...state.ltvr,
-      //     mean: action.payload.ltvr,
-      //   }
-      // }
-      // if(action.payload.vps){
-      //   newMeans.vps = {
-      //     ...state.vps,
-      //     mean: action.payload.vps,
-      //   }
-      // }
-      // if(action.payload.wm){
-      //   console.log(action.payload.wm)
-      //   newMeans.wm = {
-      //     ...state.wm,
-      //     mean: action.payload.wm,
-      //   }
-      // }
-      // if(action.payload.ir){
-      //   newMeans.ir = {
-      //     ...state.ir,
-      //     mean: action.payload.ir,
-      //   }
-      // }
-      // if(action.payload.cnaaq){
-      //   newMeans.cnaaq ={
-      //     ...state.cnaaq,
-      //     mean: {
-      //       LEARN: action.payload.q.l,
-      //       IMPROVE: action.payload.q.i,
-      //       STABLE: action.payload.q.s,
-      //       GIFT: action.payload.q.g,
-      //       INCREMENTAL: action.payload.q.i + action.payload.q.l,
-      //       ENTITY: action.payload.q.s + action.payload.q.g,
-      //     }
-      //   }
-      // }
-      // if(action.payload.cmsq){
-      //   newMeans.cmsq = {
-      //     ...state.cmsq,
-      //     mean: {
-      //       DF: action.payload.q.df,
-      //       WF: action.payload.q.wf,
-      //       DO: action.payload.q.do,
-      //       FE: action.payload.q.fe,
-      //     }
-      //   }
-      // }
+    case RECEIVE_ANALYTIC_MEANS:
+      let newMeans = {...state};
+      if(action.payload.ltvr){
+        newMeans.ltvr = {
+          ...state.ltvr,
+          mean: action.payload.ltvr,
+        }
+      }
+      if(action.payload.vps){
+        newMeans.vps = {
+          ...state.vps,
+          mean: action.payload.vps,
+        }
+      }
+      if(action.payload.wm){
+        newMeans.wm = {
+          ...state.wm,
+          mean: action.payload.wm,
+        }
+      }
+      if(action.payload.ir){
+        newMeans.ir = {
+          ...state.ir,
+          mean: action.payload.ir,
+        }
+      }
+      if(action.payload.cnaaq){
+        newMeans.cnaaq ={
+          ...state.cnaaq,
+          mean: {
+            LEARN: action.payload.q.l,
+            IMPROVE: action.payload.q.i,
+            STABLE: action.payload.q.s,
+            GIFT: action.payload.q.g,
+            INCREMENTAL: action.payload.q.i + action.payload.q.l,
+            ENTITY: action.payload.q.s + action.payload.q.g,
+          }
+        }
+      }
+      if(action.payload.cmsq){
+        newMeans.cmsq = {
+          ...state.cmsq,
+          mean: {
+            DF: action.payload.q.df,
+            WF: action.payload.q.wf,
+            DO: action.payload.q.do,
+            FE: action.payload.q.fe,
+          }
+        }
+      }
       // return {
       //   ...state,
       // }
@@ -316,48 +313,7 @@ const answersReducer = (state = initialState, action) => {
 // __proto__: Object
 // vps: 0.16666666666666666
 // wm: 0.24
-//       return newMeans;
-      return {
-        ...state,
-        ltvr: {
-          ...state.ltvr,
-          mean: action.payload.ltvr,
-        },
-        vps: {
-          ...state.vps,
-          mean: action.payload.vps,
-        },
-        wm: {
-          ...state.wm,
-          mean: action.payload.wm,
-        },
-        ir: {
-          ...state.ir,
-          mean: action.payload.ir,
-        },
-        cnaaq: {
-          ...state.cnaaq,
-          mean: {
-            LEARN: action.payload.q.l,
-            IMPROVE: action.payload.q.i,
-            STABLE: action.payload.q.s,
-            GIFT: action.payload.q.g,
-          },
-          composite: {
-            INCREMENTAL: action.payload.q.i + action.payload.q.l,
-            ENTITY: action.payload.q.s + action.payload.q.g,
-          }
-        },
-        cmsq: {
-          ...state.cmsq,
-          mean: {
-            DF: action.payload.q.df,
-            WF: action.payload.q.wf,
-            DO: action.payload.q.do,
-            FE: action.payload.q.fe,
-          }
-        }
-      };
+      return newMeans;
     default:
       return {
         ...state

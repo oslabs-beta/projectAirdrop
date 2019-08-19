@@ -7,6 +7,8 @@ databaseController.getSections = (req, res, next) => {
 		.then(result => {
 			for (let i = 0; i < result.rows.length; i += 1) {
 				res.locals.test.push(result.rows[i]);
+				// const sectionName = result.rows.section_name;
+				// res.locals.test[sectionName] =
 			}
 			next();
 		})

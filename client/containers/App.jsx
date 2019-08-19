@@ -12,23 +12,25 @@ import Container from '@material-ui/core/Container';
 
 const theme = createMuiTheme({
   typography: {
-    fontSize: 20
+    fontSize: 16,
   },
   palette: {
     primary: {
-      light: '#ffffff',
-      main: '#fafafa',
-      dark: '#c7c7c7',
-      background: '#ffffff',
-    }
+      main: '#00acc1',
+      contrastText: '#fafafa',
+    },
+    secondary: {
+      main: '#ff7043',
+      contrastText: '#fafafa',
+    },
   },
   status: {
-    danger: 'orange',
+    danger: 'red',
   },
 });
 
 const mapStateToProps = store => ({
-  login: store.userData.login
+  login: store.userData.login,
 });
 
 class App extends Component {
@@ -37,17 +39,24 @@ class App extends Component {
   }
 
   render() {
+
     return (
 
      <React.Fragment>
         <MuiThemeProvider theme={theme}>
          <CssBaseline>
-            <AppBar />
+            <AppBar/>
            <Container maxWidth={'md'}>
              <Switch>
-               <Route path='/login' component={Login} />
+               <Route
+                 path='/login'
+                 component={Login}
+               />
                <Authentication>
-                 <Route path='/main' component={Main}/>
+                 <Route
+                   path='/main'
+                   component={Main}
+                   />
                </Authentication>
              </Switch>
            </Container>

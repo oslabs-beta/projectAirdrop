@@ -22,14 +22,11 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   showClicks: () => dispatch(actions.showClicks()),
-  // fetchTest: () => dispatch(actions.fetchTest()),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   handleChangeDeploy: () => dispatch(actions.handleChangeDeploy(event)),
   setDate: () => dispatch(actions.setDate()),
   handleChangeTwo: (event) => dispatch(actions.handleChangeTwo(event)),
   postDemo: (demoData) => dispatch(actions.postDemo(demoData))
-  //fetch LTVR
-  //post demo data
 });
 // false = contains number
 function checkStr (input) {
@@ -41,23 +38,10 @@ function checkNum (input) {
   return /^[0-9]+$/.test(input);
 }
 
-
-
-// userID: 0,
-// firstName: '',
-// middleInitial: '',
-// lastName: '',
-// rank: '',
-// yearsInService: '',
-// yearsInSpecialOps: '',
-// ODANumber: '',
-// MOS: '',
-// dateOfLastDeployment: '',
-// dateOfAssessment: '',
 class Demographics extends Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
       toggled: false,
     }
@@ -72,9 +56,8 @@ class Demographics extends Component {
 
   validate (userData) {
     return {
-      firstName: userData.firstName.length > 1 && checkStr(userData.firstName),
-      lastName: userData.lastName.length > 1 && checkStr(userData.lastName),
-      middleInitial: userData.middleInitial.length === 1 && checkStr(userData.middleInitial),
+      firstName: userData.firstName.length > 0 && checkStr(userData.firstName),
+      lastName: userData.lastName.length > 0 && checkStr(userData.lastName),
       ODANumber: userData.ODANumber.length === 4 && checkNum(userData.ODANumber),
       rank: userData.rank.length > 2,
       yearsInService: userData.yearsInService.length > 1,
@@ -98,20 +81,11 @@ class Demographics extends Component {
 
   submit (e) {
     const errors = this.validate(this.props.userData);
-    console.log('testing errors', errors);
     const hold = Object.keys(errors).reduce((a,b,c,d) => {
       if (errors[b] === false) a.push(b);
       return a;
     }, []);
 
-    // console.log('testing submit arrival', this.props.userDataErrors)
-    // console.log('testing checkstr', checkStr(this.props.userData.firstName && this.props.userData.firstName.length > 2))
-    // const hold = [];
-    // if (checkStr(this.props.userData.firstName) === false && this.props.userData.firstName.length < 2) hold.push('First Name');
-    // if (checkStr(this.props.userData.lastName) === false && this.props.userData.lastName.length < 2) hold.push('Last Name');
-    // if (checkStr(this.props.userData.middleInitial) === false && this.props.userData.middleInitial.length !== 1) hold.push('Middle Initial');
-    // if (checkNum(this.props.userData.ODANumber) && this.props.userData.ODANumber.length === 4) hold.push('ODA Number');
-    console.log('testing result of demo', hold)
     if (hold.length === 0) {
       this.props.postDemo(this.props.userData);
       this.props.changeSection();
@@ -120,14 +94,11 @@ class Demographics extends Component {
         toggled: !this.state.toggled,
       })
     }
-    
     e.preventDefault()
   }
 
   render () {
     console.log('DEMO SECTION', this.props.test)
-    // const errors = validate(this.props.userData)
-    // console.log('testing errors', errors)
     console.log('toggled', this.state.toggled)
     return (
       <div>
@@ -157,7 +128,7 @@ class Demographics extends Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button 
+          <Button
           onClick={this.handleClose} autoFocus
           color="primary"
           >

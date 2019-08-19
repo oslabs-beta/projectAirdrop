@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   button: {
-    margin: theme.spacing(7)
+    margin: theme.spacing(7),
+    borderRadius: 100,
   }
 }));
 
@@ -21,7 +22,7 @@ const UserNextBtn = (props) => {
 
   return (
     <div className={classes.root}>
-      <Button className={classes.button} variant={"contained"} color={"inherit"} onClick={props.changeSection}> Next </Button>
+      <Button color={"secondary"} className={classes.button} variant={"contained"} onClick={props.changeSection}> Next </Button>
     </div>
   )
 };

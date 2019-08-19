@@ -48,9 +48,9 @@ class Questionnaires extends Component {
     window.scrollTo(0, 0)
     this.setState({
       ...this.state,
-      instructions: this.props.test[3].instructions[0],
-      CMSQ: this.props.test[3].questions,
-      CNAAQ: this.props.test[4].questions
+      instructions: this.props.test[5].instructions[0],
+      CMSQ: this.props.test[5].questions,
+      CNAAQ: this.props.test[6].questions
     })
   }
   componentWillUnmount() {
@@ -91,7 +91,7 @@ class Questionnaires extends Component {
       cmsqResponses,
       cnaaqResponses,
     });
-    console.log('testing keys', Object.keys(this.state.cmsqCurrentChoice))
+    console.log('Q CONT POST cmsq, cnaaq responses', cmsqResponses, cnaaqResponses)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -120,7 +120,7 @@ class Questionnaires extends Component {
   }
 
   nextQuest() {
-    
+
     this.setState({
       currentQuest: this.state.currentQuest + 1,
     });
@@ -149,7 +149,7 @@ class Questionnaires extends Component {
       console.log(this.state.cnaaqCurrentChoice.length)
         this.setState({
           currentQuest: this.state.currentQuest + 1,
-        }) 
+        })
       } else {
           this.setState({
             toggled: !this.state.toggled
@@ -157,7 +157,7 @@ class Questionnaires extends Component {
         }
       }
     }
-    
+
   // }
 
   render() {
@@ -165,7 +165,7 @@ class Questionnaires extends Component {
     console.log('CMSQ STATE',this.state.cmsqCurrentChoice);
     const questionnaireRend = [
     <QuestionnaireCMPT
-      sectionName={this.props.test[4].section_display_name}
+      sectionName={this.props.test[6].section_display_name}
       questions={this.state.CNAAQ}
       handleChange={this.handleChange}
       // cnaaqAnswers={this.state.cnaaqAnswers}
@@ -174,7 +174,7 @@ class Questionnaires extends Component {
       onSubmit={this.onSubmit}
       />,
       <QuestionnaireCMPT
-      sectionName={this.props.test[3].section_display_name}
+      sectionName={this.props.test[5].section_display_name}
       questions={this.state.CMSQ}
       handleChange={this.handleChangeCMSQ}
       // cmsqAnswers={this.state.cmsqAnswers}
@@ -184,7 +184,7 @@ class Questionnaires extends Component {
     ]
     return (
       <div>
-        {/* <QuestionnaireHeader sectionName={this.props.test[4].section_display_name}/> */}
+        {/* <QuestionnaireHeader sectionName={this.props.test[6].section_display_name}/> */}
         <br />
         <br />
         <SectionInstructions instructions={this.state.instructions.instruction_text}/>
@@ -198,7 +198,7 @@ class Questionnaires extends Component {
 
         />}
 
-        <QuestionnaireHeader sectionName={this.props.test[3].section_display_name}/>
+        <QuestionnaireHeader sectionName={this.props.test[5].section_display_name}/>
 
         {this.state.CMSQ &&
         <QuestionnaireCMPT

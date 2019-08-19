@@ -36,11 +36,26 @@ class UserResults extends Component {
     console.log('testing output ir', this.props.ir)
     console.log('testing output', this.props.userData)
 
+    const cnaaqComposite = Object.keys(this.props.cnaaq.responses).reduce((acc, category) => {
+      if (category === 'INCREMENTAL' || category === 'ENTITY') {
+        acc[category] = this.props.cnaaq.responses[category]
+      }
+      return acc
+    }, {});
 
+    const cnaaqResponses = Object.keys(this.props.cnaaq.responses).reduce((acc, category) => {
+      if (category !== 'INCREMENTAL' && category !== 'ENTITY') {
+        acc[category] = this.props.cnaaq.responses[category]
+      }
+      return acc
+    }, {});
+
+    console.log('CNAAQ COMPOSITE', cnaaqComposite);
+    console.log('CNAAQ RESPONSES', cnaaqResponses);
 
     return (
       <div>
-        <UserInfo 
+        <UserInfo
         firstName={this.props.userData.firstName}
         lastName={this.props.userData.lastName}
         middleInitial={this.props.userData.middleInitial}
@@ -50,13 +65,15 @@ class UserResults extends Component {
         MOS={this.props.userData.MOS}
         dateOfAssessment={this.props.userData.dateOfAssessment}
         />
-        <UserResultsCMPT 
+        <UserResultsCMPT
         ltvr={this.props.ltvr}
         vps={this.props.vps}
         wm={this.props.wm}
         ir={this.props.ir}
         cmsq={this.props.cmsq}
         cnaaq={this.props.cnaaq}
+        cnaaqResponses={cnaaqResponses}
+        cnaaqComposite={cnaaqComposite}
         // chartData={this.state.chartData}
         // ltvrData={ltvrData}
         // ltvrOptions={ltvrOptions}
@@ -75,4 +92,4 @@ export default connect(mapStateToProps)(UserResults);
 // •	Items 1, 3, 10 averaged for the STABLE dimension
 // •	Items 4, 7, 11 averaged for the GIFT dimension
 // •	LEARN mean + IMPROVE mean = INCREMENTAL
-// •	STABLE mean + GIFT mean = ENTITY 
+// •	STABLE mean + GIFT mean = ENTITY

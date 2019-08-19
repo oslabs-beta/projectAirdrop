@@ -16,8 +16,8 @@ import Paper from "@material-ui/core/Paper";
 
 import { POINT_CONVERSION_COMPRESSED } from "constants";
 
-const comp = '#FF7700';
-const you = '#16DB93';
+const comp = '#ff7043';
+const you = '#4dd0e1';
 const useStyles = makeStyles({
   card: {
     minWidth: 400
@@ -138,7 +138,8 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.vps.userResponse.correctResponses.length || 0,
+          props.vps.userResponse.correctResponses
+          // props.vps.responses.numberCorrect,
           // props.vps.mean
         ],
         // backgroundColor: 'red',
@@ -200,7 +201,7 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.wm.userResponse.correctResponses.length || 0,
+          props.wm.userResponse.correctResponses,
           // props.wm.mean
         ],
         // backgroundColor: 'red',
@@ -208,7 +209,7 @@ const UserResults = props => {
         fill: false
       },
       {
-        label: "Your Competitor",
+        label: "Your Competitors",
         backgroundColor: comp,
         data: [props.wm.mean]
       }
@@ -261,7 +262,8 @@ const UserResults = props => {
         label: "You",
         backgroundColor: you,
         data: [
-          props.ir.userResponse.correctResponses.length || 0,
+          props.ir.userResponse.correctResponses
+          // props.ir.responses.numberCorrect,
           // props.ltvr.mean
         ],
         // backgroundColor: 'red',
@@ -269,7 +271,7 @@ const UserResults = props => {
         fill: false
       },
       {
-        label: "Your Competitor",
+        label: "Your Competitors",
         backgroundColor: comp,
         data: [props.ir.mean]
       }
@@ -334,14 +336,14 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: you,
+        backgroundColor: 'rgba(0, 171, 194, 0.5)',
         data: Object.keys(props.cmsq.responses).map(
           a => props.cmsq.responses[a]
         )
       },
       {
         label: "Your competitors",
-        backgroundColor: comp,
+        backgroundColor: 'rgba(255, 110, 66, 0.5)',
         data: Object.keys(props.cmsq.mean).map(a => props.cmsq.mean[a])
       }
     ]
@@ -380,14 +382,14 @@ const UserResults = props => {
     datasets: [
       {
         label: "You",
-        backgroundColor: you,
-        data: Object.keys(props.cnaaq.responses).map(
-          a => props.cnaaq.responses[a]
+        backgroundColor: 'rgba(0, 171, 194, 0.5)',
+        data: Object.keys(props.cnaaqResponses).map(
+          a => props.cnaaqResponses[a]
         )
       },
       {
         label: "Your Competitors",
-        backgroundColor: comp,
+        backgroundColor: 'rgba(255, 110, 66, 0.5)',
         data: Object.keys(props.cnaaq.mean).map(a => props.cnaaq.mean[a])
       }
     ]
@@ -418,6 +420,128 @@ const UserResults = props => {
       ticks: {
         beginAtZero: true
       }
+    }
+  };
+
+  const incData = {
+    labels: ["INCREMENTAL"],
+    datasets: [
+      {
+        label: "You",
+        backgroundColor: you,
+        data: [
+          props.cnaaqComposite['INCREMENTAL']
+        ],
+        // backgroundColor: 'red',
+        // borderColor: "#98B9AB"
+        fill: false
+      },
+      {
+        label: "Your Competitors",
+        backgroundColor: comp,
+        data: [props.cnaaq.composite['INCREMENTAL']]
+      }
+    ]
+  };
+
+  const incOptions = {
+    responsive: true,
+    title: {
+      display: false,
+      text:
+        "Comparison Score between you and the average score for other Green Berets"
+    },
+    tooltips: {
+      mode: "label"
+    },
+    hover: {
+      mode: "dataset"
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Month"
+          }
+        }
+      ],
+      yAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Value"
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: props.ir.mean + 2
+          }
+        }
+      ]
+    }
+  };
+
+  const entData = {
+    labels: ["ENTITY"],
+    datasets: [
+      {
+        label: "You",
+        backgroundColor: you,
+        data: [
+          props.cnaaqComposite['ENTITY']
+          // props.ir.responses.numberCorrect,
+          // props.ltvr.mean
+        ],
+        // backgroundColor: 'red',
+        // borderColor: "#98B9AB"
+        fill: false
+      },
+      {
+        label: "Your Competitors",
+        backgroundColor: comp,
+        data: [props.cnaaq.composite['ENTITY']]
+      }
+    ]
+  };
+
+  const entOptions = {
+    responsive: true,
+    title: {
+      display: false,
+      text:
+        "Comparison Score between you and the average score for other Green Berets"
+    },
+    tooltips: {
+      mode: "label"
+    },
+    hover: {
+      mode: "dataset"
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Month"
+          }
+        }
+      ],
+      yAxes: [
+        {
+          display: true,
+          scaleLabel: {
+            show: true,
+            labelString: "Value"
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: props.ir.mean + 2
+          }
+        }
+      ]
     }
   };
 
@@ -455,7 +579,19 @@ const UserResults = props => {
 //   DEVELOPMENT FOCUSED dimension
 // •	Items 4, 7, 9, 19 averaged for the WIN FIXATED dimension
 // •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension
-// •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER 
+// •	Items 3, 8, 13, 17, 20 averaged for the FAILURE EVANDER
+
+  const incRow = createQ(
+    'Incremental',
+    props.cnaaqComposite['INCREMENTAL'],
+    props.cnaaq.composite['INCREMENTAL']
+  )
+
+  const entRow = createQ(
+    'Entity',
+    props.cnaaqComposite['ENTITY'],
+    props.cnaaq.composite['ENTITY']
+  )
 
   const cnaaqRow = Object.keys(props.cnaaq.mean).reduce((a, b, c, d) => {
 
@@ -466,7 +602,7 @@ const UserResults = props => {
     );
     a.push(row);
     return a;
-  }, []);
+  }, [incRow, entRow]);
 
   const rows = [
     createData(
@@ -476,17 +612,17 @@ const UserResults = props => {
     ),
     createData(
       "Visual Processing Speed",
-      props.vps.userResponse.correctResponses.length || 0,
+      props.vps.userResponse.correctResponses,
       props.vps.mean
     ),
     createData(
       "Working Memory",
-      props.wm.userResponse.correctResponses.length || 0,
+      props.wm.userResponse.correctResponses,
       props.wm.mean
     ),
     createData(
       "Image Recognition",
-      props.ir.userResponse.correctResponses.length || 0,
+      props.ir.userResponse.correctResponses,
       props.ir.mean
     )
   ];
@@ -542,9 +678,11 @@ const UserResults = props => {
               <br />
               <br />
               <Radar data={cnaaqData} options={cnaaqOptions} />
-
+              <Bar data={incData} options={incOptions} />
+              <Bar data={entData} options={entOptions} />
               {/* <li>CMSQ</li> */}
               <Radar data={cmsqData} options={cmsqOptions} />
+
               {/* {cmsq} */}
               {/* {cmsqMeans} */}
 
@@ -632,7 +770,7 @@ const UserResults = props => {
 
 export default UserResults;
 
-// Conception of the Nature of Athletic Ability – 2 Questionnaire 
+// Conception of the Nature of Athletic Ability – 2 Questionnaire
 
 // Biddle, S. J., Wang, C. J., Chatzisarantis, N. L., & Spray, C. M. (2003). Motivation for physical activity in young people: Entity and incremental beliefs about athletic ability. Journal of Sports Sciences, 21, 973-989.
 
@@ -642,13 +780,13 @@ export default UserResults;
 // •	Items 1, 3, 10 averaged for the STABLE dimension
 // •	Items 4, 7, 11 averaged for the GIFT dimension
 // •	LEARN mean + IMPROVE mean = INCREMENTAL
-// •	STABLE mean + GIFT mean = ENTITY 
+// •	STABLE mean + GIFT mean = ENTITY
 
-// Competitive Motivational Styles Questionnaire 
+// Competitive Motivational Styles Questionnaire
 
 // Gillham, E., Gillham, A. D., & Burton, D. (2013). Competitive motivational styles questionnaire (CSMQ): Development and preliminary validation. Manuscript in preparation.
 
-// 20 item instrument: 
+// 20 item instrument:
 // •	Items 1, 5, 11, 15, 18 averaged for the DEVELOPMENT FOCUSED dimension
 // •	Items 4, 7, 9, 19 averaged for the WIN FIXATED dimension
 // •	Items 2, 6, 10, 12, 14, 16 averaged for the DOUBT ORIENTED dimension

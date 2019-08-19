@@ -66,21 +66,24 @@ class VPS extends Component {
 
     this.props.postAnswers(this.state.sectionId, vpsAnswers);
 
-    const vpsResponses = this.state.answerArray.reduce((a, b, i, d) => {
-      // const vpsResponses = this.state.answerArray.reduce((a,b,i) => {
-      console.log("vps responses working?", a, b, i, d);
-      const response = {
-        seriesIndex: i + 1,
-        userChoice: b.answer,
-        timeTaken: b.timeToRespond,
-        correctAnswer: this.props.answerKey[i]
-      };
-      a.push(response);
-      // a.push(b.answer);
-      return a;
-    }, []);
-    this.props.postVPS(vpsResponses);
-  }
+		this.props.postAnswers(this.state.sectionId, vpsAnswers);
+
+
+		const vpsResponses = this.state.answerArray.reduce((a,b,c,d) => {
+			// const vpsResponses = this.state.answerArray.reduce((a,b,i) => {
+			// 	const response = {
+			// 		'seriesIndex': i + 1,
+			// 		'userChoice': b.answer,
+			// 		'timeTaken': b.timeToRespond,
+			// 		'correctAnswer': this.props.answerKey[i],
+			// 	}
+			// 	a.push(response);
+			a.push(b.answer);
+			return a;
+		},[])
+		console.log('VPS CONTAINER VPS RESPONSES PRE-POST VPS', vpsResponses)
+		this.props.postVPS(vpsResponses)
+	}
 
 	startNewSeries() {
 		this.setState({
@@ -125,7 +128,6 @@ class VPS extends Component {
 					}
 					//Sets practiceDone to true after the practice series finishes
 					if(!this.state.practiceDone) {
-						console.log('and THEY SAY WHY? WHY????????????????')
 						this.setState({
 							practiceDone: true
 						})
@@ -204,13 +206,15 @@ class VPS extends Component {
 	}
 	displayAnswers(){
 		this.setState({
-			timeToNext: 3000,
+			timeToNext: 10000,
 			timerRunning: true,
 			middleStop: false,
 			displayingAnswers: true,
 		}, this.setAndNameInterval)
 	}
 	render () {
+		console.log('VPS Container VPS Answer Key from store', this.props.answerKey);
+		console.log("validating test on arrival", this.props.vpsAnswers)
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT
