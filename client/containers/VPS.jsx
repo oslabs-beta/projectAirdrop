@@ -1,70 +1,66 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/actions';
-import VisualProcessingSpeedCMPT from '../components/VisualProcessingSpeedCMPT.jsx';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions/actions";
+import VisualProcessingSpeedCMPT from "../components/VisualProcessingSpeedCMPT.jsx";
 import Button from "@material-ui/core/Button";
 import LTVRDCMPT from "../components/LongTermVerbalRecallDisplayCMPT";
 import WorkingMemoryCMPT from "../components/WorkingMemoryCMPT";
 
-
 const mapStateToProps = store => ({
-	aid: store.answers.aid,
-	answerKey: store.test.answerKey,
+  aid: store.answers.aid,
+  answerKey: store.test.answerKey
 });
 
-
 const mapDispatchToProps = dispatch => ({
-	postAnswers: (sectionId, assessment) => dispatch(actions.postAnswers(sectionId, assessment)),
-	postVPS: (data) => dispatch(actions.vpsResponses(data)),
+  postAnswers: (sectionId, assessment) =>
+    dispatch(actions.postAnswers(sectionId, assessment)),
+  postVPS: data => dispatch(actions.vpsResponses(data))
 });
 
 class VPS extends Component {
-	constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-			timeToNext: 0,
-			timeRun: 0,
-			currentElementIndex: 0,
-			currentSeriesIndex: 0,
-			timerRunning: false,
-			practiceDone: false,
-			testStarted: false,
-			middleStop: false,
-			seenPracticeAnswers: false,
-			displayingAnswers: false,
-			answerArray: [],
-			currentChoice: null,
-			sectionId: 'VPS',
-			submitted: false,
-			isChecked: false,
-			submitError: '',
-			disabled: false
-		};
-		this.submitAnswer = this.submitAnswer.bind(this);
-		this.startNewSeries = this.startNewSeries.bind(this);
-		this.startPractice = this.startPractice.bind(this);
-		this.seriesIncrementer = this.seriesIncrementer.bind(this);
-		this.updateChoice = this.updateChoice.bind(this);
-		this.displayAnswers = this.displayAnswers.bind(this);
-	}
+      timeToNext: 0,
+      timeRun: 0,
+      currentElementIndex: 0,
+      currentSeriesIndex: 0,
+      timerRunning: false,
+      practiceDone: false,
+      testStarted: false,
+      middleStop: false,
+      seenPracticeAnswers: false,
+      displayingAnswers: false,
+      answerArray: [],
+      currentChoice: null,
+      sectionId: "VPS",
+      submitted: false,
+      isChecked: false,
+      submitError: "",
+      disabled: false
+    };
+    this.submitAnswer = this.submitAnswer.bind(this);
+    this.startNewSeries = this.startNewSeries.bind(this);
+    this.startPractice = this.startPractice.bind(this);
+    this.seriesIncrementer = this.seriesIncrementer.bind(this);
+    this.updateChoice = this.updateChoice.bind(this);
+    this.displayAnswers = this.displayAnswers.bind(this);
+  }
 
-	componentWillUnmount() {
-		console.log('VPS UNMOUNT ANSWER ARRAY ', this.state.answerArray);
-		const vpsAnswers = this.state.answerArray.reduce((a, b, i) => {
-			const response = {
-				'aid': this.props.aid,
-				'seriesIndex': i + 1,
-				'userChoice': b.answer,
-				'timeTaken': b.timeToRespond,
-				'correctAnswer': this.props.answerKey[i],
-			};
-			console.log('testing response', response);
-			a.push(response);
-			return a
-		}, []);
-		console.log('VPS assesment ', vpsAnswers);
-		console.log('VPS SECTIONID ', this.state.sectionId);
+  componentWillUnmount() {
+    const vpsAnswers = this.state.answerArray.reduce((a, b, i) => {
+      const response = {
+        aid: this.props.aid,
+        seriesIndex: i + 1,
+        userChoice: b.answer,
+        timeTaken: b.timeToRespond,
+        correctAnswer: this.props.answerKey[i]
+      };
+      a.push(response);
+      return a;
+    }, []);
 
+    this.props.postAnswers(this.state.sectionId, vpsAnswers);
 
 		this.props.postAnswers(this.state.sectionId, vpsAnswers);
 
@@ -81,7 +77,6 @@ class VPS extends Component {
 			a.push(b.answer);
 			return a;
 		},[])
-		console.log('VPS CONTAINER VPS RESPONSES PRE-POST VPS', vpsResponses)
 		this.props.postVPS(vpsResponses)
 	}
 
@@ -99,7 +94,6 @@ class VPS extends Component {
 		}, this.setAndNameInterval)
 	}
 	setAndNameInterval(){
-		console.log(this.state);
 		this.seriesTicker = setInterval(this.seriesIncrementer, 100);
 	}
 	seriesIncrementer() {
@@ -109,12 +103,10 @@ class VPS extends Component {
 					currentElementIndex: ++this.state.currentElementIndex,
 					timeRun: 0,
 				})
-				console.log(this.state.answerArray, "before")
 			}
 			// Checks if we are at the end of the current set of elements to be displayed
 			if(this.state.currentElementIndex === this.props.vpsAnswers[0][this.state.currentSeriesIndex].length){
 				clearInterval(this.seriesTicker);
-				//If we are displaying answers, we should stop
 				if(this.state.displayingAnswers){
 					//Auto-submit feature. 1st condition checks that the user hasn't done a manual submit. 2nd condition makes sure it isn't auto-submitting the practice question
 					if(!this.state.answerArray[this.state.currentSeriesIndex - 1] && this.state.practiceDone){
@@ -154,7 +146,6 @@ class VPS extends Component {
 				}
 				//Controls when we display answers
 				if(this.state.timerRunning){
-					console.log("last step firing")
 					this.setState({
 						middleStop: true,
 						timeToNext: 0,
@@ -168,7 +159,6 @@ class VPS extends Component {
 		}
 	}
 	submitAnswer(answerChoice){
-		console.log('VPS SUBMIT ANSWER BUTTON')
 		if(this.state.practiceDone && this.state.isChecked){
 			this.setState({
 				answerArray: [...this.state.answerArray, {
@@ -190,18 +180,16 @@ class VPS extends Component {
 			});
 		}
 		if (!this.state.isChecked) {
-			console.log('SUBMIT ERROR?')
 			this.setState({
 				submitError: 'Please select an answer before submitting.'
 			})
 		}
-		console.log(this.state.answerArray)
 	}
 	updateChoice(e){
 		this.setState({
 			currentChoice: e.target.value,
 			isChecked: true
-		}, () => console.log(this.state.currentChoice))
+		})
 	}
 	displayAnswers(){
 		this.setState({
@@ -212,8 +200,6 @@ class VPS extends Component {
 		}, this.setAndNameInterval)
 	}
 	render () {
-		console.log('VPS Container VPS Answer Key from store', this.props.answerKey);
-		console.log("validating test on arrival", this.props.vpsAnswers)
 		return (
 			<div>
 				<VisualProcessingSpeedCMPT
@@ -245,4 +231,7 @@ class VPS extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VPS)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VPS);

@@ -9,7 +9,6 @@ class Logout extends Component {
   }
 
   logout() {
-    console.log('are we in logout in the client?')
     fetch('api/logout',
       {
       mode: 'no-cors'

@@ -78,7 +78,6 @@ export const isAdmin = (value) => ({
 // will return data of apt_id, name, pwd, and role
 export function signup () {
   return (dispatch, getState) => {
-    console.log('am i in signup')
     const url = '/api/signup'
     const state = getState();
 
@@ -91,7 +90,6 @@ export function signup () {
     }
     return axios.post(url, body)
       .then(response => {
-        console.log('signup user action success response', response)
         dispatch(sendAPI('signed up'))
       })
       .then(data => {
@@ -104,7 +102,6 @@ export function signup () {
         })
       })
       .catch(err => {
-        console.log('signup user action error', err)
         dispatch(sendFailure('sign up error'))
       })
     }
@@ -123,7 +120,6 @@ export function login () {
     }
     return axios.post(url, body)
       .then(response => {
-        console.log('response', response)
         let userData = {
           isAdmin: response.data.result[0]['is_admin'],
           userID: response.data.result[0]['id']
@@ -134,7 +130,6 @@ export function login () {
         })
       })
       .catch(err => {
-        console.log('log in error userActions', err);
         dispatch(sendFailure('log in error'))
       })
     }

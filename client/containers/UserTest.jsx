@@ -38,15 +38,13 @@ class MainTestDisplay extends Component {
   }
 
   componentDidMount() {
-    console.log('USER TEST DISPLAY COMPONENT DID MOUNT');
     this.props.fetchTest();
     this.props.fetchMeans({"section": "all", "column": [], "value": []});
   }
 
   render () {
-    console.log('THIS PROPS TEST 0', this.props.test[0]);
-    console.log('results test', this.props.results)
-    const compArray = [<UserDemographics changeSection={this.changeSection}/>,
+    const compArray = [
+      <UserDemographics changeSection={this.changeSection}/>,
       <Introduction intro={this.props.test[2]} changeSection={this.changeSection}/>,
       <LTVRD changeSection={this.changeSection} buildVPSAnswers={this.buildVPSAnswers} section={this.props.test[3]}/>,
       <VisualProcessingSpeed changeSection={this.changeSection} vpsAnswers={this.props.vpsAnswers} section={this.props.test[4]}/>,

@@ -123,11 +123,9 @@ function getSuggestions(value, { showEmpty = false } = {}) {
   }
 
   function handleInputChange(event) {
-    console.log(event.target.value)
     setInputValue(event.target.value);
   }
   const handleDelete = item => () => {
-    console.log(item)
     const newSelectedItem = [...selectedItem];
     newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
     setSelectedItem(newSelectedItem);
@@ -136,7 +134,6 @@ function getSuggestions(value, { showEmpty = false } = {}) {
   };
   
   function handleChange(item) {
-    console.log("thing")
     let newSelectedItem = [...selectedItem];
     if (newSelectedItem.indexOf(item) === -1) {
       newSelectedItem = [...newSelectedItem, item];

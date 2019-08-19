@@ -37,7 +37,6 @@ const VisualProcessingSpeed = (props) => {
       }
     }
   }
-  console.log(props.practiceDone, "check practice done")
   if(props.timerRunning) currentEl = props.vpsAnswers[0][props.currentSeriesIndex][props.currentElementIndex];
   if(!(props.displayingAnswers || props.timerRunning)) {
     if(!props.practiceDone) currentBTN = <UserStartBTN action={props.startPractice} buttonText={'Start Practice'}/>;

@@ -48,7 +48,6 @@ app.get('/login/verify/:id',
   userController.compareEmailHash,
   userController.verifyUser,
   (req,res) => {
-    console.log('test this route')
     res.redirect('/login')
   });
 
@@ -58,7 +57,6 @@ app.post('/api/signup',
   encryptionController.encryptPassword,
   userController.createUser,
   (req, res) => {
-    console.log('signup post route', req.body)
     const host=req.get('host');
     const link="http://"+req.get('host')+"/login/verify/" + res.locals.result[0].verification_code;
     const mailOptions = {
@@ -66,13 +64,10 @@ app.post('/api/signup',
       subject : "Please confirm your Email account",
       html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
     }
-    console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
       if(error){
-        console.log(error);
         res.end("error");
       } else {
-        console.log("Message sent: " + response);
         res.status(200).send("sent");
       }
     });
@@ -148,9 +143,16 @@ app.get('/api/results',
 aController.getMeanData,
 aController.getMeanScores,
 (req, res) => {
-  console.log('query', req.query)
   res.json(res.locals.calculatedMean);
 });
+
+// TODO: needs middleware, needs locals name
+app.get('/api/allscores', 
+
+(req, res) => {
+  res.json(res.locals.allScores)
+})
+
 
 app.post("/api/demo", tpController.postDemoData, (req, res) => {
   res.json(res.locals.aID);
@@ -171,10 +173,10 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log('error handler', err);
+  // console.log('error handler', err);
   res.status(400).json({ msg: err });
 });
 
 app.listen(PORT, () => {
-  console.log(`server listening on port ${PORT}`);
+  // console.log(`server listening on port ${PORT}`);
 });

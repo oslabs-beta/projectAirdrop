@@ -75,7 +75,6 @@ const AdminQueryFilterCMPT = props => {
     </div>
   }
   if(props.displayColumnField){
-    console.log(props.displayColumnField, "should be true")
     columnField = <div> 
       <p>Filter By</p>
       <DownshiftMultiple

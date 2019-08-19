@@ -57,7 +57,6 @@ const testPostModel = {
 		})
 	},
 	postToQuestionnaire(responseArray){
-		console.log(responseArray, "response Array")
 		return new Promise((resolve, reject) => {
 			pool.query(post_questionnaire_choices, responseArray, (err, result) => {
 				if(err) return reject(err)
@@ -69,10 +68,8 @@ const testPostModel = {
 		return new Promise((resolve, reject) => {
 			pool.query(post_demo_data, responseArray, (err, result) => {
 				if(err) {
-					console.log('postToDemoData Model error')
 					return reject(err);
 				}
-				console.log('postToDemoData Model success')
 				resolve(result.rows[0].id);
 			})
 		})

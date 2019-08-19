@@ -5,7 +5,6 @@ const { secret } = require('./config.js');
 const tokenController = {};
 
 tokenController.checkToken = (req, res, next) => {
-  console.log('testing check token', req.cookies);
   let token = req.cookies.token;
   if (!token || !token.startsWith('Bearer')) return next('Incorrect token format');
   token = token.split(' ')[1];
@@ -17,7 +16,6 @@ tokenController.checkToken = (req, res, next) => {
 };
 
 tokenController.signToken = (req, res, next) => {
-  // console.log('SIGN TOKEN VERIFY EMAIL CHECK', res.locals.result[0].is_verified === true)
   if (res.locals.result[0].is_verified === true) {
     let token = jwt.sign({username: res.locals.username}, secret);
     res.locals.token = `Bearer ${token}`;

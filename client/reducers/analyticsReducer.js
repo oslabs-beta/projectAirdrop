@@ -61,7 +61,6 @@ const initialState = {
 };
 
 const answersReducer = (state = initialState, action) => {
-  console.log("action", action);
   switch (action.type) {
     case RECEIVE_AID:
       return {

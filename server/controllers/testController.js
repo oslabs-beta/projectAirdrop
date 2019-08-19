@@ -121,7 +121,6 @@ databaseController.getQuestionBySection = (req, res, next) => {
 				dbModel.getQuestionBySection([res.locals.test[i].id])
 					.then(result => {
 						res.locals.test[i].questions = result.rows;
-						console.log('GET QUESTION BY SECTION RESULT', result)
 					})
 					.catch(err => next(err)))
 		}

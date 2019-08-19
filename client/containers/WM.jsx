@@ -64,7 +64,6 @@ class WM extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('WM assessment', assessment);
 
     this.props.postAnswers(this.state.sectionId, assessment)
 
@@ -84,7 +83,6 @@ class WM extends Component {
   }
 
   onSubmit() {
-    console.log(this.state.isChecked, "Checked?")
     if (this.state.isChecked) {
       this.setState({
         answerTimeArray: [
@@ -120,7 +118,6 @@ class WM extends Component {
   }
 
   optionReset () {
-    console.log('option reset');
     this.setState({
       currentChoice: '',
       submitted: false,
@@ -295,9 +292,6 @@ class WM extends Component {
   }
 
   render() {
-    console.log('WM TIME ARRAY', this.state.answerTimeArray);
-    console.log('WM SECTION DATA', this.state.sectionData);
-    console.log('WM CHOICE ARRAY', this.state.choiceArray);
     return (
       <div>
         <SectionHeader sectionName={this.props.WM.section_display_name}/>

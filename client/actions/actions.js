@@ -76,12 +76,10 @@ export const fetchTest = () => dispatch => {
   return fetch("/api/test")
     .then(res => res.json())
     .then(res => {
-      console.log('TESTING FETCH TEST RESPONSE', res)
       if (!isValid(res)) throw new Error("something went wrong");
       return dispatch(receiveAPI(res));
     })
     .catch(err => {
-      console.log('TESTING FETCH TEST CATCH ERROR:', err);
       dispatch(receiveFailure(err))
     });
 };
@@ -92,7 +90,6 @@ export const fetchTest = () => dispatch => {
 // });
 
 export const handleChange = (event) => {
-  console.log('testing handle change prop', event.target.value)
 
    return {
    type: types.HANDLE_CHANGE,
@@ -122,8 +119,6 @@ export const setDate = () => {
 };
 
 export const storeDemoData = (userData) => {
-  // needs to be connected to DB using thunk
-  console.log('FORM SUBMITTED \n', userData);
   return {
     type: types.STORE_DEMOGRAPHIC_DATA,
   }
@@ -145,7 +140,6 @@ export const sendFailure = err => ({
 });
 
 export const postAnswers = (sectionId, data) => dispatch => {
-  console.log('POST ANSWERS DATA AID CHECK \n', sectionId, 'data \n', data);
   dispatch(requestAPI)
 
   return fetch('/api/test', {
@@ -158,17 +152,10 @@ export const postAnswers = (sectionId, data) => dispatch => {
       sectionData: data
     })
   })
-    // .then(res => res.json())
-    // .then(res => {
-    //   if(!isValid(res)) throw new Error("something went wrong!")
-    //   console.log('POST ANSWERS RESPONSE OBJECT', res);
-    //   return dispatch(sendAPI(res))
-    // })
     .catch(err => dispatch(sendFailure(err)));
 };
 
 export const postDemo = (data) => dispatch => {
-  console.log('POST DEMO DATA', data);
   dispatch(requestAPI);
   return fetch('/api/demo', {
     method: 'POST',
@@ -180,15 +167,12 @@ export const postDemo = (data) => dispatch => {
     })
   })
     .then(res => {
-      console.log("HELP")
       return res.json()
     })
     .then(res => {
-      console.log('POST DEMO RESPONSE OBJECT', res);
       return dispatch(receiveAID(res))
     })
     .catch(err => {
-      console.log(err, "ERROR")
       dispatch(sendFailure(err))});
 };
 
@@ -204,10 +188,8 @@ export const receiveAID = (aid) => ({
 // });
 
 export const questionnaireResponses = data => {
-  console.log('testing arrival', data)
   const cnaaqResponses = data.cnaaqResponses.reduce((a,b,c,d) => {
     c = c+1;
-    console.log('testing c', c)
     if (c === 1 || c === 2 || c === 10) {
       a.STABLE += Number(b);
     };
@@ -286,7 +268,6 @@ export const questionnaireResponses = data => {
 // })
 
 export const vpsResponses = data => {
-  console.log('testing arrival', data);
   return {
     type: types.SEND_VPS_RESPONSES,
     payload: data,
@@ -299,7 +280,6 @@ export const vpsResponses = data => {
 // })
 
 export const ltvrResponses = data => {
-  console.log('testing arrival', data);
   return {
     type: types.SEND_LTVR_RESPONSES,
     payload: data,
@@ -312,7 +292,6 @@ export const ltvrResponses = data => {
 // });
 
 export const wmResponses = data => {
-  console.log('testing arrival', data);
   return {
     type: types.SEND_WM_RESPONSES,
     payload: data,
@@ -325,7 +304,6 @@ export const wmResponses = data => {
 // });
 
 export const irResponses = data => {
-  console.log('testing arrival', data);
   return {
     type: types.SEND_IR_RESPONSES,
     payload: data,
@@ -338,7 +316,6 @@ export const irResponses = data => {
 // });
 
 export const receiveMeans = data => {
-  console.log('did we get the means?', data);
   return {
     type: types.RECEIVE_MEANS,
     payload: data,
@@ -351,12 +328,28 @@ export const fetchMeans = (data) => dispatch => {
   return fetch(url)
     .then(res => res.json())
     .then(res => {
-      console.log('TESTING FETCH TEST RESPONSE FETCH MEANS', res)
-      // if (!isValid(res)) throw new Error("something went wrong");
       return dispatch(receiveMeans(res));
     })
     .catch(err => {
-      console.log('TESTING FETCH TEST CATCH ERROR');
       dispatch(receiveFailure(err))
     });
 };
+
+export const receiveAllScores = data => {
+  return {
+    type: types.RECEIVE_ALL_SCORES,
+    payload: data,
+  }
+}
+export const fetchAllScores = () => dispatch => {
+  dispatch(requestAPI);
+  // TODO: needs FETCH URL
+  return fetch('/api/allscores')
+  .then(res => res.json())
+  .then(res => {
+    return dispatch(receiveAllScores(res))
+  })
+  .catch(err => {
+    dispatch(receiveFailure(err))
+  })
+}

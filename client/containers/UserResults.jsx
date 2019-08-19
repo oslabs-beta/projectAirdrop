@@ -23,19 +23,6 @@ class UserResults extends Component {
   };
 
   render(){
-    console.log('props cnaaq', this.props.cnaaq)
-    console.log('props cmsq', this.props.cmsq)
-    console.log('testing means', this.props.means)
-
-    console.log('testing output', this.props.cnaaq)
-    console.log('testing output', this.props.cmsq)
-    // console.log('testing output', cmsq)
-    console.log('testing output', this.props.ltvr)
-    console.log('testing output vps', this.props.vps)
-    console.log('testing output wm', this.props.wm)
-    console.log('testing output ir', this.props.ir)
-    console.log('testing output', this.props.userData)
-
     const cnaaqComposite = Object.keys(this.props.cnaaq.responses).reduce((acc, category) => {
       if (category === 'INCREMENTAL' || category === 'ENTITY') {
         acc[category] = this.props.cnaaq.responses[category]
@@ -49,9 +36,6 @@ class UserResults extends Component {
       }
       return acc
     }, {});
-
-    console.log('CNAAQ COMPOSITE', cnaaqComposite);
-    console.log('CNAAQ RESPONSES', cnaaqResponses);
 
     return (
       <div>

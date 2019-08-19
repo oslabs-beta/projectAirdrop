@@ -62,7 +62,6 @@ const initialState = {
 };
 
 const answersReducer = (state = initialState, action) => {
-  console.log("action", action);
   switch (action.type) {
     case RECEIVE_AID:
       return {
@@ -91,7 +90,6 @@ const answersReducer = (state = initialState, action) => {
     //   results: action.payload.results,
     // };
     case RECEIVE_API:
-      console.log('answersReducer state:', state);
       return {
         ...state,
         ltvr: {
@@ -153,8 +151,8 @@ const answersReducer = (state = initialState, action) => {
     //   }
     // }
     case SEND_WM_RESPONSES:
-      const totalRightWm = state.wm.correct.reduce((a, b, c) => {
-        if (b === action.payload[c]) {
+      const totalRightWm = state.wm.correct.reduce((a, b, c, d) => {
+        if (d[c+1] === action.payload[c]) {
           a.push(b);
         }
         return a;
@@ -249,74 +247,6 @@ const answersReducer = (state = initialState, action) => {
       };
 
     case RECEIVE_MEANS:
-      // let newMeans = {...state};
-      // if(action.payload.ltvr){
-      //   newMeans.ltvr = {
-      //     ...state.ltvr,
-      //     mean: action.payload.ltvr,
-      //   }
-      // }
-      // if(action.payload.vps){
-      //   newMeans.vps = {
-      //     ...state.vps,
-      //     mean: action.payload.vps,
-      //   }
-      // }
-      // if(action.payload.wm){
-      //   console.log(action.payload.wm)
-      //   newMeans.wm = {
-      //     ...state.wm,
-      //     mean: action.payload.wm,
-      //   }
-      // }
-      // if(action.payload.ir){
-      //   newMeans.ir = {
-      //     ...state.ir,
-      //     mean: action.payload.ir,
-      //   }
-      // }
-      // if(action.payload.cnaaq){
-      //   newMeans.cnaaq ={
-      //     ...state.cnaaq,
-      //     mean: {
-      //       LEARN: action.payload.q.l,
-      //       IMPROVE: action.payload.q.i,
-      //       STABLE: action.payload.q.s,
-      //       GIFT: action.payload.q.g,
-      //       INCREMENTAL: action.payload.q.i + action.payload.q.l,
-      //       ENTITY: action.payload.q.s + action.payload.q.g,
-      //     }
-      //   }
-      // }
-      // if(action.payload.cmsq){
-      //   newMeans.cmsq = {
-      //     ...state.cmsq,
-      //     mean: {
-      //       DF: action.payload.q.df,
-      //       WF: action.payload.q.wf,
-      //       DO: action.payload.q.do,
-      //       FE: action.payload.q.fe,
-      //     }
-      //   }
-      // }
-      // return {
-      //   ...state,
-      // }
-//       ir: 0.45
-// ltvr: 0.03286384976525822
-// q:
-// df: 17888
-// do: 4.348717948717948
-// fe: 15808
-// g: 13173.333333333332
-// i: 13866.666666666664
-// l: 16640
-// s: 12479.999999999998
-// wf: 17160
-// __proto__: Object
-// vps: 0.16666666666666666
-// wm: 0.24
-//       return newMeans;
       return {
         ...state,
         ltvr: {

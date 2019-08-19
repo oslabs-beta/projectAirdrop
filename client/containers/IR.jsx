@@ -68,7 +68,6 @@ class IR extends Component {
       a.push(answer);
       return a
     }, []);
-    console.log('ir assessment', assessment);
 
     this.props.postAnswers(this.state.sectionId, assessment);
 
@@ -300,8 +299,6 @@ class IR extends Component {
   }
 
   render() {
-    console.log('IR TIME ARRAY', this.state.answerTimeArray);
-    console.log('IR SECTION DATA', this.state.sectionData);
     return (
       <div>
         <SectionHeader sectionName={this.props.IR.section_display_name}/>

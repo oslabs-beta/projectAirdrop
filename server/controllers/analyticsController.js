@@ -2,6 +2,11 @@ const aModel = require('../models/analyticsModel');
 const analyticsController = {};
 const querystring = require('querystring')
 
+
+analyticsController.getAllScores = async (req, res, next) => {
+  
+}
+
 analyticsController.getMeanData = async (req, res, next) => {
   res.locals.queryObj = JSON.parse(req.query.objString);
   if(res.locals.queryObj.section === "all"){
@@ -31,7 +36,6 @@ analyticsController.getMeanData = async (req, res, next) => {
         acc.push(el.rows);
         return acc;
       }, [])
-      // console.log(res.locals.meanData)
       next()
     });
   } else {
@@ -43,7 +47,6 @@ analyticsController.getMeanData = async (req, res, next) => {
 
 analyticsController.getMeanScores = (req, res, next) => {
   res.locals.calculatedMean = {};
-  console.log("start", res.locals.meanData, "end");
   if(Array.isArray(res.locals.meanData[0])){
     res.locals.calculatedMean = {
       "ir": 0,
@@ -67,16 +70,13 @@ analyticsController.getMeanScores = (req, res, next) => {
         if(res.locals.meanData[i][0].section_id === 1) currentSection = "wm"
         else currentSection = 'ir'
         for(let j = 0; j < res.locals.meanData[i].length; j++){
-          // console.log(res.locals.meanData[i][j].user_answer === res.locals.meanData[i][j].correct_choice, res.locals.meanData[i][j].user_answer, res.locals.meanData[i][j].correct_choice, "Comparisons")
           if(res.locals.meanData[i][j].user_answer === res.locals.meanData[i][j].correct_choice && currentSection === "wm"){
             res.locals.calculatedMean.wm++;
           } else if(res.locals.meanData[i][j].user_answer === res.locals.meanData[i][j].correct_choice && currentSection === "ir"){
-            // console.log(res.locals.calculatedMean.ir);
             res.locals.calculatedMean.ir++;
           }
         }
         res.locals.calculatedMean[currentSection] = res.locals.calculatedMean[currentSection]/res.locals.meanData[i].length;
-        // console.log(res.locals.calculatedMean[currentSection])
       } else if(res.locals.meanData[i][0].hasOwnProperty("user_word")){
         for(let j = 0; j < res.locals.meanData[i].length; j++){
           if(res.locals.meanData[i][j].is_correct){
@@ -84,7 +84,6 @@ analyticsController.getMeanScores = (req, res, next) => {
           }
         }
         res.locals.calculatedMean.ltvr = res.locals.calculatedMean.ltvr/res.locals.meanData[i].length;
-        // console.log("ltvr");
       } else if(res.locals.meanData[i][0].hasOwnProperty("user_choice")){
         for(let j = 0; j < res.locals.meanData[i].length; j++){
           if(res.locals.meanData[i][j].user_choice === res.locals.meanData[i][j].correct_choice){
@@ -92,7 +91,6 @@ analyticsController.getMeanScores = (req, res, next) => {
           }
         }
         res.locals.calculatedMean.vps = res.locals.calculatedMean.vps/res.locals.meanData[i].length
-        // console.log(res.locals.calculatedMean.vps);
       } else {
         for(let j = 0; j < res.locals.meanData[i].length; j++){
           switch(true){
@@ -147,7 +145,6 @@ analyticsController.getMeanScores = (req, res, next) => {
             }
         }
         for(let key in res.locals.calculatedMean.q){
-          // console.log(res.locals.calculatedMean)
           if(key.length === 2){
             if(key === "do"){
               res.locals.calculatedMean.q[key] *= (32/(6*res.locals.meanData[i].length));
@@ -160,7 +157,6 @@ analyticsController.getMeanScores = (req, res, next) => {
             res.locals.calculatedMean.q[key] *= (32/(3*res.locals.meanData[i].length));
           }
         }
-        // console.log("q")
       }
     }
   } else {
@@ -168,7 +164,6 @@ analyticsController.getMeanScores = (req, res, next) => {
     for(let i = 0; i < res.locals.meanData.length; i++){
       switch(res.locals.queryObj.section){
         case "wm":
-          console.log("wm")
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
           res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
@@ -177,24 +172,20 @@ analyticsController.getMeanScores = (req, res, next) => {
           res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "ltvr":
-          console.log("ltvr");
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
           res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "vps":
-          console.log("vps")
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
           res.locals.calculatedMean[res.locals.queryObj.section]++;
           break;
         case "q":
           if(res.locals.meanData[i].user_answer === res.locals.meanData[i].correct_choice)
           res.locals.calculatedMean[res.locals.queryObj.section]++;
-          console.log("q")
           break;
       }
     }
     res.locals.calculatedMean[res.locals.queryObj.section] = res.locals.calculatedMean[res.locals.queryObj.section]/res.locals.meanData.length;
-    console.log(res.locals.calculatedMean);
   }
   next();
 }
