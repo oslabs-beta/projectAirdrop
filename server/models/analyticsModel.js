@@ -12,7 +12,30 @@ const pool = new Pool({
 	port: 5432
 });
 
-const get_wm_mean = `SELECT image_responses.user_answer, choices.correct_choice, questions.section_id FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id WHERE questions.section_id = 1`;
+const get_results_by_assessment = `
+SELECT image_responses.user_answer, image_responses.choices_id, ltvr_responses.user_word, 
+questionnaire_responses.qid, questionnaire_responses.answer, vps_responses.user_choice, vps_responses.correct_choice
+FROM assessments
+INNER JOIN image_responses
+ON image_responses.assessment_id = assessments.id
+INNER JOIN ltvr_responses
+ON ltvr_responses.assessment_id = assessments.id
+INNER JOIN questionnaire_responses
+ON questionnaire_responses.aid = assessments.id
+INNER JOIN vps_responses
+ON vps_responses.assessment_id = assessments.id
+`;
+
+const get_wm_mean = `
+SELECT image_responses.user_answer, choices.correct_choice, questions.section_id 
+FROM assessments 
+INNER JOIN image_responses 
+ON image_responses.assessment_id = assessments.id 
+INNER JOIN choices 
+ON image_responses.choices_id = choices.id 
+INNER JOIN questions 
+ON choices.question_id = questions.id WHERE questions.section_id = 1`;
+
 const get_ir_mean = `SELECT image_responses.user_answer, choices.correct_choice, questions.section_id FROM assessments INNER JOIN image_responses ON image_responses.assessment_id = assessments.id INNER JOIN choices ON image_responses.choices_id = choices.id INNER JOIN questions ON choices.question_id = questions.id WHERE questions.section_id = 2`;
 const get_ltvr_mean = `SELECT ltvr_responses.user_word, ltvr_responses.is_correct FROM assessments INNER JOIN ltvr_responses ON ltvr_responses.assessment_id = assessments.id`;
 const get_vps_mean = `SELECT vps_responses.user_choice, vps_responses.correct_choice FROM assessments INNER JOIN vps_responses ON vps_responses.assessment_id = assessments.id`;

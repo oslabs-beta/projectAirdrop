@@ -2,6 +2,11 @@ const aModel = require('../models/analyticsModel');
 const analyticsController = {};
 const querystring = require('querystring')
 
+
+analyticsController.getAllScores = async (req, res, next) => {
+  
+}
+
 analyticsController.getMeanData = async (req, res, next) => {
   res.locals.queryObj = JSON.parse(req.query.objString);
   if(res.locals.queryObj.section === "all"){

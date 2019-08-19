@@ -146,6 +146,14 @@ aController.getMeanScores,
   res.json(res.locals.calculatedMean);
 });
 
+// TODO: needs middleware, needs locals name
+app.get('/api/allscores', 
+
+(req, res) => {
+  res.json(res.locals.allScores)
+})
+
+
 app.post("/api/demo", tpController.postDemoData, (req, res) => {
   res.json(res.locals.aID);
 });

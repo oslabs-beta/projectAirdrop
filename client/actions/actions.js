@@ -334,3 +334,22 @@ export const fetchMeans = (data) => dispatch => {
       dispatch(receiveFailure(err))
     });
 };
+
+export const receiveAllScores = data => {
+  return {
+    type: types.RECEIVE_ALL_SCORES,
+    payload: data,
+  }
+}
+export const fetchAllScores = () => dispatch => {
+  dispatch(requestAPI);
+  // TODO: needs FETCH URL
+  return fetch('/api/allscores')
+  .then(res => res.json())
+  .then(res => {
+    return dispatch(receiveAllScores(res))
+  })
+  .catch(err => {
+    dispatch(receiveFailure(err))
+  })
+}
