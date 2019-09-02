@@ -1,3 +1,3 @@
 # projectAirdrop
 
-Cognitive testing app for the military.
+Mental health assessment platform for Department of Defense.
